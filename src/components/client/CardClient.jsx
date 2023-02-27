@@ -6,10 +6,17 @@ import {
 	CaseSeparator,
 	CaseTitle,
 } from "../../styled-components/index/ClientCard.style";
+import { TagContainerStyle } from "../../styled-components/index/Tags.style";
+
+import Tag from "../shared/Tag";
 
 const CardClient = () => {
 	return (
 		<CardClientStyle>
+			<TagContainerStyle>
+				<Tag title="Health" variant="category" />
+				<Tag title="Biomedical engineering" variant="service" />
+			</TagContainerStyle>
 			<CaseTitle>Title case</CaseTitle>
 			<CaseSeparator />
 			<CaseDescription>

@@ -9,7 +9,6 @@ import {
 	NavBarContainerH,
 	NavBarH2,
 } from "../../styled-components/index/Navbar";
-import { TextCategory, BaseCategory } from "../../styled-components/index/tags/category";
 
 const Home = () => {
 	return (

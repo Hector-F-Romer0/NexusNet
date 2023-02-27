@@ -18,6 +18,7 @@ const CardClientStyle = styled.div`
 `;
 
 const CaseTitle = styled.h2`
+	margin-top: 1%;
 	font-size: 2rem;
 	font-weight: 700;
 `;
