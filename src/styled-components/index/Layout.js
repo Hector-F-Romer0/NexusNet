@@ -16,6 +16,4 @@ const MainContentLayout = styled.div`
 	grid-area: main;
 `;
 
-
-
 export { Layout, MainContentLayout, NavBarLayout };

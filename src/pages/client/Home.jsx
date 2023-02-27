@@ -1,6 +1,14 @@
 import React from "react";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
-import { NavBar, NavBarContainerLogo, NavBarContainerIMG, NavBarH1, NavBarContainerH, NavBarH2 } from "../../styled-components/index/Navbar";
+import {
+	NavBar,
+	NavBarContainerLogo,
+	NavBarContainerIMG,
+	NavBarH1,
+	NavBarContainerH,
+	NavBarH2,
+} from "../../styled-components/index/Navbar";
+import { TextCategory, BaseCategory } from "../../styled-components/index/tags/category";
 
 const Home = () => {
 	return (
@@ -20,6 +28,9 @@ const Home = () => {
 					</NavBarContainerH>
 				</NavBar>
 			</NavBarLayout>
+			<MainContentLayout>
+				<BaseCategory>hola</BaseCategory>
+			</MainContentLayout>
 		</Layout>
 	);
 };
