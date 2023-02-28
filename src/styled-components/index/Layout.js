@@ -21,7 +21,13 @@ const FlexCenterColumnLayout = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background-color: maroon;
+	background-color: red;
 `;
 
-export { Layout, MainContentLayout, NavBarLayout, FlexCenterColumnLayout };
+const FlexCardLayout = styled(FlexCenterColumnLayout)`
+	background-color: #e8f1ff;
+	width: 80%;
+	/* padding: 1em; */
+`;
+
+export { Layout, MainContentLayout, NavBarLayout, FlexCenterColumnLayout, FlexCardLayout };
