@@ -16,4 +16,12 @@ const MainContentLayout = styled.div`
 	grid-area: main;
 `;
 
-export { Layout, MainContentLayout, NavBarLayout };
+const FlexCenterColumnLayout = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: maroon;
+`;
+
+export { Layout, MainContentLayout, NavBarLayout, FlexCenterColumnLayout };

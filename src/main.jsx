@@ -3,9 +3,12 @@ import ReactDOM from "react-dom/client";
 import Home from "./pages/client/Home";
 import AccountClient from "./pages/client/AccountClient";
 import "./styled-components/index/index.css";
+import RateProvider from "./pages/client/RateProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<AccountClient />
+		{/* <Home /> */}
+		{/* <AccountClient /> */}
+		<RateProvider />
 	</React.StrictMode>
 );

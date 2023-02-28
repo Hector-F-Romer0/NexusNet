@@ -7,14 +7,14 @@ const CardContainerStyle = styled.div`
 	gap: 20px;
 	align-items: center;
 	justify-content: center;
-	padding: 2em;
+	margin-top: 3em;
 `;
 
 const CardClientStyle = styled.div`
 	background-color: #e8f1ff;
-	width: 800px;
+	width: 80%;
+	padding: 2.5em;
 	border-radius: 12px;
-	padding: 1em;
 `;
 
 const CaseTitle = styled.h2`
