@@ -1,6 +1,5 @@
 import React from "react";
-import CardContainer from "../../components/client/CardContainer";
-import { ButtonContainerStyle, ButtonClientStyle } from "../../styled-components/index/button.style";
+import CardAccount from "../../components/client/CardAccount";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 import {
 	NavBar,
@@ -12,7 +11,7 @@ import {
 } from "../../styled-components/index/Navbar";
 import logo from "../../assets/logo.png";
 
-const Home = () => {
+const AccountClient = () => {
 	return (
 		<Layout>
 			<NavBarLayout>
@@ -31,15 +30,10 @@ const Home = () => {
 				</NavBar>
 			</NavBarLayout>
 			<MainContentLayout>
-				<h1>Welcome to my cases - Client</h1>
-				<ButtonContainerStyle>
-					<ButtonClientStyle>Search Providers</ButtonClientStyle>
-					<ButtonClientStyle>Upload your cases</ButtonClientStyle>
-				</ButtonContainerStyle>
-				<CardContainer />
+				<CardAccount></CardAccount>
 			</MainContentLayout>
 		</Layout>
 	);
 };
 
-export default Home;
+export default AccountClient;
