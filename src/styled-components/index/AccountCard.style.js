@@ -3,12 +3,12 @@ import styled from "styled-components";
 const AccountCardContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 300px;
 `;
 
 const AccountCardClientStyle = styled.div`
 	background-color: #e8f1ff;
-	width: 1300px;
+	width: 1400px;
     height: 850px;
 	border-radius: 10px;
     display: grid;
@@ -16,7 +16,10 @@ const AccountCardClientStyle = styled.div`
 `;
 
 const AccountContainerDescription = styled.div`
-	margin: 10%;
+	margin: 15%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 `;
 
 const AccountImage = styled.img`

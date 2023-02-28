@@ -3,9 +3,9 @@ import styled from "styled-components";
 const NavBar = styled.div`
 	grid-area: navbar;
     background: #5A8FCC;
-    display: flex;
+    display: block;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
 `;
 
 const NavBarContainerLogo = styled.div`
