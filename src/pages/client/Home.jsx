@@ -1,5 +1,6 @@
 import React from "react";
 import CardContainer from "../../components/client/CardContainer";
+import { ButtonContainerStyle, ButtonClientStyle } from "../../styled-components/index/button.style";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 import {
 	NavBar,
@@ -30,8 +31,10 @@ const Home = () => {
 			</NavBarLayout>
 			<MainContentLayout>
 				<h1>Welcome to my cases - Client</h1>
-				<button>Search Providers</button>
-				<button>Upload your cases</button>
+				<ButtonContainerStyle>
+					<ButtonClientStyle>Search Providers</ButtonClientStyle>
+					<ButtonClientStyle>Upload your cases</ButtonClientStyle>
+				</ButtonContainerStyle>
 				<CardContainer />
 			</MainContentLayout>
 		</Layout>
