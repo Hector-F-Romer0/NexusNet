@@ -6,6 +6,10 @@ const NavBar = styled.div`
     display: block;
     flex-direction: column;
     height: 100%;
+    position: fixed;
+    top:0;
+    width:400px;
+
 `;
 
 const NavBarContainerLogo = styled.div`

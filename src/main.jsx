@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <Home /> */}
 		{/* <AccountClient /> */}
 		{/* <RateProvider /> */}
-		{/* <TopProviders/> */}
-		<ViewAccountProvider/>
+		<TopProviders/>
+		{/* <ViewAccountProvider/> */}
 	</React.StrictMode>
 );
