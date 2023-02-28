@@ -4,11 +4,13 @@ import Home from "./pages/client/Home";
 import AccountClient from "./pages/client/AccountClient";
 import "./styled-components/index/index.css";
 import RateProvider from "./pages/client/RateProvider";
+import TopProviders from "./pages/client/TopProviders";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		{/* <Home /> */}
 		{/* <AccountClient /> */}
-		<RateProvider />
+		{/* <RateProvider /> */}
+		<TopProviders/>
 	</React.StrictMode>
 );

@@ -30,7 +30,7 @@ const CardAccount = () => {
 					<AccountSeparator></AccountSeparator>
 					<AccountContainerP>
 						<AccountInfo>Email: pedromanostijeras@example.com</AccountInfo>
-						<AccountInfo>Phone number 317 000 0000</AccountInfo>
+						<AccountInfo>Phone number: 317 000 0000</AccountInfo>
 						<AccountInfo>Country: Colombia</AccountInfo>
 						<AccountInfo>State: Boyacá</AccountInfo>
 						<AccountInfo>City: Sogamoso</AccountInfo>
