@@ -21,12 +21,12 @@ const FlexCenterColumnLayout = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background-color: red;
 `;
 
 const FlexCardLayout = styled(FlexCenterColumnLayout)`
 	background-color: #e8f1ff;
 	width: 80%;
+	border-radius: 10px;
 	/* padding: 1em; */
 `;
 

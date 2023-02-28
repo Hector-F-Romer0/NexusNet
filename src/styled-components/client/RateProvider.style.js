@@ -3,19 +3,18 @@ import styled from "styled-components";
 const GridRateStyle = styled.div`
 	display: grid;
 	width: 80%;
-	background-color: #e8f1ff;
 	justify-content: center;
 	grid-template-areas: "photo title" "photo rate";
-	grid-template-columns: 212px 1fr;
-	grid-template-rows: 1fr 1fr;
-	padding: 3em;
+	grid-template-columns: minmax(150px, 212px) auto;
+	grid-template-rows: auto auto;
+	padding: 2em 1em;
+	column-gap: 6em;
 `;
 
 const ProviderPhotoStyle = styled.img`
 	width: 100%;
 	grid-area: photo;
 	border-radius: 10px;
-	/* text-align: center; */
 	margin-left: auto;
 	margin-right: auto;
 `;
