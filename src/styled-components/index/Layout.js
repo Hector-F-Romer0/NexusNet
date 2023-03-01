@@ -5,11 +5,19 @@ const Layout = styled.div`
 	min-height: 100vh;
 	grid-template-areas: "navbar main";
 	grid-template-rows: 100%;
-	grid-template-columns: 1.5fr 5fr;
+	grid-template-columns: minmax(200px, 300px) 1fr;
 `;
 
 const NavBarLayout = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 50px;
 	grid-area: navbar;
+	background: #5a8fcc;
+	height: 100vh;
+	top: 0;
+	position: sticky;
 `;
 
 const MainContentLayout = styled.div`

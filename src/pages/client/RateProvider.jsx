@@ -1,13 +1,13 @@
 import React from "react";
 import CardRateProvider from "../../components/client/CardRateProvider";
-import ClientNavBar from "../../components/client/ClientNavBar";
+import UserNavBar from "../../components/client/UserNavBar";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 
 const RateProvider = () => {
 	return (
 		<Layout>
 			<NavBarLayout>
-				<ClientNavBar />
+				<UserNavBar />
 			</NavBarLayout>
 			<MainContentLayout>
 				<h1>Rate provider</h1>
