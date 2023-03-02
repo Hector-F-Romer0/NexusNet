@@ -3,6 +3,7 @@ import UserRegisterInfo from "../../components/shared/UserRegisterInfo";
 import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index/Button.style";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import UserNavBar from "../../components/shared/UserNavBar";
+import Footer from "../../components/shared/Footer";
 
 const ClientRegister = () => {
 	return (
@@ -16,6 +17,7 @@ const ClientRegister = () => {
 				</ButtonContainerStyle>
 				<UserRegisterInfo></UserRegisterInfo>
 				<ButtonStyle>Register</ButtonStyle>
+				<Footer />
 			</MainContentLayout>
 		</Layout>
 	);

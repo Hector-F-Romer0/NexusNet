@@ -3,6 +3,7 @@ import { Layout, MainContentLayout } from "../../styled-components/index/Layout"
 import UserNavBar from "../../components/shared/UserNavBar";
 import ContainerChats from "../../components/shared/ContainerChats";
 import ChatMessage from "../../components/shared/ChatMessage";
+import Footer from "../../components/shared/Footer";
 
 const ChatClient = () => {
 	return (
@@ -13,6 +14,7 @@ const ChatClient = () => {
 					<ContainerChats></ContainerChats>
 					<ChatMessage></ChatMessage>
 				</div>
+				<Footer />
 			</MainContentLayout>
 		</Layout>
 	);

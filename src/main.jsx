@@ -17,14 +17,24 @@ import AccountProvider from "./pages/provider/AccountProvider";
 import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
+import KeyWordsCRUD from "./pages/admin/KeyWordsCRUD";
+import SignIn from "./pages/index/SignIn";
+import SignUp from "./pages/index/SignUp";
+import CategoriesCRUD from "./pages/admin/CategoriesCRUD";
+import HomeAdmin from "./pages/admin/HomeAdmin";
+import ServicesCRUD from "./pages/admin/ServicesCRUD";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
+		{/* Index */}
+		{/* <SignIn /> */}
+		{/* <SignUp /> */}
+
 		{/* Client */}
-		{/* <HomeClient /> */}
+		<HomeClient />
 		{/* <AccountClient /> */}
 		{/* <RateProvider /> */}
-		{/* <TopProviders /> */}
+		{/* <TopProvidersClient /> */}
 		{/* <ViewAccountProvider /> */}
 		{/* <CaseInformationClient /> */}
 		{/* <SearchProviders /> */}
@@ -39,5 +49,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <TopProvidersProvider /> */}
 		{/* <ChatProvider /> */}
 		{/* <CaseInformationProvider /> */}
+
+		{/* Admin pages */}
+		{/* <HomeAdmin /> */}
+		{/* <ViewAccountProvider /> */}
+		{/* <CategoriesCRUD /> */}
+		{/* <ServicesCRUD /> */}
+		{/* <KeyWordsCRUD /> */}
 	</React.StrictMode>
 );

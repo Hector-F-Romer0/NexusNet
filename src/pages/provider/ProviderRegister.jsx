@@ -4,6 +4,7 @@ import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import UserNavBar from "../../components/shared/UserNavBar";
 import ProviderRegisterInfo from "../../components/provider/ProviderRegisterInfo";
+import Footer from "../../components/shared/Footer";
 
 const ProviderRegister = () => {
 	return (
@@ -18,6 +19,7 @@ const ProviderRegister = () => {
 				<UserRegisterInfo></UserRegisterInfo>
 				<ProviderRegisterInfo></ProviderRegisterInfo>
 				<ButtonStyle>Register</ButtonStyle>
+				<Footer />
 			</MainContentLayout>
 		</Layout>
 	);
