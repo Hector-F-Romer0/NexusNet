@@ -3,7 +3,7 @@ import { Layout, MainContentLayout } from "../../styled-components/index/Layout"
 import UserNavBar from "../../components/shared/UserNavBar";
 import { CardInfoCase } from "../../components/shared/CardInfoCase";
 
-const CaseInformation = () => {
+const CaseInformationProvider = () => {
 	return (
 		<Layout>
 			<UserNavBar />
@@ -14,4 +14,4 @@ const CaseInformation = () => {
 	);
 };
 
-export default CaseInformation;
+export default CaseInformationProvider;
