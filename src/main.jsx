@@ -8,6 +8,7 @@ import TopProviders from "./pages/client/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformation from "./pages/client/CaseInformation";
 import SearchProviders from "./pages/client/SearchProviders";
+import ClientRegister from "./pages/client/ClientRegister";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <TopProviders /> */}
 		{/* <ViewAccountProvider /> */}
 		{/* <CaseInformation /> */}
-		<SearchProviders />
+		{/* <SearchProviders /> */}
+		<ClientRegister />
 	</React.StrictMode>
 );
