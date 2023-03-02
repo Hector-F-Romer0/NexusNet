@@ -15,6 +15,7 @@ import HomeProvider from "./pages/provider/HomeProvider";
 import ProviderRegister from "./pages/provider/ProviderRegister";
 import AccountProvider from "./pages/provider/AccountProvider";
 import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
+import ChatProvider from "./pages/provider/ChatProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <HomeProvider /> */}
 		{/* <ProviderRegister /> */}
 		{/* <AccountProvider /> */}
-		<TopProvidersProvider />
+		{/* <TopProvidersProvider /> */}
+		<ChatProvider />
 	</React.StrictMode>
 );
