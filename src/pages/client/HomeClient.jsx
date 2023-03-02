@@ -4,7 +4,7 @@ import UserNavBar from "../../components/shared/UserNavBar";
 import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index/Button.style";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 
-const Home = () => {
+const HomeClient = () => {
 	return (
 		<Layout>
 			<UserNavBar />
@@ -20,4 +20,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default HomeClient;

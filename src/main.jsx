@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./pages/client/Home";
+import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
 import "./styled-components/index/index.css";
 import RateProvider from "./pages/client/RateProvider";
-import TopProviders from "./pages/client/TopProviders";
+import TopProvidersClient from "./pages/client/TopProvidersClient";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformation from "./pages/client/CaseInformation";
 import SearchProviders from "./pages/client/SearchProviders";
@@ -14,11 +14,12 @@ import ChatClient from "./pages/client/ChatClient";
 import HomeProvider from "./pages/provider/HomeProvider";
 import ProviderRegister from "./pages/provider/ProviderRegister";
 import AccountProvider from "./pages/provider/AccountProvider";
+import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		{/* Client */}
-		{/* <Home /> */}
+		{/* <HomeClient /> */}
 		{/* <AccountClient /> */}
 		{/* <RateProvider /> */}
 		{/* <TopProviders /> */}
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* Provider */}
 		{/* <HomeProvider /> */}
 		{/* <ProviderRegister /> */}
-		<AccountProvider />
+		{/* <AccountProvider /> */}
+		<TopProvidersProvider />
 	</React.StrictMode>
 );

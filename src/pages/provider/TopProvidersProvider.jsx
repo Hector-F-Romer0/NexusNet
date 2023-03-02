@@ -2,7 +2,8 @@ import React from "react";
 import UserNavBar from "../../components/shared/UserNavBar";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import ContainerTopProvider from "../../components/shared/ContainerTopProvider";
-const TopProviders = () => {
+
+const TopProvidersProvider = () => {
 	return (
 		<Layout>
 			<UserNavBar />
@@ -14,4 +15,4 @@ const TopProviders = () => {
 	);
 };
 
-export default TopProviders;
+export default TopProvidersProvider;
