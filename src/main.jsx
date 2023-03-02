@@ -11,9 +11,11 @@ import SearchProviders from "./pages/client/SearchProviders";
 import ClientRegister from "./pages/client/ClientRegister";
 import CaseForm from "./pages/client/CaseForm";
 import ChatClient from "./pages/client/ChatClient";
+import HomeProvider from "./pages/provider/HomeProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
+		{/* Client */}
 		{/* <Home /> */}
 		{/* <AccountClient /> */}
 		{/* <RateProvider /> */}
@@ -23,6 +25,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <SearchProviders /> */}
 		{/* <ClientRegister /> */}
 		{/* <CaseForm /> */}
-		<ChatClient />
+		{/* <ChatClient /> */}
+
+		{/* Provider */}
+		<HomeProvider />
 	</React.StrictMode>
 );
