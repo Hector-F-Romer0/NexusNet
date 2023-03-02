@@ -9,6 +9,7 @@ import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformation from "./pages/client/CaseInformation";
 import SearchProviders from "./pages/client/SearchProviders";
 import ClientRegister from "./pages/client/ClientRegister";
+import CaseForm from "./pages/client/CaseForm";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <ViewAccountProvider /> */}
 		{/* <CaseInformation /> */}
 		{/* <SearchProviders /> */}
-		<ClientRegister />
+		{/* <ClientRegister /> */}
+		<CaseForm />
 	</React.StrictMode>
 );
