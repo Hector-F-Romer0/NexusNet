@@ -3,7 +3,7 @@ import CaseContainer from "../../components/shared/CaseContainer";
 import UserNavBar from "../../components/shared/UserNavBar";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 
-const Home = () => {
+const HomeProvider = () => {
 	return (
 		<Layout>
 			<UserNavBar />
@@ -15,4 +15,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default HomeProvider;
