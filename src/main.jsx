@@ -10,6 +10,7 @@ import CaseInformation from "./pages/client/CaseInformation";
 import SearchProviders from "./pages/client/SearchProviders";
 import ClientRegister from "./pages/client/ClientRegister";
 import CaseForm from "./pages/client/CaseForm";
+import ChatClient from "./pages/client/ChatClient";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <CaseInformation /> */}
 		{/* <SearchProviders /> */}
 		{/* <ClientRegister /> */}
-		<CaseForm />
+		{/* <CaseForm /> */}
+		<ChatClient />
 	</React.StrictMode>
 );
