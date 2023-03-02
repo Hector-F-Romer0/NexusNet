@@ -13,6 +13,7 @@ import CaseForm from "./pages/client/CaseForm";
 import ChatClient from "./pages/client/ChatClient";
 import HomeProvider from "./pages/provider/HomeProvider";
 import ProviderRegister from "./pages/provider/ProviderRegister";
+import AccountProvider from "./pages/provider/AccountProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 		{/* Provider */}
 		{/* <HomeProvider /> */}
-		<ProviderRegister />
+		{/* <ProviderRegister /> */}
+		<AccountProvider />
 	</React.StrictMode>
 );
