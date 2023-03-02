@@ -1,4 +1,6 @@
 import React from "react";
+import RecipientMessage from "./RecipientMessage";
+import SenderMessage from "./SenderMessage";
 
 const ChatMessage = () => {
 	return (
@@ -7,11 +9,9 @@ const ChatMessage = () => {
 				<h2>Enrique Manos Cuchillas</h2>
 			</div>
 			<div>
+				<RecipientMessage />
 				<div>
-					<h2>Chat here!</h2>
-				</div>
-				<div>
-					<h2>Chat here!</h2>
+					<SenderMessage />
 				</div>
 			</div>
 			<div>
