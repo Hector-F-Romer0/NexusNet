@@ -1,18 +1,18 @@
 import React from "react";
 import {
-	CardClientStyle,
+	CardCaseStyle,
 	CaseDate,
 	CaseDescription,
 	CaseSeparator,
 	CaseTitle,
-} from "../../styled-components/client/ClientCard.style";
+} from "../../styled-components/client/CardCase.style";
 import { TagContainerStyle } from "../../styled-components/index/Tags.style";
 
-import Tag from "../shared/Tag";
+import Tag from "./Tag";
 
-const CardClient = () => {
+const CardCase = () => {
 	return (
-		<CardClientStyle>
+		<CardCaseStyle>
 			<TagContainerStyle>
 				<Tag title="Health" variant="category" />
 				<Tag title="Biomedical engineering" variant="service" />
@@ -25,8 +25,8 @@ const CardClient = () => {
 				voluptate illum deleniti possimus?
 			</CaseDescription>
 			<CaseDate>Taken on dd/mm/yy</CaseDate>
-		</CardClientStyle>
+		</CardCaseStyle>
 	);
 };
 
-export default CardClient;
+export default CardCase;

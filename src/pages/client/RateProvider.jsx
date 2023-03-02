@@ -1,6 +1,6 @@
 import React from "react";
 import CardRateProvider from "../../components/client/CardRateProvider";
-import UserNavBar from "../../components/client/UserNavBar";
+import UserNavBar from "../../components/shared/UserNavBar";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 
 const RateProvider = () => {

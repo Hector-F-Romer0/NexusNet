@@ -10,7 +10,7 @@ const CardContainerStyle = styled.div`
 	margin-top: 3em;
 `;
 
-const CardClientStyle = styled.div`
+const CardCaseStyle = styled.div`
 	background-color: #e8f1ff;
 	width: 80%;
 	padding: 2.5em;
@@ -44,4 +44,14 @@ const CaseDate = styled.span`
 	margin-top: 3%;
 `;
 
-export { CardContainerStyle, CardClientStyle, CaseDescription, CaseTitle, CaseDate, CaseSeparator };
+
+const CardInfoCaseStyle = styled.div`
+`;
+
+const InfoCaseStyle = styled.div`
+`;
+
+const CaseUploadsStyle = styled.div`
+`;
+
+export { CardContainerStyle, CardCaseStyle, CaseDescription, CaseTitle, CaseDate, CaseSeparator, CardInfoCaseStyle, InfoCaseStyle, CaseUploadsStyle };

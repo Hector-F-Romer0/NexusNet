@@ -22,10 +22,6 @@ const UserNavBar = () => {
 				<NavBarTitle>Chats</NavBarTitle>
 				<NavBarTitle>Account</NavBarTitle>
 				<NavBarTitle>Log Out</NavBarTitle>
-				{/* <NavBarH2></NavBarH2>
-				<NavBarH2>Chats</NavBarH2>
-				<NavBarH2>Account</NavBarH2>
-				<NavBarH2>Log out</NavBarH2> */}
 			</NavBarContainerTitles>
 		</NavBarLayout>
 	);

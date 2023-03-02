@@ -1,6 +1,6 @@
 import React from "react";
-import CardContainer from "../../components/client/CardContainer";
-import UserNavBar from "../../components/client/UserNavBar";
+import CaseContainer from "../../components/shared/CaseContainer";
+import UserNavBar from "../../components/shared/UserNavBar";
 import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index/Button.style";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 
@@ -14,7 +14,7 @@ const Home = () => {
 					<ButtonStyle>Search Providers</ButtonStyle>
 					<ButtonStyle>Upload your cases</ButtonStyle>
 				</ButtonContainerStyle>
-				<CardContainer />
+				<CaseContainer />
 			</MainContentLayout>
 		</Layout>
 	);

@@ -1,8 +1,7 @@
 import React from "react";
-import CardAccount from "../../components/client/CardAccount";
+import CardAccount from "../../components/shared/CardAccount";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
-import ProviderViewCardAccount from "../../components/client/ProviderViewCardAccount";
-import UserNavBar from "../../components/client/UserNavBar";
+import UserNavBar from "../../components/shared/UserNavBar";
 
 const ViewAccountProvider = () => {
 	return (
@@ -11,7 +10,7 @@ const ViewAccountProvider = () => {
 				<UserNavBar />
 			</NavBarLayout>
 			<MainContentLayout>
-				<ProviderViewCardAccount />
+				<CardAccount />
 			</MainContentLayout>
 		</Layout>
 	);

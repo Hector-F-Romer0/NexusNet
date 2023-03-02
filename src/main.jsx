@@ -6,13 +6,15 @@ import "./styled-components/index/index.css";
 import RateProvider from "./pages/client/RateProvider";
 import TopProviders from "./pages/client/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
+import CaseInformation from "./pages/client/CaseInformation";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		{/* <Home /> */}
+		<Home />
 		{/* <AccountClient /> */}
-		<RateProvider />
-		{/* <TopProviders/> */}
-		{/* <ViewAccountProvider/> */}
+		{/* <RateProvider /> */}
+		{/* <TopProviders /> */}
+		{/* <ViewAccountProvider /> */}
+		{/* <CaseInformation /> */}
 	</React.StrictMode>
 );
