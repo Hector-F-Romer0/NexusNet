@@ -17,6 +17,7 @@ import AccountProvider from "./pages/provider/AccountProvider";
 import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
+import SignIn from "./pages/index/SignIn";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -39,5 +40,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <TopProvidersProvider /> */}
 		{/* <ChatProvider /> */}
 		{/* <CaseInformationProvider /> */}
+
+		{/* index */}
+		<SignIn />
 	</React.StrictMode>
 );
