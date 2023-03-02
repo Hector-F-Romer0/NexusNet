@@ -18,6 +18,7 @@ import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
 import SignIn from "./pages/index/SignIn";
+import SignUp from "./pages/index/SignUp";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		{/* <CaseInformationProvider /> */}
 
 		{/* index */}
-		<SignIn />
+		{/* <SignIn /> */}
+		{/* <SignUp /> */}
 	</React.StrictMode>
 );
