@@ -5,7 +5,7 @@ import {
 	CaseDescription,
 	CaseSeparator,
 	CaseTitle,
-} from "../../styled-components/client/CardCase.style";
+} from "../../styled-components/index/CardCase.style";
 import { TagContainerStyle } from "../../styled-components/index/Tags.style";
 
 import Tag from "./Tag";

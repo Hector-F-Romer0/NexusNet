@@ -7,14 +7,16 @@ import RateProvider from "./pages/client/RateProvider";
 import TopProviders from "./pages/client/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformation from "./pages/client/CaseInformation";
+import SearchProviders from "./pages/client/SearchProviders";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<Home />
+		{/* <Home /> */}
 		{/* <AccountClient /> */}
 		{/* <RateProvider /> */}
 		{/* <TopProviders /> */}
 		{/* <ViewAccountProvider /> */}
 		{/* <CaseInformation /> */}
+		<SearchProviders />
 	</React.StrictMode>
 );

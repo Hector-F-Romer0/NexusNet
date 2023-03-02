@@ -9,7 +9,7 @@ import { FlexCardLayout, FlexCenterColumnLayout } from "../../styled-components/
 import photoProvider3 from "../../assets/Provider3.jpg";
 import StarContainer from "../shared/StarContainer";
 import { PrimaryButtonStyle } from "../../styled-components/index/Button.style";
-import { TextInput } from "../../styled-components/client/Input.style";
+import { TextInput } from "../../styled-components/index/Input.style";
 
 const CardRateProvider = () => {
 	return (

@@ -1,18 +1,15 @@
 import React from "react";
-import { CaseDate, CaseSeparator } from "../../styled-components/client/CardCase.style";
-import { TagContainerStyle } from "../../styled-components/index/Tags.style";
-import Tag from "./Tag";
-import { InfoCaseStyle } from "../../styled-components/client/CardCase.style";
+import { CaseDate, CaseSeparator } from "../../styled-components/index/CardCase.style";
+import { InfoCaseStyle } from "../../styled-components/index/CardCase.style";
+import ContainerTagKeywords from "./ContainerTagKeywords";
+import ContainerTag from "./ContainerTag";
 
 const InfoCase = () => {
 	return (
 		<InfoCaseStyle>
 			<h1>Tittle case</h1>
 			<CaseSeparator></CaseSeparator>
-			<TagContainerStyle>
-				<Tag></Tag>
-				<Tag></Tag>
-			</TagContainerStyle>
+			<ContainerTag></ContainerTag>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis hendrerit efficitur. Fusce id
 				nunc pellentesque, placerat purus ut, aliquet risus. Quisque vulputate cursus euismod. Nullam a mattis
@@ -30,11 +27,7 @@ const InfoCase = () => {
 				torquent per conubia nostra, per inceptos himenaeos. Interdum et malesuada fames ac ante ipsum primis in
 				faucibus.
 			</p>
-			<TagContainerStyle>
-				<Tag></Tag>
-				<Tag></Tag>
-				<Tag></Tag>
-			</TagContainerStyle>
+			<ContainerTagKeywords></ContainerTagKeywords>
 			<CaseDate> Taken on dd/mm/yy </CaseDate>
 			<CaseSeparator></CaseSeparator>
 		</InfoCaseStyle>

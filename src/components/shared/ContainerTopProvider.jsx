@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContainerStyle } from "../../styled-components/client/CardCase.style";
+import { CardContainerStyle } from "../../styled-components/index/CardCase.style";
 import CardTopProvider from "./CardTopProvider";
 
 const ContainerTopProvider = () => {

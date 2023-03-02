@@ -11,4 +11,5 @@ const TextInput = styled.input.attrs((props) => ({ type: "text", placeholder: pr
 	padding: 0.5em;
 	border-radius: 10px;
 `;
+
 export { TextInput };

@@ -1,10 +1,9 @@
 import React from "react";
-import { TagContainerStyle } from "../../styled-components/index/Tags.style";
-import Tag from "./Tag";
 import CardTopProvider from "./CardTopProvider";
 import InfoCase from "./InfoCase";
-import { CardInfoCaseStyle } from "../../styled-components/client/CardCase.style";
+import { CardInfoCaseStyle } from "../../styled-components/index/CardCase.style";
 import CaseUploads from "./CaseUploads";
+import ContainerTagKeywords from "./ContainerTagKeywords";
 
 export const CardInfoCase = () => {
 	return (
@@ -14,11 +13,7 @@ export const CardInfoCase = () => {
 			<CaseUploads></CaseUploads>
 			<h2>Taken by</h2>
 			<CardTopProvider></CardTopProvider>
-			<TagContainerStyle>
-				<Tag></Tag>
-				<Tag></Tag>
-				<Tag></Tag>
-			</TagContainerStyle>
+			<ContainerTagKeywords></ContainerTagKeywords>
 		</CardInfoCaseStyle>
 	);
 };

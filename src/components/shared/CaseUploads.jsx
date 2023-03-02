@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseUploadsStyle } from "../../styled-components/client/CardCase.style";
+import { CaseUploadsStyle } from "../../styled-components/index/CardCase.style";
 
 const CaseUploads = () => {
 	return (
