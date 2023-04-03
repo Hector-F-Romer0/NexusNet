@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { ButtonStyle } from "../../styled-components/index/Button.style";
 import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider.style";
+import FormInput from "../../components/shared/FormInput";
 
 const SignIn = () => {
 	const {
@@ -17,7 +18,7 @@ const SignIn = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-		navigate("/client/home");
+		// navigate("/client/home");
 	};
 
 	return (
@@ -29,17 +30,38 @@ const SignIn = () => {
 				<h2>Sign Up - </h2>
 			</div>
 			<form action="" onSubmit={handleSubmit(onSubmit)}>
-				<label htmlFor="username">Username</label>
-				<input type="text" {...register("username", { required: true, minLength: 3, maxLeminLength: 18 })} />
-				{errors.username && (
-					<small>Username is required. This field must be between 3 and 18 characters.</small>
-				)}
-				<label htmlFor="password">Password</label>
-				<input
-					type="password"
-					{...register("password", { required: true, minLength: 3, maxLeminLength: 18 })}
+				<FormInput
+					label="Username"
+					type="text"
+					registerName="username"
+					placeholder="Username"
+					register={register}
+					validations={{
+						required: {
+							value: true,
+							message: "Username is required.",
+						},
+						minLength: {
+							value: 3,
+							message: "Username must be between 3 and 18 characters",
+						},
+					}}
+					error={errors.username}
 				/>
-				{errors.password && <small>Password is required.</small>}
+				<FormInput
+					label="Password"
+					type="password"
+					placeholder="Password"
+					registerName="password"
+					register={register}
+					validations={{
+						required: {
+							value: true,
+							message: "Password is required.",
+						},
+					}}
+					error={errors.password}
+				/>
 				<ButtonStyle type="submit">Sign in</ButtonStyle>
 			</form>
 			<div>
