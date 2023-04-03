@@ -6,6 +6,7 @@ import Logo from "../../assets/logo.png";
 import { ButtonStyle } from "../../styled-components/index/Button.style";
 import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider.style";
 import FormInput from "../../components/shared/FormInput";
+import { FormStyle } from "../../styled-components/index";
 
 const SignIn = () => {
 	const {
@@ -18,7 +19,7 @@ const SignIn = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-		// navigate("/client/home");
+		navigate("/client/home");
 	};
 
 	return (
@@ -29,7 +30,7 @@ const SignIn = () => {
 				<h2>Dont have an account</h2>
 				<h2>Sign Up - </h2>
 			</div>
-			<form action="" onSubmit={handleSubmit(onSubmit)}>
+			<FormStyle action="" onSubmit={handleSubmit(onSubmit)}>
 				<FormInput
 					label="Username"
 					type="text"
@@ -43,7 +44,7 @@ const SignIn = () => {
 						},
 						minLength: {
 							value: 3,
-							message: "Username must be between 3 and 18 characters",
+							message: "Username must be between 3 and 18 characters.",
 						},
 					}}
 					error={errors.username}
@@ -63,7 +64,7 @@ const SignIn = () => {
 					error={errors.password}
 				/>
 				<ButtonStyle type="submit">Sign in</ButtonStyle>
-			</form>
+			</FormStyle>
 			<div>
 				<ButtonStyle>Sign in with Facebook</ButtonStyle>
 				<ButtonStyle>Sign in with Google</ButtonStyle>

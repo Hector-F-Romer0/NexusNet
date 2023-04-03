@@ -1,19 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { InputContainerStyle, InputErrorStyle, InputLabelStyle, InputStyle } from "../../styled-components/index";
 
 const FormInput = ({ label, registerName, placeholder, register, type, validations, error }) => {
 	return (
-		<div>
-			<label htmlFor={registerName}>{label}</label>
-			<input type={type} placeholder={placeholder} {...register(registerName, validations)} />
-			{error?.type === "required" && <span>{error?.message}</span>}
-			{error?.type === "minLength" && <span>{error?.message}</span>}
-			{error?.type === "maxLength" && <span>{error?.message}</span>}
-			{error?.type === "max" && <span>{error?.message}</span>}
-			{error?.type === "min" && <span>{error?.message}</span>}
-			{error?.type === "pattern" && <span>{error?.message}</span>}
-			{error?.type === "validate" && <span>{error?.message}</span>}
-		</div>
+		<InputContainerStyle>
+			<InputLabelStyle htmlFor={registerName}>{label}</InputLabelStyle>
+			<InputStyle type={type} placeholder={placeholder} {...register(registerName, validations)} />
+			{error?.type === "required" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "minLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "maxLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "max" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "min" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "pattern" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "validate" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+		</InputContainerStyle>
 	);
 };
 
