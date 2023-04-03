@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const NavBarContainerLogo = styled.div`
 	display: flex;
@@ -29,7 +30,8 @@ const NavBarContainerTitles = styled.div`
 	gap: 35px;
 `;
 
-const NavBarTitle = styled.h2`
+const NavBarTitle = styled(NavLink)`
+	text-decoration: none;
 	margin-left: 10%;
 	font-style: normal;
 	font-weight: 700;

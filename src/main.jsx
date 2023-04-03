@@ -23,38 +23,50 @@ import SignUp from "./pages/index/SignUp";
 import CategoriesCRUD from "./pages/admin/CategoriesCRUD";
 import HomeAdmin from "./pages/admin/HomeAdmin";
 import ServicesCRUD from "./pages/admin/ServicesCRUD";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		{/* Index */}
-		{/* <SignIn /> */}
-		{/* <SignUp /> */}
+	<>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<SignUp />}></Route>
+				<Route path="/client/home" element={<HomeClient />}></Route>
+				<Route path="/client/provider/top" element={<TopProvidersClient />}></Route>
+				<Route path="/client/chats" element={<ChatClient />}></Route>
+				<Route path="/client/account" element={<AccountClient />}></Route>
+				<Route path="/signin" element={<SignIn />}></Route>
+				{/* <Route path="/client/chats" element={<ChatClient />}></Route> */}
+			</Routes>
+			{/* Index */}
+			{/* <SignIn /> */}
+			{/* <SignUp /> */}
 
-		{/* Client */}
-		<HomeClient />
-		{/* <AccountClient /> */}
-		{/* <RateProvider /> */}
-		{/* <TopProvidersClient /> */}
-		{/* <ViewAccountProvider /> */}
-		{/* <CaseInformationClient /> */}
-		{/* <SearchProviders /> */}
-		{/* <ClientRegister /> */}
-		{/* <CaseForm /> */}
-		{/* <ChatClient /> */}
+			{/* Client */}
+			{/* <HomeClient /> */}
+			{/* <AccountClient /> */}
+			{/* <RateProvider /> */}
+			{/* <TopProvidersClient /> */}
+			{/* <ViewAccountProvider /> */}
+			{/* <CaseInformationClient /> */}
+			{/* <SearchProviders /> */}
+			{/* <ClientRegister /> */}
+			{/* <CaseForm /> */}
+			{/* <ChatClient /> */}
 
-		{/* Provider */}
-		{/* <HomeProvider /> */}
-		{/* <ProviderRegister /> */}
-		{/* <AccountProvider /> */}
-		{/* <TopProvidersProvider /> */}
-		{/* <ChatProvider /> */}
-		{/* <CaseInformationProvider /> */}
+			{/* Provider */}
+			{/* <HomeProvider /> */}
+			{/* <ProviderRegister /> */}
+			{/* <AccountProvider /> */}
+			{/* <TopProvidersProvider /> */}
+			{/* <ChatProvider /> */}
+			{/* <CaseInformationProvider /> */}
 
-		{/* Admin pages */}
-		{/* <HomeAdmin /> */}
-		{/* <ViewAccountProvider /> */}
-		{/* <CategoriesCRUD /> */}
-		{/* <ServicesCRUD /> */}
-		{/* <KeyWordsCRUD /> */}
-	</React.StrictMode>
+			{/* Admin pages */}
+			{/* <HomeAdmin /> */}
+			{/* <ViewAccountProvider /> */}
+			{/* <CategoriesCRUD /> */}
+			{/* <ServicesCRUD /> */}
+			{/* <KeyWordsCRUD /> */}
+		</BrowserRouter>
+	</>
 );

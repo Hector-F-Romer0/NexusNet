@@ -8,6 +8,7 @@ import {
 } from "../../styled-components/index/Navbar";
 import logo from "../../assets/logo.png";
 import { NavBarLayout } from "../../styled-components/index/Layout";
+import { NavLink } from "react-router-dom";
 
 const UserNavBar = () => {
 	return (
@@ -17,11 +18,11 @@ const UserNavBar = () => {
 				<NavBarH1>NexusNet</NavBarH1>
 			</NavBarContainerLogo>
 			<NavBarContainerTitles>
-				<NavBarTitle>Home</NavBarTitle>
-				<NavBarTitle>Top providers</NavBarTitle>
-				<NavBarTitle>Chats</NavBarTitle>
-				<NavBarTitle>Account</NavBarTitle>
-				<NavBarTitle>Log Out</NavBarTitle>
+				<NavBarTitle to="/client/home">Home</NavBarTitle>
+				<NavBarTitle to="/client/provider/top">Top Providers</NavBarTitle>
+				<NavBarTitle to="/client/chats">Chats</NavBarTitle>
+				<NavBarTitle to="/client/account">Account</NavBarTitle>
+				<NavBarTitle to="/signin">Log Out</NavBarTitle>
 			</NavBarContainerTitles>
 		</NavBarLayout>
 	);

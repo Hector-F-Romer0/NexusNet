@@ -6,6 +6,8 @@ import UserNavBar from "../../components/shared/UserNavBar";
 import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index/Button.style";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import { MainTitle } from "../../styled-components/index/Titles";
+import { Route, Routes } from "react-router-dom";
+// import TopProvidersClient from "./TopProvidersClient";
 
 const HomeClient = () => {
 	return (
@@ -20,6 +22,10 @@ const HomeClient = () => {
 				<CaseContainer />
 				<Footer />
 			</MainContentLayout>
+			{/* <Routes>
+				<Route path="/" element={<HomeClient />}></Route> */}
+			{/* <Route path="/providers/top" element={<TopProvidersClient/>}></Route> */}
+			{/* </Routes> */}
 		</Layout>
 	);
 };
