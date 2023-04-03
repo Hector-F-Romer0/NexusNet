@@ -8,7 +8,6 @@ import {
 } from "../../styled-components/index/Navbar";
 import logo from "../../assets/logo.png";
 import { NavBarLayout } from "../../styled-components/index/Layout";
-import { NavLink } from "react-router-dom";
 
 const UserNavBar = () => {
 	return (

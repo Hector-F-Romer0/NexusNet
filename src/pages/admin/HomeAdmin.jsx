@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNavBar from "../../components/provider/AdminNavBar";
+import AdminNavBar from "../../components/admin/AdminNavBar";
 import ContainerProvider from "../../components/shared/ContainerProvider";
 import Footer from "../../components/shared/Footer";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";

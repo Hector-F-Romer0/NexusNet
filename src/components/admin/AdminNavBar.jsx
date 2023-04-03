@@ -7,7 +7,7 @@ import {
 	NavBarContainerTitles,
 	NavBarH1,
 	NavBarTitle,
-} from "../../styled-components/index";
+} from "../../styled-components/index/index";
 
 const AdminNavBar = () => {
 	return (
@@ -17,11 +17,11 @@ const AdminNavBar = () => {
 				<NavBarH1>NexusNet</NavBarH1>
 			</NavBarContainerLogo>
 			<NavBarContainerTitles>
-				<NavBarTitle>Home</NavBarTitle>
-				<NavBarTitle>Categories</NavBarTitle>
-				<NavBarTitle>Services</NavBarTitle>
-				<NavBarTitle>Key words</NavBarTitle>
-				<NavBarTitle>Log Out</NavBarTitle>
+				<NavBarTitle to={"/admin/home"}>Home</NavBarTitle>
+				<NavBarTitle to={"/admin/categories"}>Categories</NavBarTitle>
+				<NavBarTitle to={"/admin/services"}>Services</NavBarTitle>
+				<NavBarTitle to={"/admin/keywords"}>Key words</NavBarTitle>
+				<NavBarTitle to={"/signin"}>Log Out</NavBarTitle>
 			</NavBarContainerTitles>
 		</NavBarLayout>
 	);
