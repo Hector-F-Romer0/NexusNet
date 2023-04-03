@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	<>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<SignUp />}></Route>
+				<Route path="/" element={<SignIn />}></Route>
 				{/* Client routes */}
 				<Route path="/client/home" element={<HomeClient />}></Route>
 				<Route path="/client/view/top" element={<TopProvidersClient />}></Route>

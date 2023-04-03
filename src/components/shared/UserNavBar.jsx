@@ -18,7 +18,7 @@ const UserNavBar = () => {
 			</NavBarContainerLogo>
 			<NavBarContainerTitles>
 				<NavBarTitle to="/client/home">Home</NavBarTitle>
-				<NavBarTitle to="/client/provider/top">Top Providers</NavBarTitle>
+				<NavBarTitle to="/client/view/top">Top Providers</NavBarTitle>
 				<NavBarTitle to="/client/chats">Chats</NavBarTitle>
 				<NavBarTitle to="/client/account">Account</NavBarTitle>
 				<NavBarTitle to="/signin">Log Out</NavBarTitle>
