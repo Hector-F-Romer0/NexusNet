@@ -7,7 +7,7 @@ import {
 	NavBarContainerTitles,
 	NavBarH1,
 	NavBarTitle,
-} from "../../styled-components/index/index";
+} from "../../styled-components/index/Navbar.style";
 
 const AdminNavBar = () => {
 	return (

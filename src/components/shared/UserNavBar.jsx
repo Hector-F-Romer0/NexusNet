@@ -5,7 +5,7 @@ import {
 	NavBarH1,
 	NavBarContainerTitles,
 	NavBarTitle,
-} from "../../styled-components/index/Navbar";
+} from "../../styled-components/index/Navbar.style";
 import logo from "../../assets/logo.png";
 import { NavBarLayout } from "../../styled-components/index/Layout";
 

@@ -2,7 +2,7 @@ import React from "react";
 import CRUDManagement from "../../components/admin/CRUDManagement";
 import AdminNavBar from "../../components/admin/AdminNavBar";
 import Footer from "../../components/shared/Footer";
-import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index";
+import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 
 const KeyWordsCRUD = () => {
 	return (

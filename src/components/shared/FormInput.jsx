@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { InputContainerStyle, InputErrorStyle, InputLabelStyle, InputStyle } from "../../styled-components/index";
+import {
+	InputContainerStyle,
+	InputErrorStyle,
+	InputLabelStyle,
+	InputStyle,
+} from "../../styled-components/index/Input.style";
 
 const FormInput = ({ label, registerName, placeholder, register, type, validations, error }) => {
 	return (

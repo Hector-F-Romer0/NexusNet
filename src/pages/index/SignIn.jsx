@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import Logo from "../../assets/logo.png";
-import { ButtonStyle } from "../../styled-components/index/Button.style";
+import { ButtonGenericStyle } from "../../styled-components/index/Button.style";
 import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider.style";
 import FormInput from "../../components/shared/FormInput";
-import { FormStyle } from "../../styled-components/index";
+import { FormStyle } from "../../styled-components/index/Input.style";
 
 const SignIn = () => {
 	const {
@@ -63,11 +63,11 @@ const SignIn = () => {
 					}}
 					error={errors.password}
 				/>
-				<ButtonStyle type="submit">Sign in</ButtonStyle>
+				<ButtonGenericStyle type="submit">Sign in</ButtonGenericStyle>
 			</FormStyle>
 			<div>
-				<ButtonStyle>Sign in with Facebook</ButtonStyle>
-				<ButtonStyle>Sign in with Google</ButtonStyle>
+				<ButtonGenericStyle>Sign in with Facebook</ButtonGenericStyle>
+				<ButtonGenericStyle>Sign in with Google</ButtonGenericStyle>
 			</div>
 		</div>
 	);

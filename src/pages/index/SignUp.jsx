@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
 import DropDownList from "../../components/shared/DropDownList";
-import { ButtonStyle } from "../../styled-components/index/Button.style";
+import { ButtonGenericStyle } from "../../styled-components/index/Button.style";
 import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider.style";
 
 const SignUp = () => {
@@ -20,10 +20,10 @@ const SignUp = () => {
 					<input></input>
 				</div>
 				<DropDownList></DropDownList>
-				<ButtonStyle>Sign Up</ButtonStyle>
+				<ButtonGenericStyle>Sign Up</ButtonGenericStyle>
 				<div>
-					<ButtonStyle>Sign Up with Facebook</ButtonStyle>
-					<ButtonStyle>Sign Up With Google</ButtonStyle>
+					<ButtonGenericStyle>Sign Up with Facebook</ButtonGenericStyle>
+					<ButtonGenericStyle>Sign Up With Google</ButtonGenericStyle>
 				</div>
 			</div>
 		</div>

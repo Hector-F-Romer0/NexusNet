@@ -1,5 +1,6 @@
 import React from "react";
-import { PrimaryButtonStyle } from "../../styled-components/index/index";
+import { PrimaryButtonStyle } from "../../styled-components/index/Button.style";
+// import { PrimaryButtonStyle } from "../../styled-components/index/Button.style";
 
 const CRUDTableRow = () => {
 	return (

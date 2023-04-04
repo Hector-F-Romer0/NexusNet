@@ -1,6 +1,6 @@
 import React from "react";
 import UserRegisterInfo from "../../components/shared/UserRegisterInfo";
-import { ButtonContainerStyle, ButtonStyle } from "../../styled-components/index/Button.style";
+import { ButtonContainerStyle, ButtonGenericStyle } from "../../styled-components/index/Button.style";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import UserNavBar from "../../components/shared/UserNavBar";
 import ProviderRegisterInfo from "../../components/provider/ProviderRegisterInfo";
@@ -13,12 +13,12 @@ const ProviderRegister = () => {
 			<MainContentLayout>
 				<h1>Register Your data</h1>
 				<ButtonContainerStyle>
-					<ButtonStyle>Sign up with Facebook</ButtonStyle>
-					<ButtonStyle>Sign up with Google</ButtonStyle>
+					<ButtonGenericStyle>Sign up with Facebook</ButtonGenericStyle>
+					<ButtonGenericStyle>Sign up with Google</ButtonGenericStyle>
 				</ButtonContainerStyle>
 				<UserRegisterInfo></UserRegisterInfo>
 				<ProviderRegisterInfo></ProviderRegisterInfo>
-				<ButtonStyle>Register</ButtonStyle>
+				<ButtonGenericStyle>Register</ButtonGenericStyle>
 				<Footer />
 			</MainContentLayout>
 		</Layout>
