@@ -38,6 +38,20 @@ const InputContainerStyle = styled.div`
 	}
 `;
 
+const InputContainerRowStyle = styled.div`
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	/* gap: 10px; */
+	display: grid;
+    grid-template-columns: 2fr 3.5fr;
+	margin: 0.5em 0;
+
+	label {
+		align-self: flex-start;
+	}
+`;
+
 const InputLabelStyle = styled.label`
 	margin: 2% 0;
 	font-weight: 700;
@@ -69,4 +83,4 @@ const TextAreaStyle = styled.textarea`
 	resize: none;
 `;
 
-export { TextInput, InputStyle, InputContainerStyle, InputErrorStyle, InputLabelStyle, FormStyle, TextAreaStyle };
+export { TextInput, InputStyle, InputContainerStyle, InputContainerRowStyle, InputErrorStyle, InputLabelStyle, FormStyle, TextAreaStyle };
