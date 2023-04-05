@@ -29,7 +29,7 @@ const InputContainerStyle = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 10px;
+	/* gap: 10px; */
 	flex-direction: column;
 	margin: 0.5em 0;
 
@@ -39,6 +39,7 @@ const InputContainerStyle = styled.div`
 `;
 
 const InputLabelStyle = styled.label`
+	margin: 2% 0;
 	font-weight: 700;
 `;
 
@@ -55,4 +56,17 @@ const FormStyle = styled.form`
 	flex-direction: column;
 `;
 
-export { TextInput, InputStyle, InputContainerStyle, InputErrorStyle, InputLabelStyle, FormStyle };
+const TextAreaStyle = styled.textarea`
+	background-color: #fff;
+	min-width: 600px;
+	width: 80%;
+	min-height: 200px;
+	/* max-height: 200px; */
+	font-size: 1.2rem;
+	border: #dcdfe4 2px solid;
+	padding: 0.5em;
+	border-radius: 10px;
+	resize: none;
+`;
+
+export { TextInput, InputStyle, InputContainerStyle, InputErrorStyle, InputLabelStyle, FormStyle, TextAreaStyle };

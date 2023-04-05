@@ -8,13 +8,15 @@ import {
 	DropDownStyle,
 	IconDeploy,
 } from "../../styled-components/index/DropDownList.style";
+import { InputLabelStyle } from "../../styled-components/index/Input.style";
 
-const DropDownList = ({ selected, setSelected }) => {
+const DropDownList = ({ selected, setSelected, label }) => {
 	const [isActive, setIsActive] = useState(false);
 	const [options, setOptions] = useState(keywords);
-	console.log(options);
+	// console.log(options);
 	return (
 		<DropDownStyle>
+			<InputLabelStyle>{label}</InputLabelStyle>
 			<DropDownBtn onClick={(e) => setIsActive(!isActive)}>{selected.name}</DropDownBtn>
 			<IconDeploy />
 			{isActive && (

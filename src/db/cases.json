@@ -1,0 +1,22 @@
+[
+	{
+		"caseTitle": "The chicken or the egg?",
+		"caseDescription": "Eius officia, asperiores tempora, quidem saepe voluptatum deleniti reiciendis fugit doloribus possimus iusto sequi pariatur earum. Repudiandae maiores cumque omnis adipisci velit quibusdam alias itaque asperiores. Minima rem perferendis suscipit.",
+		"createdBy": 123456789,
+		"createdAt": "05/04/2023",
+		"keywords": [
+			{ "id": 3, "name": "Engineering" },
+			{ "id": 4, "name": "Python" },
+			{ "id": 2, "name": "Health" }
+		],
+		"category": 4,
+		"services": 1,
+		"files": [
+			{
+				"id": 1,
+				"src": "https://...."
+			}
+		]
+	},
+	{}
+]

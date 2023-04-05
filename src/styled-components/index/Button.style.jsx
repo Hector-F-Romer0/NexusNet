@@ -16,21 +16,21 @@ const ButtonGenericStyle = styled.button`
 `;
 
 const PrimaryButtonStyle = styled(ButtonGenericStyle)`
-	/* background-color: #2e61e7;
+	background-color: #2e61e7;
 	color: #fff;
 
 	&:hover {
 		background-color: #4372f5;
-	} */
+	}
 `;
 
 const DeleteButtonStyle = styled(ButtonGenericStyle)`
-	/* background-color: #e72e2e;
+	background-color: #e72e2e;
 	color: #fff;
 
 	&:hover {
 		background-color: #f74340;
-	} */
+	}
 `;
 
 const ButtonContainerStyle = styled.div`

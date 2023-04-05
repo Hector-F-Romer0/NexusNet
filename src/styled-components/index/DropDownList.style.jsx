@@ -3,7 +3,7 @@ import { FiChevronDown } from "react-icons/fi";
 
 const DropDownStyle = styled.div`
 	width: 400px;
-	margin: 0 auto;
+	margin: 2% auto;
 	user-select: none;
 	position: relative;
 `;
@@ -19,6 +19,7 @@ const DropDownBtn = styled.div`
 	color: #333;
 	cursor: pointer;
 	border-radius: 10px;
+	margin: 2% 0;
 `;
 
 const DropDownContent = styled.div`
@@ -47,7 +48,7 @@ const DropDownItem = styled.div`
 const IconDeploy = styled(FiChevronDown)`
 	position: absolute;
 	font-size: 2rem;
-	top: 10px;
+	top: 36px;
 	left: 88%;
 	pointer-events: none;
 	/* left: 100px; */
