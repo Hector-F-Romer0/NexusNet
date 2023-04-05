@@ -58,6 +58,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<Route path="/admin/services" element={<ServicesCRUD />}></Route>
 				<Route path="/admin/view/provider" element={<ViewAccountProviderAdmin />}></Route>
 				<Route path="/signin" element={<SignIn />}></Route>
+				<Route path="/signup" element={<SignUp />}></Route>
 				<Route path="/*" element={<NotFound />}></Route>
 				{/* <Route path="/client/chats" element={<ChatClient />}></Route> */}
 			</Routes>

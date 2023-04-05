@@ -28,7 +28,9 @@ const SignIn = () => {
 				<h1>Sign in</h1>
 				<ProviderPhotoCard src={Logo}></ProviderPhotoCard>
 				<h2>Dont have an account</h2>
-				<h2>Sign Up - </h2>
+				<ButtonGenericStyle type="submit" onClick={() => navigate("/signup")}>
+					Sign up
+				</ButtonGenericStyle>
 			</div>
 			<FormStyle action="" onSubmit={handleSubmit(onSubmit)}>
 				<FormInput
