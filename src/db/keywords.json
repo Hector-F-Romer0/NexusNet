@@ -1,15 +1,15 @@
 [
 	{
 		"id": 1,
-		"name": "Programming"
+		"name": "Soring algorithms"
 	},
 	{
 		"id": 2,
-		"name": "Health"
+		"name": "NodeJS"
 	},
 	{
 		"id": 3,
-		"name": "Engineering"
+		"name": "Weightloss"
 	},
 	{
 		"id": 4,
@@ -22,5 +22,9 @@
 	{
 		"id": 6,
 		"name": "Demand for food"
+	},
+	{
+		"id": 7,
+		"name": "Depression"
 	}
 ]

@@ -33,6 +33,7 @@ const DropDownContent = styled.div`
 	color: #333;
 	width: 100%;
 	border-radius: 2px;
+	z-index: 1;
 `;
 
 const DropDownItem = styled.div`

@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1,
+		"name": "Health"
+	},
+	{
+		"id": 2,
+		"name": "Programming"
+	},
+	{
+		"id": 3,
+		"name": "Psychology"
+	},
+	{
+		"id": 4,
+		"name": "Maths"
+	},
+	{
+		"id": 5,
+		"name": "Engineering"
+	}
+]

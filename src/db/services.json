@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1,
+		"name": "Programmer"
+	},
+	{
+		"id": 2,
+		"name": "Nutritionist"
+	},
+	{
+		"id": 3,
+		"name": "Psychiatrist"
+	},
+	{
+		"id": 4,
+		"name": "Teacher"
+	},
+	{
+		"id": 5,
+		"name": "Lawyer"
+	}
+]

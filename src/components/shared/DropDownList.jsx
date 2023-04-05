@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import keywords from "../../db/keywords.json";
 
 import {
 	DropDownBtn,
@@ -10,9 +9,9 @@ import {
 } from "../../styled-components/index/DropDownList.style";
 import { InputLabelStyle } from "../../styled-components/index/Input.style";
 
-const DropDownList = ({ selected, setSelected, label }) => {
+const DropDownList = ({ selected, setSelected, label, availableOptions }) => {
 	const [isActive, setIsActive] = useState(false);
-	const [options, setOptions] = useState(keywords);
+	const [options, setOptions] = useState(availableOptions);
 	// console.log(options);
 	return (
 		<DropDownStyle>

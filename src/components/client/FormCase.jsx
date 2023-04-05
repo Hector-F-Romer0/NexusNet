@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+
+// ? READ FILES
+import keywords from "../../db/keywords.json";
+import services from "../../db/services.json";
+import categories from "../../db/categories.json";
 
 // import { ButtonStyle } from "../../styled-components/index/Button.style";
 import ContainerTagKeywords from "../shared/ContainerTagKeywords";
@@ -8,7 +13,7 @@ import FormInput from "../shared/FormInput";
 import { FormStyle } from "../../styled-components/index/Input.style";
 import { ButtonGenericStyle, PrimaryButtonStyle } from "../../styled-components/index/Button.style";
 import TextAreaForm from "../shared/TextAreaForm";
-import { useEffect } from "react";
+
 // import { saveJSON } from "../../helpers/jsonFileManager";
 
 const FormCase = () => {
@@ -18,22 +23,31 @@ const FormCase = () => {
 		formState: { errors },
 	} = useForm();
 
-	const [selected, setSelected] = useState({
+	const [selectedKeyWord, setSelectedKeyWord] = useState({
 		id: 0,
 		name: "Select keywords",
 	});
+	const [setectedService, setSelectedService] = useState({
+		id: services[0]?.id,
+		name: services[0]?.name,
+	});
 
-	const [keywords, setKeyWords] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState({
+		id: categories[0]?.id,
+		name: categories[0]?.name,
+	});
+
+	const [keywordsChosen, setKeyWordsChosen] = useState([]);
 
 	useEffect(() => {
-		if (selected.id === 0) {
+		if (selectedKeyWord.id === 0) {
 			console.log("No se ha selecionado ninguna keyword.");
 			// alert("No se ha selecionado ninguna keyword.");
 			return;
 		}
 
 		// Verificar que la keyword ya fue escogida
-		const keyWordExists = keywords.find((keyword) => selected.id === keyword?.id);
+		const keyWordExists = keywordsChosen.find((keyword) => selectedKeyWord.id === keyword?.id);
 		if (keyWordExists !== undefined) {
 			console.log(`Ya existe ${keyWordExists?.name}`);
 			alert(`Ya agregaste la keyword ${keyWordExists?.name}`);
@@ -41,16 +55,16 @@ const FormCase = () => {
 		}
 
 		// Filtra el valor por defecto para que nunca se guarde en el estado.
-		keywords.filter((item) => item?.id === 0);
-		setKeyWords([...keywords, selected]);
-	}, [selected]);
+		keywordsChosen.filter((item) => item?.id === 0);
+		setKeyWordsChosen([...keywordsChosen, selectedKeyWord]);
+	}, [selectedKeyWord]);
 
 	const onSubmit = (data) => {
-		if (keywords.length === 0) {
+		if (keywordsChosen.length === 0) {
 			alert("Seleccione al menos 1 keyword.");
 			return;
 		}
-		console.log({ data, keywords: keywords });
+		console.log({ data, category: selectedCategory, service: setectedService, keywords: keywordsChosen });
 		// saveJSON({ data, keywords: keywords });
 	};
 
@@ -100,8 +114,23 @@ const FormCase = () => {
 					}}
 					error={errors.caseDescription}
 				/>
-				<DropDownList label="Key words" selected={selected} setSelected={setSelected}></DropDownList>
-				<ContainerTagKeywords keywords={keywords} setKeyWords={setKeyWords} />
+				<DropDownList
+					label="Service requested"
+					availableOptions={services}
+					selected={setectedService}
+					setSelected={setSelectedService}></DropDownList>
+				<DropDownList
+					label="Associated category"
+					availableOptions={categories}
+					selected={selectedCategory}
+					setSelected={setSelectedCategory}></DropDownList>
+				<DropDownList
+					label="Key words"
+					availableOptions={keywords}
+					selected={selectedKeyWord}
+					setSelected={setSelectedKeyWord}></DropDownList>
+
+				<ContainerTagKeywords keywords={keywordsChosen} setKeyWords={setKeyWordsChosen} />
 				<PrimaryButtonStyle type="submit">Upload your case</PrimaryButtonStyle>
 			</FormStyle>
 		</div>
