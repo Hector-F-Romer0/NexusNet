@@ -10,7 +10,6 @@ const StarContainer = () => {
 			<Star />
 			<Star />
 			<Star />
-			<h2>Promedio</h2>
 		</StartRateContainerStyle>
 	);
 };

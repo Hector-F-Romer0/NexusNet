@@ -7,12 +7,14 @@ import {
 import StarContainer from "./StarContainer";
 import photoProvider1 from "../../assets/Provider1.jpg";
 
-const CardTopProvider = () => {
+const CardTopProvider = ({ data }) => {
+	console.log(data);
 	return (
 		<CardTopProvidersStyle>
 			<ProviderPhotoCard src={photoProvider1}></ProviderPhotoCard>
-			<NameProviderCard>Enrique Manos Cuchillas</NameProviderCard>
+			<NameProviderCard> {data.name} </NameProviderCard>
 			<StarContainer margin-rigth="auto"></StarContainer>
+			<h2> {data.rate} </h2>
 		</CardTopProvidersStyle>
 	);
 };
