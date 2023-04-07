@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { size } from "./deviceSizes";
 
 const ButtonGenericStyle = styled.button`
 	background-color: #ededed;
@@ -13,6 +14,14 @@ const ButtonGenericStyle = styled.button`
 	color: #2a4c73;
 	border: none;
 	/* margin: 3% 0; */
+
+	@media (max-width: ${size.tablet}) {
+		height: 30px;
+		/* padding: 0.5em 1em; */
+		font-size: 0.8rem;
+		min-width: 90px;
+		max-width: 250px;
+	}
 `;
 
 const PrimaryButtonStyle = styled(ButtonGenericStyle)`
@@ -21,6 +30,16 @@ const PrimaryButtonStyle = styled(ButtonGenericStyle)`
 
 	&:hover {
 		background-color: #4372f5;
+	}
+
+	@media (max-width: ${size.tablet}) {
+		display: block;
+		margin: 0 auto;
+		height: 40px;
+		padding: 0.5em 2em;
+		font-size: 1rem;
+		min-width: 90px;
+		max-width: 250px;
 	}
 `;
 
