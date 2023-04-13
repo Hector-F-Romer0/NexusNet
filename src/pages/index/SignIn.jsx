@@ -14,6 +14,7 @@ import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider
 import FormInput from "../../components/shared/FormInput";
 import { FormStyle } from "../../styled-components/index/Input.style";
 import { FlexCenterColumnLayout } from "../../styled-components/index/Layout.js";
+import "./../../index.css";
 
 const SignIn = () => {
 	const {
@@ -32,7 +33,7 @@ const SignIn = () => {
 		<CenterCard>
 			<Layout>
 				<LogoLayout>
-					<h1>Sign in</h1>
+					<h1 className="text-1xl font-bold underline">Sign in</h1>
 					<ProviderPhotoCard src={Logo}></ProviderPhotoCard>
 					<h2>Don't have an account?</h2>
 					<ButtonGenericStyle type="button" onClick={() => navigate("/signup")}>
