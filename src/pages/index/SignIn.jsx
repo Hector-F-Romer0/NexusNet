@@ -14,7 +14,6 @@ import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider
 import FormInput from "../../components/shared/FormInput";
 import { FormStyle } from "../../styled-components/index/Input.style";
 import { FlexCenterColumnLayout } from "../../styled-components/index/Layout.js";
-import "./../../index.css";
 
 const SignIn = () => {
 	const {
