@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'navbar': '#5A8FCC',
+        'footer': '#2A4C73'
+      }
+    },
   },
   plugins: [require('tailwind-scrollbar')],
 }
