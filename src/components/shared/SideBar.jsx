@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 const SideBar = () => {
 	const menus = [
 		{ name: "Home", link: "/client/home", icon: FiGlobe },
-		{ name: "Top providers", link: "/client/view/top", icon: FiAward },
+		{ name: "Top providers", link: "/top/providers", icon: FiAward },
 		{ name: "Chats", link: "/client/chats", icon: FiMessageSquare },
 		{ name: "Account", link: "/client/account", icon: FiUser, margin: true },
 		{ name: "Log Out", link: "/signin", icon: FiLogOut },

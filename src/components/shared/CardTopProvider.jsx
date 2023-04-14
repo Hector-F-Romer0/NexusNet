@@ -1,21 +1,13 @@
 import React from "react";
-import {
-	CardTopProvidersStyle,
-	NameProviderCard,
-	ProviderPhotoCard,
-} from "../../styled-components/index/cardTopProvider.style";
-import StarContainer from "./StarContainer";
-import photoProvider1 from "../../assets/Provider1.jpg";
 
-const CardTopProvider = ({ data }) => {
-	console.log(data);
+const CardTopProvider = ({ img }) => {
 	return (
-		<CardTopProvidersStyle>
-			<ProviderPhotoCard src={photoProvider1}></ProviderPhotoCard>
-			<NameProviderCard> {data.name} </NameProviderCard>
-			<StarContainer margin-rigth="auto"></StarContainer>
-			<h2> {data.rate} </h2>
-		</CardTopProvidersStyle>
+		<div className="flex flex-row gap-2 sm:gap-8 min-w-sm w-4/5 py-8 px-8 rounded-lg justify-between bg-card items-center">
+			<img className="h-auto w-1/4 rounded-lg" src={img} alt="Provider photo" />
+			<h3 className="text-xs sm:text-base">Nombre provider</h3>
+			<h3 className="text-xs sm:text-base">Estrellas</h3>
+			<h3 className="text-xs sm:text-base">4.5</h3>
+		</div>
 	);
 };
 

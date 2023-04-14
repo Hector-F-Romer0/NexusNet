@@ -6,7 +6,7 @@ import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
 import "./styled-components/index/index.css";
 import RateProvider from "./pages/client/RateProvider";
-import TopProvidersClient from "./pages/client/TopProvidersClient";
+import TopProviders from "./pages/shared/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformationClient from "./pages/client/CaseInformationClient";
 import SearchProviders from "./pages/client/SearchProviders";
@@ -16,7 +16,6 @@ import ChatClient from "./pages/client/ChatClient";
 import HomeProvider from "./pages/provider/HomeProvider";
 import ProviderRegister from "./pages/provider/ProviderRegister";
 import AccountProvider from "./pages/provider/AccountProvider";
-import TopProvidersProvider from "./pages/provider/TopProvidersProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
 import KeyWordsCRUD from "./pages/admin/KeyWordsCRUD";
@@ -28,7 +27,6 @@ import ServicesCRUD from "./pages/admin/ServicesCRUD";
 import NotFound from "./pages/index/NotFound";
 import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
 import "./index.css";
-import HomeClientAyuda from "./pages/client/HomeClientAyuda";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<>
@@ -37,7 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<Route path="/" element={<SignIn />}></Route>
 				{/* Client routes */}
 				<Route path="/client/home" element={<HomeClient />}></Route>
-				<Route path="/client/view/top" element={<TopProvidersClient />}></Route>
+				<Route path="/top/providers" element={<TopProviders />}></Route>
 				<Route path="/client/chats" element={<ChatClient />}></Route>
 				<Route path="/client/account" element={<AccountClient />}></Route>
 				<Route path="/client/case/add" element={<CaseForm />}></Route>
@@ -50,7 +48,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<Route path="/provider/home" element={<HomeProvider />}></Route>
 				<Route path="/provider/chat" element={<ChatProvider />}></Route>
 				<Route path="/provider/account" element={<AccountProvider />}></Route>
-				<Route path="/provider/view/top" element={<TopProvidersProvider />}></Route>
 				<Route path="/provider/case/:id" element={<CaseInformationProvider />}></Route>
 				{/* PENDIENTE UBICAR providerRegister */}
 				{/* Admin Routes */}
