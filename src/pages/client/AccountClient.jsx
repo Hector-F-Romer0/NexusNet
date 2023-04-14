@@ -1,13 +1,13 @@
 import React from "react";
 import CardAccount from "../../components/shared/CardAccount";
 import Footer from "../../components/shared/Footer";
-import UserNavBar from "../../components/shared/UserNavBar";
+import SideBar from "../../components/shared/SideBar";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 
 const AccountClient = () => {
 	return (
 		<Layout>
-			<UserNavBar />
+			<SideBar />
 			<MainContentLayout>
 				<CardAccount></CardAccount>
 				<Footer />

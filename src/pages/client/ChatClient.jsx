@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
-import UserNavBar from "../../components/shared/UserNavBar";
+import SideBar from "../../components/shared/SideBar";
 import ContainerChats from "../../components/shared/ContainerChats";
 import ChatMessage from "../../components/shared/ChatMessage";
 import Footer from "../../components/shared/Footer";
@@ -8,12 +8,12 @@ import Footer from "../../components/shared/Footer";
 const ChatClient = () => {
 	return (
 		<Layout>
-			<UserNavBar />
+			<SideBar />
 			<MainContentLayout>
-				<div>
+				{/* <div>
 					<ContainerChats></ContainerChats>
 					<ChatMessage></ChatMessage>
-				</div>
+				</div> */}
 				<Footer />
 			</MainContentLayout>
 		</Layout>

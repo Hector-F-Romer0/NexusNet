@@ -3,13 +3,13 @@ import ContainerList from "../../components/shared/ContainerList";
 import ContainerProvider from "../../components/shared/ContainerProvider";
 import Footer from "../../components/shared/Footer";
 import SearchBar from "../../components/shared/SearchBar";
-import UserNavBar from "../../components/shared/UserNavBar";
+import SideBar from "../../components/shared/SideBar";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 
 const SearchProviders = () => {
 	return (
 		<Layout>
-			<UserNavBar />
+			<SideBar />
 			<MainContentLayout>
 				<SearchBar></SearchBar>
 				<ContainerList></ContainerList>

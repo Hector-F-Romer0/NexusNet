@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { size } from "./deviceSizes";
 
 const Layout = styled.div`
 	display: grid;
-	min-height: 100vh;
+	/* position: relative; */
+	height: 100vh;
 	grid-template-areas: "navbar main";
 	grid-template-rows: 100%;
 	grid-template-columns: minmax(200px, 300px) 1fr;
+
+	@media (max-width: ${size.lg}) {
+		grid-template-columns: auto 6fr;
+	}
 `;
 
 const NavBarLayout = styled.div`
@@ -22,6 +28,14 @@ const NavBarLayout = styled.div`
 
 const MainContentLayout = styled.div`
 	grid-area: main;
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	flex-direction: column;
+`;
+
+const MainContentStyle = styled.div`
+	flex-grow: 1;
 `;
 
 const FlexCenterColumnLayout = styled.div`
@@ -38,4 +52,4 @@ const FlexCardLayout = styled(FlexCenterColumnLayout)`
 	/* padding: 1em; */
 `;
 
-export { Layout, MainContentLayout, NavBarLayout, FlexCenterColumnLayout, FlexCardLayout };
+export { Layout, MainContentLayout, NavBarLayout, FlexCenterColumnLayout, FlexCardLayout, MainContentStyle };

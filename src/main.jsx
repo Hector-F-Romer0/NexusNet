@@ -28,6 +28,7 @@ import ServicesCRUD from "./pages/admin/ServicesCRUD";
 import NotFound from "./pages/index/NotFound";
 import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
 import "./index.css";
+import HomeClientAyuda from "./pages/client/HomeClientAyuda";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<>

@@ -16,7 +16,8 @@ import imgClient from "../../assets/imgClient.jpg";
 const CardAccount = () => {
 	return (
 		<AccountCardContainer>
-			<AccountCardClientStyle>
+			<h1>Account card</h1>
+			{/* <AccountCardClientStyle>
 				<AccountContainerDescription>
 					<AccountImage src={imgClient}></AccountImage>
 					<AccountTitle>Client</AccountTitle>
@@ -36,7 +37,7 @@ const CardAccount = () => {
 						<AccountInfo>City: Sogamoso</AccountInfo>
 					</AccountContainerP>
 				</AccountContainerInfo>
-			</AccountCardClientStyle>
+			</AccountCardClientStyle> */}
 		</AccountCardContainer>
 	);
 };

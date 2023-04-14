@@ -26,6 +26,7 @@ const SignIn = () => {
 
 	const onSubmitSignIn = (data) => {
 		console.log(data);
+		navigate("/client/home");
 	};
 
 	return (
