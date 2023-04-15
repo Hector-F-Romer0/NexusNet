@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-	InputContainerStyle,
-	InputErrorStyle,
-	InputLabelStyle,
-	InputStyle,
-	TextAreaStyle,
-} from "../../styled-components/index/Input.style";
+import { InputContainerStyle, InputErrorStyle } from "../../styled-components/index/Input.style";
 
-const TextAreaForm = ({ label, registerName, placeholder, register, type, validations, error }) => {
+const TextAreaForm = ({ label, registerName, placeholder, register, validations, error }) => {
 	return (
 		<InputContainerStyle>
-			<InputLabelStyle htmlFor={registerName}>{label}</InputLabelStyle>
-			<TextAreaStyle placeholder={placeholder} {...register(registerName, validations)} />
+			<label htmlFor={registerName} className="block mb-2 text-base font-semibold text-gray-900">
+				{label}
+			</label>
+			<textarea
+				placeholder={placeholder}
+				{...register(registerName, validations)}
+				className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 resize-none focus:ring-blue-500 focus:border-blue-500"
+			/>
 			{error?.type === "required" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
 			{error?.type === "minLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
 			{error?.type === "maxLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}

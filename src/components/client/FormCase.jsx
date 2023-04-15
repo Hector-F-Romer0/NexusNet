@@ -10,11 +10,7 @@ import categories from "../../db/categories.json";
 import ContainerTagKeywords from "../shared/ContainerTagKeywords";
 import DropDownList from "../shared/DropDownList";
 import FormInput from "../shared/FormInput";
-import { FormStyle } from "../../styled-components/index/Input.style";
-import { ButtonGenericStyle, PrimaryButtonStyle } from "../../styled-components/index/Button.style";
 import TextAreaForm from "../shared/TextAreaForm";
-
-// import { saveJSON } from "../../helpers/jsonFileManager";
 
 const FormCase = () => {
 	const {
@@ -65,75 +61,79 @@ const FormCase = () => {
 			return;
 		}
 		console.log({ data, category: selectedCategory, service: setectedService, keywords: keywordsChosen });
-		// saveJSON({ data, keywords: keywords });
 	};
 
 	return (
-		<div>
-			<FormStyle onSubmit={handleSubmit(onSubmit)}>
-				<FormInput
-					label="Case title"
-					type="text"
-					registerName="caseTitle"
-					placeholder="Problem with css"
-					register={register}
-					validations={{
-						required: {
-							value: true,
-							message: "Case title is required.",
-						},
-						minLength: {
-							value: 3,
-							message: "Case title must be between 3 and 30 characters.",
-						},
-						maxLength: {
-							value: 30,
-							message: "Case title must be between 3 and 30 characters.",
-						},
-					}}
-					error={errors.caseTitle}
-				/>
-				<TextAreaForm
-					label="Case description"
-					registerName="caseDescription"
-					placeholder="Problem with css..."
-					register={register}
-					validations={{
-						required: {
-							value: true,
-							message: "Case description is required.",
-						},
-						minLength: {
-							value: 3,
-							message: "Case description must be between 3 and 30 characters.",
-						},
-						maxLength: {
-							value: 500,
-							message: "Case description must be between 3 and 500 characters.",
-						},
-					}}
-					error={errors.caseDescription}
-				/>
-				<DropDownList
-					label="Service requested"
-					availableOptions={services}
-					selected={setectedService}
-					setSelected={setSelectedService}></DropDownList>
-				<DropDownList
-					label="Associated category"
-					availableOptions={categories}
-					selected={selectedCategory}
-					setSelected={setSelectedCategory}></DropDownList>
-				<DropDownList
-					label="Key words"
-					availableOptions={keywords}
-					selected={selectedKeyWord}
-					setSelected={setSelectedKeyWord}></DropDownList>
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<FormInput
+				label="Case title"
+				type="text"
+				registerName="caseTitle"
+				placeholder="Problem with css"
+				register={register}
+				validations={{
+					required: {
+						value: true,
+						message: "Case title is required.",
+					},
+					minLength: {
+						value: 3,
+						message: "Case title must be between 3 and 30 characters.",
+					},
+					maxLength: {
+						value: 30,
+						message: "Case title must be between 3 and 30 characters.",
+					},
+				}}
+				error={errors.caseTitle}
+			/>
+			<TextAreaForm
+				label="Case description"
+				registerName="caseDescription"
+				placeholder="Problem with css..."
+				register={register}
+				validations={{
+					required: {
+						value: true,
+						message: "Case description is required.",
+					},
+					minLength: {
+						value: 3,
+						message: "Case description must be between 3 and 30 characters.",
+					},
+					maxLength: {
+						value: 500,
+						message: "Case description must be between 3 and 500 characters.",
+					},
+				}}
+				error={errors.caseDescription}
+			/>
+			{/* <TestDrop /> */}
+			<DropDownList
+				label="Service requested"
+				availableOptions={services}
+				selected={setectedService}
+				setSelected={setSelectedService}></DropDownList>
+			<DropDownList
+				label="Associated category"
+				availableOptions={categories}
+				selected={selectedCategory}
+				setSelected={setSelectedCategory}></DropDownList>
+			<DropDownList
+				label="Key words"
+				availableOptions={keywords}
+				selected={selectedKeyWord}
+				setSelected={setSelectedKeyWord}></DropDownList>
 
-				<ContainerTagKeywords keywords={keywordsChosen} setKeyWords={setKeyWordsChosen} />
-				<PrimaryButtonStyle type="submit">Upload your case</PrimaryButtonStyle>
-			</FormStyle>
-		</div>
+			<ContainerTagKeywords keywords={keywordsChosen} setKeyWords={setKeyWordsChosen} />
+			<div className="flex justify-center">
+				<button
+					type="submit"
+					className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5">
+					Upload your case
+				</button>
+			</div>
+		</form>
 	);
 };
 

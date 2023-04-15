@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 import SideBar from "../../components/shared/SideBar";
 import CardCase from "../../components/shared/CardCase";
 import Footer from "../../components/shared/Footer";
 const HomeClient = () => {
+	const navigate = useNavigate();
+
 	return (
 		<section className="flex">
 			<SideBar />
@@ -11,7 +15,9 @@ const HomeClient = () => {
 					<button className="bg-gray-200 hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center cursor-pointer ">
 						Search providers
 					</button>
-					<button className="bg-gray-200 hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center cursor-pointer">
+					<button
+						onClick={() => navigate("/client/case/add")}
+						className="bg-gray-200 hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center cursor-pointer">
 						Upload your cases
 					</button>
 				</div>
