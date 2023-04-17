@@ -23,7 +23,9 @@
     "react-router-dom": "^6.10.0",
     "sort-by": "^1.2.0",
     "styled": "^1.0.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "sweetalert2": "^11.7.3",
+    "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
