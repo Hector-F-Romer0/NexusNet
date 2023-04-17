@@ -1,7 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import casesDB from "../../../db/cases.json";
 
-const initialState = casesDB;
+const initialState = {
+	allCases: casesDB,
+	isLoading: false,
+};
 
 export const casesSlices = createSlice({
 	name: "cases",
@@ -10,7 +13,14 @@ export const casesSlices = createSlice({
 		addCase: (state, action) => {
 			console.log("Add case");
 		},
+		deleteCase: (state, action) => {
+			const allCases = current(state.allCases);
+			const filter = allCases.filter((userCase) => {
+				return userCase.id !== action.payload.id;
+			});
+			state.allCases = filter;
+		},
 	},
 });
 
-export const { addCase } = casesSlices.actions;
+export const { addCase, deleteCase } = casesSlices.actions;

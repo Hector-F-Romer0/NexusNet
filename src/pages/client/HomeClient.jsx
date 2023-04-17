@@ -7,7 +7,7 @@ import Footer from "../../components/shared/Footer";
 
 const HomeClient = () => {
 	const navigate = useNavigate();
-	const cases = useSelector((state) => state.cases);
+	const { allCases } = useSelector((state) => state.cases);
 
 	return (
 		<section className="flex">
@@ -26,7 +26,7 @@ const HomeClient = () => {
 					</button>
 				</div>
 				<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
-					{cases.map((caseInfo) => (
+					{allCases.map((caseInfo) => (
 						<CardCase key={caseInfo.id} data={caseInfo} />
 					))}
 				</div>
