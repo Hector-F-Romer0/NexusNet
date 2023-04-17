@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { InputContainerStyle, InputErrorStyle } from "../../styled-components/index/Input.style";
 
 const FormInput = ({ label, registerName, placeholder, register, type, validations, error }) => {
 	return (
-		<InputContainerStyle>
+		<div className="flex flex-col w-full my-3">
 			<label htmlFor={registerName} className="block mb-2 text-base font-semibold text-gray-900">
 				{label}
 			</label>
@@ -31,7 +30,7 @@ const FormInput = ({ label, registerName, placeholder, register, type, validatio
 			{error?.type === "validate" && (
 				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
 			)}
-		</InputContainerStyle>
+		</div>
 	);
 };
 
