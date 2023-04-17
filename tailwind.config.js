@@ -9,6 +9,8 @@ export default {
 				card: "#E8F1FF",
 				categoryTag: "#227FC2",
 				serviceTag: "#2B5E99",
+				keyTag: "#D0E3F1",
+				keywordText: "#2C5877"
 			},
 			fontFamily: {
 				montserrat: ["Montserrat", "sans-serif"],

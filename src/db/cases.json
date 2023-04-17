@@ -6,6 +6,7 @@
 		"createdBy": 123456789,
 		"createdAt": "05/04/2023",
 		"takenOn": "06/04/2023",
+		"takenBy": "1",
 		"keywords": [
 			{ "id": 3, "name": "Engineering" },
 			{ "id": 4, "name": "Python" },
@@ -33,6 +34,7 @@
 		"createdBy": 9387656789,
 		"createdAt": "16/04/2023",
 		"takenOn": null,
+		"takenBy": "2",
 		"keywords": [
 			{ "id": 3, "name": "Engineering" },
 			{ "id": 4, "name": "Python" },
