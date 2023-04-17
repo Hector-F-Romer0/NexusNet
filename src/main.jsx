@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider, BrowserRouter, Route, Routes } from "react-router-dom";
+import { store } from "./store/store";
 
 import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
@@ -10,11 +12,9 @@ import TopProviders from "./pages/shared/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformationClient from "./pages/client/CaseInformationClient";
 import SearchProviders from "./pages/client/SearchProviders";
-import ClientRegister from "./pages/client/ClientRegister";
 import CaseForm from "./pages/client/CaseForm";
 import ChatClient from "./pages/client/ChatClient";
 import HomeProvider from "./pages/provider/HomeProvider";
-import ProviderRegister from "./pages/provider/ProviderRegister";
 import AccountProvider from "./pages/provider/AccountProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
@@ -29,7 +29,7 @@ import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<>
+	<Provider store={store}>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<SignIn />}></Route>
@@ -62,5 +62,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				{/* <Route path="/client/chats" element={<ChatClient />}></Route> */}
 			</Routes>
 		</BrowserRouter>
-	</>
+	</Provider>
 );

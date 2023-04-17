@@ -1,26 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const CardCase = () => {
+const CardCase = ({ data }) => {
+	const navigate = useNavigate();
+
 	return (
-		<div className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card">
-			<div className="flex flex-row gap-5 mb-3 flex-wrap text-sm md:text-xl">
+		<div
+			onClick={() => navigate(`/client/case/${data?.id}`)}
+			className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card cursor-pointer">
+			<div className="flex flex-row gap-5 mb-3 flex-wrap text-sm md:text-xl ">
 				<div className="text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-categoryTag rounded-full text-white">
-					Health
+					{data.category?.name}
 				</div>
 				<div className=" text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-serviceTag rounded-full text-white">
-					Services
+					{data.service?.name}
 				</div>
 			</div>
-			<h3 className="mb-2 text-3xl font-bold tracking-tight text-black">Title case</h3>
+			<h3 className="mb-2 text-3xl font-bold tracking-tight text-black ">{data?.caseTitle}</h3>
 			<hr className="h-1 bg-black mb-5 f" />
-			<p className="font-light text-gray-700 text-sm md:text-xl">
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe repudiandae commodi facere voluptate
-				dolores aliquam, mollitia deserunt, quis illo dolorem velit a voluptatum nobis totam illum voluptatibus
-				non ipsum sequi. Esse nesciunt quo vero? Rem, soluta dolorum iusto eos distinctio repellat reiciendis
-				atque inventore voluptatibus vel sequi, ut nesciunt error esse accusamus accusantium! Perferendis
-				accusantium fugiat aperiam ipsum pariatur quibusdam.
-			</p>
-			<h4 className="font-thin text-base text-right text-gray-700 mt-4 pb-2">Taken on dd/mm/yy</h4>
+			<p className="font-light text-gray-700 text-sm md:text-xl">{data?.caseDescription}</p>
+			<h4 className="font-thin text-base text-right text-gray-700 mt-4 pb-2">
+				{data.takenOn ? `Taken on ${data.takenOn}` : "Not assumed"}
+			</h4>
 		</div>
 	);
 };

@@ -1,16 +1,24 @@
 [
 	{
+		"id": 1,
 		"caseTitle": "The chicken or the egg?",
 		"caseDescription": "Eius officia, asperiores tempora, quidem saepe voluptatum deleniti reiciendis fugit doloribus possimus iusto sequi pariatur earum. Repudiandae maiores cumque omnis adipisci velit quibusdam alias itaque asperiores. Minima rem perferendis suscipit.",
 		"createdBy": 123456789,
 		"createdAt": "05/04/2023",
+		"takenOn": "06/04/2023",
 		"keywords": [
 			{ "id": 3, "name": "Engineering" },
 			{ "id": 4, "name": "Python" },
 			{ "id": 2, "name": "Health" }
 		],
-		"category": 4,
-		"services": 1,
+		"category": {
+			"id": 1,
+			"name": "Health"
+		},
+		"service": {
+			"id": 1,
+			"name": "Nutritionist"
+		},
 		"files": [
 			{
 				"id": 1,
@@ -18,5 +26,31 @@
 			}
 		]
 	},
-	{}
+	{
+		"id": 2,
+		"caseTitle": "¿King papa o Satillos?",
+		"caseDescription": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione distinctio magni, inventore sequi maiores hic animi dolores. Cum, iusto deserunt obcaecati laborum, explicabo animi molestiae ipsum nesciunt excepturi et exercitationem.Quidem fugiat cumque asperiores odio officia ut sequi similique, saepe aperiam eligendi, fugit veniam illo illum iure reprehenderit ducimus praesentium doloremque, quis exercitationem quasi dolore vitae esse recusandae? Ipsa, minus? ",
+		"createdBy": 9387656789,
+		"createdAt": "16/04/2023",
+		"takenOn": null,
+		"keywords": [
+			{ "id": 3, "name": "Engineering" },
+			{ "id": 4, "name": "Python" },
+			{ "id": 2, "name": "Health" }
+		],
+		"category": {
+			"id": 2,
+			"name": "Psychology"
+		},
+		"service": {
+			"id": 1,
+			"name": "Nutritionist"
+		},
+		"files": [
+			{
+				"id": 1,
+				"src": "https://...."
+			}
+		]
+	}
 ]
