@@ -14,13 +14,23 @@ const FormInput = ({ label, registerName, placeholder, register, type, validatio
 				{...register(registerName, validations)}
 				className="bg-white border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
 			/>
-			{error?.type === "required" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "minLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "maxLength" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "max" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "min" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "pattern" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
-			{error?.type === "validate" && <InputErrorStyle>{error?.message}</InputErrorStyle>}
+			{error?.type === "required" && (
+				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
+			)}
+			{error?.type === "minLength" && (
+				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
+			)}
+			{error?.type === "maxLength" && (
+				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
+			)}
+			{error?.type === "max" && <span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>}
+			{error?.type === "min" && <span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>}
+			{error?.type === "pattern" && (
+				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
+			)}
+			{error?.type === "validate" && (
+				<span className="mt-2 text-sm text-red-600 font-medium">{error?.message}</span>
+			)}
 		</InputContainerStyle>
 	);
 };

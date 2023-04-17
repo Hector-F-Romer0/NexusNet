@@ -1,19 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {
-	Layout,
-	LogoLayout,
-	FormContentLayout,
-	CenterCard,
-	SignInButtons,
-} from "../../styled-components/index/sign.style.jsx";
-import Logo from "../../assets/logo.png";
-import { ButtonGenericStyle, PrimaryButtonStyle } from "../../styled-components/index/Button.style";
-import { ProviderPhotoCard } from "../../styled-components/index/cardTopProvider.style";
+
 import FormInput from "../../components/shared/FormInput";
-import { FormStyle } from "../../styled-components/index/Input.style";
-import { FlexCenterColumnLayout } from "../../styled-components/index/Layout.js";
+import GoogleButton from "../../components/shared/GoogleButton.jsx";
+import FacebookButton from "../../components/shared/FacebookButton.jsx";
+import usersDB from "../../db/users.json";
+import Logo from "../../assets/logo.png";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const SignIn = () => {
 	const {
@@ -23,24 +19,37 @@ const SignIn = () => {
 	} = useForm();
 
 	const navigate = useNavigate();
+	const MySwal = withReactContent(Swal);
 
 	const onSubmitSignIn = (data) => {
-		console.log(data);
-		navigate("/client/home");
+		const existsUser = usersDB.find((user) => user.username == data.username);
+
+		if (!existsUser || data.password !== existsUser?.password) {
+			MySwal.fire({
+				title: "Incorrect data",
+				icon: "error",
+				text: "That password or username was incorrect. Please try again.",
+				confirmButtonColor: "#007BFF",
+			});
+		} else {
+			navigate("/client/home");
+		}
 	};
 
 	return (
-		<CenterCard>
-			<Layout>
-				<LogoLayout>
-					<h1 className="text-1xl font-bold underline">Sign in</h1>
-					<ProviderPhotoCard src={Logo}></ProviderPhotoCard>
-					<h2>Don't have an account?</h2>
-					<ButtonGenericStyle type="button" onClick={() => navigate("/signup")}>
+		<div className="bg-white flex justify-center items-center h-screen">
+			<div className="bg-card w-3/4 h-auto flex flex-col justify-center px-6 py-16 gap-6 rounded-lg  lg:gap-16 lg:px-10 md:flex-row md:my-0">
+				<div>
+					<h1 className="text-4xl font-bold text-center mt-9">Sign in</h1>
+					<img src={Logo} alt="NexusNet logo" className="w-2/4 mx-auto lg:w-3/5" />
+					<h2 className="text-base font-normal text-center my-5">Don't have an account?</h2>
+					<span
+						onClick={() => navigate("/signup")}
+						className="text-blue-700 text-base font-semibold text-center block mx-auto cursor-pointer hover:text-blue-950">
 						Sign up
-					</ButtonGenericStyle>
-				</LogoLayout>
-				<FormContentLayout>
+					</span>
+				</div>
+				<div className="self-center">
 					<form action="" onSubmit={handleSubmit(onSubmitSignIn)}>
 						<FormInput
 							label="Username"
@@ -74,15 +83,66 @@ const SignIn = () => {
 							}}
 							error={errors.password}
 						/>
-						<PrimaryButtonStyle type="submit">Sign in</PrimaryButtonStyle>
+						<button
+							type="submit"
+							className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 w-full">
+							Sign in
+						</button>
 					</form>
-					<SignInButtons>
-						<ButtonGenericStyle>Sign in with Facebook</ButtonGenericStyle>
-						<ButtonGenericStyle>Sign in with Google</ButtonGenericStyle>
-					</SignInButtons>
-				</FormContentLayout>
-			</Layout>
-		</CenterCard>
+					<div className="flex flex-col mt-10">
+						<GoogleButton />
+						<FacebookButton />
+					</div>
+				</div>
+			</div>
+		</div>
+		// min-w-sm w-4/5 h-4/5 py-5 px-5 md:px-10 rounded-lg shadow bg-card my-7k
+		// <CenterCard>
+		// 	<Layout>
+		// 		<LogoLayout>
+		// 			<h1 className="text-1xl font-bold underline">Sign in</h1>
+		//
+		// 		</LogoLayout>
+		// 		<FormContentLayout>
+		// 			<form action="" onSubmit={handleSubmit(onSubmitSignIn)}>
+		// 				<FormInput
+		// 					label="Username"
+		// 					type="text"
+		// 					registerName="username"
+		// 					placeholder="Username"
+		// 					register={register}
+		// 					validations={{
+		// 						required: {
+		// 							value: true,
+		// 							message: "Username is required.",
+		// 						},
+		// 						minLength: {
+		// 							value: 3,
+		// 							message: "Username must be between 3 and 18 characters.",
+		// 						},
+		// 					}}
+		// 					error={errors.username}
+		// 				/>
+		// 				<FormInput
+		// 					label="Password"
+		// 					type="password"
+		// 					placeholder="Password"
+		// 					registerName="password"
+		// 					register={register}
+		// 					validations={{
+		// 						required: {
+		// 							value: true,
+		// 							message: "Password is required.",
+		// 						},
+		// 					}}
+		// 					error={errors.password}
+		// 				/>
+		// 				<PrimaryButtonStyle type="submit">Sign in</PrimaryButtonStyle>
+		// 			</form>
+		//
+		// 		</FormContentLayout>
+		// 	</Layout>
+		// </CenterCard>
 	);
 };
 

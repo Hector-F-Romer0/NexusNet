@@ -1,0 +1,41 @@
+[
+	{
+		"id": 12345,
+		"names": "Pedro",
+		"lastnames": "Manos tijeras",
+		"username": "manosT29",
+		"email": "pedromtijeras@example.com",
+		"password": "manos123",
+		"typeUser": "client",
+		"photoNumber": "317 000 0000",
+		"country": "Colombia",
+		"state": "Boyacá",
+		"city": "Sogamoso"
+	},
+	{
+		"id": 56789,
+		"names": "Enrique",
+		"lastnames": "Manos Cuchillas",
+		"username": "manosC30",
+		"email": "enriquemcuchillas@example.com",
+		"password": "cuchillas123",
+		"typeUser": "provider",
+		"photoNumber": "320 000 0000",
+		"country": "Colombia",
+		"state": "Santander",
+		"city": "Barrancabermeja"
+	},
+	{
+		"id": 15434,
+		"names": "Octavio",
+		"lastnames": "Manos Machete",
+		"username": "machete123",
+		"email": "octavommachete@example.com",
+		"password": "admin123",
+		"typeUser": "admin",
+		"photoNumber": "310 000 0000",
+		"country": "Colombia",
+		"state": "Santander",
+		"city": "Barrancabermeja"
+	}
+]
