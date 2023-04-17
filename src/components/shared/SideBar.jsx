@@ -7,7 +7,7 @@ const SideBar = () => {
 		{ name: "Home", link: "/client/home", icon: FiGlobe },
 		{ name: "Top providers", link: "/top/providers", icon: FiAward },
 		{ name: "Chats", link: "/client/chats", icon: FiMessageSquare },
-		{ name: "Account", link: "/client/account", icon: FiUser, margin: true },
+		{ name: "Account", link: "/client/account", icon: FiUser },
 		{ name: "Log Out", link: "/signin", icon: FiLogOut },
 	];
 	const [open, setOpen] = useState(true);

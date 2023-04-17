@@ -21,6 +21,11 @@ const SignUp = () => {
 
 	const onSubmit = (data) => {
 		console.log({ data, typeUser });
+		if (typeUser.name === "User") {
+			navigate("/register/client");
+		} else {
+			navigate("/register/provider");
+		}
 		// console.log(typeUser);
 		// navigate("/client/home");
 	};
@@ -102,7 +107,7 @@ const SignUp = () => {
 							<button
 								type="submit"
 								className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 w-2/4">
-								Sign in
+								Sign Up
 							</button>
 						</div>
 					</form>
