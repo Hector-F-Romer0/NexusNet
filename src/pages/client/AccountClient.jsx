@@ -6,13 +6,13 @@ import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components
 
 const AccountClient = () => {
 	return (
-		<Layout>
+		<section className="flex">
 			<SideBar />
-			<MainContentLayout>
+			<div>
 				<CardAccount></CardAccount>
 				<Footer />
-			</MainContentLayout>
-		</Layout>
+			</div>
+		</section>
 	);
 };
 
