@@ -10,10 +10,10 @@ const KeyWord = ({ data, setKeyWords, keywords, canDelete }) => {
 	};
 
 	return (
-		<KeyWordStyle>
-			<span>{data.name}</span>
+		<>
+			<span>{data?.name}</span>
 			{canDelete && <FiX onClick={(e) => deleteKeyWord(data.id)} />}
-		</KeyWordStyle>
+		</>
 	);
 };
 

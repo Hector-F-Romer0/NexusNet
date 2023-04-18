@@ -20,7 +20,18 @@ export const casesSlices = createSlice({
 			});
 			state.allCases = filter;
 		},
+		completeCase: (state, action) => {
+			// const allCases = current(state.allCases);
+			console.log(action.payload);
+			const modifiedCases = state.allCases.map((item) => {
+				if (item.id === action.payload) {
+					item.completed = true;
+				}
+				return item;
+			});
+			state.allCases = modifiedCases;
+		},
 	},
 });
 
-export const { addCase, deleteCase } = casesSlices.actions;
+export const { addCase, deleteCase, completeCase } = casesSlices.actions;

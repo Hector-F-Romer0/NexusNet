@@ -1,14 +1,16 @@
 [
 	{
-        "id": 1,
-		"name": "Enrique Manos Tijeras",
-		"urlImg": "xdxd",
+		"id": 1,
+		"names": "Enrique",
+		"lastnames": "Manos Tijeras",
+		"urlImg": "/src/assets/Provider1.jpg",
 		"rate": 4.5
 	},
 	{
-        "id": 2,
-		"name": "Susana Manos de Alicate",
-		"urlImg": "xdxd",
+		"id": 2,
+		"names": "Susana",
+		"lastnames": "Manos Tijeras",
+		"urlImg": "/src/assets/Provider3.jpg",
 		"rate": 3.5
-    }
+	}
 ]

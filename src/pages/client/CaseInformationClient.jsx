@@ -9,6 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import CardTopProvider from "../../components/shared/CardTopProvider";
 import { FiCornerUpLeft, FiThumbsUp, FiMessageCircle, FiTrash2 } from "react-icons/fi";
 import { deleteCase } from "../../store/slices/cases/casesSlice";
+import KeyWord from "../../components/shared/KeyWord";
+import KeyWordT from "../../components/shared/KeyWordT";
 
 const CaseInformationClient = () => {
 	const [userCase, setUserCase] = useState({});
@@ -56,40 +58,54 @@ const CaseInformationClient = () => {
 					</div>
 					<p className="my-3">{userCase?.caseDescription}</p>
 					<div className="flex flex-col sm:flex-row items-center sm:items-start">
-						<p className="text-sm items-center text-center font-bold leading-sm py-1 my-1 mx-1 bg-keyTag w-8/12  sm:w-6/12 md:w-3/12 rounded-full text-keywordText">
-							key
-						</p>
-						<p className="text-sm items-center text-center font-bold leading-sm py-1 my-1 mx-1 bg-keyTag w-8/12 sm:w-6/12 md:w-3/12 rounded-full text-keywordText">
-							key
-						</p>
+						{userCase?.keywords?.map((keyword) => (
+							<KeyWordT key={keyword.id} data={keyword} />
+						))}
 					</div>
 					<div className="my-1">
-						<p className="text-end">
+						<p className="text-end font-light">
 							{userCase?.takenOn ? `Taken on ${userCase?.takenOn}` : "Not assumed"}
 						</p>
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
-					<h2>Files uploads</h2>
-					<h2>Taken by</h2>
-					<div className="flex items-center justify-center my-5">
-						<CardTopProvider img={"/src/assets/Provider1.jpg"} />
-					</div>
+					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Files uploads</h2>
+					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Taken by</h2>
+					{userCase?.takenBy !== null ? (
+						<div className="flex items-center justify-center my-5">
+							<CardTopProvider data={userCase.takenBy} />
+						</div>
+					) : (
+						<h3 className="my-5 text-sm md:text-base font-normal tracking-tight text-black">
+							This case has not been taken
+						</h3>
+					)}
+
 					<div className="flex items-center justify-center flex-col md:flex-row">
-						<button
-							className="flex px-3 py-2 bg-[#1FCE1B] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md:text-lg"
-							onClick={() => navigate(`/client/rate/provider/4`)}>
-							<FiThumbsUp size={26}></FiThumbsUp>
-							<span className="ml-1">Message</span>
-						</button>
-						<button
-							className="flex px-8 py-2 bg-[#5A8FCC] mr-1 text-white font-semibold rounded  justify-center items-center my-1 text-xs w-40 lg:w-60 md:text-lg"
-							onClick={() => navigate("/client/chats")}>
-							<FiMessageCircle size={26}></FiMessageCircle>
-							<span className="ml-1">Chat</span>
-						</button>
+						{userCase?.takenBy === null ? (
+							""
+						) : (
+							<>
+								<button
+									className="flex px-3 py-2 bg-[#1FCE1B] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
+									onClick={() =>
+										navigate(`/client/rate/provider/${userCase.takenBy.id}`, {
+											state: { idCase: userCase.id },
+										})
+									}>
+									<FiThumbsUp size={26}></FiThumbsUp>
+									<span className="ml-1">Mark as done</span>
+								</button>
+								<button
+									className="flex px-8 py-2 bg-[#5A8FCC] mr-1 text-white font-semibold rounded  justify-center items-center my-1 text-xs w-40 lg:w-60"
+									onClick={() => navigate("/client/chats")}>
+									<FiMessageCircle size={26}></FiMessageCircle>
+									<span className="ml-1">Chat</span>
+								</button>
+							</>
+						)}
 						<button
 							onClick={() => handleDeleteCase()}
-							className="flex px-3 py-2 bg-[#E72E2E] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md:text-lg">
+							className="flex px-3 py-2 bg-[#E72E2E] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md">
 							<FiTrash2 size={26}></FiTrash2>
 							<span className="ml-1">Delete Case</span>
 						</button>

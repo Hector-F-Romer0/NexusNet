@@ -6,11 +6,17 @@
 		"createdBy": 123456789,
 		"createdAt": "05/04/2023",
 		"takenOn": "06/04/2023",
-		"takenBy": "1",
+		"takenBy": null,
+		"completed": false,
 		"keywords": [
-			{ "id": 3, "name": "Engineering" },
-			{ "id": 4, "name": "Python" },
-			{ "id": 2, "name": "Health" }
+			{
+				"id": 3,
+				"name": "Weightloss"
+			},
+			{
+				"id": 7,
+				"name": "Depression"
+			}
 		],
 		"category": {
 			"id": 1,
@@ -33,12 +39,21 @@
 		"caseDescription": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione distinctio magni, inventore sequi maiores hic animi dolores. Cum, iusto deserunt obcaecati laborum, explicabo animi molestiae ipsum nesciunt excepturi et exercitationem.Quidem fugiat cumque asperiores odio officia ut sequi similique, saepe aperiam eligendi, fugit veniam illo illum iure reprehenderit ducimus praesentium doloremque, quis exercitationem quasi dolore vitae esse recusandae? Ipsa, minus? ",
 		"createdBy": 9387656789,
 		"createdAt": "16/04/2023",
-		"takenOn": null,
-		"takenBy": "2",
+		"takenOn": "17/04/2023",
+		"takenBy": {
+			"id": 1,
+			"names": "Enrique",
+			"lastnames": "Manos Tijeras",
+			"urlImg": "/src/assets/Provider1.jpg",
+			"rate": 4.5
+		},
+		"completed": false,
 		"keywords": [
 			{ "id": 3, "name": "Engineering" },
-			{ "id": 4, "name": "Python" },
-			{ "id": 2, "name": "Health" }
+			{
+				"id": 7,
+				"name": "Depression"
+			}
 		],
 		"category": {
 			"id": 2,

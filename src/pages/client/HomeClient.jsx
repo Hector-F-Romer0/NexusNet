@@ -26,9 +26,9 @@ const HomeClient = () => {
 					</button>
 				</div>
 				<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
-					{allCases.map((caseInfo) => (
-						<CardCase key={caseInfo.id} data={caseInfo} />
-					))}
+					{allCases.map((caseInfo) =>
+						!caseInfo?.completed ? <CardCase key={caseInfo.id} data={caseInfo} /> : ""
+					)}
 				</div>
 				<Footer />
 			</div>
