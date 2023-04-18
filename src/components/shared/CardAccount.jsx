@@ -1,16 +1,4 @@
 import React from "react";
-import {
-	AccountContainerDescription,
-	AccountContainerInfo,
-	AccountContainerP,
-	AccountImage,
-	AccountInfo,
-	AccountCardContainer,
-	AccountCardClientStyle,
-	AccountTitle,
-	AccountSeparator,
-	AccountDescription,
-} from "../../styled-components/index/AccountCard.style";
 import imgClient from "../../assets/imgClient.jpg";
 
 const CardAccount = () => {
