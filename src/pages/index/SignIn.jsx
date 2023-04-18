@@ -40,7 +40,7 @@ const SignIn = () => {
 		<div className="bg-white flex justify-center items-center h-screen">
 			<div className="bg-card w-3/4 h-auto flex flex-col justify-center px-6 py-16 gap-6 rounded-lg  lg:gap-16 lg:px-10 md:flex-row md:my-0">
 				<div>
-					<h1 className="text-4xl font-bold text-center mt-9">Sign in</h1>
+					<h1 className="text-4xl font-bold text-center mt-9">Sign In</h1>
 					<img src={Logo} alt="NexusNet logo" className="w-2/4 mx-auto lg:w-3/5" />
 					<h2 className="text-base font-normal text-center my-5">Don't have an account?</h2>
 					<span

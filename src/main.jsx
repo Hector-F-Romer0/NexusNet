@@ -14,9 +14,11 @@ import CaseInformationClient from "./pages/client/CaseInformationClient";
 import SearchProviders from "./pages/client/SearchProviders";
 import CaseForm from "./pages/client/CaseForm";
 import ChatClient from "./pages/client/ChatClient";
+import ClientRegister from "./pages/client/ClientRegister";
 import HomeProvider from "./pages/provider/HomeProvider";
 import AccountProvider from "./pages/provider/AccountProvider";
 import ChatProvider from "./pages/provider/ChatProvider";
+import ProviderRegister from "./pages/provider/ProviderRegister";
 import CaseInformationProvider from "./pages/provider/CaseInformationProvider";
 import KeyWordsCRUD from "./pages/admin/KeyWordsCRUD";
 import SignIn from "./pages/index/SignIn";
@@ -43,13 +45,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<Route path="/client/rate/provider/:id" element={<RateProvider />}></Route>
 				<Route path="/client/search" element={<SearchProviders />}></Route>
 				<Route path="/client/view/provider/:id" element={<ViewAccountProvider />}></Route>
-				{/* PENDIENTE UBICAR ClientRegister */}
+				<Route path="/register/client" element={<ClientRegister></ClientRegister>}></Route>
 				{/* Provider routes */}
 				<Route path="/provider/home" element={<HomeProvider />}></Route>
 				<Route path="/provider/chat" element={<ChatProvider />}></Route>
 				<Route path="/provider/account" element={<AccountProvider />}></Route>
 				<Route path="/provider/case/:id" element={<CaseInformationProvider />}></Route>
-				{/* PENDIENTE UBICAR providerRegister */}
+				<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
 				{/* Admin Routes */}
 				<Route path="/admin/home" element={<HomeAdmin />}></Route>
 				<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>
