@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { FiMessageSquare, FiGlobe, FiAward, FiUser, FiLogOut, FiAlignRight } from "react-icons/fi";
+import { FiGlobe, FiList, FiTool, FiBook, FiLogOut, FiAlignRight } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 
-const SideBar = () => {
+const AdminSideBar = () => {
 	const menus = [
-		{ name: "Home", link: "/client/home", icon: FiGlobe },
-		{ name: "Top providers", link: "/top/providers", icon: FiAward },
-		{ name: "Chats", link: "/client/chats", icon: FiMessageSquare },
-		{ name: "Account", link: "/client/account", icon: FiUser },
+		{ name: "Home", link: "/admin/home", icon: FiGlobe },
+		{ name: "Categories", link: "/admin/categories", icon: FiList },
+		{ name: "Services", link: "/admin/services", icon: FiTool },
+		{ name: "Key words", link: "/admin/keywords", icon: FiBook },
 		{ name: "Log Out", link: "/signin", icon: FiLogOut },
 	];
 	const [open, setOpen] = useState(true);
 
 	return (
-		<div className={`bg-navbar h-screen sticky top-0 ${open ? "w-72" : "w-16"} duration-500 text-gray-100 px-4 `}>
+		<div className={`bg-navbar h-screen sticky top-0 ${open ? "w-72" : "w-16"} duration-500 text-gray-100 px-4`}>
 			<div className="py-3 flex justify-end ">
 				<FiAlignRight size={26} className="cursor-pointer" onClick={() => setOpen(!open)} />
 			</div>
@@ -48,4 +48,4 @@ const SideBar = () => {
 	);
 };
 
-export default SideBar;
+export default AdminSideBar;
