@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 // ? READ FILES
 import keywords from "../../db/keywords.json";
@@ -11,6 +14,10 @@ import ContainerTagKeywords from "../shared/ContainerTagKeywords";
 import DropDownList from "../shared/DropDownList";
 import FormInput from "../shared/FormInput";
 import TextAreaForm from "../shared/TextAreaForm";
+import { postCase } from "../../store/slices/cases/thunks";
+import { useNavigate } from "react-router-dom";
+import KeyWord from "../shared/KeyWord";
+import KeyWordT from "../shared/KeyWordT";
 
 const FormCase = () => {
 	const {
@@ -18,12 +25,16 @@ const FormCase = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	const { user } = useSelector((state) => state.user);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const MySwal = withReactContent(Swal);
 
 	const [selectedKeyWord, setSelectedKeyWord] = useState({
 		id: 0,
 		name: "Select keywords",
 	});
-	const [setectedService, setSelectedService] = useState({
+	const [selectedService, setSelectedService] = useState({
 		id: services[0]?.id,
 		name: services[0]?.name,
 	});
@@ -36,17 +47,15 @@ const FormCase = () => {
 	const [keywordsChosen, setKeyWordsChosen] = useState([]);
 
 	useEffect(() => {
-		if (selectedKeyWord.id === 0) {
-			console.log("No se ha selecionado ninguna keyword.");
-			// alert("No se ha selecionado ninguna keyword.");
-			return;
-		}
-
 		// Verificar que la keyword ya fue escogida
 		const keyWordExists = keywordsChosen.find((keyword) => selectedKeyWord.id === keyword?.id);
 		if (keyWordExists !== undefined) {
-			console.log(`Ya existe ${keyWordExists?.name}`);
-			alert(`Ya agregaste la keyword ${keyWordExists?.name}`);
+			MySwal.fire({
+				title: "Previously added word",
+				icon: "error",
+				text: `You already have added the key word ${keyWordExists?.name}. Plesase select another.`,
+				confirmButtonColor: "#007BFF",
+			});
 			return;
 		}
 
@@ -56,11 +65,31 @@ const FormCase = () => {
 	}, [selectedKeyWord]);
 
 	const onSubmit = (data) => {
+		if (selectedKeyWord.id === 0 || keywordsChosen.length === 1) {
+			MySwal.fire({
+				title: "No chosen word",
+				icon: "error",
+				text: `Choose at least one word to create the case.`,
+				confirmButtonColor: "#007BFF",
+			});
+			return;
+		}
+
 		if (keywordsChosen.length === 0) {
 			alert("Seleccione al menos 1 keyword.");
 			return;
 		}
-		console.log({ data, category: selectedCategory, service: setectedService, keywords: keywordsChosen });
+
+		const newCase = {
+			data,
+			category: selectedCategory,
+			service: selectedService,
+			keywords: keywordsChosen.filter((item) => item?.id !== 0),
+			userId: user.id,
+		};
+
+		dispatch(postCase(newCase));
+		navigate("/client/home");
 	};
 
 	return (
@@ -112,7 +141,7 @@ const FormCase = () => {
 			<DropDownList
 				label="Service requested"
 				availableOptions={services}
-				selected={setectedService}
+				selected={selectedService}
 				setSelected={setSelectedService}></DropDownList>
 			<DropDownList
 				label="Associated category"
@@ -125,7 +154,20 @@ const FormCase = () => {
 				selected={selectedKeyWord}
 				setSelected={setSelectedKeyWord}></DropDownList>
 
-			<ContainerTagKeywords keywords={keywordsChosen} setKeyWords={setKeyWordsChosen} />
+			<div className=" flex flex-row flex-wrap">
+				{keywordsChosen.map(
+					(keyword) =>
+						keyword?.id !== 0 && (
+							<KeyWordT
+								key={keyword.id}
+								data={keyword}
+								keywords={keywordsChosen}
+								setKeyWords={setKeyWordsChosen}
+								canDelete={true}
+							/>
+						)
+				)}
+			</div>
 			<div className="flex justify-center">
 				<button
 					type="submit"
