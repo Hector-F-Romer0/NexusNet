@@ -1,22 +1,18 @@
 import React from "react";
 import CRUDManagement from "../../components/admin/CRUDManagement";
-import AdminNavBar from "../../components/admin/AdminNavBar";
+import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
 import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 
 const KeyWordsCRUD = () => {
 	return (
-		<Layout>
-			<NavBarLayout>
-				<AdminNavBar />
-			</NavBarLayout>
-			<MainContentLayout>
-				<h1>Key words</h1>
-				<h2>Create, Read, Update and Delete Categories</h2>
+		<section className="flex">
+			<AdminSideBar />
+			<div className="w-full">
 				<CRUDManagement />
 				<Footer />
-			</MainContentLayout>
-		</Layout>
+			</div>
+		</section>
 	);
 };
 

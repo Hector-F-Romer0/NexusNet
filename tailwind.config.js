@@ -10,7 +10,9 @@ export default {
 				categoryTag: "#227FC2",
 				serviceTag: "#2B5E99",
 				keyTag: "#D0E3F1",
-				keywordText: "#2C5877"
+				keywordText: "#2C5877",
+				buttonAdmin: "#007BFF",
+				mainTitle: "#010334"
 			},
 			fontFamily: {
 				montserrat: ["Montserrat", "sans-serif"],
