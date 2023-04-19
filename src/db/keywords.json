@@ -26,5 +26,17 @@
 	{
 		"id": 7,
 		"name": "Depression"
+	},
+	{
+		"id": 8,
+		"name": "Oratory"
+	},
+	{
+		"id": 9,
+		"name": "Remodeling"
+	},
+	{
+		"id": 10,
+		"name": "fundraising"
 	}
 ]

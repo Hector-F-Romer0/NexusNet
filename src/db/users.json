@@ -37,5 +37,18 @@
 		"country": "Colombia",
 		"state": "Santander",
 		"city": "Barrancabermeja"
+	},
+	{
+		"id": 56467,
+		"names": "Susana",
+		"lastnames": "Manos de Alicate",
+		"username": "susana5",
+		"email": "susanaalicate@example.com",
+		"password": "1234",
+		"typeUser": "provider",
+		"photoNumber": "324 000 0000",
+		"country": "Colombia",
+		"state": "Santander",
+		"city": "Barrancabermeja"
 	}
 ]

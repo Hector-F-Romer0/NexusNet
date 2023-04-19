@@ -1,8 +1,7 @@
 import React from "react";
-import { KeyWordStyle } from "../../styled-components/index/Tags.style";
 import { FiX } from "react-icons/fi";
 
-const KeyWord = ({ data, setKeyWords, keywords, canDelete }) => {
+const KeyWord = ({ data, canDelete, setKeyWords, keywords }) => {
 	const deleteKeyWord = (id) => {
 		console.log(id);
 		const keyWordsFiltered = keywords.filter((item) => item.id !== id);
@@ -10,12 +9,14 @@ const KeyWord = ({ data, setKeyWords, keywords, canDelete }) => {
 	};
 
 	return (
-		<>
-			<p className="text-sm items-center text-center font-bold leading-sm py-1 px-6 my-1 mx-1 bg-keyTag w-fit rounded-full text-keywordText">
-				{data?.name}
-				<span>{canDelete && <FiX onClick={(e) => deleteKeyWord(data.id)} />}</span>
-			</p>
-		</>
+		<p className="text-sm items-center text-center font-bold leading-sm py-1 px-6 my-1 mx-1 bg-keyTag w-fit rounded-full text-keywordText relative flex flex-row gap-2 align-middle">
+			{data.name}
+			{canDelete && (
+				<span className="cursor-pointer text-lg">
+					<FiX onClick={(e) => deleteKeyWord(data.id)} />
+				</span>
+			)}
+		</p>
 	);
 };
 

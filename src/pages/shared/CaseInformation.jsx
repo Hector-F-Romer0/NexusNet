@@ -9,7 +9,7 @@ import Footer from "../../components/shared/Footer";
 import CardTopProvider from "../../components/shared/CardTopProvider";
 import { FiCornerUpLeft, FiThumbsUp, FiMessageCircle, FiTrash2 } from "react-icons/fi";
 import { deleteCase } from "../../store/slices/cases/casesSlice";
-import KeyWordT from "../../components/shared/KeyWordT";
+import KeyWord from "../../components/shared/KeyWord";
 
 const CaseInformation = () => {
 	const { id } = useParams();
@@ -82,12 +82,12 @@ const CaseInformation = () => {
 					<p className="my-3">{userCase?.caseDescription}</p>
 					<div className="flex flex-col sm:flex-row items-center sm:items-start">
 						{userCase?.keywords?.map((keyword) => (
-							<KeyWordT key={keyword.id} data={keyword} />
+							<KeyWord key={keyword.id} data={keyword} />
 						))}
 					</div>
 					<div className="my-1">
 						<p className="text-end font-light">
-							{userCase?.takenOn ? `Taken on ${userCase?.takenOn}` : "Not assumed"}{" "}
+							{userCase?.takenOn ? `Taken on ${userCase?.takenOn}` : "Not assumed"}
 						</p>
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
@@ -95,25 +95,25 @@ const CaseInformation = () => {
 					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Taken by</h2>
 					{userCase?.takenBy !== null ? (
 						<div className="flex items-center justify-center my-5">
-							<CardTopProvider data={userCase?.takenBy} />{" "}
+							<CardTopProvider data={userCase?.takenBy} />
 						</div>
 					) : (
 						<h3 className="my-5 text-sm md:text-base font-normal tracking-tight text-black">
-							This case has not been taken{" "}
+							This case has not been taken
 						</h3>
 					)}
 					<div className="flex items-center justify-center flex-col md:flex-row">
-						{showButtons()}{" "}
+						{showButtons()}
 						<button
 							onClick={() => handleDeleteCase()}
 							className="flex px-3 py-2 bg-[#E72E2E] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md">
 							<FiTrash2 size={26}></FiTrash2>
-							<span className="ml-1">Delete Case</span>{" "}
+							<span className="ml-1">Delete Case</span>
 						</button>
-					</div>{" "}
+					</div>
 				</div>
 				<Footer />
-			</div>{" "}
+			</div>
 		</section>
 	);
 };

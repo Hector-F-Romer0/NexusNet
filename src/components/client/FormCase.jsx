@@ -9,15 +9,12 @@ import keywords from "../../db/keywords.json";
 import services from "../../db/services.json";
 import categories from "../../db/categories.json";
 
-// import { ButtonStyle } from "../../styled-components/index/Button.style";
-import ContainerTagKeywords from "../shared/ContainerTagKeywords";
 import DropDownList from "../shared/DropDownList";
 import FormInput from "../shared/FormInput";
 import TextAreaForm from "../shared/TextAreaForm";
 import { postCase } from "../../store/slices/cases/thunks";
 import { useNavigate } from "react-router-dom";
 import KeyWord from "../shared/KeyWord";
-import KeyWordT from "../shared/KeyWordT";
 
 const FormCase = () => {
 	const {
@@ -158,7 +155,7 @@ const FormCase = () => {
 				{keywordsChosen.map(
 					(keyword) =>
 						keyword?.id !== 0 && (
-							<KeyWordT
+							<KeyWord
 								key={keyword.id}
 								data={keyword}
 								keywords={keywordsChosen}
