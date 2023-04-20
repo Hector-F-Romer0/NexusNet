@@ -1,46 +1,80 @@
 [
 	{
-		"id": 56789,
+		"id": 102,
 		"names": "Enrique",
-		"lastnames": "Manos Tijeras",
+		"lastnames": "Manos Cuchillas",
 		"username": "manosC30",
+		"email": "enriquecuchillas@example.com",
+		"password": "1234",
+		"typeUser": "provider",
+		"photoNumber": "311 000 0000",
+		"country": "Colombia",
+		"state": "Santander",
+		"city": "Barrancabermeja",
 		"urlImg": "/src/assets/Provider1.jpg",
+		"cases": [],
 		"rate": 4.5,
-		"keywords": [
-			{
-				"id": 10,
-				"name": "fundraising"
-			},
-			{
-				"id": 8,
-				"name": "Oratory"
-			},
-			{
-				"id": 3,
-				"name": "Weightloss"
-			}
-		]
-	},
-	{
-		"id": 56467,
-		"names": "Susana",
-		"lastnames": "Manos Tijeras",
-		"username": "susana5",
-		"urlImg": "/src/assets/Provider3.jpg",
-		"rate": 3.5,
+		"category": {
+			"id": 2,
+			"name": "Programming"
+		},
+		"service": {
+			"id": 1,
+			"name": "Programmer"
+		},
 		"keywords": [
 			{
 				"id": 2,
 				"name": "NodeJS"
 			},
 			{
-				"id": 5,
-				"name": "Threads"
-			},
-			{
 				"id": 4,
 				"name": "Python"
+			},
+			{
+				"id": 1,
+				"name": "Soring algorithms"
 			}
-		]
+		],
+		"phrase": "Morbi gravida leo in ipsum viverra, ut tempor lorem fermentum. Etiam quis turpis viverra, fringilla turpis quis, tincidunt nulla. Praesent efficitur lorem at cursus tincidunt."
+	},
+	{
+		"id": 103,
+		"names": "Susana",
+		"lastnames": "Manos de Lija",
+		"username": "susana5",
+		"email": "susanalija@example.com",
+		"password": "1234",
+		"typeUser": "provider",
+		"photoNumber": "302 000 0000",
+		"country": "Colombia",
+		"state": "Santander",
+		"city": "Barrancabermeja",
+		"urlImg": "/src/assets/wassim-mechergui-sj9rp-ksq2o-unsplash.jpg",
+		"cases": [],
+		"rate": 3.4,
+		"category": {
+			"id": 3,
+			"name": "Psychology"
+		},
+		"service": {
+			"id": 3,
+			"name": "Psychiatrist"
+		},
+		"keywords": [
+			{
+				"id": 3,
+				"name": "Weightloss"
+			},
+			{
+				"id": 7,
+				"name": "Depression"
+			},
+			{
+				"id": 8,
+				"name": "Oratory"
+			}
+		],
+		"phrase": "Morbi gravida leo in ipsum viverra, ut tempor lorem fermentum. Etiam quis turpis viverra, fringilla turpis quis, tincidunt nulla. Praesent efficitur lorem at cursus tincidunt."
 	}
 ]

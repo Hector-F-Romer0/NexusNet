@@ -1,6 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useDispatch } from "react-redux";
 
 import FormInput from "../../components/shared/FormInput";
 import GoogleButton from "../../components/shared/GoogleButton.jsx";
@@ -8,9 +11,6 @@ import FacebookButton from "../../components/shared/FacebookButton.jsx";
 import usersDB from "../../db/users.json";
 import Logo from "../../assets/logo.png";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import { useDispatch } from "react-redux";
 import { getUser } from "../../store/slices/user/thunks";
 
 const SignIn = () => {
