@@ -30,6 +30,7 @@ const SearchProviders = () => {
 
 	useEffect(() => {
 		dispatch(getServices());
+		console.log(services);
 		// console.log(services);
 		// console.log(services[0]);
 		// console.log(services[0]?.id);

@@ -12,7 +12,7 @@ const CardAccount = () => {
 						<img
 							src={user?.urlImg}
 							className="w-1/2 md:w-full bg-slate-600 rounded-3xl overflow-hidden"></img>
-						<h1 className="text-lg my-3 font-semibold">{user?.typeUser.toUpperCase()}</h1>
+						<h1 className="text-lg my-3 font-semibold">{user?.typeUser?.toUpperCase()}</h1>
 						<p className="text-xs">{user?.typeUser === "Provider" ? "Aquí va la frase" : ""}</p>
 					</div>
 					<div className="md:w-3/5 space-y-4 flex flex-col justify-start items-center">
