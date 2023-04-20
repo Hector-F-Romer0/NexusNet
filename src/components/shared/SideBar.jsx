@@ -1,16 +1,36 @@
 import React, { useState } from "react";
 import { FiMessageSquare, FiGlobe, FiAward, FiUser, FiLogOut, FiAlignRight } from "react-icons/fi";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 const SideBar = () => {
-	const menus = [
+	const { user } = useSelector((state) => state.user);
+
+	const menusClient = [
 		{ name: "Home", link: "/client/home", icon: FiGlobe },
 		{ name: "Top providers", link: "/top/providers", icon: FiAward },
 		{ name: "Chats", link: "/client/chats", icon: FiMessageSquare },
 		{ name: "Account", link: "/client/account", icon: FiUser },
 		{ name: "Log Out", link: "/signin", icon: FiLogOut },
 	];
+
+	const menusProvider = [
+		{ name: "Home", link: "/provider/home", icon: FiGlobe },
+		{ name: "Top providers", link: "/top/providers", icon: FiAward },
+		{ name: "Chats", link: "/provider/chats", icon: FiMessageSquare },
+		{ name: "Account", link: "/provider/account", icon: FiUser },
+		{ name: "Log Out", link: "/signin", icon: FiLogOut },
+	];
+
 	const [open, setOpen] = useState(true);
+
+	const showSideBar = () => {
+		if (user?.typeUser == "client") {
+			return menusClient;
+		} else {
+			return menusProvider;
+		}
+	};
 
 	return (
 		<div className={`bg-navbar h-screen sticky top-0 ${open ? "w-72" : "w-16"} duration-500 text-gray-100 px-4 `}>
@@ -18,7 +38,7 @@ const SideBar = () => {
 				<FiAlignRight size={26} className="cursor-pointer" onClick={() => setOpen(!open)} />
 			</div>
 			<div className="mt-4 flex flex-col gap-4 max-h-screen">
-				{menus?.map((menu, i) => (
+				{showSideBar()?.map((menu, i) => (
 					<NavLink
 						to={menu?.link}
 						key={i}
