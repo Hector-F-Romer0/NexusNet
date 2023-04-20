@@ -6,15 +6,17 @@ import Footer from "../../components/shared/Footer";
 
 const ViewAccountProvider = () => {
 	return (
-		<Layout>
-			<NavBarLayout>
+		<section className="flex">
+			<ContainerSideBar>
 				<SideBar />
-			</NavBarLayout>
-			<MainContentLayout>
+			</ContainerSideBar>
+			<div className="flex flex-col w-full">
 				<CardAccount />
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

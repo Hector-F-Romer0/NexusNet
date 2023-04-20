@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import { useDispatch, useSelector } from "react-redux";
-
-import TextAreaForm from "../../components/shared/TextAreaForm";
-import { useForm } from "react-hook-form";
-import imgProvier from "../../assets/Provider3.jpg";
+import React from "react";
+import CardRateProvider from "../../components/client/CardRateProvider";
 import Footer from "../../components/shared/Footer";
 import StarRating from "../../components/shared/StarRating";
 import { rateProvider } from "../../store/slices/providers/providersSlice";

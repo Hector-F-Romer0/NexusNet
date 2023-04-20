@@ -7,16 +7,18 @@ import Footer from "../../components/shared/Footer";
 
 const ChatProvider = () => {
 	return (
-		<Layout>
-			<SideBar />
-			<MainContentLayout>
-				<div>
-					<ContainerChats></ContainerChats>
-					<ChatMessage></ChatMessage>
-				</div>
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+		<section className="flex">
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div>
+				{/* <ContainerChats></ContainerChats>
+				<ChatMessage></ChatMessage> */}
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

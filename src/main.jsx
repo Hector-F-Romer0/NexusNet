@@ -47,7 +47,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<Route path="/register/client" element={<ClientRegister></ClientRegister>}></Route>
 				{/* Provider routes */}
 				<Route path="/provider/home" element={<HomeProvider />}></Route>
-				<Route path="/provider/chat" element={<ChatProvider />}></Route>
+				<Route path="/provider/chats" element={<ChatClient />}></Route>
 				<Route path="/provider/account" element={<AccountProvider />}></Route>
 				<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
 				<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>

@@ -1,20 +1,20 @@
 import React from "react";
 import CRUDManagement from "../../components/admin/CRUDManagement";
-
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
 
 const CategoriesCRUD = () => {
 	return (
 		<section className="flex">
-			<div className="relative left-0 top-0">
+			<ContainerSideBar>
 				<AdminSideBar />
-			</div>
-			<div className="w-full h-full">
+			</ContainerSideBar>
+			<div className="w-full">
 				<CRUDManagement />
-				<div className="fixed w-full right-0 bottom-0">
+				<ContainerFooter>
 					<Footer />
-				</div>
+				</ContainerFooter>
 			</div>
 		</section>
 	);

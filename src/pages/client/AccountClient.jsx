@@ -4,14 +4,19 @@ import { useSelector } from "react-redux";
 import CardAccount from "../../components/shared/CardAccount";
 import Footer from "../../components/shared/Footer";
 import SideBar from "../../components/shared/SideBar";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const AccountClient = () => {
 	return (
 		<section className="flex">
-			<SideBar />
-			<div className="w-full">
-				<CardAccount />
-				<Footer />
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div className="flex flex-col justify-end">
+				<CardAccount></CardAccount>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

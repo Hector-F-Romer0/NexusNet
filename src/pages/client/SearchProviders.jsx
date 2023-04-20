@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { getServices } from "../../store/slices/services/thunks";
 import CardProvider from "../../components/shared/CardProvider";
 import { useSearchBar } from "../../hooks/useSearchBar";
+import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const SearchProviders = () => {
 	const { services } = useSelector((state) => state.services);
@@ -38,7 +39,9 @@ const SearchProviders = () => {
 
 	return (
 		<section className="flex">
-			<SideBar />
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
 			<div className="w-full">
 				<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a provider</h1>
 				<div className="w-3/4 mx-auto">
@@ -56,7 +59,9 @@ const SearchProviders = () => {
 						<CardProvider key={provider.id} data={provider} />
 					))}
 				</div>
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

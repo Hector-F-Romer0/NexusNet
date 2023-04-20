@@ -2,15 +2,20 @@ import React from "react";
 import CRUDManagement from "../../components/admin/CRUDManagement";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
-import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const ServicesCRUD = () => {
 	return (
 		<section className="flex">
-			<AdminSideBar />
+			<ContainerSideBar>
+				<AdminSideBar />
+			</ContainerSideBar>
+
 			<div className="w-full">
 				<CRUDManagement />
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

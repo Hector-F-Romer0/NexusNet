@@ -9,6 +9,7 @@ import Footer from "../../components/shared/Footer";
 import CardTopProvider from "../../components/shared/CardTopProvider";
 import { FiCornerUpLeft, FiThumbsUp, FiMessageCircle, FiTrash2 } from "react-icons/fi";
 import { deleteCase } from "../../store/slices/cases/casesSlice";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import KeyWord from "../../components/shared/KeyWord";
 
 const CaseInformation = () => {
@@ -63,7 +64,9 @@ const CaseInformation = () => {
 
 	return (
 		<section className="flex">
-			<SideBar />
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
 			<div className="flex flex-col w-full">
 				<div className="flex-grow self-center min-w-sm w-4/5 py-5 px-5 md:px-10 rounded-lg shadow bg-card my-7">
 					<div className="flex flex-row w-full items-center">
@@ -112,7 +115,9 @@ const CaseInformation = () => {
 						</button>
 					</div>
 				</div>
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);
