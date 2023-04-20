@@ -7,7 +7,7 @@ const CardProvider = () => {
 	return (
 		<GridRateStyle>
 			<ProviderPhotoStyle src={provider}></ProviderPhotoStyle>
-			<InfoCardProvider></InfoCardProvider>
+			{/* <InfoCardProvider></InfoCardProvider> */}
 		</GridRateStyle>
 	);
 };

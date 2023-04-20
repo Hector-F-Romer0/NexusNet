@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import SideBar from "../../components/shared/SideBar";
 import CardCase from "../../components/shared/CardCase";
 import Footer from "../../components/shared/Footer";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const HomeClient = () => {
 	const navigate = useNavigate();
@@ -11,7 +11,9 @@ const HomeClient = () => {
 
 	return (
 		<section className="flex">
-			<SideBar />
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
 			<div className=" text-gray-900 font-semibold">
 				<h1 className="text-4xl font-bold text-center mt-9">Welcome to my cases - client</h1>
 				<h2></h2>
@@ -30,7 +32,9 @@ const HomeClient = () => {
 						<CardCase key={caseInfo.id} data={caseInfo} />
 					))}
 				</div>
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

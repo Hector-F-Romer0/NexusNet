@@ -2,17 +2,21 @@ import React from "react";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import ContainerProvider from "../../components/shared/ContainerProvider";
 import Footer from "../../components/shared/Footer";
-import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const HomeAdmin = () => {
 	return (
-		<Layout>
-			<AdminSideBar />
-			<MainContentLayout>
+		<section className="flex">
+			<ContainerSideBar>
+				<AdminSideBar />
+			</ContainerSideBar>
+			<div className="w-full">
 				<ContainerProvider />
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

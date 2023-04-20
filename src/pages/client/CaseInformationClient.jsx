@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 import SideBar from "../../components/shared/SideBar";
 import Footer from "../../components/shared/Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CardTopProvider from "../../components/shared/CardTopProvider";
 import { FiCornerUpLeft, FiThumbsUp, FiMessageCircle, FiTrash2 } from "react-icons/fi";
 import { deleteCase } from "../../store/slices/cases/casesSlice";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const CaseInformationClient = () => {
 	const [userCase, setUserCase] = useState({});
@@ -38,7 +38,9 @@ const CaseInformationClient = () => {
 
 	return (
 		<section className="flex">
-			<SideBar />
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
 			<div className="flex flex-col w-full">
 				<div className="flex-grow self-center min-w-sm w-4/5 py-5 px-5 md:px-10 rounded-lg shadow bg-card my-7">
 					<div className="flex flex-row w-full items-center">
@@ -95,7 +97,9 @@ const CaseInformationClient = () => {
 						</button>
 					</div>
 				</div>
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

@@ -1,22 +1,26 @@
 import React from "react";
-import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import SideBar from "../../components/shared/SideBar";
 import ContainerChats from "../../components/shared/ContainerChats";
 import ChatMessage from "../../components/shared/ChatMessage";
 import Footer from "../../components/shared/Footer";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const ChatClient = () => {
 	return (
-		<Layout>
-			<SideBar />
-			<MainContentLayout>
-				{/* <div>
+		<section className="flex">
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div className="flex flex-col w-full">
+				<div className="flex flex-row">
 					<ContainerChats></ContainerChats>
 					<ChatMessage></ChatMessage>
-				</div> */}
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+				</div>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

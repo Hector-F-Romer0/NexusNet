@@ -2,18 +2,22 @@ import React from "react";
 import CaseContainer from "../../components/shared/CaseContainer";
 import Footer from "../../components/shared/Footer";
 import SideBar from "../../components/shared/SideBar";
-import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
+import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const HomeProvider = () => {
 	return (
-		<Layout>
-			<SideBar />
-			<MainContentLayout>
+		<section className="flex">
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div className="w-full">
 				<h1>Welcome to my cases - Provider</h1>
-				<CaseContainer />
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+				{/* <CaseContainer /> */}
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

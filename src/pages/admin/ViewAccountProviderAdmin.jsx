@@ -1,18 +1,22 @@
 import React from "react";
-import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 import CardAccount from "../../components/shared/CardAccount";
 import AdminSideBar from "../../components/admin/AdminSideBar";
+import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 
 const ViewAccountProviderAdmin = () => {
 	return (
-		<Layout>
-			<NavBarLayout>
+		<section className="flex">
+			<ContainerSideBar>
 				<AdminSideBar />
-			</NavBarLayout>
-			<MainContentLayout>
+			</ContainerSideBar>
+
+			<div className="w-full">
 				<CardAccount />
-			</MainContentLayout>
-		</Layout>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 

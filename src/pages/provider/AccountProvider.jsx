@@ -1,16 +1,20 @@
 import React from "react";
 import CardAccount from "../../components/shared/CardAccount";
-import { Layout, MainContentLayout, NavBarLayout } from "../../styled-components/index/Layout";
 import SideBar from "../../components/shared/SideBar";
 import Footer from "../../components/shared/Footer";
+import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const AccountProvider = () => {
 	return (
 		<section className="flex">
-			<SideBar />
-			<div>
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div className="flex flex-col justify-end">
 				<CardAccount></CardAccount>
-				<Footer />
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
 			</div>
 		</section>
 	);

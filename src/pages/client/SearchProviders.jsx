@@ -8,15 +8,19 @@ import { Layout, MainContentLayout } from "../../styled-components/index/Layout"
 
 const SearchProviders = () => {
 	return (
-		<Layout>
-			<SideBar />
-			<MainContentLayout>
+		<section className="flex">
+			<ContainerSideBar>
+				<SideBar />
+			</ContainerSideBar>
+			<div className="flex flex-col w-full">
 				<SearchBar></SearchBar>
 				<ContainerList></ContainerList>
 				<ContainerProvider />
-				<Footer />
-			</MainContentLayout>
-		</Layout>
+				<ContainerFooter>
+					<Footer />
+				</ContainerFooter>
+			</div>
+		</section>
 	);
 };
 
