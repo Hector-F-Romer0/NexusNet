@@ -6,11 +6,11 @@ const CardProvider = ({ data }) => {
 	return (
 		<>
 			<div className="bg-card w-9/12 h-fit flex flex-col justify-center px-1 py-10 gap-6 rounded-lg lg:px-10 md:my-0 md:px-6 ">
-				<div className="flex flex-row flex-auto">
-					<div className="sm:w-1/4 md:w-1/6 ">
+				<div className="grid grid-cols-[100px_minMax(99px,_1fr)] md:grid-cols-[250px_minMax(99px,_1fr)] gap-4">
+					<div className=" h-full">
 						<img src={data?.urlImg} alt="Provider photo" className="rounded-lg" />
 					</div>
-					<div className=" w-3/4 px-10">
+					<div className="">
 						<div className="flex flex-row  items-center justify-between">
 							<h2 className="mb-2 text-xl md:text-3xl font-semibold tracking-tight text-black">
 								{`${data?.names} ${data?.lastnames}`}

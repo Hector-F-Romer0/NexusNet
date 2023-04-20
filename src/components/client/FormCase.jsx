@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -13,7 +14,6 @@ import DropDownList from "../shared/DropDownList";
 import FormInput from "../shared/FormInput";
 import TextAreaForm from "../shared/TextAreaForm";
 import { postCase } from "../../store/slices/cases/thunks";
-import { useNavigate } from "react-router-dom";
 import KeyWord from "../shared/KeyWord";
 
 const FormCase = () => {

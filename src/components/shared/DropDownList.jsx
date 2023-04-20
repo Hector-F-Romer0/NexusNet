@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 import { FiChevronDown } from "react-icons/fi";
 
 const DropDownList = ({ selected, setSelected, label, availableOptions }) => {
 	const [isActive, setIsActive] = useState(false);
 	const [options, setOptions] = useState(availableOptions);
+
 	// console.log(options);
 	return (
 		<div className="flex flex-col items-center my-6">

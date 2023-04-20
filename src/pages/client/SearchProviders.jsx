@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Footer from "../../components/shared/Footer";
 import SearchBar from "../../components/shared/SearchBar";
 import SideBar from "../../components/shared/SideBar";
 import DropDownList from "../../components/shared/DropDownList";
 
-// ? READ FILES
-import keywords from "../../db/keywords.json";
-import services from "../../db/services.json";
-import categories from "../../db/categories.json";
-
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getServices } from "../../store/slices/services/thunks";
 import CardProvider from "../../components/shared/CardProvider";
 import { useSearchBar } from "../../hooks/useSearchBar";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const SearchProviders = () => {
-	const { services } = useSelector((state) => state.services);
 	const { providers } = useSelector((state) => state.providers);
+	const { services } = useSelector((state) => state.services);
 	const dispatch = useDispatch();
 
 	const { searchResults, handleChange } = useSearchBar(providers);
@@ -28,13 +22,10 @@ const SearchProviders = () => {
 		id: services[0]?.id,
 		name: services[0]?.name,
 	});
+	console.log(providers);
 
 	useEffect(() => {
 		dispatch(getServices());
-		console.log(services);
-		// console.log(services);
-		// console.log(services[0]);
-		// console.log(services[0]?.id);
 	}, [services]);
 
 	return (

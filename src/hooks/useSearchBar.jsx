@@ -14,7 +14,7 @@ export const useSearchBar = (initialData) => {
 	}, [inputSearch]);
 
 	const filterResults = () => {
-		console.log(inputSearch);
+		// console.log(inputSearch);
 		if (!inputSearch) {
 			setSearchResults(initialValues);
 		} else {
