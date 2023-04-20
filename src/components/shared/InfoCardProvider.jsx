@@ -1,7 +1,6 @@
 import React from "react";
 import { CaseSeparator } from "../../styled-components/index/CardCase.style";
 import ContainerTag from "./ContainerTag";
-import ContainerTagKeywords from "./ContainerTagKeywords";
 import StarContainer from "./StarContainer";
 import { InfoProviderStyle } from "../../styled-components/index/CardProvider.style";
 
@@ -12,7 +11,6 @@ const InfoCardProvider = () => {
 			<CaseSeparator></CaseSeparator>
 			<ContainerTag></ContainerTag>
 			<StarContainer></StarContainer>
-			<ContainerTagKeywords></ContainerTagKeywords>
 		</InfoProviderStyle>
 	);
 };

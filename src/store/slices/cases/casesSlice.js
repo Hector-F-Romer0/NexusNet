@@ -10,8 +10,11 @@ export const casesSlices = createSlice({
 	name: "cases",
 	initialState,
 	reducers: {
-		addCase: (state, action) => {
-			console.log("Add case");
+		createCase: (state, action) => {
+			state.allCases = [...state.allCases, action.payload];
+		},
+		setCases: (state, action) => {
+			state.allCases = action.payload;
 		},
 		deleteCase: (state, action) => {
 			const allCases = current(state.allCases);
@@ -20,7 +23,18 @@ export const casesSlices = createSlice({
 			});
 			state.allCases = filter;
 		},
+		completeCase: (state, action) => {
+			// const allCases = current(state.allCases);
+			console.log(action.payload);
+			const modifiedCases = state.allCases.map((item) => {
+				if (item.id === action.payload) {
+					item.completed = true;
+				}
+				return item;
+			});
+			state.allCases = modifiedCases;
+		},
 	},
 });
 
-export const { addCase, deleteCase } = casesSlices.actions;
+export const { createCase, deleteCase, completeCase } = casesSlices.actions;

@@ -10,6 +10,8 @@ import Logo from "../../assets/logo.png";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../store/slices/user/thunks";
 
 const SignIn = () => {
 	const {
@@ -19,11 +21,13 @@ const SignIn = () => {
 	} = useForm();
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const MySwal = withReactContent(Swal);
 
 	const onSubmitSignIn = (data) => {
 		const existsUser = usersDB.find((user) => user.username == data.username);
 
+		// ! POSIBLE ELIMINACIÓN DE ESTO Y MANEJARLO POR THUNKS
 		if (!existsUser || data.password !== existsUser?.password) {
 			MySwal.fire({
 				title: "Incorrect data",
@@ -32,6 +36,8 @@ const SignIn = () => {
 				confirmButtonColor: "#007BFF",
 			});
 		} else {
+			console.log(data);
+			dispatch(getUser(data));
 			navigate("/client/home");
 		}
 	};

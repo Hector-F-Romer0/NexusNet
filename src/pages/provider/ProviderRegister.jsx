@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import FormInput from "../../components/shared/FormInput";
 import TextAreaForm from "../../components/shared/TextAreaForm";
 import { FiCornerUpLeft } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const ProviderRegister = () => {
+
+	const navigate = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
@@ -13,7 +17,7 @@ const ProviderRegister = () => {
 	} = useForm();
 
 	const onSubmit = () => {
-		console.log("HolaMundo");
+		navigate("/provider/home")
 	};
 
 	return (

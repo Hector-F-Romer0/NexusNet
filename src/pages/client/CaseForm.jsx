@@ -10,7 +10,7 @@ const CaseForm = () => {
 				<SideBar />
 			</ContainerSideBar>
 			<div className="flex flex-col w-full">
-				<div className="flex-grow self-center min-w-sm w-4/5 py-5 px-10 md:px-20 rounded-lg shadow bg-card my-7">
+				<div className="flex-grow self-center w-4/5 py-5 px-4 md:px-10 rounded-lg shadow bg-card my-7">
 					<h1 className="text-xl md:text-4xl font-bold text-center mt-9">Case register</h1>
 					<FormCase />
 				</div>
