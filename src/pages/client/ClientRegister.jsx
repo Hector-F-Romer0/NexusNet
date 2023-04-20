@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import FormInput from "../../components/shared/FormInput";
 import { FiCornerUpLeft } from "react-icons/fi";
 
@@ -10,7 +12,10 @@ const ClientRegister = () => {
 		formState: { errors },
 	} = useForm();
 
+	const navigate = useNavigate();
+	const location = useLocation();
 	const onSubmit = () => {
+		console.log(location.state);
 		console.log("HolaMundo");
 	};
 
@@ -19,7 +24,7 @@ const ClientRegister = () => {
 			<div className="flex w-11/12 justify-center items-center py-10">
 				<div className="bg-card lg:w-3/4 flex flex-col px-1 py-10 gap-3 rounded-3xl lg:px-10 md:my-0 md:px-6 overflow-y-visible">
 					<div>
-						<FiCornerUpLeft size={40} className="flex"></FiCornerUpLeft>
+						<FiCornerUpLeft size={40} onClick={() => navigate("/signup")} className="flex cursor-pointer" />
 						<h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[##010334]">
 							Register your data
 						</h1>

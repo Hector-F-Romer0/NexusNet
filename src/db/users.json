@@ -1,8 +1,8 @@
 [
 	{
-		"id": 12345,
+		"id": 100,
 		"names": "Pedro",
-		"lastnames": "Manos tijeras",
+		"lastnames": "Manos Tijeras",
 		"username": "manosT29",
 		"email": "pedromtijeras@example.com",
 		"password": "1234",
@@ -10,23 +10,12 @@
 		"photoNumber": "317 000 0000",
 		"country": "Colombia",
 		"state": "Boyacá",
-		"city": "Sogamoso"
+		"city": "Sogamoso",
+		"urlImg": "/src/assets/jake-oates-9gGTLP0QL1M-unsplash.jpg",
+		"cases": null
 	},
 	{
-		"id": 56789,
-		"names": "Enrique",
-		"lastnames": "Manos Cuchillas",
-		"username": "manosC30",
-		"email": "enriquemcuchillas@example.com",
-		"password": "1234",
-		"typeUser": "provider",
-		"photoNumber": "320 000 0000",
-		"country": "Colombia",
-		"state": "Santander",
-		"city": "Barrancabermeja"
-	},
-	{
-		"id": 15434,
+		"id": 101,
 		"names": "Octavio",
 		"lastnames": "Manos Machete",
 		"username": "machete123",
@@ -36,19 +25,8 @@
 		"photoNumber": "310 000 0000",
 		"country": "Colombia",
 		"state": "Santander",
-		"city": "Barrancabermeja"
-	},
-	{
-		"id": 56467,
-		"names": "Susana",
-		"lastnames": "Manos de Alicate",
-		"username": "susana5",
-		"email": "susanaalicate@example.com",
-		"password": "1234",
-		"typeUser": "provider",
-		"photoNumber": "324 000 0000",
-		"country": "Colombia",
-		"state": "Santander",
-		"city": "Barrancabermeja"
+		"city": "Barrancabermeja",
+		"urlImg": "/src/assets/jake-oates-9gGTLP0QL1M-unsplash.jpg",
+		"cases": null
 	}
 ]

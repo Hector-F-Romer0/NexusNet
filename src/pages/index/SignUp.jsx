@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 import Logo from "../../assets/logo.png";
 import { useNavigate } from "react-router";
@@ -16,18 +18,32 @@ const SignUp = () => {
 	} = useForm();
 
 	const [typeUser, setTypeUser] = useState({ id: 1, name: "User" });
+	const MySwal = withReactContent(Swal);
 
 	const navigate = useNavigate();
 
 	const onSubmit = (data) => {
+		if (data?.confirmationPassword !== data.password) {
+			MySwal.fire({
+				title: "Passwords don't matches.",
+				icon: "error",
+				text: "Passwords must be the same. Write again.",
+				confirmButtonColor: "#007BFF",
+			});
+			return;
+		}
 		console.log({ data, typeUser });
+
 		if (typeUser.name === "User") {
-			navigate("/register/client");
+			navigate("/register/client", {
+				state: {
+					userData: data,
+					typeUser,
+				},
+			});
 		} else {
 			navigate("/register/provider");
 		}
-		// console.log(typeUser);
-		// navigate("/client/home");
 	};
 
 	return (
