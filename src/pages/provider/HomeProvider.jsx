@@ -12,7 +12,7 @@ const HomeProvider = () => {
 			</ContainerSideBar>
 			<div className="w-full">
 				<h1>Welcome to my cases - Provider</h1>
-				{/* <CaseContainer /> */}
+				<CaseContainer />
 				<ContainerFooter>
 					<Footer />
 				</ContainerFooter>

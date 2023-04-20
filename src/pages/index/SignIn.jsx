@@ -25,6 +25,7 @@ const SignIn = () => {
 	const dispatch = useDispatch();
 	const MySwal = withReactContent(Swal);
 	const { usersDB } = useSelector((state) => state.usersDB);
+	const { providers } = useSelector((state) => state.providers);
 
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
@@ -32,21 +33,61 @@ const SignIn = () => {
 	}, []);
 
 	const onSubmitSignIn = (data) => {
-		const existsUser = usersDB.find((user) => user.username == data.username);
+		let existsUser = "";
+		const existsClient = usersDB.find((user) => user.username == data.username);
+		const existsProvider = providers.find((provider) => provider.username == data.username);
+
+		if (existsClient) {
+			existsUser = "client";
+		} else if (existsProvider) {
+			existsUser = "provider";
+		} else {
+			existsUser = null;
+		}
+		console.log(existsUser);
+		console.log(".....");
 
 		// ! POSIBLE ELIMINACIÓN DE ESTO Y MANEJARLO POR THUNKS
-		if (!existsUser || data.password !== existsUser?.password) {
+		if (!existsUser) {
+			console.log("no existe");
 			MySwal.fire({
 				title: "Incorrect data",
 				icon: "error",
 				text: "That password or username was incorrect. Please try again.",
 				confirmButtonColor: "#007BFF",
 			});
-		} else {
-			console.log(data);
+		}
 
-			dispatch(setUser(existsUser));
-			navigate("/client/home");
+		if (existsUser === "client") {
+			if (data.password !== existsClient?.password) {
+				MySwal.fire({
+					title: "Incorrect data",
+					icon: "error",
+					text: "That password or username was incorrect. Please try again.",
+					confirmButtonColor: "#007BFF",
+				});
+				return;
+			}
+
+			dispatch(setUser(existsClient));
+			if (existsClient?.typeUser === "client") {
+				navigate("/client/home");
+			} else {
+				navigate("/admin/home");
+			}
+		} else {
+			if (data.password !== existsProvider?.password) {
+				MySwal.fire({
+					title: "Incorrect data",
+					icon: "error",
+					text: "That password or username was incorrect. Please try again.",
+					confirmButtonColor: "#007BFF",
+				});
+				return;
+			}
+			console.log("SOY PROVEEDOR");
+			navigate("/provider/home");
+			dispatch(setUser(existsProvider));
 		}
 	};
 

@@ -12,7 +12,77 @@
 		"state": "Santander",
 		"city": "Barrancabermeja",
 		"urlImg": "/src/assets/Provider1.jpg",
-		"cases": [],
+		"cases": [
+			{
+				"id": 2,
+				"caseTitle": "¿King papa o Satillos?",
+				"caseDescription": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione distinctio magni, inventore sequi maiores hic animi dolores. Cum, iusto deserunt obcaecati laborum, explicabo animi molestiae ipsum nesciunt excepturi et exercitationem.Quidem fugiat cumque asperiores odio officia ut sequi similique, saepe aperiam eligendi, fugit veniam illo illum iure reprehenderit ducimus praesentium doloremque, quis exercitationem quasi dolore vitae esse recusandae? Ipsa, minus? ",
+				"createdBy": 100,
+				"createdAt": "16/04/2023",
+				"takenOn": "17/04/2023",
+				"takenBy": {
+					"id": 102,
+					"names": "Enrique",
+					"lastnames": "Manos Cuchillas",
+					"username": "manosC30",
+					"email": "enriquecuchillas@example.com",
+					"password": "1234",
+					"typeUser": "provider",
+					"photoNumber": "311 000 0000",
+					"country": "Colombia",
+					"state": "Santander",
+					"city": "Barrancabermeja",
+					"urlImg": "/src/assets/Provider1.jpg",
+					"cases": [],
+					"rate": 4.5,
+					"category": {
+						"id": 2,
+						"name": "Programming"
+					},
+					"service": {
+						"id": 1,
+						"name": "Programmer"
+					},
+					"keywords": [
+						{
+							"id": 2,
+							"name": "NodeJS"
+						},
+						{
+							"id": 4,
+							"name": "Python"
+						},
+						{
+							"id": 1,
+							"name": "Soring algorithms"
+						}
+					],
+					"phrase": "Morbi gravida leo in ipsum viverra, ut tempor lorem fermentum. Etiam quis turpis viverra, fringilla turpis quis, tincidunt nulla. Praesent efficitur lorem at cursus tincidunt."
+				},
+				"completed": false,
+				"keywords": [
+					{ "id": 3, "name": "Engineering" },
+					{
+						"id": 7,
+						"name": "Depression"
+					}
+				],
+				"category": {
+					"id": 2,
+					"name": "Psychology"
+				},
+				"service": {
+					"id": 1,
+					"name": "Nutritionist"
+				},
+				"files": [
+					{
+						"id": 1,
+						"src": "https://...."
+					}
+				]
+			}
+		],
 		"rate": 4.5,
 		"category": {
 			"id": 2,

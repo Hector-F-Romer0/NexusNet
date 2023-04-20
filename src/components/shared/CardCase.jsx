@@ -1,12 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const CardCase = ({ data }) => {
 	const navigate = useNavigate();
+	const { user } = useSelector((state) => state.user);
+
+	const handleNavigate = () => {
+		if (user?.type === "client") {
+			navigate(`/client/case/${data?.id}`);
+		} else {
+			navigate(`/provider/case/${data?.id}`);
+		}
+	};
 
 	return (
 		<div
-			onClick={() => navigate(`/client/case/${data?.id}`)}
+			onClick={() => handleNavigate()}
 			className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card cursor-pointer">
 			<div className="flex flex-row gap-5 mb-3 flex-wrap text-sm md:text-xl ">
 				<div className="text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-categoryTag rounded-full text-white">
