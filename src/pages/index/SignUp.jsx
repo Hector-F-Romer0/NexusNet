@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
-import Logo from "../../assets/logo.png";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+
+import Logo from "../../assets/logo.png";
 import FormInput from "../../components/shared/FormInput";
 import DropDownList from "../../components/shared/DropDownList";
 import FacebookButton from "../../components/shared/FacebookButton";
@@ -17,7 +17,7 @@ const SignUp = () => {
 		formState: { errors },
 	} = useForm();
 
-	const [typeUser, setTypeUser] = useState({ id: 1, name: "User" });
+	const [typeUser, setTypeUser] = useState({ id: 1, name: "client" });
 	const MySwal = withReactContent(Swal);
 
 	const navigate = useNavigate();
@@ -34,7 +34,7 @@ const SignUp = () => {
 		}
 		console.log({ data, typeUser });
 
-		if (typeUser.name === "User") {
+		if (typeUser.name === "client") {
 			navigate("/register/client", {
 				state: {
 					userData: data,
@@ -114,8 +114,8 @@ const SignUp = () => {
 						<DropDownList
 							label="User type"
 							availableOptions={[
-								{ id: 1, name: "User" },
-								{ id: 2, name: "Provider" },
+								{ id: 1, name: "client" },
+								{ id: 2, name: "provider" },
 							]}
 							selected={typeUser}
 							setSelected={setTypeUser}></DropDownList>

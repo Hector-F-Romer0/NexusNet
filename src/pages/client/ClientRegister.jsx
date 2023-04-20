@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { current } from "@reduxjs/toolkit";
 
 import FormInput from "../../components/shared/FormInput";
 import { FiCornerUpLeft } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { postUserDB } from "../../store/slices/usersDB/thunks";
+import { setUser } from "../../store/slices/user/userSlice";
 
 const ClientRegister = () => {
 	const {
@@ -12,11 +18,45 @@ const ClientRegister = () => {
 		formState: { errors },
 	} = useForm();
 
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const onSubmit = () => {
-		console.log(location.state);
-		console.log("HolaMundo");
+	const MySwal = withReactContent(Swal);
+	const { usersDB } = useSelector((state) => state.usersDB);
+
+	const onSubmit = async (data) => {
+		const { userData, typeUser } = location.state;
+		const newUser = {
+			names: data?.names,
+			lastnames: data?.lastnames,
+			username: data?.username,
+			email: userData?.email,
+			password: userData?.password,
+			typeUser: typeUser?.name,
+			phoneNumber: data?.phoneNumber,
+			country: data?.country,
+			state: data?.state,
+			city: data?.city,
+			urlImg: "/src/assets/Duck.jpg",
+			cases: null,
+			id: Date.now(),
+		};
+
+		// ? CREACIÓN DEL USUARIO EN STORE
+		dispatch(postUserDB(newUser));
+		await MySwal.fire({
+			title: `Welcome to NexusNet ${data?.names} 😎`,
+			icon: "success",
+			text: "Go to home to and explore all our tools.",
+			confirmButtonColor: "#007BFF",
+		});
+
+		dispatch(setUser(newUser));
+		// const allUsers = current(usersDB);
+		// const findUser = allUsers.find((us) => us?.username === data?.username);
+		// console.log(findUser);
+
+		navigate("/client/home");
 	};
 
 	return (
@@ -100,7 +140,7 @@ const ClientRegister = () => {
 								<FormInput
 									label="Phone number"
 									type="number"
-									registerName="phonenumber"
+									registerName="phoneNumber"
 									register={register}
 									validations={{
 										required: {
@@ -108,15 +148,15 @@ const ClientRegister = () => {
 											message: "Phone number is required.",
 										},
 										minLength: {
-											value: 7,
-											message: "Phone number must be between 3 and 30 characters.",
+											value: 10,
+											message: "Phone number must be 10 characters.",
 										},
 										maxLength: {
 											value: 10,
-											message: "Phone number must be between 3 and 30 characters.",
+											message: "Phone number must be 10 characters.",
 										},
 									}}
-									error={errors.phonenumber}
+									error={errors.phoneNumber}
 								/>
 								<FormInput
 									label="Country"

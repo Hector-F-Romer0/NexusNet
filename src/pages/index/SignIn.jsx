@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import FormInput from "../../components/shared/FormInput";
 import GoogleButton from "../../components/shared/GoogleButton.jsx";
 import FacebookButton from "../../components/shared/FacebookButton.jsx";
-import usersDB from "../../db/users.json";
 import Logo from "../../assets/logo.png";
 
 import { getUser } from "../../store/slices/user/thunks";
+import { getUsersDB } from "../../store/slices/usersDB/thunks";
+import { setUser } from "../../store/slices/user/userSlice";
 
 const SignIn = () => {
 	const {
@@ -23,6 +24,12 @@ const SignIn = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const MySwal = withReactContent(Swal);
+	const { usersDB } = useSelector((state) => state.usersDB);
+
+	useEffect(() => {
+		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
+		dispatch(getUsersDB());
+	}, []);
 
 	const onSubmitSignIn = (data) => {
 		const existsUser = usersDB.find((user) => user.username == data.username);
@@ -37,7 +44,8 @@ const SignIn = () => {
 			});
 		} else {
 			console.log(data);
-			dispatch(getUser(data));
+
+			dispatch(setUser(existsUser));
 			navigate("/client/home");
 		}
 	};
@@ -102,53 +110,6 @@ const SignIn = () => {
 				</div>
 			</div>
 		</div>
-		// min-w-sm w-4/5 h-4/5 py-5 px-5 md:px-10 rounded-lg shadow bg-card my-7k
-		// <CenterCard>
-		// 	<Layout>
-		// 		<LogoLayout>
-		// 			<h1 className="text-1xl font-bold underline">Sign in</h1>
-		//
-		// 		</LogoLayout>
-		// 		<FormContentLayout>
-		// 			<form action="" onSubmit={handleSubmit(onSubmitSignIn)}>
-		// 				<FormInput
-		// 					label="Username"
-		// 					type="text"
-		// 					registerName="username"
-		// 					placeholder="Username"
-		// 					register={register}
-		// 					validations={{
-		// 						required: {
-		// 							value: true,
-		// 							message: "Username is required.",
-		// 						},
-		// 						minLength: {
-		// 							value: 3,
-		// 							message: "Username must be between 3 and 18 characters.",
-		// 						},
-		// 					}}
-		// 					error={errors.username}
-		// 				/>
-		// 				<FormInput
-		// 					label="Password"
-		// 					type="password"
-		// 					placeholder="Password"
-		// 					registerName="password"
-		// 					register={register}
-		// 					validations={{
-		// 						required: {
-		// 							value: true,
-		// 							message: "Password is required.",
-		// 						},
-		// 					}}
-		// 					error={errors.password}
-		// 				/>
-		// 				<PrimaryButtonStyle type="submit">Sign in</PrimaryButtonStyle>
-		// 			</form>
-		//
-		// 		</FormContentLayout>
-		// 	</Layout>
-		// </CenterCard>
 	);
 };
 

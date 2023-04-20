@@ -9,10 +9,11 @@ const initialState = {
 		email: null,
 		password: null,
 		typeUser: null,
-		photoNumber: null,
+		phoneNumber: null,
 		country: null,
 		state: null,
 		city: null,
+		urlImg: null,
 	},
 };
 

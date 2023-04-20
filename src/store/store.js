@@ -5,6 +5,7 @@ import { userSlice } from "./slices/user/userSlice";
 import { servicesSlice } from "./slices/services/servicesSlice";
 import { categoriesSlice } from "./slices/categories/categoriesSlice";
 import { keyWordsSlice } from "./slices/keywords/keywordsSlice";
+import { usersDBlice } from "./slices/usersDB/usersDBSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
 		services: servicesSlice.reducer,
 		categories: categoriesSlice.reducer,
 		keywords: keyWordsSlice.reducer,
+		usersDB: usersDBlice.reducer,
 	},
 });
