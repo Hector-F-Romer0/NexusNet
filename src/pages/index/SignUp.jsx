@@ -42,7 +42,12 @@ const SignUp = () => {
 				},
 			});
 		} else {
-			navigate("/register/provider");
+			navigate("/register/provider", {
+				state: {
+					userData: data,
+					typeUser,
+				},
+			});
 		}
 	};
 

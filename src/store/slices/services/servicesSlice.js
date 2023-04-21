@@ -20,13 +20,13 @@ export const servicesSlice = createSlice({
 		deleteServices: (state, action) => {
 			const allServices = current(state.services);
 			const filter = allServices.filter((service) => {
-				return service.id !== action.payload;
+				return service.value !== action.payload;
 			});
 			state.services = filter;
 		},
 		updateService: (state, action) => {
 			const updatedService = { ...action.payload };
-			const filteredServices = state.services.filter((service) => service.id !== updatedService.id);
+			const filteredServices = state.services.filter((service) => service.value !== updatedService.value);
 			const newServices = [updatedService, ...filteredServices];
 			state.services = newServices;
 		},

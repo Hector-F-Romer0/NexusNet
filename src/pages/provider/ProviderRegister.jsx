@@ -4,11 +4,18 @@ import { useForm } from "react-hook-form";
 import FormInput from "../../components/shared/FormInput";
 import TextAreaForm from "../../components/shared/TextAreaForm";
 import { FiCornerUpLeft } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import { addProvider } from "../../store/slices/providers/providersSlice";
+import { setUser } from "../../store/slices/user/userSlice";
 
 const ProviderRegister = () => {
-
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
+	const MySwal = withReactContent(Swal);
 
 	const {
 		register,
@@ -16,8 +23,42 @@ const ProviderRegister = () => {
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = () => {
-		navigate("/provider/home")
+	const onSubmit = async (data) => {
+		const { userData, typeUser } = location.state;
+
+		console.log(data);
+		console.log(userData);
+		console.log(typeUser);
+
+		const newUser = {
+			names: data?.names,
+			lastnames: data?.lastnames,
+			username: data?.username,
+			email: userData?.email,
+			password: userData?.password,
+			typeUser: typeUser?.name,
+			phoneNumber: data?.phoneNumber,
+			country: data?.country,
+			state: data?.state,
+			city: data?.city,
+			urlImg: "/src/assets/Duck.jpg",
+			cases: null,
+			phrase: data?.phrase,
+			id: Date.now(),
+		};
+
+		// ? CREACIÓN DEL USUARIO EN STORE
+		dispatch(addProvider(newUser));
+		await MySwal.fire({
+			title: `Welcome to NexusNet ${data?.names} 😎`,
+			icon: "success",
+			text: "Go to home to and explore all our tools.",
+			confirmButtonColor: "#007BFF",
+		});
+
+		dispatch(setUser(newUser));
+
+		navigate("/provider/home");
 	};
 
 	return (
@@ -25,7 +66,7 @@ const ProviderRegister = () => {
 			<div className="flex w-11/12 justify-center items-center py-10">
 				<div className="bg-card lg:w-3/4 flex flex-col px-1 py-10 gap-3 rounded-3xl lg:px-10 md:my-0 md:px-6 overflow-y-visible">
 					<div>
-						<FiCornerUpLeft size={40} className="flex"></FiCornerUpLeft>
+						<FiCornerUpLeft size={40} className="flex" onClick={() => navigate("/signup")}></FiCornerUpLeft>
 						<h1 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[##010334]">
 							Register your data
 						</h1>
@@ -101,7 +142,7 @@ const ProviderRegister = () => {
 								<FormInput
 									label="Phone number"
 									type="number"
-									registerName="phonenumber"
+									registerName="phoneNumber"
 									register={register}
 									validations={{
 										required: {
@@ -110,11 +151,11 @@ const ProviderRegister = () => {
 										},
 										minLength: {
 											value: 7,
-											message: "Phone number must be between 3 and 30 characters.",
+											message: "Phone number must be between 7 and 10 characters.",
 										},
 										maxLength: {
 											value: 10,
-											message: "Phone number must be between 3 and 30 characters.",
+											message: "Phone number must be between 7 and 10 characters.",
 										},
 									}}
 									error={errors.phonenumber}
@@ -229,7 +270,7 @@ const ProviderRegister = () => {
 							/>
 							<TextAreaForm
 								label="Tell us about yourself"
-								registerName="tellus"
+								registerName="phrase"
 								register={register}
 								validations={{
 									required: {
@@ -245,7 +286,7 @@ const ProviderRegister = () => {
 										message: "Tell us about yourself must be between 3 and 500 characters.",
 									},
 								}}
-								error={errors.tellus}
+								error={errors.phrase}
 							/>
 							<div className="flex justify-center mt-3">
 								<button

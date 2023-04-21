@@ -145,13 +145,13 @@ const CRUDRow = ({ data, titleToManage }) => {
 		});
 	};
 
-	const goToUpdate = (label) => {
+	const goToUpdate = (name) => {
 		if (titleToManage === "Categories") {
-			dispatch(updateCategory({ id: data.value, label }));
+			dispatch(updateCategory({ value: data.value, label: name }));
 		} else if (titleToManage === "Services") {
-			dispatch(updateService({ id: data.value, label }));
+			dispatch(updateService({ value: data.value, label: name }));
 		} else {
-			dispatch(updateKeyword({ id: data.value, label }));
+			dispatch(updateKeyword({ value: data.value, label: name }));
 		}
 	};
 

@@ -26,7 +26,7 @@ export const categoriesSlice = createSlice({
 		},
 		updateCategory: (state, action) => {
 			const updatedCategory = { ...action.payload };
-			const filteredCategories = state.categories.filter((category) => category.id !== updatedCategory.id);
+			const filteredCategories = state.categories.filter((category) => category.value !== updatedCategory.value);
 			const newCategories = [updatedCategory, ...filteredCategories];
 			state.categories = newCategories;
 		},

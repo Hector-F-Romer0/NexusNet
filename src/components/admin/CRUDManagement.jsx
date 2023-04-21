@@ -9,7 +9,7 @@ const CRUDManagement = ({ data, nameToManage }) => {
 	console.log(searchResults);
 
 	return (
-		<div className="bg-white p-8 rounded-md w-full">
+		<div className="bg-white p-8 rounded-md w-full mb-20">
 			<div>
 				<CRUDHeader titleToManage={nameToManage} handleChange={handleChange} />
 				<div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
