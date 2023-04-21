@@ -25,7 +25,7 @@ const CRUDManagement = ({ data, nameToManage }) => {
 							</thead>
 							<tbody>
 								{data?.map((item) => (
-									<CRUDRow key={item?.id} data={item} titleToManage={nameToManage} />
+									<CRUDRow key={item?.value} data={item} titleToManage={nameToManage} />
 								))}
 							</tbody>
 						</table>

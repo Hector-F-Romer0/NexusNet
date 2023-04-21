@@ -58,21 +58,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 					<Route path="/client/search" element={<SearchProviders />}></Route>
 					<Route path="/client/view/provider/:id" element={<ViewAccountProvider />}></Route>
 
-				{/* Provider routes */}
-				<Route path="/provider/home" element={<HomeProvider />}></Route>
-				<Route path="/provider/chats" element={<Chat />}></Route>
-				<Route path="/provider/account" element={<AccountProvider />}></Route>
-				<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
-				<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
-				<Route path="/provider/searchcase" element={<ProviderSearchCases></ProviderSearchCases>}></Route>
-				{/* Admin Routes */}
-				<Route path="/admin/home" element={<HomeAdmin />}></Route>
-				<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>
-				<Route path="/admin/keywords" element={<KeyWordsCRUD />}></Route>
-				<Route path="/admin/services" element={<ServicesCRUD />}></Route>
-				<Route path="/admin/view/provider" element={<ViewAccountProviderAdmin />}></Route>
-				{/* </ProtectedRoutes> */}
-			</Routes>
-		</BrowserRouter>
-	</Provider>
+					{/* Provider routes */}
+					<Route path="/provider/home" element={<HomeProvider />}></Route>
+					<Route path="/provider/chats" element={<Chat />}></Route>
+					<Route path="/provider/account" element={<AccountProvider />}></Route>
+					<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
+					<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
+					<Route path="/provider/searchcase" element={<ProviderSearchCases></ProviderSearchCases>}></Route>
+					{/* Admin Routes */}
+					<Route path="/admin/home" element={<HomeAdmin />}></Route>
+					<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>
+					<Route path="/admin/keywords" element={<KeyWordsCRUD />}></Route>
+					<Route path="/admin/services" element={<ServicesCRUD />}></Route>
+					<Route path="/admin/view/provider" element={<ViewAccountProviderAdmin />}></Route>
+					{/* </ProtectedRoutes> */}
+				</Routes>
+			</BrowserRouter>
+		</Provider>
+	</PersistGate>
 );

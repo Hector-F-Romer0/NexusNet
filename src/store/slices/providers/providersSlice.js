@@ -21,7 +21,21 @@ export const providerSlice = createSlice({
 			});
 			state.providers = updatedProviders;
 		},
+		setProviders: (state, action) => {
+			state.providers = action.payload;
+			state.isLoading = false;
+		},
+		startLoading: (state, action) => {
+			state.isLoading = true;
+		},
+		deleteProvider: (state, action) => {
+			const provider = action.payload
+			const filter = state.providers.filter((prv) => {
+				return prv.id !== provider.id
+			})
+			state.providers = filter
+		}
 	},
 });
 
-export const { rateProvider } = providerSlice.actions;
+export const { rateProvider , setProviders, startLoading, deleteProvider} = providerSlice.actions;
