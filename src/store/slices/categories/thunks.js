@@ -1,7 +1,7 @@
-import categoriesDB from "../../../db/cases.json";
+import categoriesDB from "../../../db/categories.json";
 import { startLoading, setCategories } from "../categories/categoriesSlice";
 
-export const getServices = () => {
+export const getCategories = () => {
 	return async (dispatch) => {
 		dispatch(startLoading());
 		// TODO: hacer la petición al backend

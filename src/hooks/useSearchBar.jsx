@@ -28,7 +28,9 @@ export const useSearchBar = (initialData) => {
 	};
 
 	return {
+		initialValues,
 		searchResults,
+		setSearchResults,
 		handleChange,
 	};
 };

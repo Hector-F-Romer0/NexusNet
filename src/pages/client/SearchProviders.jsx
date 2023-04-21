@@ -12,22 +12,43 @@ import { useSearchBar } from "../../hooks/useSearchBar";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const SearchProviders = () => {
-	const { providers } = useSelector((state) => state.providers);
+	const { providers, isLoading } = useSelector((state) => state.providers);
 	const { services } = useSelector((state) => state.services);
 	const dispatch = useDispatch();
 
-	const { searchResults, handleChange } = useSearchBar(providers);
+	const { initialValues, searchResults, setSearchResults, handleChange } = useSearchBar(providers);
 
 	const [selectedService, setSelectedService] = useState({
-		id: services[0]?.id,
-		name: services[0]?.name,
+		id: 0,
+		name: "Choose one",
 	});
-	console.log(providers);
+
+	// useEffect(() => {
+	// 	dispatch(getServices());
+	// }, [services]);
 
 	useEffect(() => {
 		dispatch(getServices());
-	}, [services]);
+	}, []);
 
+	useEffect(() => {
+		console.log("Cambió servicio");
+		console.log(selectedService);
+		const { id } = selectedService;
+		console.log(id);
+		if (id === 0) {
+			console.log("no ha seleccionado nada");
+			setSearchResults(initialValues);
+			return;
+		} else {
+			const filterService = searchResults.filter((item) => item?.id === id);
+			setSearchResults(filterService);
+		}
+	}, [selectedService]);
+
+	if (isLoading) {
+		return <h1>Cargando...</h1>;
+	}
 	return (
 		<section className="flex">
 			<ContainerSideBar>

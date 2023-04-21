@@ -6,7 +6,11 @@ import { FiChevronDown } from "react-icons/fi";
 const DropDownList = ({ selected, setSelected, label, availableOptions }) => {
 	const [isActive, setIsActive] = useState(false);
 	const [options, setOptions] = useState(availableOptions);
+	console.log(availableOptions);
 
+	useEffect(() => {
+		console.log(options);
+	}, [isActive]);
 	// console.log(options);
 	return (
 		<div className="flex flex-col items-center my-6">
@@ -15,7 +19,7 @@ const DropDownList = ({ selected, setSelected, label, availableOptions }) => {
 				onClick={(e) => setIsActive(!isActive)}
 				className={`bg-white w-2/4 text-sm text-gray-900 p-2.5 flex items-center rounded-lg border border-gray-300 justify-between`}>
 				{selected.name}
-				<FiChevronDown size={20} className={`${isActive && "rotate-180"}`} /> {/**/}
+				<FiChevronDown size={20} className={`${isActive && "rotate-180"}`} />
 			</div>
 			{isActive && (
 				<div className={`bg-white mt-2 overflow-y-auto w-2/4 ${isActive ? "max-h-60" : "max-h-0"} `}>

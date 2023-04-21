@@ -1,7 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { CardContainerStyle } from "../../styled-components/index/CardCase.style";
 import CardCase from "./CardCase";
-import { useSelector } from "react-redux";
 
 const CaseContainer = () => {
 	const { user } = useSelector((state) => state.user);

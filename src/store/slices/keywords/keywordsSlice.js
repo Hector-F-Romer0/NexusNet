@@ -10,7 +10,7 @@ export const keyWordsSlice = createSlice({
 	initialState,
 	reducers: {
 		setKeyWords: (state, action) => {
-			state.categories = action.payload;
+			state.keywords = action.payload;
 			state.isLoading = false;
 		},
 		startLoading: (state, action) => {

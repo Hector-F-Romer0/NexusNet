@@ -1,9 +1,19 @@
 import React from "react";
-import CardRateProvider from "../../components/client/CardRateProvider";
-import Footer from "../../components/shared/Footer";
-import StarRating from "../../components/shared/StarRating";
 import { rateProvider } from "../../store/slices/providers/providersSlice";
 import { completeCase } from "../../store/slices/cases/casesSlice";
+import { useParams } from "react-router";
+import { useLocation } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import withReactContent from "sweetalert2-react-content";
+
+import CardRateProvider from "../../components/client/CardRateProvider";
+import TextAreaForm from "../../components/shared/TextAreaForm";
+import Footer from "../../components/shared/Footer";
+import StarRating from "../../components/shared/StarRating";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 const RateProvider = () => {
 	const { id } = useParams();

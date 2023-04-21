@@ -1,14 +1,14 @@
 import React from "react";
 import { FiTrash2 } from "react-icons/fi";
 
-const CRUDRow = () => {
+const CRUDRow = ({ data }) => {
 	return (
 		<tr>
 			<td className="px-15 w-44 py-4 border-b border-white bg-white text-sm">
-				<p className="text-gray-900 whitespace-no-wrap text-center">1</p>
+				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.id}</p>
 			</td>
 			<td className="px-15 py-4 border-b border-white bg-white text-center text-sm">
-				<p className="text-gray-900 whitespace-no-wrap">Admin</p>
+				<p className="text-gray-900 whitespace-no-wrap">{data?.name}</p>
 			</td>
 			<td className="px-5 py-4 border-b border-white bg-white">
 				<div className="flex flex-row justify-end">

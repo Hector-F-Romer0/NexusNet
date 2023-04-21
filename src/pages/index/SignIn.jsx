@@ -13,6 +13,9 @@ import Logo from "../../assets/logo.png";
 import { getUser } from "../../store/slices/user/thunks";
 import { getUsersDB } from "../../store/slices/usersDB/thunks";
 import { setUser } from "../../store/slices/user/userSlice";
+import { getCategories } from "../../store/slices/categories/thunks";
+import { getKeyWords } from "../../store/slices/keywords/thunks";
+import { setUserLocalStorage } from "../../helpers/localStorageManagement";
 
 const SignIn = () => {
 	const {
@@ -30,6 +33,8 @@ const SignIn = () => {
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
 		dispatch(getUsersDB());
+		dispatch(getCategories());
+		dispatch(getKeyWords());
 	}, []);
 
 	const onSubmitSignIn = (data) => {
@@ -70,6 +75,7 @@ const SignIn = () => {
 			}
 
 			dispatch(setUser(existsClient));
+			setUserLocalStorage(existsClient);
 			if (existsClient?.typeUser === "client") {
 				navigate("/client/home");
 			} else {
@@ -86,8 +92,9 @@ const SignIn = () => {
 				return;
 			}
 			console.log("SOY PROVEEDOR");
-			navigate("/provider/home");
+			setUserLocalStorage(existsProvider);
 			dispatch(setUser(existsProvider));
+			navigate("/provider/home");
 		}
 	};
 

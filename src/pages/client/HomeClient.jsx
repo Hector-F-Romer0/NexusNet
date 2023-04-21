@@ -1,13 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
 import SideBar from "../../components/shared/SideBar";
 import CardCase from "../../components/shared/CardCase";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
+import { getUserLocalStorage, setUserLocalStorage } from "../../helpers/localStorageManagement";
+import { setUser } from "../../store/slices/user/userSlice";
 
 const HomeClient = () => {
 	const navigate = useNavigate();
 	const { allCases } = useSelector((state) => state.cases);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const userInfo = getUserLocalStorage();
+		setUserLocalStorage(userInfo);
+		dispatch(setUser(userInfo));
+	}, []);
 
 	return (
 		<section className="flex">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiMessageSquare, FiGlobe, FiAward, FiUser, FiLogOut, FiAlignRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { clearUserLocalStorage } from "../../helpers/localStorageManagement";
 
 const SideBar = () => {
 	const { user } = useSelector((state) => state.user);
@@ -11,7 +12,7 @@ const SideBar = () => {
 		{ name: "Top providers", link: "/top/providers", icon: FiAward },
 		{ name: "Chats", link: "/client/chats", icon: FiMessageSquare },
 		{ name: "Account", link: "/client/account", icon: FiUser },
-		{ name: "Log Out", link: "/signin", icon: FiLogOut },
+		{ name: "Log Out", link: "/signin", icon: FiLogOut, onClickFunction: () => logOut() },
 	];
 
 	const menusProvider = [
@@ -19,11 +20,14 @@ const SideBar = () => {
 		{ name: "Top providers", link: "/top/providers", icon: FiAward },
 		{ name: "Chats", link: "/provider/chats", icon: FiMessageSquare },
 		{ name: "Account", link: "/provider/account", icon: FiUser },
-		{ name: "Log Out", link: "/signin", icon: FiLogOut },
+		{ name: "Log Out", link: "/signin", icon: FiLogOut, onClickFunction: () => logOut() },
 	];
 
 	const [open, setOpen] = useState(true);
 
+	const logOut = () => {
+		clearUserLocalStorage();
+	};
 	const showSideBar = () => {
 		if (user?.typeUser == "client") {
 			return menusClient;
@@ -42,6 +46,7 @@ const SideBar = () => {
 					<NavLink
 						to={menu?.link}
 						key={i}
+						onClick={menu?.onClickFunction}
 						className={` ${
 							menu?.margin && "mt-5"
 						} group flex items-center text-sm  gap-3.5 font-bold p-2 hover:bg-gray-800 rounded-md`}>
