@@ -1,9 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 const CardAccount = () => {
 	const { user } = useSelector((state) => state.user);
-	console.log(user);
+
 	return (
 		<div className="flex items-center justify-center bg-white w-full h-screen">
 			<div className="w-10/12 h-5/6 py-8 my-6 flex flex-row items-center justify-center bg-[#E8F1FF] rounded-3xl shadow-xl mb-24">
