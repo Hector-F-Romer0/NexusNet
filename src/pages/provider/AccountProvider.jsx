@@ -10,7 +10,7 @@ const AccountProvider = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className="flex flex-col justify-end">
+			<div className="flex flex-col w-full">
 				<CardAccount></CardAccount>
 				<ContainerFooter>
 					<Footer />

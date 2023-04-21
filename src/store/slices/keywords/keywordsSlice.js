@@ -20,15 +20,13 @@ export const keyWordsSlice = createSlice({
 		deleteKeyword: (state, action) => {
 			const allKeywords = current(state.keywords);
 			const filter = allKeywords.filter((keyword) => {
-				return keyword.id !== action.payload;
+				return keyword.value !== action.payload;
 			});
 			state.keywords = filter;
 		},
 		updateKeyword: (state, action) => {
 			const updatedKeyword = { ...action.payload };
-			const filteredKeywords = state.keywords.filter(
-			  (keyword) => keyword.id !== updatedKeyword.id
-			);
+			const filteredKeywords = state.keywords.filter((keyword) => keyword.value !== updatedKeyword.value);
 			const newKeywords = [updatedKeyword, ...filteredKeywords];
 			state.keywords = newKeywords;
 		  },

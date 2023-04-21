@@ -12,7 +12,7 @@ const Chat = () => {
 				<SideBar />
 			</ContainerSideBar>
 			<div className="flex w-full">
-				<div className="flex">
+				<div className="flex w-full h-screen">
 					<ContainerChats></ContainerChats>
 					<ChatMessage></ChatMessage>
 				</div>
