@@ -3,8 +3,11 @@ import CRUDManagement from "../../components/admin/CRUDManagement";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
+import { useSelector } from "react-redux";
 
 const ServicesCRUD = () => {
+	const { services } = useSelector((state) => state.services);
+
 	return (
 		<section className="flex">
 			<ContainerSideBar>
@@ -12,7 +15,7 @@ const ServicesCRUD = () => {
 			</ContainerSideBar>
 
 			<div className="w-full">
-				<CRUDManagement />
+				<CRUDManagement data={services} nameToManage={"Services"} />
 				<ContainerFooter>
 					<Footer />
 				</ContainerFooter>

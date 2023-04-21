@@ -13,10 +13,29 @@ export const servicesSlice = createSlice({
 			state.services = action.payload;
 			state.isLoading = false;
 		},
+		createService: (state, action) =>{
+			const allServices = current(state.services)
+			state.services = [action.payload, ...allServices]
+		},
+		deleteServices: (state, action) => {
+			const allServices = current(state.services);
+			const filter = allServices.filter((service) => {
+				return service.id !== action.payload;
+			});
+			state.services = filter;
+		},
+		updateService: (state, action) => {
+			const updatedService = { ...action.payload };
+			const filteredServices = state.services.filter(
+			  (service) => service.id !== updatedService.id
+			);
+			const newServices = [updatedService, ...filteredServices];
+			state.services = newServices;
+		  },
 		startLoading: (state, action) => {
 			state.isLoading = true;
 		},
 	},
 });
 
-export const { setServices, startLoading } = servicesSlice.actions;
+export const { setServices, startLoading, createService, deleteServices, updateService } = servicesSlice.actions;

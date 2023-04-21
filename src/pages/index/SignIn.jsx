@@ -16,6 +16,7 @@ import { setUser } from "../../store/slices/user/userSlice";
 import { getCategories } from "../../store/slices/categories/thunks";
 import { getKeyWords } from "../../store/slices/keywords/thunks";
 import { setUserLocalStorage } from "../../helpers/localStorageManagement";
+import { getServices } from "../../store/slices/services/thunks";
 
 const SignIn = () => {
 	const {
@@ -35,6 +36,7 @@ const SignIn = () => {
 		dispatch(getUsersDB());
 		dispatch(getCategories());
 		dispatch(getKeyWords());
+		dispatch(getServices());
 	}, []);
 
 	const onSubmitSignIn = (data) => {

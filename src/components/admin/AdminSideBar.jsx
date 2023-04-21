@@ -14,9 +14,7 @@ const AdminSideBar = () => {
 
 	return (
 		<div
-			className={`bg-navbar h-screen sticky top-0 ${
-				open ? "w-72 fixed top-0" : "w-16"
-			} duration-500 text-gray-100 px-4`}>
+			className={`bg-navbar min-h-screen sticky top-0 ${open ? "w-72" : "w-16"} duration-500 text-gray-100 px-4`}>
 			<div className="py-3 flex justify-end ">
 				<FiAlignRight size={26} className="cursor-pointer" onClick={() => setOpen(!open)} />
 			</div>

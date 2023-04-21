@@ -11,8 +11,8 @@ const Chat = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className="flex flex-col w-full">
-				<div className="flex flex-row">
+			<div className="flex w-full">
+				<div className="flex">
 					<ContainerChats></ContainerChats>
 					<ChatMessage></ChatMessage>
 				</div>
