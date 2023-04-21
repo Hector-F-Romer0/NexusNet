@@ -1,13 +1,17 @@
 import React from "react";
 import CRUDRow from "./CRUDRow";
 import CRUDHeader from "./CRUDHeader";
+import { useSearchBar } from "../../hooks/useSearchBar";
 
 const CRUDManagement = ({ data, nameToManage }) => {
-	console.log(data);
+	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
+	console.log(inputSearch);
+	console.log(searchResults);
+
 	return (
 		<div className="bg-white p-8 rounded-md w-full">
 			<div>
-				<CRUDHeader titleToManage={nameToManage} />
+				<CRUDHeader titleToManage={nameToManage} handleChange={handleChange} />
 				<div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
 					<div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
 						<table className="min-w-full leading-normal">
@@ -25,7 +29,7 @@ const CRUDManagement = ({ data, nameToManage }) => {
 								</tr>
 							</thead>
 							<tbody>
-								{data?.map((item) => (
+								{searchResults?.map((item) => (
 									<CRUDRow key={item?.value} data={item} titleToManage={nameToManage} />
 								))}
 							</tbody>

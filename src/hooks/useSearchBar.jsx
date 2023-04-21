@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useSearchBar = (initialData) => {
+export const useSearchBar = (initialData, factorToSearch) => {
 	const [initialValues, setInitialValues] = useState(initialData);
 	const [searchResults, setSearchResults] = useState([]);
 	const [inputSearch, setInputSearch] = useState("");
@@ -19,7 +19,7 @@ export const useSearchBar = (initialData) => {
 			setSearchResults(initialValues);
 		} else {
 			const result = searchResults.filter((element) => {
-				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
+				if (element[factorToSearch]?.toLowerCase().includes(inputSearch?.toLowerCase())) {
 					return element;
 				}
 			});

@@ -10,21 +10,21 @@
 		"completed": false,
 		"keywords": [
 			{
-				"id": 3,
-				"name": "Weightloss"
+				"value": 3,
+				"label": "Weightloss"
 			},
 			{
-				"id": 7,
-				"name": "Depression"
+				"value": 7,
+				"label": "Depression"
 			}
 		],
 		"category": {
-			"id": 1,
-			"name": "Health"
+			"value": 1,
+			"label": "Health"
 		},
 		"service": {
-			"id": 1,
-			"name": "Nutritionist"
+			"value": 1,
+			"label": "Nutritionist"
 		},
 		"files": [
 			{
@@ -56,44 +56,44 @@
 			"cases": [],
 			"rate": 4.5,
 			"category": {
-				"id": 2,
-				"name": "Programming"
+				"value": 2,
+				"label": "Programming"
 			},
 			"service": {
-				"id": 1,
-				"name": "Programmer"
+				"value": 1,
+				"label": "Programmer"
 			},
 			"keywords": [
 				{
-					"id": 2,
-					"name": "NodeJS"
+					"value": 2,
+					"label": "NodeJS"
 				},
 				{
-					"id": 4,
-					"name": "Python"
+					"value": 4,
+					"label": "Python"
 				},
 				{
-					"id": 1,
-					"name": "Soring algorithms"
+					"value": 1,
+					"label": "Soring algorithms"
 				}
 			],
 			"phrase": "Morbi gravida leo in ipsum viverra, ut tempor lorem fermentum. Etiam quis turpis viverra, fringilla turpis quis, tincidunt nulla. Praesent efficitur lorem at cursus tincidunt."
 		},
 		"completed": false,
 		"keywords": [
-			{ "id": 3, "name": "Engineering" },
+			{ "value": 3, "label": "Engineering" },
 			{
-				"id": 7,
-				"name": "Depression"
+				"value": 7,
+				"label": "Depression"
 			}
 		],
 		"category": {
-			"id": 2,
-			"name": "Psychology"
+			"value": 2,
+			"label": "Psychology"
 		},
 		"service": {
-			"id": 1,
-			"name": "Nutritionist"
+			"value": 1,
+			"label": "Nutritionist"
 		},
 		"files": [
 			{

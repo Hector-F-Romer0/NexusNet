@@ -18,7 +18,10 @@ const SearchProviders = () => {
 	const { categories } = useSelector((state) => state.categories);
 	const { keywords } = useSelector((state) => state.keywords);
 	const dispatch = useDispatch();
-	const { initialValues, searchResults, setSearchResults, handleChange, inputSearch } = useSearchBar(providers);
+	const { initialValues, searchResults, setSearchResults, handleChange, inputSearch } = useSearchBar(
+		providers,
+		"username"
+	);
 	console.log(inputSearch);
 	// * FILTROS CON SELECT
 	const [selectedOptionService, setSelectedOptionService] = useState(services[0]);
@@ -141,8 +144,23 @@ const SearchProviders = () => {
 			}
 		} else {
 			console.log("😼 Existe un filtro CON BARRA DE BUSQUEDA");
+
+			if (
+				selectedOptionCategory.value === 0 &&
+				selectedOptionKeyWord.value === 0 &&
+				selectedOptionService.value === 0 &&
+				inputSearch !== ""
+			) {
+				const result = providers.filter((element) => {
+					if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			}
+
 			// * FILTRAR ÚNICAMENTE POR SERVICIO
-			if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
+			else if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
 				console.log("FILTRADO POR SERVICIO");
 				const filterWithSearch = providers.filter(
 					(provider) => provider.service.id === selectedOptionService.value

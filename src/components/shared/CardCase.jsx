@@ -20,10 +20,10 @@ const CardCase = ({ data }) => {
 			className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card cursor-pointer">
 			<div className="flex flex-row gap-5 mb-3 flex-wrap text-sm md:text-xl ">
 				<div className="text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-categoryTag rounded-full text-white">
-					{data.category?.name}
+					{data.category?.label}
 				</div>
 				<div className=" text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-serviceTag rounded-full text-white">
-					{data.service?.name}
+					{data.service?.label}
 				</div>
 			</div>
 			<h3 className="mb-2 text-3xl font-bold tracking-tight text-black ">{data?.caseTitle}</h3>

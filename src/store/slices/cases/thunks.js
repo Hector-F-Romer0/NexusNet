@@ -24,9 +24,8 @@ export const getCase = (idCase) => {
 
 export const postCase = (caseToCreate) => {
 	return async (dispatch) => {
-		const { category, data, keywords, service, userId } = caseToCreate;
+		const { data, keywords, userId } = caseToCreate;
 		//TODO: Petición a la BD para crear un caso.
-
 		const caseToAdd = {
 			id: Date.now(),
 			caseTitle: data?.caseTitle,
@@ -37,8 +36,8 @@ export const postCase = (caseToCreate) => {
 			takenBy: null,
 			completed: false,
 			keywords,
-			service,
-			category,
+			service: data.service,
+			category: data.category,
 			files: [
 				{
 					id: 1,

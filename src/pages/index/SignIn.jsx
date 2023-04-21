@@ -18,6 +18,7 @@ import { getKeyWords } from "../../store/slices/keywords/thunks";
 import { setUserLocalStorage } from "../../helpers/localStorageManagement";
 import { getServices } from "../../store/slices/services/thunks";
 import { getProviders } from "../../store/slices/providers/thunks";
+import { getCases } from "../../store/slices/cases/thunks";
 
 const SignIn = () => {
 	const {
@@ -39,6 +40,7 @@ const SignIn = () => {
 		dispatch(getKeyWords());
 		dispatch(getServices());
 		dispatch(getProviders());
+		dispatch(getCases());
 	}, []);
 
 	const onSubmitSignIn = (data) => {

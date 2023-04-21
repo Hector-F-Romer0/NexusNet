@@ -77,15 +77,15 @@ const CaseInformation = () => {
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
 					<div className="text-sm inline-flex items-center font-bold leading-sm px-7 py-1 my-1 mx-1 bg-categoryTag rounded-full text-white">
-						{userCase?.category?.name}
+						{userCase?.category?.label}
 					</div>
 					<div className=" text-sm inline-flex items-center font-bold leading-sm px-7 py-1 my-1 mx-1 bg-serviceTag rounded-full text-white">
-						{userCase?.service?.name}
+						{userCase?.service?.label}
 					</div>
 					<p className="my-3">{userCase?.caseDescription}</p>
 					<div className="flex flex-col sm:flex-row items-center sm:items-start">
 						{userCase?.keywords?.map((keyword) => (
-							<KeyWord key={keyword.id} data={keyword} />
+							<KeyWord key={keyword.value} data={keyword} />
 						))}
 					</div>
 					<div className="my-1">

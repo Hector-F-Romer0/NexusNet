@@ -3,12 +3,15 @@ import { FiSearch } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
 import withReactContent from "sweetalert2-react-content";
 import { createCategory } from "../../store/slices/categories/categoriesSlice";
 import { createService } from "../../store/slices/services/servicesSlice";
 import { createKeyword } from "../../store/slices/keywords/keywordsSlice";
+import SearchBar from "../shared/SearchBar";
+import { useSearchBar } from "../../hooks/useSearchBar";
 
-const CRUDHeader = ({ titleToManage }) => {
+const CRUDHeader = ({ titleToManage, handleChange }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
@@ -127,16 +130,18 @@ const CRUDHeader = ({ titleToManage }) => {
 							{`Create ${titleToManage}`}
 						</button>
 					</div>
-					<div className="flex bg-[#F0F0F0] items-center rounded-2xl p-2 w-96">
-						<FiSearch size={26}></FiSearch>
+					<SearchBar handleChange={handleChange} />
+					{/*<div className="flex bg-[#F0F0F0] items-center rounded-2xl p-2 w-96">
+
+						 <FiSearch size={26}></FiSearch>
 						<input
 							className="bg-[#F0F0F0] outline-none ml-1 block"
 							type="text"
 							name=""
 							id=""
 							placeholder={`Search ${titleToManage} here...`}
-						/>
-					</div>
+						/> 
+					</div>*/}
 				</div>
 			</div>
 		</div>
