@@ -13,9 +13,9 @@ export const servicesSlice = createSlice({
 			state.services = action.payload;
 			state.isLoading = false;
 		},
-		createService: (state, action) =>{
-			const allServices = current(state.services)
-			state.services = [action.payload, ...allServices]
+		createService: (state, action) => {
+			const allServices = current(state.services);
+			state.services = [action.payload, ...allServices];
 		},
 		deleteServices: (state, action) => {
 			const allServices = current(state.services);
@@ -26,14 +26,15 @@ export const servicesSlice = createSlice({
 		},
 		updateService: (state, action) => {
 			const updatedService = { ...action.payload };
-			const filteredServices = state.services.filter(
-			  (service) => service.id !== updatedService.id
-			);
+			const filteredServices = state.services.filter((service) => service.id !== updatedService.id);
 			const newServices = [updatedService, ...filteredServices];
 			state.services = newServices;
-		  },
+		},
 		startLoading: (state, action) => {
 			state.isLoading = true;
+		},
+		endLoading: (state, action) => {
+			state.isLoading = false;
 		},
 	},
 });

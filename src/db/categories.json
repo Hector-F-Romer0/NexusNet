@@ -1,22 +1,26 @@
 [
 	{
-		"id": 1,
-		"name": "Health"
+		"value": 0,
+		"label": "None"
 	},
 	{
-		"id": 2,
-		"name": "Programming"
+		"value": 1,
+		"label": "Health"
 	},
 	{
-		"id": 3,
-		"name": "Psychology"
+		"value": 2,
+		"label": "Programming"
 	},
 	{
-		"id": 4,
-		"name": "Maths"
+		"value": 3,
+		"label": "Psychology"
 	},
 	{
-		"id": 5,
-		"name": "Engineering"
+		"value": 4,
+		"label": "Maths"
+	},
+	{
+		"value": 5,
+		"label": "Engineering"
 	}
 ]

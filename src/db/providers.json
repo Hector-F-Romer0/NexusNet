@@ -162,8 +162,8 @@
 		"urlImg": "/src/assets/ryan-white_woman.jpg",
 		"rate": 4.8,
 		"category": {
-			"id": 2,
-			"name": "Programming"
+			"id": 4,
+			"name": "Maths"
 		},
 		"service": {
 			"id": 1,
