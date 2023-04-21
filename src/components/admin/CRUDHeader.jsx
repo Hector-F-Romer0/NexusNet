@@ -99,11 +99,11 @@ const CRUDHeader = ({ titleToManage }) => {
 
 	const goToCreate = (id, name) => {
 		if (titleToManage === "Categories") {
-			dispatch(createCategory({ id, name }));
+			dispatch(createCategory({ value: id, label: name }));
 		} else if (titleToManage === "Services") {
-			dispatch(createService({ id, name }));
+			dispatch(createService({ value: id, label: name }));
 		} else {
-			dispatch(createKeyword({ id, name }));
+			dispatch(createKeyword({ value: id, label: name }));
 		}
 	};
 

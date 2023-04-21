@@ -28,6 +28,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 	};
 
 	const handleDeleteCategory = async () => {
+		console.log(data);
 		dispatch(deleteCategory(data?.value));
 		await MySwal.fire({
 			title: "Category deleted successfully",

@@ -3,6 +3,7 @@ import CRUDRow from "./CRUDRow";
 import CRUDHeader from "./CRUDHeader";
 
 const CRUDManagement = ({ data, nameToManage }) => {
+	console.log(data);
 	return (
 		<div className="bg-white p-8 rounded-md w-full">
 			<div>

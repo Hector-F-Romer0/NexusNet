@@ -14,7 +14,7 @@ const CardProvider = ({ data }) => {
 
 	return (
 		<div className="flex flex-col bg-card w-9/12 my-12 justify-center px-1 py-10 rounded-3xl lg:px-10 md:my-10 md:px-6 shadow-2xl">
-			<div className="grid grid-cols-[80px_minMax(99px,_1fr)] md:grid-cols-[150px_minMax(99px,_1fr)] lg:grid-cols-[150px_minMax(99px,_1fr)] gap-4">
+			<div className="grid grid-cols-1  md:grid-cols-[150px_minMax(99px,_1fr)] lg:grid-cols-[150px_minMax(99px,_1fr)] gap-4">
 				<div className=" h-full">
 					<img src={data?.urlImg} alt="Provider photo" className="rounded-lg" />
 				</div>
@@ -28,7 +28,7 @@ const CardProvider = ({ data }) => {
 						</h3>
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
-					<div className="flex flex-col gap-2 lg:flex-row lg:gap-4 my-4">
+					<div className="flex flex-wrap gap-2 lg:flex-row lg:gap-4 my-4">
 						<div className="text-sm inline-flex items-center font-bold leading-sm px-4 py-1 bg-categoryTag rounded-full text-white w-fit">
 							{data?.category?.name}
 						</div>
@@ -36,18 +36,20 @@ const CardProvider = ({ data }) => {
 							{data?.service?.name}
 						</div>
 					</div>
-					<div className="flex justify-around items-center align-middle">
-						<Rating
-							readonly={true}
-							allowFraction={true}
-							initialValue={data?.rate}
-							emptyStyle={{ display: "flex" }}
-							fillStyle={{ display: "-webkit-inline-box" }}
-							fillIcon={<FiStar className="fill-[#FFCB45] text-xs md:text-3xl stroke-none" />}
-							emptyIcon={<FiStar className="fill-[#D1D5DB] text-xs md:text-3xl stroke-none" />}
-						/>
-						<h3 className="mb-2 text-base md:text-lg font-semibold text-black">{data?.rate}</h3>
-						<div>
+					<div className="flex flex-col lg:flex-row justify-around items-center align-middle">
+						<div className="flex flex-row">
+							<Rating
+								readonly={true}
+								allowFraction={true}
+								initialValue={data?.rate}
+								emptyStyle={{ display: "flex" }}
+								fillStyle={{ display: "-webkit-inline-box" }}
+								fillIcon={<FiStar className="fill-[#FFCB45] text-xl md:text-3xl stroke-none" />}
+								emptyIcon={<FiStar className="fill-[#D1D5DB] text-xl md:text-3xl stroke-none" />}
+							/>
+							<h3 className="mb-2 text-base md:text-lg font-semibold text-black">{data?.rate}</h3>
+						</div>
+						<div className="flex flex-row md:flex row">
 							<button
 								onClick={() => deletePrv()}
 								className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center justify-center cursor-pointerl mx-2">
@@ -58,6 +60,7 @@ const CardProvider = ({ data }) => {
 							</button>
 						</div>
 					</div>
+
 					<div className="flex flex-row flex-wrap mt-5">
 						{data?.keywords?.map((keyword) => (
 							<KeyWord key={keyword.id} data={keyword} />
