@@ -28,11 +28,11 @@ const CRUDRow = ({ data, titleToManage }) => {
 	};
 
 	const handleDeleteCategory = async () => {
-		dispatch(deleteCategory(data?.id));
+		dispatch(deleteCategory(data?.value));
 		await MySwal.fire({
 			title: "Category deleted successfully",
 			icon: "success",
-			text: `The category ${data?.name} was deleted from database.`,
+			text: `The category ${data?.label} was deleted from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
@@ -40,11 +40,11 @@ const CRUDRow = ({ data, titleToManage }) => {
 	};
 
 	const handleDeleteService = async () => {
-		dispatch(deleteServices(data?.id));
+		dispatch(deleteServices(data?.value));
 		await MySwal.fire({
 			title: "Service deleted successfully",
 			icon: "success",
-			text: `The service ${data?.name} was deleted from database.`,
+			text: `The service ${data?.label} was deleted from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
@@ -52,11 +52,11 @@ const CRUDRow = ({ data, titleToManage }) => {
 	};
 
 	const handleDeleteKeyword = async () => {
-		dispatch(deleteKeyword(data?.id));
+		dispatch(deleteKeyword(data?.value));
 		await MySwal.fire({
 			title: "Keyword deleted successfully",
 			icon: "success",
-			text: `The keyword ${data?.name} was deleted from database.`,
+			text: `The keyword ${data?.label} was deleted from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
@@ -77,7 +77,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 
 	const handleUpdateCategory = async () => {
 		await Swal.fire({
-			title: `Update the category ${data?.name}`,
+			title: `Update the category ${data?.label}`,
 			input: "text",
 			inputLabel: "Category",
 			inputValidator: (value) => {
@@ -92,7 +92,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 		await MySwal.fire({
 			title: "Category update successfully",
 			icon: "success",
-			text: `The category ${data?.name} was updated from database.`,
+			text: `The category ${data?.label} was updated from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
@@ -100,7 +100,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 
 	const handleUpdateService = async () => {
 		await Swal.fire({
-			title: `Update the service ${data?.name}`,
+			title: `Update the service ${data?.label}`,
 			input: "text",
 			inputLabel: "Service",
 			inputValidator: (value) => {
@@ -115,7 +115,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 		await MySwal.fire({
 			title: "Service update successfully",
 			icon: "success",
-			text: `The service ${data?.name} was updated from database.`,
+			text: `The service ${data?.label} was updated from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
@@ -123,7 +123,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 
 	const handleUpdateKeyword = async () => {
 		await Swal.fire({
-			title: `Update the keyword ${data?.name}`,
+			title: `Update the keyword ${data?.label}`,
 			input: "text",
 			inputLabel: "Key word",
 			inputValidator: (value) => {
@@ -138,29 +138,29 @@ const CRUDRow = ({ data, titleToManage }) => {
 		await MySwal.fire({
 			title: "Key word update successfully",
 			icon: "success",
-			text: `The keyword ${data?.name} was updated from database.`,
+			text: `The keyword ${data?.label} was updated from database.`,
 			confirmButtonColor: "#007BFF",
 			confirmButtonText: "Done",
 		});
 	};
 
-	const goToUpdate = (name) => {
+	const goToUpdate = (label) => {
 		if (titleToManage === "Categories") {
-			dispatch(updateCategory({ id: data.id, name }));
+			dispatch(updateCategory({ id: data.value, label }));
 		} else if (titleToManage === "Services") {
-			dispatch(updateService({ id: data.id, name }));
+			dispatch(updateService({ id: data.value, label }));
 		} else {
-			dispatch(updateKeyword({ id: data.id, name }));
+			dispatch(updateKeyword({ id: data.value, label }));
 		}
 	};
 
 	return (
 		<tr>
 			<td className="px-15 w-44 py-4 border-b border-white bg-white text-sm">
-				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.id}</p>
+				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.value}</p>
 			</td>
 			<td className="px-15 py-4 border-b border-white bg-white text-center text-sm">
-				<p className="text-gray-900 whitespace-no-wrap">{data?.name}</p>
+				<p className="text-gray-900 whitespace-no-wrap">{data?.label}</p>
 			</td>
 			<td className="px-5 py-4 border-b border-white bg-white">
 				<div className="flex flex-row justify-end">

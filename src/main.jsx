@@ -14,6 +14,7 @@ import TopProviders from "./pages/shared/TopProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseInformation from "./pages/shared/CaseInformation";
 import SearchProviders from "./pages/client/SearchProviders";
+import ProviderSearchCases from "./pages/provider/ProviderSearchCases";
 import CaseForm from "./pages/client/CaseForm";
 import Chat from "./pages/shared/Chat";
 import ClientRegister from "./pages/client/ClientRegister";
@@ -63,6 +64,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 					<Route path="/provider/account" element={<AccountProvider />}></Route>
 					<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
 					<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
+					<Route path="/provider/searchcase" element={<ProviderSearchCases></ProviderSearchCases>}></Route>
 					{/* Admin Routes */}
 					<Route path="/admin/home" element={<HomeAdmin />}></Route>
 					<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>

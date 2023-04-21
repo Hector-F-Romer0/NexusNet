@@ -11,6 +11,12 @@ const HomeAdmin = () => {
 				<AdminSideBar />
 			</ContainerSideBar>
 			<div className="w-full">
+				<div className="flex flex-col justify-center items-center mt-10">
+					<h1 className="text-mainTitle ml-5 text-5xl font-extrabold my-5"> Providers Management </h1>
+					<h4 className="text-black ml-5 text-2xl my-4">
+						Aprprove or decline providers according to your criteria
+					</h4>
+				</div>
 				<ContainerProvider />
 				<ContainerFooter>
 					<Footer />
