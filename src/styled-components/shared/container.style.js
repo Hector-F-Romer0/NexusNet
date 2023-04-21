@@ -7,10 +7,10 @@ const ContainerSideBar = styled.div`
 `;
 
 const ContainerFooter = styled.div`
-    position: sticky;
+    position: fixed;
     width: 100%;
-    right: 0;
-    bottom: 0
+    right: 1;
+    bottom: 0;
 `;
 
 export { ContainerSideBar, ContainerFooter };

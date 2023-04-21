@@ -12,7 +12,7 @@ const AccountClient = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className="flex flex-col justify-end">
+			<div className="flex-col justify-center items-center">
 				<CardAccount></CardAccount>
 				<ContainerFooter>
 					<Footer />

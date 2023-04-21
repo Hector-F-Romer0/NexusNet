@@ -3,7 +3,7 @@ import { FiSend, FiCornerUpLeft } from "react-icons/fi";
 
 const ChatMessage = () => {
 	return (
-		<div className="items-center justify-between">
+		<div className="items-center">
 			<div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
 				<div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
 					<FiCornerUpLeft size={30} className="mx-3"></FiCornerUpLeft>
@@ -26,9 +26,7 @@ const ChatMessage = () => {
 						<span className="text-lg text-gray-600">Username</span>
 					</div>
 				</div>
-				<div
-					id="messages"
-					className="flex flex-col space-y-4 p-3 overflow-y-scroll bg-[#E8F1FF]">
+				<div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-scroll bg-[#E8F1FF]">
 					<div className="chat-message ">
 						<div className="flex items-end">
 							<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
@@ -173,10 +171,11 @@ const ChatMessage = () => {
 							className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
 						/>
 						<span className="absolute inset-y-0 right-5 flex items-center justify-end">
-						<FiSend size={30} className=" inline-flex rounded-fulltransition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 text-gray-600"></FiSend>
+							<FiSend
+								size={30}
+								className=" inline-flex rounded-fulltransition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 text-gray-600"></FiSend>
 						</span>
-						
-					</div>		
+					</div>
 				</div>
 			</div>
 		</div>

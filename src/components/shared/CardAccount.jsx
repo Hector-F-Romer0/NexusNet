@@ -5,8 +5,8 @@ const CardAccount = () => {
 	const { user } = useSelector((state) => state.user);
 	console.log(user);
 	return (
-		<div className="flex items-center justify-center bg-white w-full">
-			<div className="w-10/12 h-5/6 py-8 my-6 flex flex-row items-center justify-center bg-[#E8F1FF] rounded-3xl shadow-xl">
+		<div className="flex items-center justify-center bg-white w-full h-screen">
+			<div className="w-10/12 h-5/6 py-8 my-6 flex flex-row items-center justify-center bg-[#E8F1FF] rounded-3xl shadow-xl mb-24">
 				<div className="flex flex-col md:flex-row w-3/4 md:w-5/6">
 					<div className="w-full md:w-2/6 flex flex-col items-center justify-center mx-0 md:mx-10">
 						<img

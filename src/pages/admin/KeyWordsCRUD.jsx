@@ -15,7 +15,7 @@ const KeyWordsCRUD = () => {
 				<AdminSideBar />
 			</ContainerSideBar>
 			<div className="w-full">
-				<CRUDManagement data={keywords} />
+				<CRUDManagement data={keywords} nameToManage={"Key words"} />
 				<ContainerFooter>
 					<Footer />
 				</ContainerFooter>

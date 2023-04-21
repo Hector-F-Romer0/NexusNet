@@ -15,7 +15,7 @@ const CategoriesCRUD = () => {
 				<AdminSideBar />
 			</ContainerSideBar>
 			<div className="w-full">
-				<CRUDManagement data={categories} />
+				<CRUDManagement data={categories} nameToManage={"Categories"} />
 				<ContainerFooter>
 					<Footer />
 				</ContainerFooter>
