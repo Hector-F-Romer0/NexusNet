@@ -16,7 +16,10 @@ export const servicesSlice = createSlice({
 		startLoading: (state, action) => {
 			state.isLoading = true;
 		},
+		endLoading: (state, action) => {
+			state.isLoading = false;
+		},
 	},
 });
 
-export const { setServices, startLoading } = servicesSlice.actions;
+export const { setServices, startLoading, endLoading } = servicesSlice.actions;

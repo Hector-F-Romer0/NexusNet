@@ -1,22 +1,26 @@
 [
 	{
-		"id": 1,
-		"name": "Programmer"
+		"value": 0,
+		"label": "None"
 	},
 	{
-		"id": 2,
-		"name": "Nutritionist"
+		"value": 1,
+		"label": "Programmer"
 	},
 	{
-		"id": 3,
-		"name": "Psychiatrist"
+		"value": 2,
+		"label": "Nutritionist"
 	},
 	{
-		"id": 4,
-		"name": "Teacher"
+		"value": 3,
+		"label": "Psychiatrist"
 	},
 	{
-		"id": 5,
-		"name": "Lawyer"
+		"value": 4,
+		"label": "Teacher"
+	},
+	{
+		"value": 5,
+		"label": "Lawyer"
 	}
 ]

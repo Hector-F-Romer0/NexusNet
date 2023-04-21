@@ -1,50 +1,54 @@
 [
 	{
-		"id": 1,
-		"name": "Soring algorithms"
+		"value": 0,
+		"label": "None"
 	},
 	{
-		"id": 2,
-		"name": "NodeJS"
+		"value": 1,
+		"label": "Soring algorithms"
 	},
 	{
-		"id": 3,
-		"name": "Weightloss"
+		"value": 2,
+		"label": "NodeJS"
 	},
 	{
-		"id": 4,
-		"name": "Python"
+		"value": 3,
+		"label": "Weightloss"
 	},
 	{
-		"id": 5,
-		"name": "Threads"
+		"value": 4,
+		"label": "Python"
 	},
 	{
-		"id": 6,
-		"name": "Demand for food"
+		"value": 5,
+		"label": "Threads"
 	},
 	{
-		"id": 7,
-		"name": "Depression"
+		"value": 6,
+		"label": "Demand for food"
 	},
 	{
-		"id": 8,
-		"name": "Oratory"
+		"value": 7,
+		"label": "Depression"
 	},
 	{
-		"id": 9,
-		"name": "Remodeling"
+		"value": 8,
+		"label": "Oratory"
 	},
 	{
-		"id": 10,
-		"name": "fundraising"
+		"value": 9,
+		"label": "Remodeling"
 	},
 	{
-		"id": 11,
-		"name": "Java"
+		"value": 10,
+		"label": "fundraising"
 	},
 	{
-		"id": 12,
-		"name": "POO"
+		"value": 11,
+		"label": "Java"
+	},
+	{
+		"value": 12,
+		"label": "POO"
 	}
 ]
