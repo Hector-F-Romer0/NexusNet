@@ -18,8 +18,8 @@ const SearchProviders = () => {
 	const { categories } = useSelector((state) => state.categories);
 	const { keywords } = useSelector((state) => state.keywords);
 	const dispatch = useDispatch();
-	const { initialValues, searchResults, setSearchResults, handleChange } = useSearchBar(providers);
-
+	const { initialValues, searchResults, setSearchResults, handleChange, inputSearch } = useSearchBar(providers);
+	console.log(inputSearch);
 	// * FILTROS CON SELECT
 	const [selectedOptionService, setSelectedOptionService] = useState(services[0]);
 	const [selectedOptionCategory, setSelectedOptionCategory] = useState(categories[0]);
@@ -27,13 +27,14 @@ const SearchProviders = () => {
 
 	useEffect(() => {
 		filterBySelect();
-	}, [selectedOptionService, selectedOptionCategory, selectedOptionKeyWord]);
+	}, [selectedOptionService, selectedOptionCategory, selectedOptionKeyWord, inputSearch]);
 
 	const filterBySelect = () => {
 		if (
 			selectedOptionService.value === 0 &&
 			selectedOptionCategory.value === 0 &&
-			selectedOptionKeyWord.value === 0
+			selectedOptionKeyWord.value === 0 &&
+			inputSearch === ""
 		) {
 			console.log("Quitar filtro");
 			setSearchResults(providers);
@@ -66,16 +67,77 @@ const SearchProviders = () => {
 				}
 			});
 			setSearchResults(filter);
-		} else {
-			console.log("FILTRAR POR TODO");
+		} else if (
+			selectedOptionCategory.value !== 0 &&
+			selectedOptionService.value !== 0 &&
+			selectedOptionKeyWord.value === 0
+		) {
+			//* FILTRAR POR CATEGORÍA Y SERVICIO
+			console.log("FILTRAR CATEGORIA Y SERVICIO");
 			const filter = providers.filter(
 				(provider) =>
-					provider.service === selectedOptionService.value && provider.category === selectedOptionCategory
+					provider.category.id === selectedOptionCategory.value &&
+					provider.service.id === selectedOptionService.value
 			);
+			console.log(filter);
+			setSearchResults(filter);
+		} else if (
+			selectedOptionService.value !== 0 &&
+			selectedOptionKeyWord.value !== 0 &&
+			selectedOptionCategory.value === 0
+		) {
+			//* FILTRAR POR KEYWORD Y SERVICIO
+			console.log("FILTRO POR KEYWORD Y SERVICIO");
+			const filter = providers.filter((provider) => {
+				// console.log("Actualmente con " + provider.names);
+				const existKeyword = provider.keywords?.filter((k) => {
+					// console.log(k);
+					return k.id === selectedOptionKeyWord.value;
+				});
+				// console.log(existKeyword === true);
+				if (existKeyword.length > 0 && selectedOptionService.value === provider.service.id) {
+					return provider;
+				}
+			});
+			setSearchResults(filter);
+		} else if (
+			selectedOptionService.value === 0 &&
+			selectedOptionKeyWord.value !== 0 &&
+			selectedOptionCategory.value !== 0
+		) {
+			//* FILTRAR POR KEYWORD Y CATEGORY
+			console.log("FILTRO POR KEYWORD Y CATEGORY");
+			const filter = providers.filter((provider) => {
+				// console.log("Actualmente con " + provider.names);
+				const existKeyword = provider.keywords?.filter((k) => {
+					// console.log(k);
+					return k.id === selectedOptionKeyWord.value;
+				});
+				// console.log(existKeyword === true);
+				if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.id) {
+					return provider;
+				}
+			});
+			setSearchResults(filter);
+		} else {
+			console.log("FILTRAR POR TODO");
+			const filter = providers.filter((provider) => {
+				// console.log("Actualmente con " + provider.names);
+				const existKeyword = provider.keywords?.filter((k) => {
+					// console.log(k);
+					return k.id === selectedOptionKeyWord.value;
+				});
+				// console.log(existKeyword === true);
+				if (
+					existKeyword.length > 0 &&
+					selectedOptionService.value === provider.service.id &&
+					selectedOptionCategory.value === provider.category.id
+				) {
+					return provider;
+				}
+			});
 			setSearchResults(filter);
 		}
-
-		// console.log(filter);
 	};
 
 	return (
@@ -85,7 +147,9 @@ const SearchProviders = () => {
 			</ContainerSideBar>
 			<div className="w-full">
 				<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a provider</h1>
-				<div className="w-3/4 mx-auto">{/* <SearchBar handleChange={handleChange} /> */}</div>
+				<div className="w-3/4 mx-auto">
+					<SearchBar handleChange={handleChange} />
+				</div>
 				<div className="grid grid-cols-3 mx-12 gap-10 my-4">
 					<div>
 						<h2 className="text-base md:text-xl font-normal text-center my-1">Service</h2>

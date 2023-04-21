@@ -32,5 +32,6 @@ export const useSearchBar = (initialData) => {
 		searchResults,
 		setSearchResults,
 		handleChange,
+		inputSearch,
 	};
 };

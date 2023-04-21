@@ -23,10 +23,10 @@ const CardProvider = ({ data }) => {
 						<hr className="h-1 bg-black mb-5 f" />
 						<div className="flex flex-col gap-2 lg:flex-row lg:gap-4 my-4">
 							<div className="text-sm inline-flex items-center font-bold leading-sm px-4 py-1 bg-categoryTag rounded-full text-white w-fit">
-								{data.category?.name}
+								{data?.category?.name}
 							</div>
 							<div className=" text-sm inline-flex items-center font-bold leading-sm px-4 py-1 bg-serviceTag rounded-full text-white w-fit">
-								{data.service?.name}
+								{data?.service?.name}
 							</div>
 						</div>
 						<div className="flex justify-around items-center align-middle">
