@@ -27,8 +27,6 @@ import NotFound from "./pages/index/NotFound";
 import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
 
 import "./index.css";
-import { ProtectedRoutes } from "./routes/ProtectedRoutes";
-import { ClientRoutes } from "./routes/ClientRoutes";
 import TopProviders from "./pages/shared/TopProviders";
 import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
@@ -36,6 +34,7 @@ import RateProvider from "./pages/client/RateProvider";
 import SearchProviders from "./pages/client/SearchProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseForm from "./pages/client/CaseForm";
+import PrivateRoutes from "./routes/PrivateRoutes";
 
 const persistor = persistStore(store);
 
@@ -50,7 +49,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 					<Route path="/register/client" element={<ClientRegister></ClientRegister>}></Route>
 					<Route path="/*" element={<NotFound />}></Route>
 
-					<Route element={<ProtectedRoutes allowedFor={"client"} />}>
+					<Route element={<PrivateRoutes allowedFor={"client"} />}>
 						<Route path="/client/home" element={<HomeClient />}></Route>
 						<Route path="/top/providers" element={<TopProviders />}></Route>
 						<Route path="/client/chats" element={<Chat />}></Route>
@@ -61,9 +60,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 						<Route path="/client/search" element={<SearchProviders />}></Route>
 						<Route path="/client/view/provider/:id" element={<ViewAccountProvider />}></Route>
 					</Route>
-
 					{/* Provider routes */}
-					<Route element={<ProtectedRoutes allowedFor={"provider"} />}>
+					<Route element={<PrivateRoutes allowedFor={"provider"} />}>
 						<Route path="/provider/home" element={<HomeProvider />}></Route>
 						<Route path="/provider/chats" element={<Chat />}></Route>
 						<Route path="/provider/account" element={<AccountProvider />}></Route>
@@ -74,7 +72,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 							element={<ProviderSearchCases></ProviderSearchCases>}></Route>
 					</Route>
 					{/* Admin Routes */}
-					<Route element={<ProtectedRoutes allowedFor={"admin"} />}>
+					<Route element={<PrivateRoutes allowedFor={"admin"} />}>
 						<Route path="/admin/home" element={<HomeAdmin />}></Route>
 						<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>
 						<Route path="/admin/keywords" element={<KeyWordsCRUD />}></Route>
