@@ -1,30 +1,36 @@
-import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
+import { getUserLocalStorage } from "../helpers/localStorageManagement";
 
-export const ProtectedRoutes = ({ children }) => {
-	// const { user } = useSelector((state) => state.user);
-
+export const ProtectedRoutes = ({ children, allowedFor }) => {
+	const user = getUserLocalStorage();
 	console.log(user);
-	console.log(user?.user);
-	if (!user.user) {
+
+	if (!user) {
 		return <Navigate to="/" />;
 	}
 
-	return children ? children : <Outlet />;
-	//     const { usersDB } = useSelector((state) => state.usersDB);
-	//     const { providers } = useSelector((state) => state.providers);
-	//     let existsUser = "";
-	// 	const existsClient = usersDB.find((user) => user.username == data.username);
-	// 	const existsProvider = providers.find((provider) => provider.username == data.username);
+	if (user.typeUser === "client" && allowedFor === "provider") {
+		return <Navigate to="/client/home" />;
+	}
 
-	// 	if (existsClient?.typeUser === "client") {
-	// 		existsUser = "client";
-	// 	} else if (existsClient?.typeUser === "admin"){
-	//         existsUser = "admin";
-	//     } else if (existsProvider) {
-	// 		existsUser = "provider";
-	// 	} else {
-	// 		existsUser = null;
-	// 	}
-	// 	console.log(existsUser);
+	if (user.typeUser === "client" && allowedFor === "admin") {
+		return <Navigate to="/client/home" />;
+	}
+
+	if (user.typeUser === "provider" && allowedFor === "client") {
+		return <Navigate to="/provider/home" />;
+	}
+	if (user.typeUser === "provider" && allowedFor === "admin") {
+		return <Navigate to="/provider/home" />;
+	}
+
+	if (user.typeUser === "admin" && allowedFor === "provider") {
+		return <Navigate to="/admin/home" />;
+	}
+
+	if (user.typeUser === "admin" && allowedFor === "client") {
+		return <Navigate to="/admin/home" />;
+	}
+
+	return children ? children : <Outlet />;
 };

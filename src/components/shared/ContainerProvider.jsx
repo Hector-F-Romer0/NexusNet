@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const ContainerProvider = () => {
 	const { providers } = useSelector((state) => state.providers);
-
 	return (
 		<div className="flex flex-col justify-center items-center mb-20">
 			{!providers.length > 0 ? (

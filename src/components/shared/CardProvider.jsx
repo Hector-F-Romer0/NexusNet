@@ -63,7 +63,7 @@ const CardProvider = ({ data }) => {
 
 					<div className="flex flex-row flex-wrap mt-5">
 						{data?.keywords?.map((keyword) => (
-							<KeyWord key={keyword.id} data={keyword} />
+							<KeyWord key={keyword.value} data={keyword} />
 						))}
 					</div>
 				</div>
