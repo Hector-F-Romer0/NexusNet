@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { getUserLocalStorage } from "../helpers/localStorageManagement";
 
-export const ProtectedRoutes = ({ children, allowedFor }) => {
+const ProtectedRoutes = ({ children, allowedFor }) => {
 	const user = getUserLocalStorage();
 	console.log(user);
 
@@ -34,3 +34,5 @@ export const ProtectedRoutes = ({ children, allowedFor }) => {
 
 	return children ? children : <Outlet />;
 };
+
+export default ProtectedRoutes;

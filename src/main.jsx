@@ -25,10 +25,8 @@ import HomeAdmin from "./pages/admin/HomeAdmin";
 import ServicesCRUD from "./pages/admin/ServicesCRUD";
 import NotFound from "./pages/index/NotFound";
 import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
-
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 import "./index.css";
-import { ProtectedRoutes } from "./routes/ProtectedRoutes";
-import { ClientRoutes } from "./routes/ClientRoutes";
 import TopProviders from "./pages/shared/TopProviders";
 import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
