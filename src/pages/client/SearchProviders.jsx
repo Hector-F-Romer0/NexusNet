@@ -5,9 +5,6 @@ import Select from "react-select";
 import Footer from "../../components/shared/Footer";
 import SearchBar from "../../components/shared/SearchBar";
 import SideBar from "../../components/shared/SideBar";
-import DropDownList from "../../components/shared/DropDownList";
-
-import { getServices } from "../../store/slices/services/thunks";
 import CardProvider from "../../components/shared/CardProvider";
 import { useSearchBar } from "../../hooks/useSearchBar";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
@@ -22,7 +19,7 @@ const SearchProviders = () => {
 		providers,
 		"username"
 	);
-	console.log(inputSearch);
+	// console.log(inputSearch);
 	// * FILTROS CON SELECT
 	const [selectedOptionService, setSelectedOptionService] = useState(services[0]);
 	const [selectedOptionCategory, setSelectedOptionCategory] = useState(categories[0]);
@@ -39,22 +36,23 @@ const SearchProviders = () => {
 			selectedOptionKeyWord.value === 0 &&
 			inputSearch === ""
 		) {
-			console.log("Quitar filtro");
+			// console.log("Quitar filtro");
 			setSearchResults(providers);
 			return;
 		}
 
 		if (inputSearch === "") {
-			console.log("Existe un filtro SIN BARRA DE BUSQUEDA");
+			// console.log("Existe un filtro SIN BARRA DE BUSQUEDA");
+			// console.log(selectedOptionService);
 			// * FILTRAR ÚNICAMENTE POR SERVICIO
 			if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
 				// console.log("FILTRADO POR SERVICIO");
-				const filter = providers.filter((provider) => provider.service.id === selectedOptionService.value);
+				const filter = providers.filter((provider) => provider.service.value === selectedOptionService.value);
 				setSearchResults(filter);
 			} else if (selectedOptionService.value === 0 && selectedOptionKeyWord.value === 0) {
 				//* FILTRAR ÚNICAMENTE POR CATEGORÍA
 				// console.log("FILTRADO POR CATEGORIA");
-				const filter = providers.filter((provider) => provider.category.id === selectedOptionCategory.value);
+				const filter = providers.filter((provider) => provider.category.value === selectedOptionCategory.value);
 				setSearchResults(filter);
 			} else if (selectedOptionService.value === 0 && selectedOptionCategory.value === 0) {
 				// console.log("FILTRADO POR Keyword");
@@ -63,7 +61,7 @@ const SearchProviders = () => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
 					if (existKeyword.length > 0) {
@@ -80,8 +78,8 @@ const SearchProviders = () => {
 				// console.log("FILTRAR CATEGORIA Y SERVICIO");
 				const filter = providers.filter(
 					(provider) =>
-						provider.category.id === selectedOptionCategory.value &&
-						provider.service.id === selectedOptionService.value
+						provider.category.value === selectedOptionCategory.value &&
+						provider.service.value === selectedOptionService.value
 				);
 				// console.log(filter);
 				setSearchResults(filter);
@@ -96,10 +94,10 @@ const SearchProviders = () => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
-					if (existKeyword.length > 0 && selectedOptionService.value === provider.service.id) {
+					if (existKeyword.length > 0 && selectedOptionService.value === provider.service.value) {
 						return provider;
 					}
 				});
@@ -115,10 +113,10 @@ const SearchProviders = () => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
-					if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.id) {
+					if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.value) {
 						return provider;
 					}
 				});
@@ -129,13 +127,13 @@ const SearchProviders = () => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
 					if (
 						existKeyword.length > 0 &&
-						selectedOptionService.value === provider.service.id &&
-						selectedOptionCategory.value === provider.category.id
+						selectedOptionService.value === provider.service.value &&
+						selectedOptionCategory.value === provider.category.value
 					) {
 						return provider;
 					}
@@ -143,7 +141,7 @@ const SearchProviders = () => {
 				setSearchResults(filter);
 			}
 		} else {
-			console.log("😼 Existe un filtro CON BARRA DE BUSQUEDA");
+			// console.log("😼 Existe un filtro CON BARRA DE BUSQUEDA");
 
 			if (
 				selectedOptionCategory.value === 0 &&
@@ -161,9 +159,9 @@ const SearchProviders = () => {
 
 			// * FILTRAR ÚNICAMENTE POR SERVICIO
 			else if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
-				console.log("FILTRADO POR SERVICIO");
+				// console.log("FILTRADO POR SERVICIO");
 				const filterWithSearch = providers.filter(
-					(provider) => provider.service.id === selectedOptionService.value
+					(provider) => provider.service.value === selectedOptionService.value
 				);
 
 				const result = filterWithSearch.filter((element) => {
@@ -176,7 +174,7 @@ const SearchProviders = () => {
 				//* FILTRAR ÚNICAMENTE POR CATEGORÍA
 				// console.log("FILTRADO POR CATEGORIA");
 				const filterWithSearch = providers.filter(
-					(provider) => provider.category.id === selectedOptionCategory.value
+					(provider) => provider.category.value === selectedOptionCategory.value
 				);
 
 				const result = filterWithSearch.filter((element) => {
@@ -186,13 +184,13 @@ const SearchProviders = () => {
 				});
 				setSearchResults(result);
 			} else if (selectedOptionService.value === 0 && selectedOptionCategory.value === 0) {
-				console.log("FILTRADO POR Keyword");
+				// console.log("FILTRADO POR Keyword");
 				// console.log(selectedOptionKeyWord);
 				const filterWithSearch = providers.filter((provider) => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
 					if (existKeyword.length > 0) {
@@ -211,11 +209,11 @@ const SearchProviders = () => {
 				selectedOptionKeyWord.value === 0
 			) {
 				//* FILTRAR POR CATEGORÍA Y SERVICIO
-				console.log("FILTRAR CATEGORIA Y SERVICIO");
+				// console.log("FILTRAR CATEGORIA Y SERVICIO");
 				const filterWithSearch = providers.filter(
 					(provider) =>
-						provider.category.id === selectedOptionCategory.value &&
-						provider.service.id === selectedOptionService.value
+						provider.category.value === selectedOptionCategory.value &&
+						provider.service.value === selectedOptionService.value
 				);
 				const result = filterWithSearch.filter((element) => {
 					if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
@@ -229,15 +227,15 @@ const SearchProviders = () => {
 				selectedOptionCategory.value === 0
 			) {
 				//* FILTRAR POR KEYWORD Y SERVICIO
-				console.log("FILTRO POR KEYWORD Y SERVICIO");
+				// console.log("FILTRO POR KEYWORD Y SERVICIO");
 				const filterWithSearch = providers.filter((provider) => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
-					if (existKeyword.length > 0 && selectedOptionService.value === provider.service.id) {
+					if (existKeyword.length > 0 && selectedOptionService.value === provider.service.value) {
 						return provider;
 					}
 				});
@@ -253,15 +251,15 @@ const SearchProviders = () => {
 				selectedOptionCategory.value !== 0
 			) {
 				//* FILTRAR POR KEYWORD Y CATEGORY
-				console.log("FILTRO POR KEYWORD Y CATEGORY");
+				// console.log("FILTRO POR KEYWORD Y CATEGORY");
 				const filterWithSearch = providers.filter((provider) => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
-					if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.id) {
+					if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.value) {
 						return provider;
 					}
 				});
@@ -277,13 +275,13 @@ const SearchProviders = () => {
 					// console.log("Actualmente con " + provider.names);
 					const existKeyword = provider.keywords?.filter((k) => {
 						// console.log(k);
-						return k.id === selectedOptionKeyWord.value;
+						return k.value === selectedOptionKeyWord.value;
 					});
 					// console.log(existKeyword === true);
 					if (
 						existKeyword.length > 0 &&
-						selectedOptionService.value === provider.service.id &&
-						selectedOptionCategory.value === provider.category.id
+						selectedOptionService.value === provider.service.value &&
+						selectedOptionCategory.value === provider.category.value
 					) {
 						return provider;
 					}

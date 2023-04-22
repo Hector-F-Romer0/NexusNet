@@ -1,15 +1,35 @@
 import React from "react";
 import { Rating } from "react-simple-star-rating";
-import KeyWord from "./KeyWord";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useDispatch, useSelector } from "react-redux";
 import { FiStar, FiX, FiCheck } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+
+import KeyWord from "./KeyWord";
 import { deleteProvider } from "../../store/slices/providers/providersSlice";
 
 const CardProvider = ({ data }) => {
 	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.user);
+	const MySwal = withReactContent(Swal);
 
 	const deletePrv = () => {
+		MySwal.fire({
+			title: "Provider deleted",
+			icon: "success",
+			text: `You decided that this provider doesn't comply with the rules of NexusNet. Thanks`,
+			confirmButtonColor: "#007BFF",
+		});
 		dispatch(deleteProvider(data));
+	};
+
+	const handleAcceptProvider = () => {
+		MySwal.fire({
+			title: "Provider accepted",
+			icon: "success",
+			text: `You decided that this provider complies with the rules of NexusNet. Thanks`,
+			confirmButtonColor: "#007BFF",
+		});
 	};
 
 	return (
@@ -49,16 +69,22 @@ const CardProvider = ({ data }) => {
 							/>
 							<h3 className="mb-2 text-base md:text-lg font-semibold text-black">{data?.rate}</h3>
 						</div>
-						<div className="flex flex-row md:flex row">
-							<button
-								onClick={() => deletePrv()}
-								className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center justify-center cursor-pointerl mx-2">
-								<FiX className="text-[#FF0000] text-4xl mx-auto" />
-							</button>
-							<button className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center cursor-pointerl mx-2">
-								<FiCheck className="text-[#1DCD0D] text-4xl mx-auto" />
-							</button>
-						</div>
+						{user?.typeUser !== "admin" ? (
+							""
+						) : (
+							<div className="flex flex-row md:flex row">
+								<button
+									onClick={() => deletePrv()}
+									className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center justify-center cursor-pointerl mx-2">
+									<FiX className="text-[#FF0000] text-4xl mx-auto" />
+								</button>
+								<button
+									onClick={() => handleAcceptProvider()}
+									className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center cursor-pointerl mx-2">
+									<FiCheck className="text-[#1DCD0D] text-4xl mx-auto" />
+								</button>
+							</div>
+						)}
 					</div>
 
 					<div className="flex flex-row flex-wrap mt-5">
