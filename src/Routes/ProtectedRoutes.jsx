@@ -3,7 +3,7 @@ import { getUserLocalStorage } from "../helpers/localStorageManagement";
 
 const ProtectedRoutes = ({ children, allowedFor }) => {
 	const user = getUserLocalStorage();
-	console.log(user);
+	// console.log(user);
 
 	if (!user) {
 		return <Navigate to="/" />;

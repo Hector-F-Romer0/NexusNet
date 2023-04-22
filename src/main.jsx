@@ -1,17 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { createBrowserRouter, RouterProvider, BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { store } from "./store/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./styled-components/index/index.css";
 
-import CaseInformation from "./pages/shared/CaseInformation";
-
-import ProviderSearchCases from "./pages/provider/ProviderSearchCases";
-
+import "./index.css";
 import Chat from "./pages/shared/Chat";
 import ClientRegister from "./pages/client/ClientRegister";
 import HomeProvider from "./pages/provider/HomeProvider";
@@ -26,7 +23,6 @@ import ServicesCRUD from "./pages/admin/ServicesCRUD";
 import NotFound from "./pages/index/NotFound";
 import ViewAccountProviderAdmin from "./pages/admin/ViewAccountProviderAdmin";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-import "./index.css";
 import TopProviders from "./pages/shared/TopProviders";
 import HomeClient from "./pages/client/HomeClient";
 import AccountClient from "./pages/client/AccountClient";
@@ -34,6 +30,8 @@ import RateProvider from "./pages/client/RateProvider";
 import SearchProviders from "./pages/client/SearchProviders";
 import ViewAccountProvider from "./pages/client/ViewAccountProvider";
 import CaseForm from "./pages/client/CaseForm";
+import CaseInformation from "./pages/shared/CaseInformation";
+import ProviderSearchCases from "./pages/provider/ProviderSearchCases";
 
 const persistor = persistStore(store);
 
