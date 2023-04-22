@@ -11,64 +11,29 @@ import { getServices } from "../../store/slices/services/thunks";
 import CardCase from "../../components/shared/CardCase";
 
 const ProviderSearchCases = () => {
-	const { cases, isLoading } = useSelector((state) => state.cases);
+	const { allCases } = useSelector((state) => state.cases);
 	const { services } = useSelector((state) => state.services);
 	const dispatch = useDispatch();
+	const { initialValues, searchResults, setSearchResults, handleChange } = useSearchBar(allCases, "caseTitle");
+	console.log(allCases);
 
-	const { initialValues, searchResults, setSearchResults, handleChange } = useSearchBar(cases);
-
-	const [selectedService, setSelectedService] = useState({
-		id: 0,
-		name: "Choose one",
-	});
-
-	// useEffect(() => {
-	// 	dispatch(getServices());
-	// }, [services]);
-
-	useEffect(() => {
-		dispatch(getServices());
-	}, []);
-
-	useEffect(() => {
-		console.log("Cambió servicio");
-		console.log(selectedService);
-		const { id } = selectedService;
-		console.log(id);
-		if (id === 0) {
-			console.log("no ha seleccionado nada");
-			setSearchResults(initialValues);
-			return;
-		} else {
-			const filterService = searchResults.filter((item) => item?.id === id);
-			setSearchResults(filterService);
-		}
-	}, [selectedService]);
-
-	if (isLoading) {
-		return <h1>Cargando...</h1>;
-	}
 	return (
 		<section className="flex">
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className="w-full">
+			<div className="w-full mb-20">
 				<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a case</h1>
-				<div className="w-3/4 mx-auto">
+				<div className="w-3/4 mx-auto my-4">
 					<SearchBar handleChange={handleChange} />
 				</div>
-				<div>
-					<DropDownList
-						availableOptions={services}
-						selected={selectedService}
-						setSelected={setSelectedService}
-					/>
-				</div>
-				<div className="flex flex-col flex-wrap  gap-6 content-center mb-7">
-					{searchResults?.map((provider) => (
-						<CardCase key={provider.id} data={cases} />
-					))}
+				{/* Mustra todos los casos que no han sido tomados */}
+				<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
+					{searchResults
+						.filter((caseClient) => caseClient?.takenBy === null)
+						?.map((caseClient) => (
+							<CardCase key={caseClient.id} data={caseClient} />
+						))}
 				</div>
 				<ContainerFooter>
 					<Footer />

@@ -101,5 +101,47 @@
 				"src": "https://...."
 			}
 		]
+	},
+	{
+		"id": 3,
+		"caseTitle": "This work is enough for the 5.0?",
+		"caseDescription": "Eius officia, asperiores tempora, quidem saepe voluptatum deleniti reiciendis fugit doloribus possimus iusto sequi pariatur earum. Repudiandae maiores cumque omnis adipisci velit quibusdam alias itaque asperiores. Minima rem perferendis suscipit.",
+		"createdBy": 13349,
+		"createdAt": "21/04/2023",
+		"takenOn": null,
+		"takenBy": null,
+		"completed": false,
+		"keywords": [
+			{
+				"value": 8,
+				"label": "Oratory"
+			},
+			{
+				"value": 7,
+				"label": "Depression"
+			},
+			{
+				"value": 10,
+				"label": "Fundraising"
+			},
+			{
+				"value": 6,
+				"label": "Demand for food"
+			}
+		],
+		"category": {
+			"value": 5,
+			"label": "Engineering"
+		},
+		"service": {
+			"value": 4,
+			"label": "Teacher"
+		},
+		"files": [
+			{
+				"id": 1,
+				"src": "https://...."
+			}
+		]
 	}
 ]

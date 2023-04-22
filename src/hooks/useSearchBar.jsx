@@ -10,6 +10,10 @@ export const useSearchBar = (initialData, factorToSearch) => {
 	};
 
 	useEffect(() => {
+		setSearchResults(initialData);
+	}, [initialData]);
+
+	useEffect(() => {
 		filterResults();
 	}, [inputSearch]);
 

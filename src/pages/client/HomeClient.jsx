@@ -25,9 +25,8 @@ const HomeClient = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className=" text-gray-900 font-semibold">
+			<div className=" text-gray-900 font-semibold mb-20">
 				<h1 className="text-4xl font-bold text-center mt-9">Welcome to my cases - client</h1>
-				<h2></h2>
 				<div className="flex flex-row justify-center align-middle gap-10 my-7 text-xs md:text-2xl ">
 					<button
 						onClick={() => navigate("/client/search")}

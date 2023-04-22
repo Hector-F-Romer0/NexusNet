@@ -18,6 +18,7 @@ export const categoriesSlice = createSlice({
 			state.categories = [action.payload, ...allCategories];
 		},
 		deleteCategory: (state, action) => {
+			console.log(action.payload);
 			const allCategories = current(state.categories);
 			const filter = allCategories.filter((category) => {
 				return category.value !== action.payload;

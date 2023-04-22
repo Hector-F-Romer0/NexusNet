@@ -1,9 +1,11 @@
 import React from "react";
+import { FiStar } from "react-icons/fi";
 import { Provider, useSelector } from "react-redux";
+import { Rating } from "react-simple-star-rating";
 
 const CardAccount = () => {
 	const { user } = useSelector((state) => state.user);
-
+	console.log(user);
 	return (
 		<div className="flex items-center justify-center bg-white w-full h-screen">
 			<div className="w-10/12 h-5/6 py-8 my-6 flex flex-row items-center justify-center bg-[#E8F1FF] rounded-3xl shadow-xl mb-24">
@@ -13,7 +15,22 @@ const CardAccount = () => {
 							src={user?.urlImg}
 							className="w-1/2 md:w-full bg-slate-600 rounded-3xl overflow-hidden"></img>
 						<h1 className="text-lg my-3 font-semibold">{user?.typeUser?.toUpperCase()}</h1>
-						<p className="text-xs">{user?.typeUser === "provider" ? <span>{user?.phrase}</span> : ""}</p>
+						{user?.typeUser === "client" ? (
+							""
+						) : (
+							<Rating
+								initialValue={user?.rate}
+								readonly={true}
+								allowFraction={true}
+								emptyStyle={{ display: "flex" }}
+								fillIcon={<FiStar className="fill-[#FFCB45] text-xs md:text-3xl stroke-none" />}
+								emptyIcon={<FiStar className="fill-[#D1D5DB] text-xs md:text-3xl stroke-none" />}
+								fillStyle={{ display: "-webkit-inline-box" }}
+							/>
+						)}
+						<p className="text-xs mt-5">
+							{user?.typeUser === "provider" ? <span>{user?.phrase}</span> : ""}
+						</p>
 					</div>
 					<div className="md:w-3/5 space-y-4 flex flex-col justify-start items-center">
 						<div className="flex flex-col justify-center">

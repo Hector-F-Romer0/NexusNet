@@ -226,47 +226,48 @@ const ProviderRegister = () => {
 									error={errors.city}
 								/>
 							</div>
+
 							<FormInput
-								label="Services"
+								label="Category"
 								type="text"
-								registerName="services"
+								registerName="category"
 								register={register}
 								validations={{
 									required: {
 										value: true,
-										message: "Services is required.",
+										message: "Category is required.",
 									},
 									minLength: {
 										value: 3,
-										message: "Services must be between 3 and 30 characters.",
+										message: "Category must be between 3 and 30 characters.",
 									},
 									maxLength: {
 										value: 30,
-										message: "Services must be between 3 and 30 characters.",
+										message: "Category must be between 3 and 30 characters.",
 									},
 								}}
-								error={errors.services}
+								error={errors.category}
 							/>
 							<FormInput
-								label="Key words"
+								label="Service"
 								type="text"
-								registerName="keywords"
+								registerName="service"
 								register={register}
 								validations={{
 									required: {
 										value: true,
-										message: "Key words is required.",
+										message: "Service is required.",
 									},
 									minLength: {
 										value: 3,
-										message: "Key words must be between 3 and 30 characters.",
+										message: "Service must be between 3 and 30 characters.",
 									},
 									maxLength: {
 										value: 30,
-										message: "Key words must be between 3 and 30 characters.",
+										message: "Service must be between 3 and 30 characters.",
 									},
 								}}
-								error={errors.keywords}
+								error={errors.service}
 							/>
 							<TextAreaForm
 								label="Tell us about yourself"

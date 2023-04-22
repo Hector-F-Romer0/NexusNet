@@ -7,7 +7,7 @@ const CardContainerStyle = styled.div`
 	gap: 30px;
 	align-items: center;
 	justify-content: center;
-	margin-top: 3em;
+	margin: 20px 0;
 `;
 
 const CardCaseStyle = styled.div`
@@ -44,14 +44,20 @@ const CaseDate = styled.span`
 	margin-top: 3%;
 `;
 
+const CardInfoCaseStyle = styled.div``;
 
-const CardInfoCaseStyle = styled.div`
-`;
+const InfoCaseStyle = styled.div``;
 
-const InfoCaseStyle = styled.div`
-`;
+const CaseUploadsStyle = styled.div``;
 
-const CaseUploadsStyle = styled.div`
-`;
-
-export { CardContainerStyle, CardCaseStyle, CaseDescription, CaseTitle, CaseDate, CaseSeparator, CardInfoCaseStyle, InfoCaseStyle, CaseUploadsStyle };
+export {
+	CardContainerStyle,
+	CardCaseStyle,
+	CaseDescription,
+	CaseTitle,
+	CaseDate,
+	CaseSeparator,
+	CardInfoCaseStyle,
+	InfoCaseStyle,
+	CaseUploadsStyle,
+};

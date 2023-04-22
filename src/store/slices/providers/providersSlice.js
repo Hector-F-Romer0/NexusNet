@@ -1,5 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import providersDB from "../../../db/providers.json";
+import { setUserLocalStorage } from "../../../helpers/localStorageManagement";
 
 const initialState = {
 	providers: providersDB,
@@ -33,14 +34,28 @@ export const providerSlice = createSlice({
 		startLoading: (state, action) => {
 			state.isLoading = true;
 		},
+		assignCaseProvider: (state, action) => {
+			const { userCase, provider } = action.payload;
+			const copyCase = { ...userCase };
+			const copyProvider = { ...provider };
+
+			const oldCases = copyProvider.cases;
+			copyProvider.cases = [copyCase, ...oldCases];
+
+			const filterProvider = current(state.providers).filter((item) => item.id !== provider.id);
+			const updatedProviders = [...filterProvider, copyProvider];
+			setUserLocalStorage(copyProvider);
+			state.providers = updatedProviders;
+		},
 		deleteProvider: (state, action) => {
-			const provider = action.payload
+			const provider = action.payload;
 			const filter = state.providers.filter((prv) => {
-				return prv.id !== provider.id
-			})
-			state.providers = filter
-		}
+				return prv.id !== provider.id;
+			});
+			state.providers = filter;
+		},
 	},
 });
 
-export const { rateProvider, addProvider, setProviders, startLoading, deleteProvider} = providerSlice.actions;
+export const { rateProvider, addProvider, setProviders, startLoading, assignCaseProvider, deleteProvider } =
+	providerSlice.actions;

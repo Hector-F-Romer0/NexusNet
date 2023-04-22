@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CRUDRow from "./CRUDRow";
 import CRUDHeader from "./CRUDHeader";
 import { useSearchBar } from "../../hooks/useSearchBar";
 
 const CRUDManagement = ({ data, nameToManage }) => {
 	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
-	console.log(inputSearch);
-	console.log(searchResults);
+
+	// useEffect(() => {
+	// 	console.log("SE ACTUALIZÓ DATA");
+	// }, [data]);
 
 	return (
 		<div className="bg-white p-8 rounded-md w-full mb-20">

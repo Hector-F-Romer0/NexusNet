@@ -12,15 +12,15 @@ const HomeProvider = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className="w-full">
-				<div className="flex flex-row justify-evenly mt-12">
-					<h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[mainTitle]">
-						Welcome to my cases - Provider
+			<div className="w-full mb-20">
+				<div className="flex flex-row justify-evenly mt-12  ">
+					<h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-4xl font-bold text-[mainTitle]">
+						Welcome to your current cases - Provider
 					</h1>
 					<button
 						onClick={() => navigate("/provider/searchcase")}
 						className="bg-gray-200 hover:bg-gray-300 text-[#2A4C73] font-bold py-2 px-4 rounded inline-flex items-center cursor-pointer ">
-						Search providers
+						Search cases
 					</button>
 				</div>
 

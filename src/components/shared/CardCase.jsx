@@ -17,7 +17,7 @@ const CardCase = ({ data }) => {
 	return (
 		<div
 			onClick={() => handleNavigate()}
-			className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card cursor-pointer">
+			className="block min-w-sm w-4/5 pt-5 px-10  rounded-lg shadow bg-card cursor-pointer shadow-3xl">
 			<div className="flex flex-row gap-5 mb-3 flex-wrap text-sm md:text-xl ">
 				<div className="text-sm inline-flex items-center font-bold leading-sm px-7 py-1 bg-categoryTag rounded-full text-white">
 					{data.category?.label}

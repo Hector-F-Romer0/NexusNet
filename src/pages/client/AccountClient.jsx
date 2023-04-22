@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import CardAccount from "../../components/shared/CardAccount";
 import Footer from "../../components/shared/Footer";

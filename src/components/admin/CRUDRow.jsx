@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteCategory, updateCategory } from "../../store/slices/categories/categoriesSlice";
@@ -174,7 +174,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 					<button
 						onClick={() => detectNameUpdate()}
 						className="flex ml-4 mr-10 py-1 bg-buttonAdmin text-white font-semibold rounded-2xl justify-center items-center my-1 text-xs w-40 lg:w-40 md:text-md">
-						<FiTrash2 size={20}></FiTrash2>
+						<FiEdit size={20}></FiEdit>
 						<span className="ml-1">Update</span>
 					</button>
 				</div>
