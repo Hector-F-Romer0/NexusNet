@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import { dbConnection } from "./database/config.js";
 import clientRoutes from "./routes/clients.routes.js";
 import serviceRoutes from "./routes/services.routes.js";
+import keywordsRoutes from "./routes/keywords.routes.js";
 
 dotenv.config();
 
@@ -18,5 +19,6 @@ app.use(express.json());
 // RUTAS
 app.use("/api/v1/client", clientRoutes);
 app.use("/api/v1/service", serviceRoutes);
+app.use("/api/v1/keyword", keywordsRoutes);
 
 app.listen(PORT, () => console.log(`Server corriendo en el servidor ${PORT} 🔥`));
