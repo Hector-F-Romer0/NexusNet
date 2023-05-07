@@ -1,5 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
+import cors from "cors";
 
 import { dbConnection } from "./database/config.js";
 import clientRoutes from "./routes/clients.routes.js";
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 4001;
 dbConnection(); // Establecer conexión a la BD
 
 // Middlewares
+app.use(cors());
 // Lectura y parseo del del body (generalmente utilizado cuando se envian información por PUT o POST)
 app.use(express.json());
 
