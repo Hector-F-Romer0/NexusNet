@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CRUDRow from "./CRUDRow";
 import CRUDHeader from "./CRUDHeader";
 import { useSearchBar } from "../../hooks/useSearchBar";
 
-const CRUDManagement = ({ data, nameToManage }) => {
+const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate }) => {
 	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
-
-	// useEffect(() => {
-	// 	console.log("SE ACTUALIZÓ DATA");
-	// }, [data]);
 
 	return (
 		<div className="bg-white p-8 rounded-md w-full mb-20">
 			<div>
-				<CRUDHeader titleToManage={nameToManage} handleChange={handleChange} />
+				<CRUDHeader titleToManage={nameToManage} handleChange={handleChange} handleCreate={handleCreate} />
 				<div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
 					<div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
 						<table className="min-w-full leading-normal">
@@ -32,7 +28,12 @@ const CRUDManagement = ({ data, nameToManage }) => {
 							</thead>
 							<tbody>
 								{searchResults?.map((item) => (
-									<CRUDRow key={item?.value} data={item} titleToManage={nameToManage} />
+									<CRUDRow
+										key={item?.id}
+										data={item}
+										titleToManage={nameToManage}
+										handleUpdate={handleUpdate}
+									/>
 								))}
 							</tbody>
 						</table>

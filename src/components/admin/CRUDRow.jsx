@@ -4,13 +4,14 @@ import { useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteCategory, updateCategory } from "../../store/slices/categories/categoriesSlice";
+import { updateCategory } from "../../store/slices/categories/categoriesSlice";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { deleteKeyword, updateKeyword } from "../../store/slices/keywords/keywordsSlice";
 import { deleteServices, updateService } from "../../store/slices/services/servicesSlice";
+import { deleteCategoryRequest } from "../../store/slices/categories/thunks";
 
-const CRUDRow = ({ data, titleToManage }) => {
+const CRUDRow = ({ data, titleToManage, handleUpdate }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
@@ -29,7 +30,8 @@ const CRUDRow = ({ data, titleToManage }) => {
 
 	const handleDeleteCategory = async () => {
 		console.log(data);
-		dispatch(deleteCategory(data?.value));
+		dispatch(deleteCategoryRequest(data.id));
+		// dispatch(deleteCategory(data?.value));
 		await MySwal.fire({
 			title: "Category deleted successfully",
 			icon: "success",
@@ -76,28 +78,28 @@ const CRUDRow = ({ data, titleToManage }) => {
 		}
 	};
 
-	const handleUpdateCategory = async () => {
-		await Swal.fire({
-			title: `Update the category ${data?.label}`,
-			input: "text",
-			inputLabel: "Category",
-			inputValidator: (value) => {
-				if (!value) {
-					return "You need to write something!";
-				}
-				if (value) {
-					goToUpdate(value);
-				}
-			},
-		});
-		await MySwal.fire({
-			title: "Category update successfully",
-			icon: "success",
-			text: `The category ${data?.label} was updated from database.`,
-			confirmButtonColor: "#007BFF",
-			confirmButtonText: "Done",
-		});
-	};
+	// const handleUpdateCategory = async () => {
+	// 	await Swal.fire({
+	// 		title: `Update the category ${data?.label}`,
+	// 		input: "text",
+	// 		inputLabel: "Category",
+	// 		inputValidator: (value) => {
+	// 			if (!value) {
+	// 				return "You need to write something!";
+	// 			}
+	// 			if (value) {
+	// 				goToUpdate(value);
+	// 			}
+	// 		},
+	// 	});
+	// 	await MySwal.fire({
+	// 		title: "Category update successfully",
+	// 		icon: "success",
+	// 		text: `The category ${data?.label} was updated from database.`,
+	// 		confirmButtonColor: "#007BFF",
+	// 		confirmButtonText: "Done",
+	// 	});
+	// };
 
 	const handleUpdateService = async () => {
 		await Swal.fire({
@@ -158,7 +160,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 	return (
 		<tr>
 			<td className="px-15 w-44 py-4 border-b border-white bg-white text-sm">
-				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.value}</p>
+				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.id}</p>
 			</td>
 			<td className="px-15 py-4 border-b border-white bg-white text-center text-sm">
 				<p className="text-gray-900 whitespace-no-wrap">{data?.label}</p>
@@ -172,7 +174,7 @@ const CRUDRow = ({ data, titleToManage }) => {
 						<span className="ml-1">Delete</span>
 					</button>
 					<button
-						onClick={() => detectNameUpdate()}
+						onClick={() => handleUpdate(data)}
 						className="flex ml-4 mr-10 py-1 bg-buttonAdmin text-white font-semibold rounded-2xl justify-center items-center my-1 text-xs w-40 lg:w-40 md:text-md">
 						<FiEdit size={20}></FiEdit>
 						<span className="ml-1">Update</span>

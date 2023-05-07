@@ -11,94 +11,46 @@ import { createKeyword } from "../../store/slices/keywords/keywordsSlice";
 import SearchBar from "../shared/SearchBar";
 import { useSearchBar } from "../../hooks/useSearchBar";
 
-const CRUDHeader = ({ titleToManage, handleChange }) => {
+const CRUDHeader = ({ titleToManage, handleChange, handleCreate }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
-
+	// console.log(handleCreate);
 	//! CREATE
 
-	const detectNameCreate = () => {
-		if (titleToManage === "Categories") {
-			handleCreateCategory();
-		} else if (titleToManage === "Services") {
-			handleCreateService();
-		} else {
-			handleCreateKeyword();
-		}
-	};
+	// const detectNameCreate = () => {
+	// 	if (titleToManage === "Categories") {
+	// 		handleCreateCategory();
+	// 	} else if (titleToManage === "Services") {
+	// 		handleCreateService();
+	// 	} else {
+	// 		handleCreateKeyword();
+	// 	}
+	// };
 
-	const handleCreateCategory = async () => {
-		await Swal.fire({
-			title: "Create a category:",
-			input: "text",
-			inputLabel: "Category",
-			inputValidator: (value) => {
-				if (!value) {
-					return "You need to write something!";
-				}
-				if (value) {
-					const id = Date.now();
-					goToCreate(id, value);
-					MySwal.fire({
-						title: "Category create successfully",
-						icon: "success",
-						text: `The category was created from database.`,
-						confirmButtonColor: "#007BFF",
-						confirmButtonText: "Done",
-					});
-				}
-			},
-		});
-	};
-
-	const handleCreateService = async () => {
-		await Swal.fire({
-			title: "Create a service",
-			input: "text",
-			inputLabel: "Service",
-			inputValidator: (value) => {
-				if (!value) {
-					return "You need to write something!";
-				}
-				if (value) {
-					const id = Date.now();
-					goToCreate(id, value);
-					MySwal.fire({
-						title: "Service create successfully",
-						icon: "success",
-						text: "The service was created from database.",
-						confirmButtonColor: "#007BFF",
-						confirmButtonText: "Done",
-					});
-				}
-			},
-		});
-	};
-
-	const handleCreateKeyword = async () => {
-		await Swal.fire({
-			title: "Create a keyword",
-			input: "text",
-			inputLabel: "Key word",
-			inputValidator: (value) => {
-				if (!value) {
-					return "You need to write something!";
-				}
-				if (value) {
-					const id = Date.now();
-					goToCreate(id, value);
-					MySwal.fire({
-						title: "Key word created successfully",
-						icon: "success",
-						text: "The keyword was created from database.",
-						confirmButtonColor: "#007BFF",
-						confirmButtonText: "Done",
-					});
-				}
-			},
-		});
-	};
+	// const handleCreateCategory = async () => {
+	// 	await Swal.fire({
+	// 		title: "Create a category:",
+	// 		input: "text",
+	// 		inputLabel: "Category",
+	// 		inputValidator: (value) => {
+	// 			if (!value) {
+	// 				return "You need to write something!";
+	// 			}
+	// 			if (value) {
+	// 				// const id = Date.now();
+	// 				goToCreate(id, value);
+	// 				MySwal.fire({
+	// 					title: "Category create successfully",
+	// 					icon: "success",
+	// 					text: `The category was created from database.`,
+	// 					confirmButtonColor: "#007BFF",
+	// 					confirmButtonText: "Done",
+	// 				});
+	// 			}
+	// 		},
+	// 	});
+	// };
 
 	const goToCreate = (id, name) => {
 		if (titleToManage === "Categories") {
@@ -125,7 +77,7 @@ const CRUDHeader = ({ titleToManage, handleChange }) => {
 				<div className="flex items-center justify-between">
 					<div className="mx-20">
 						<button
-							onClick={() => detectNameCreate()}
+							onClick={() => handleCreate()}
 							className="bg-buttonAdmin py-2 w-64 rounded-2xl text-white font-semibold tracking-wide cursor-pointer">
 							{`Create ${titleToManage}`}
 						</button>
