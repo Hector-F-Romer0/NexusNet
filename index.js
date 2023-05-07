@@ -6,6 +6,7 @@ import clientRoutes from "./routes/clients.routes.js";
 import serviceRoutes from "./routes/services.routes.js";
 import keywordsRoutes from "./routes/keywords.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
+import providerRoutes from "./routes/provider.routes.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // RUTAS
 app.use("/api/v1/client", clientRoutes);
+app.use("/api/v1/provider", providerRoutes);
 app.use("/api/v1/service", serviceRoutes);
 app.use("/api/v1/keyword", keywordsRoutes);
 app.use("/api/v1/category", categoryRoutes);
