@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose";
 
-const keyWordSchema = Schema({
+export const keywordSchema = Schema({
 	label: { type: String, required: true },
 });
 
-const keyWordModel = model("Keyword", keyWordSchema);
+const keyWordModel = model("Keyword", keywordSchema);
 
 export default keyWordModel;

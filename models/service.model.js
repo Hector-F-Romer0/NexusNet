@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const serviceSchema = Schema({
+export const serviceSchema = Schema({
 	label: { type: String, required: true },
 });
 

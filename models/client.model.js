@@ -1,6 +1,8 @@
 import { Schema, model } from "mongoose";
 
-const clientSchema = Schema({
+import { caseSchema } from "./case.model.js";
+
+export const clientSchema = Schema({
 	names: { type: String, required: true },
 	lastnames: { type: String, required: true },
 	username: { type: String, required: true },
@@ -12,7 +14,13 @@ const clientSchema = Schema({
 	state: { type: String, required: true },
 	city: { type: String, required: true },
 	urlImg: { type: String, required: true },
-	cases: { type: [String], required: true }, //! Actualizar esta propiedad a un arreglo del modelo de Casos
+	cases: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Case",
+			required: false,
+		},
+	],
 });
 
 const clientModel = model("Client", clientSchema);
