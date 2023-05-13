@@ -18,6 +18,7 @@ import { getKeyWords } from "../../store/slices/keywords/thunks";
 import { setUserLocalStorage } from "../../helpers/localStorageManagement";
 import { getServices } from "../../store/slices/services/thunks";
 import { getProviders } from "../../store/slices/providers/thunks";
+import { getCases } from "../../store/slices/cases/thunks";
 
 const SignIn = () => {
 	const {
@@ -35,10 +36,11 @@ const SignIn = () => {
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
 		dispatch(getUsersDB());
-		dispatch(getCategories());
+		// dispatch(getCategories());
 		dispatch(getKeyWords());
 		dispatch(getServices());
 		dispatch(getProviders());
+		dispatch(getCases());
 	}, []);
 
 	const onSubmitSignIn = (data) => {
