@@ -1,13 +1,14 @@
 import { request, response } from "express";
 import bcrypt from "bcrypt";
 
-import clientModel from "../models/client.model.js";
+// import clientModel from "../models/client.model.js";
+import { userModel } from "../models/user.model.js";
 
 const getClient = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
 		console.log(id);
-		let user = await clientModel.findById(id);
+		let user = await userModel.findById(id);
 
 		if (!user) {
 			return res.status(404).json({ error: "User don't found" });
@@ -22,31 +23,25 @@ const getClient = async (req = request, res = response) => {
 
 const createClient = async (req = request, res = response) => {
 	try {
-		const {
-			names,
-			lastnames,
-			username,
-			email,
-			password,
-			typeUser,
-			phoneNumber,
-			country,
-			state,
-			city,
-			urlImg,
-			cases,
-		} = req.body;
+		const { names, lastnames, username, email, password, role, phoneNumber, country, state, city, urlImg, cases } =
+			req.body;
+
+		const existsUsername = await userModel.findOne({ username }).exec();
+
+		if (existsUsername) {
+			return res.status(409).json({ msg: `Username ${username} already exist.` });
+		}
 
 		const salt = bcrypt.genSaltSync();
 		const encryptedPassword = bcrypt.hashSync(password, salt);
 
-		const client = new clientModel({
+		const client = new userModel({
 			names,
 			lastnames,
 			username,
 			email,
 			password: encryptedPassword,
-			typeUser,
+			role,
 			phoneNumber,
 			country,
 			state,

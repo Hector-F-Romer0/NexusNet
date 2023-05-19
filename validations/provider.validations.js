@@ -63,7 +63,7 @@ export const createProviderValidation = {
 
 		errorMessage: "Password can't be empty.",
 	},
-	typeUser: {
+	role: {
 		isString: true,
 		notEmpty: true,
 		trim: true,

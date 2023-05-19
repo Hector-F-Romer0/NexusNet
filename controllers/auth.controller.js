@@ -1,12 +1,13 @@
 import { generateJWT } from "../helpers/jwt.js";
-import clientModel from "../models/client.model.js";
 import bcrypt from "bcrypt";
+
+import { userModel } from "../models/user.model.js";
 
 const loginUser = async (req = request, res = response) => {
 	try {
 		const { username, password } = req.body;
 
-		const user = await clientModel.findOne({ username }).exec();
+		const user = await userModel.findOne({ username }).exec();
 		if (!user) {
 			return res.status(404).json({ msg: "User doesn't exist." });
 		}
