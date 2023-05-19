@@ -36,7 +36,7 @@ const SignIn = () => {
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
 		dispatch(getUsersDB());
-		dispatch(getCategories());
+		// dispatch(getCategories());
 		dispatch(getKeyWords());
 		dispatch(getServices());
 		dispatch(getProviders());

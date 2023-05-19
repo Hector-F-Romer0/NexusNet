@@ -9,8 +9,11 @@ import Select from "react-select";
 import DropDownList from "../shared/DropDownList";
 import FormInput from "../shared/FormInput";
 import TextAreaForm from "../shared/TextAreaForm";
-import { postCase } from "../../store/slices/cases/thunks";
 import KeyWord from "../shared/KeyWord";
+import { getCategoriesRequest } from "../../services/categories.services";
+import { getServicesRequest } from "../../services/services.services";
+import { getKeywordsRequest } from "../../services/keywords.services";
+import { postCaseRequest } from "../../services/cases.services";
 
 const FormCase = () => {
 	const {
@@ -21,18 +24,34 @@ const FormCase = () => {
 	} = useForm();
 
 	const { user } = useSelector((state) => state.user);
-	const { keywords } = useSelector((state) => state.keywords);
-	const { categories } = useSelector((state) => state.categories);
-	const { services } = useSelector((state) => state.services);
+	const [categories, setCategories] = useState([]);
+	const [services, setServices] = useState([]);
+	const [keywords, setKeywords] = useState([]);
+
+	const [uploadFile, setUploadFile] = useState("");
+	const [cloudinaryImage, setCloudinaryImage] = useState("");
 
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const MySwal = withReactContent(Swal);
 
-	const [selectedService, setSelectedService] = useState(null);
 	const [selectedKeyWord, setSelectedKeyWord] = useState(null);
-	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [keywordsChosen, setKeyWordsChosen] = useState([]);
+
+	useEffect(() => {
+		//? Cargar categorias, servicios y keywords de la BD
+		getDataBD();
+	}, []);
+
+	const getDataBD = async () => {
+		const categories = await getCategoriesRequest();
+		const services = await getServicesRequest();
+		const keywords = await getKeywordsRequest();
+		// console.log(keywords);
+		// console.log(categories);
+		setCategories(categories);
+		setServices(services);
+		setKeywords(keywords);
+	};
 
 	useEffect(() => {
 		if (selectedKeyWord === null) {
@@ -62,7 +81,7 @@ const FormCase = () => {
 		setKeyWordsChosen([...keywordsChosen, selectedKeyWord]);
 	}, [selectedKeyWord]);
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		if (selectedKeyWord.value === 0 || keywordsChosen.length === 0) {
 			MySwal.fire({
 				title: "No chosen word",
@@ -73,15 +92,42 @@ const FormCase = () => {
 			return;
 		}
 
-		const newCase = {
-			data,
-			keywords: keywordsChosen,
-			userId: user.id,
-		};
+		data.createdBy = "6456d389e145265e62819aae";
+		data.keywords = keywordsChosen.map((keyword) => keyword.value);
 		// console.log(newCase);
+		console.log(data);
 
-		dispatch(postCase(newCase));
-		navigate("/client/home");
+		const formData = new FormData();
+
+		formData.append("file", uploadFile);
+		formData.append("upload_preset", "your upload preset name");
+		console.log(formData);
+		console.log(uploadFile);
+
+		// const res = await postCaseRequest(data);
+		// console.log(res);
+		// const { data, keywords, userId } = caseToCreate;
+		// //TODO: Petición a la BD para crear un caso.
+		// const caseToAdd = {
+		// 	caseTitle: data?.caseTitle,
+		// 	caseDescription: data.caseDescription,
+		// 	createdBy: userId,
+		// 	// createdAt: moment(Date.now()).format("DD/MM/YYYY"),
+		// 	takenOn: null,
+		// 	takenBy: null,
+		// 	completed: false,
+		// 	keywords,
+		// 	service: data.service,
+		// 	category: data.category,
+		// 	files: [
+		// 		{
+		// 			id: 1,
+		// 			src: "https://....",
+		// 		},
+		// 	],
+		// };
+		// dispatch(postCase(newCase));
+		// navigate("/client/home");
 	};
 
 	return (
@@ -163,8 +209,8 @@ const FormCase = () => {
 					rules={{ required: true }}
 					render={({ field }) => (
 						<Select
-							options={services}
-							value={services.find((s) => s.value === field.value)}
+							options={keywords}
+							value={keywords.find((s) => s.value === field.value)}
 							onChange={(selectedOption) => {
 								field.onChange(selectedOption.value);
 								setSelectedKeyWord(selectedOption);
@@ -187,6 +233,16 @@ const FormCase = () => {
 							/>
 						)
 				)}
+			</div>
+			<div>
+				<input
+					type="file"
+					name=""
+					id=""
+					onChange={(e) => {
+						setUploadFile(e.target.files[0]);
+					}}
+				/>
 			</div>
 			<div className="flex justify-center">
 				<button

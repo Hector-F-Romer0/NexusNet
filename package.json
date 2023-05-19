@@ -26,6 +26,7 @@
     "react-select": "^5.7.2",
     "react-simple-star-rating": "^5.1.7",
     "redux-persist": "^6.0.0",
+    "sharp": "^0.32.1",
     "sort-by": "^1.2.0",
     "styled": "^1.0.0",
     "styled-components": "^5.3.6",
