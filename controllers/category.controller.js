@@ -6,6 +6,7 @@ import { handleErrorHTTP } from "../helpers/handleError.js";
 const getCategory = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
+
 		const category = await categoryModel.findById(id).exec();
 
 		if (!category) {

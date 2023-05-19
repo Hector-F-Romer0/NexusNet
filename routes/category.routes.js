@@ -9,11 +9,12 @@ import {
 	getCategory,
 	updateCategory,
 } from "../controllers/category.controller.js";
+import { validateJWT } from "../middlewares/validate-jwt.js";
 
 const router = express.Router();
 
 router.get("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], getCategory);
-router.get("/", getCategories);
+router.get("/", [validateJWT], getCategories);
 router.post("/", [check("label", "Label is required.").not().isEmpty(), validarCampos], createCategory);
 router.put(
 	"/:id",

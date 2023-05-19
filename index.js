@@ -9,6 +9,7 @@ import keywordsRoutes from "./routes/keywords.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import providerRoutes from "./routes/provider.routes.js";
 import casesRoutes from "./routes/cases.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config();
 
@@ -28,5 +29,6 @@ app.use("/api/v1/service", serviceRoutes);
 app.use("/api/v1/keyword", keywordsRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/case", casesRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 app.listen(PORT, () => console.log(`Server corriendo en el servidor ${PORT} 🔥`));
