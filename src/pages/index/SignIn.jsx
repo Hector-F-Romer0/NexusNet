@@ -10,15 +10,12 @@ import GoogleButton from "../../components/shared/GoogleButton.jsx";
 import FacebookButton from "../../components/shared/FacebookButton.jsx";
 import Logo from "../../assets/logo.png";
 
-import { getUser } from "../../store/slices/user/thunks";
 import { getUsersDB } from "../../store/slices/usersDB/thunks";
-import { setUser } from "../../store/slices/user/userSlice";
-import { getCategories } from "../../store/slices/categories/thunks";
 import { getKeyWords } from "../../store/slices/keywords/thunks";
-import { setUserLocalStorage } from "../../helpers/localStorageManagement";
 import { getServices } from "../../store/slices/services/thunks";
 import { getProviders } from "../../store/slices/providers/thunks";
 import { getCases } from "../../store/slices/cases/thunks";
+import { loginUserRequest } from "../../services/users.services";
 
 const SignIn = () => {
 	const {
@@ -30,8 +27,6 @@ const SignIn = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const MySwal = withReactContent(Swal);
-	const { usersDB } = useSelector((state) => state.usersDB);
-	const { providers } = useSelector((state) => state.providers);
 
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
@@ -43,64 +38,28 @@ const SignIn = () => {
 		dispatch(getCases());
 	}, []);
 
-	const onSubmitSignIn = (data) => {
-		let existsUser = "";
-		const existsClient = usersDB.find((user) => user.username == data.username);
-		const existsProvider = providers.find((provider) => provider.username == data.username);
-
-		if (existsClient) {
-			existsUser = "client";
-		} else if (existsProvider) {
-			existsUser = "provider";
-		} else {
-			existsUser = null;
-		}
-		console.log(existsUser);
-		console.log(".....");
-
-		// ! POSIBLE ELIMINACIÓN DE ESTO Y MANEJARLO POR THUNKS
-		if (!existsUser) {
-			console.log("no existe");
-			MySwal.fire({
+	const onSubmitSignIn = async (data) => {
+		const res = await loginUserRequest(data);
+		console.log(res);
+		if (res.status === 404) {
+			return await MySwal.fire({
 				title: "Incorrect data",
 				icon: "error",
-				text: "That password or username was incorrect. Please try again.",
+				text: res.data.msg,
 				confirmButtonColor: "#007BFF",
 			});
 		}
 
-		if (existsUser === "client") {
-			if (data.password !== existsClient?.password) {
-				MySwal.fire({
-					title: "Incorrect data",
-					icon: "error",
-					text: "That password or username was incorrect. Please try again.",
-					confirmButtonColor: "#007BFF",
-				});
-				return;
-			}
-
-			dispatch(setUser(existsClient));
-			setUserLocalStorage(existsClient);
-			if (existsClient?.typeUser === "client") {
+		if (res.status === 200) {
+			console.log(res.data);
+			localStorage.setItem("auth-token", JSON.stringify(res.data.token));
+			if (res.data.user.role.role === "Provider") {
+				navigate("/provider/home");
+			} else if (res.data.user.role.role === "Client") {
 				navigate("/client/home");
 			} else {
 				navigate("/admin/home");
 			}
-		} else {
-			if (data.password !== existsProvider?.password) {
-				MySwal.fire({
-					title: "Incorrect data",
-					icon: "error",
-					text: "That password or username was incorrect. Please try again.",
-					confirmButtonColor: "#007BFF",
-				});
-				return;
-			}
-			console.log("SOY PROVEEDOR");
-			setUserLocalStorage(existsProvider);
-			dispatch(setUser(existsProvider));
-			navigate("/provider/home");
 		}
 	};
 
