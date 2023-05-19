@@ -7,15 +7,15 @@ const loginUser = async (req = request, res = response) => {
 	try {
 		const { username, password } = req.body;
 
-		const user = await userModel.findOne({ username }).exec();
+		const user = await userModel.findOne({ username }).populate("role").exec();
 		if (!user) {
-			return res.status(404).json({ msg: "User doesn't exist." });
+			return res.status(404).json({ msg: `The user ${username} doesn't exist. Please try it again.` });
 		}
 
 		const match = await bcrypt.compare(password, user.password);
 
 		if (!match) {
-			return res.status(404).json({ msg: "Incorrect password." });
+			return res.status(404).json({ msg: "Incorrect password. Please try it again." });
 		}
 
 		const token = await generateJWT(user.id, user.username, user.typeUser);
