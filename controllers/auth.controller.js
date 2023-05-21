@@ -17,8 +17,10 @@ const loginUser = async (req = request, res = response) => {
 		if (!match) {
 			return res.status(404).json({ msg: "Incorrect password. Please try it again." });
 		}
+		// console.log(user.role._id);
 
-		const token = await generateJWT(user.id, user.username, user.typeUser);
+		// TODO: Cambiar _id a id cuando pueda moficiar el modelo de rol
+		const token = await generateJWT(user.id, user.username, user.role._id);
 
 		res.status(200).json({ user, token });
 	} catch (error) {

@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { response } from "express";
+import { verifyJWT } from "../helpers/jwt.js";
 
 export const validateJWT = (req, res = response, next) => {
 	const token = req.headers.authorization.split(" ").pop();
@@ -11,10 +11,10 @@ export const validateJWT = (req, res = response, next) => {
 	}
 
 	try {
-		const { uid, username, typeUser } = jwt.verify(token, process.env.SECRET_JWT_SEED);
+		const { uid, username, role } = verifyJWT(token);
 		req.uid = uid;
 		req.username = username;
-		req.typeUser = typeUser;
+		req.role = role;
 	} catch (error) {
 		return res.status(401).json({
 			ok: false,
