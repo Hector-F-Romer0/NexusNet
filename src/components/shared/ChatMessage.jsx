@@ -1,5 +1,8 @@
 import React from "react";
 import { FiSend, FiCornerUpLeft } from "react-icons/fi";
+import SenderMessage from "./SenderMessage";
+import RecipientMessage from "./RecipientMessage";
+import InputChat from "./InputChat";
 
 const ChatMessage = () => {
 	return (
@@ -9,7 +12,7 @@ const ChatMessage = () => {
 				<div className="relative">
 					<span className="absolute text-green-500 right-0 bottom-0">
 						<svg width="20" height="20">
-							<circle cx="8" cy="8" r="8" fill="currentColor"></circle>
+							{/* <circle cx="8" cy="8" r="8" fill="currentColor"></circle> */}
 						</svg>
 					</span>
 					<img
@@ -26,30 +29,13 @@ const ChatMessage = () => {
 				</div>
 			</div>
 			<div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-scroll bg-[#E8F1FF]">
-				<div className="chat-message ">
-					<div className="flex items-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-									Can be verified on any platform using docker
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end justify-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-									Your error message says permission denied, npm global installs must be given root
-									privileges.
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
+				<SenderMessage menssage={"Can be verified on any platform using docker"} />
+				<RecipientMessage
+					message={
+						"Your error message says permission denied, npm global installs must be given root privileges."
+					}
+				/>
+				{/* <div className="chat-message">
 					<div className="flex items-end">
 						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
 							<div>
@@ -160,22 +146,9 @@ const ChatMessage = () => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
-			<div className="border-gray-200">
-				<div className="relative flex">
-					<input
-						type="text"
-						placeholder="Write your message..."
-						className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
-					/>
-					<span className="absolute inset-y-0 right-5 flex items-center justify-end">
-						<FiSend
-							size={30}
-							className=" inline-flex rounded-fulltransition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 text-gray-500"></FiSend>
-					</span>
-				</div>
-			</div>
+			<InputChat />
 		</div>
 	);
 };
