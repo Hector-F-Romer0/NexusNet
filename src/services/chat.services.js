@@ -7,8 +7,8 @@ const createChatRequest = async (idUserForCreatingChat, token) => {
 			{ userForCreatingChat: idUserForCreatingChat },
 			{ headers: { Authorization: `Bearer ${token}` } }
 		);
-		console.log(res);
-		return res.data;
+		// console.log(res);
+		return res;
 	} catch (error) {
 		return error.response;
 	}

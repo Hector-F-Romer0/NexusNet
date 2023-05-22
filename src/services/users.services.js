@@ -20,4 +20,24 @@ const getUsersRequest = async () => {
 	}
 };
 
-export { loginUserRequest, getUsersRequest };
+const getUserIdRequest = async (id) => {
+	try {
+		const res = await instanceBackend.get(`/user/${id}`);
+		return res;
+	} catch (error) {
+		return error.response;
+	}
+};
+
+const getUsersWithoutMeRequest = async (token) => {
+	try {
+		const res = await instanceBackend.get("/user/search/withoutme", {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return res;
+	} catch (error) {
+		return error.response;
+	}
+};
+
+export { loginUserRequest, getUsersRequest, getUsersWithoutMeRequest, getUserIdRequest };

@@ -5,12 +5,9 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import thunk from "redux-thunk";
 
 import { casesSlices } from "./slices/cases/casesSlice";
-import { providerSlice } from "./slices/providers/providersSlice";
 import { userSlice } from "./slices/user/userSlice";
-import { servicesSlice } from "./slices/services/servicesSlice";
-import { categoriesSlice } from "./slices/categories/categoriesSlice";
-import { keyWordsSlice } from "./slices/keywords/keywordsSlice";
 import { usersDBlice } from "./slices/usersDB/usersDBSlice";
+import { chatSlice } from "./slices/chat/chatSlice";
 
 const persistConfig = {
 	key: "root",
@@ -20,11 +17,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	user: userSlice.reducer,
 	cases: casesSlices.reducer,
-	providers: providerSlice.reducer,
-	services: servicesSlice.reducer,
-	categories: categoriesSlice.reducer,
-	keywords: keyWordsSlice.reducer,
-	usersDB: usersDBlice.reducer,
+	chat: chatSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

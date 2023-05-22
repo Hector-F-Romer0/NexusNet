@@ -1,19 +1,28 @@
 import { useForm } from "react-hook-form";
 import { FiSend } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:4000");
 
 const InputChat = () => {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm();
+	const dispatch = useDispatch();
+	const { chatId } = useSelector((state) => state.chat);
 
 	const onSubmit = (data) => {
 		console.log(data);
 		const token = JSON.parse(localStorage.getItem("auth-token"));
+
+		// Send new message to backend
 		socket.emit("send-message", {
 			message: data.userMessage,
 			token,
+			chatId: chatId,
 		});
+
+		// Clean the input
+		reset();
 	};
 
 	return (

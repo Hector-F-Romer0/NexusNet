@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { FiSend, FiCornerUpLeft } from "react-icons/fi";
+
 import SenderMessage from "./SenderMessage";
 import RecipientMessage from "./RecipientMessage";
 import InputChat from "./InputChat";
+import { getUserIdRequest } from "../../services/users.services";
 
 const ChatMessage = () => {
+	const { messaageHistory, userIdSesion, recipientIdUser } = useSelector((state) => state.chat);
+	const [recipientUser, setRecipientUser] = useState();
+
+	useEffect(() => {
+		const getRecipientData = async () => {
+			const res = await getUserIdRequest(recipientIdUser);
+			setRecipientUser(res.data);
+		};
+
+		getRecipientData();
+	}, [recipientIdUser]);
+
 	return (
 		<div className="flex flex-col mb-20 w-2/4 mx-2">
 			<div className="flex sm:items-center border-b-2 border-gray-200">
@@ -23,130 +38,22 @@ const ChatMessage = () => {
 				</div>
 				<div className="flex flex-col leading-tight mx-3">
 					<div className="text-2xl mt-1 flex items-center">
-						<span className="text-gray-700 mr-3">Anderson Vanhron</span>
+						<span className="text-gray-700 mr-3">{`${recipientUser?.names} ${recipientUser?.lastnames}`}</span>
 					</div>
-					<span className="text-lg text-gray-600">Username</span>
+					<span className="text-lg text-gray-600">{recipientUser?.username}</span>
 				</div>
 			</div>
 			<div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-scroll bg-[#E8F1FF]">
-				<SenderMessage menssage={"Can be verified on any platform using docker"} />
-				<RecipientMessage
-					message={
-						"Your error message says permission denied, npm global installs must be given root privileges."
+				{/* !CAMBIAR EL ._id a .id */}
+				{messaageHistory.map((message) => {
+					// console.log(`ID de sesión actual ${userIdSesion}`);
+					// console.log(message);
+					if (message.sender === userIdSesion) {
+						return <SenderMessage key={message._id} message={message.message} />;
+					} else {
+						return <RecipientMessage key={message._id} message={message.message} />;
 					}
-				/>
-				{/* <div className="chat-message">
-					<div className="flex items-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									Command was run with root privileges. I'm sure about that.
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									I've update the description so it's more obviously now
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									FYI https://askubuntu.com/a/700266/510172
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-									Check the line above (it ends with a # so, I'm running it as root )
-									<pre># npm install -g @vue/devtools</pre>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end justify-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-									Any updates on this issue? I'm getting the same error when trying to install
-									devtools. Thanks
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-									Thanks for your message David. I thought I'm alone with this issue. Please, ? the
-									issue to support it :)
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end justify-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-blue-600 text-white ">
-									Are you using sudo?
-								</span>
-							</div>
-							<div></div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									It seems like you are from Mac OS world. There is no /Users/ folder on linux ?
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-									I have no issue with any other packages installed with root permission globally.
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end justify-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-									yes, I have a mac. I never had issues with root permission as well, but this helped
-									me to solve the problem
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="chat-message">
-					<div className="flex items-end">
-						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									I get the same error on Arch Linux (also with sudo)
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-									I also have this issue, Here is what I was doing until now: #1076
-								</span>
-							</div>
-							<div>
-								<span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-									even i am facing
-								</span>
-							</div>
-						</div>
-					</div>
-				</div> */}
+				})}
 			</div>
 			<InputChat />
 		</div>

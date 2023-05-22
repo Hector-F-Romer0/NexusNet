@@ -15,9 +15,9 @@ const HomeClient = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const userInfo = getUserLocalStorage();
-		setUserLocalStorage(userInfo);
-		dispatch(setUser(userInfo));
+		// const userInfo = getUserLocalStorage();
+		// setUserLocalStorage(userInfo);
+		// dispatch(setUser(userInfo));
 	}, []);
 
 	return (

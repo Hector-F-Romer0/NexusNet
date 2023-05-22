@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import CardChat from "./CardChat";
 import { useSelector } from "react-redux";
-import { getUsersRequest } from "../../services/users.services";
+import { getUsersRequest, getUsersWithoutMeRequest } from "../../services/users.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
 
-const ContainerChats = () => {
+const ContainerChats = ({ setmessageHistory }) => {
 	const [users, setUsers] = useState([]);
+	const { userIdSesion } = useSelector((state) => state.chat);
 
 	useEffect(() => {
 		const getAllUsers = async () => {
-			const users = await getUsersRequest();
-			console.log(users);
-			setUsers(users.data);
+			const userToken = getUserToken();
+			const resUsers = await getUsersWithoutMeRequest(userToken);
+			console.log(resUsers);
+			setUsers(resUsers.data);
 		};
 		getAllUsers();
 	}, []);
@@ -19,7 +22,7 @@ const ContainerChats = () => {
 		<div className="w-2/4 mx-2">
 			<h1 className="text-5xl font-bold m-5 text-mainTitle">Chats</h1>
 			<div className="flex flex-col items-center">
-				{users.map((user) => {
+				{users?.map((user) => {
 					return <CardChat key={user?.id} data={user} />;
 				})}
 			</div>

@@ -16,6 +16,7 @@ import { getServices } from "../../store/slices/services/thunks";
 import { getProviders } from "../../store/slices/providers/thunks";
 import { getCases } from "../../store/slices/cases/thunks";
 import { loginUserRequest } from "../../services/users.services";
+import { setUser } from "../../store/slices/user/userSlice";
 
 const SignIn = () => {
 	const {
@@ -30,12 +31,12 @@ const SignIn = () => {
 
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
-		dispatch(getUsersDB());
+		// dispatch(getUsersDB());
 		// dispatch(getCategories());
-		dispatch(getKeyWords());
-		dispatch(getServices());
-		dispatch(getProviders());
-		dispatch(getCases());
+		// dispatch(getKeyWords());
+		// dispatch(getServices());
+		// dispatch(getProviders());
+		// dispatch(getCases());
 	}, []);
 
 	const onSubmitSignIn = async (data) => {
@@ -53,6 +54,7 @@ const SignIn = () => {
 		if (res.status === 200) {
 			console.log(res.data);
 			localStorage.setItem("auth-token", JSON.stringify(res.data.token));
+			// dispatch(setUser(res.data.user));
 			if (res.data.user.role.role === "Provider") {
 				navigate("/provider/home");
 			} else if (res.data.user.role.role === "Client") {
