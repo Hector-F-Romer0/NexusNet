@@ -14,6 +14,10 @@ import providerRoutes from "./routes/provider.routes.js";
 import casesRoutes from "./routes/cases.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import roleRoutes from "./routes/role.routes.js";
+import messageRoutes from "./routes/message.routes.js";
+import userRoutes from "./routes/users.routes.js";
+import chatRoutes from "./routes/chat.routes.js";
+
 import { socketController } from "./sockets/socket.controller.js";
 
 dotenv.config();
@@ -47,6 +51,9 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/case", casesRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/role", roleRoutes);
+app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/chat", chatRoutes);
 
 // Listen with socketserver according to documentation
 httpServer.listen(PORT, () => console.log(`Server corriendo en el servidor ${PORT} 🔥`));
