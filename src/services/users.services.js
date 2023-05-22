@@ -11,4 +11,13 @@ const loginUserRequest = async (data) => {
 	}
 };
 
-export { loginUserRequest };
+const getUsersRequest = async () => {
+	try {
+		const res = await instanceBackend.get("/user");
+		return res;
+	} catch (error) {
+		return error.response;
+	}
+};
+
+export { loginUserRequest, getUsersRequest };

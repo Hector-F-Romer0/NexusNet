@@ -10,4 +10,10 @@ const setUserLocalStorage = (data) => {
 const clearUserLocalStorage = () => {
 	localStorage.setItem("userInfo", JSON.stringify(""));
 };
-export { getUserLocalStorage, setUserLocalStorage, clearUserLocalStorage };
+
+const getUserToken = () => {
+	const data = JSON.parse(localStorage.getItem("auth-token"));
+	return data;
+};
+
+export { getUserLocalStorage, setUserLocalStorage, clearUserLocalStorage, getUserToken };
