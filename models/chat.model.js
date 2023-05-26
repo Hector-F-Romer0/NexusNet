@@ -17,14 +17,22 @@ export const chatSchema = Schema(
 			},
 		],
 	},
-	{ timestamps: true }
+	{
+		timestamps: true,
+		toJSON: {
+			virtuals: true,
+		},
+		toObject: {
+			virtuals: true,
+		},
+	}
 );
 
 //* Modificaremos el método del modelo que retorna el JSON del modelo. Esto lo haremos para arrojar en la respuesta del protocolo el "_id" de Mongo como "id"
 chatSchema.methods.toJSON = function () {
-	const { __v, _id, ...chat } = this.toObject();
-	chat.id = _id;
-	return chat;
+	const { __v, _id, ...object } = this.toObject();
+	object.id = _id;
+	return object;
 };
 
 const chatModel = model("Chat", chatSchema);

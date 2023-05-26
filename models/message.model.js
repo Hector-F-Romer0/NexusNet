@@ -9,14 +9,22 @@ export const messageSchema = Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{
+		timestamps: true,
+		toJSON: {
+			virtuals: true,
+		},
+		toObject: {
+			virtuals: true,
+		},
+	}
 );
 
 //* Modificaremos el método del modelo que retorna el JSON del modelo. Esto lo haremos para arrojar en la respuesta del protocolo el "_id" de Mongo como "id"
 messageSchema.methods.toJSON = function () {
-	const { __v, _id, ...message } = this.toObject();
-	message.id = _id;
-	return message;
+	const { __v, _id, ...object } = this.toObject();
+	object.id = _id;
+	return object;
 };
 
 const messageModel = model("Message", messageSchema);

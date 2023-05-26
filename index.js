@@ -40,7 +40,7 @@ const io = new Server(httpServer, {
 	},
 });
 
-io.on("connection", socketController);
+io.on("connection", (socket) => socketController(socket, io));
 
 // RUTAS
 app.use("/api/v1/client", clientRoutes);
