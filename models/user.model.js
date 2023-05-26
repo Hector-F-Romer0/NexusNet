@@ -1,6 +1,11 @@
 import { Schema, model } from "mongoose";
-
 import { caseSchema } from "./case.model.js";
+
+export const USER_ROLES = Object.freeze({
+	ADMIN: "Admin",
+	PROVIDER: "Provider",
+	CLIENT: "Client",
+});
 
 const userSchema = Schema({
 	names: { type: String, required: true, minLength: 3, maxLength: 30, trim: true },

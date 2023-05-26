@@ -1,7 +1,7 @@
 import express from "express";
 import { check } from "express-validator";
 
-import { validarCampos } from "../middlewares/validar-campos.js";
+import { validateFields } from "../middlewares/validar-campos.js";
 import {
 	createKeyWord,
 	deleteKeyWord,
@@ -12,14 +12,14 @@ import {
 
 const router = express.Router();
 
-router.get("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], getKeyWord);
+router.get("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], getKeyWord);
 router.get("/", getKeyWords);
-router.post("/", [check("label", "Label is required.").not().isEmpty(), validarCampos], createKeyWord);
+router.post("/", [check("label", "Label is required.").not().isEmpty(), validateFields], createKeyWord);
 router.put(
 	"/:id",
-	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validarCampos],
+	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validateFields],
 	updateKeyWord
 );
-router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], deleteKeyWord);
+router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], deleteKeyWord);
 
 export default router;
