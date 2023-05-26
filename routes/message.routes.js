@@ -3,14 +3,25 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validar-campos.js";
 import { getMessage, getMessages, createMessage } from "../controllers/message.controller.js";
+import { hasRoles } from "../middlewares/validate-role.js";
+import { USER_ROLES } from "../models/user.model.js";
 
 const router = express.Router();
 
-router.get("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], getMessage);
-router.get("/", getMessages);
+router.get(
+	"/:id",
+	[
+		hasRoles(USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER),
+		check("id", "Invalid id.").isMongoId(),
+		validateFields,
+	],
+	getMessage
+);
+router.get("/", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])], getMessages);
 router.post(
 	"/",
 	[
+		hasRoles(USER_ROLES.ADMIN),
 		check("message", "Message is required.").not().isEmpty(),
 		check("sender", "Sender id is required").not().isEmpty().isMongoId(),
 		validateFields,

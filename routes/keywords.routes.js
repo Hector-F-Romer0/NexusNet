@@ -9,17 +9,42 @@ import {
 	getKeyWords,
 	updateKeyWord,
 } from "../controllers/keywords.controller.js";
+import { validateJWT } from "../middlewares/validate-jwt.js";
+import { hasRoles } from "../middlewares/validate-role.js";
+import { USER_ROLES } from "../models/user.model.js";
 
 const router = express.Router();
+router.use(validateJWT);
 
-router.get("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], getKeyWord);
-router.get("/", getKeyWords);
-router.post("/", [check("label", "Label is required.").not().isEmpty(), validateFields], createKeyWord);
+router.get(
+	"/:id",
+	[
+		hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER]),
+		check("id", "Invalid id.").isMongoId(),
+		validateFields,
+	],
+	getKeyWord
+);
+router.get("/", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])], getKeyWords);
+router.post(
+	"/",
+	[hasRoles([USER_ROLES.ADMIN]), check("label", "Label is required.").not().isEmpty(), validateFields],
+	createKeyWord
+);
 router.put(
 	"/:id",
-	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validateFields],
+	[
+		hasRoles([USER_ROLES.ADMIN]),
+		check("id", "Invalid id.").isMongoId(),
+		check("label", "Label is required.").not().isEmpty(),
+		validateFields,
+	],
 	updateKeyWord
 );
-router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], deleteKeyWord);
+router.delete(
+	"/:id",
+	[hasRoles([USER_ROLES.ADMIN]), check("id", "Invalid id.").isMongoId(), validateFields],
+	deleteKeyWord
+);
 
 export default router;
