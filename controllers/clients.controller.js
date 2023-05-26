@@ -1,5 +1,6 @@
 import { request, response } from "express";
 import bcrypt from "bcrypt";
+import { enviarMail } from "../helpers/nodeMailer.js";
 
 // import clientModel from "../models/client.model.js";
 import { userModel } from "../models/user.model.js";
@@ -50,8 +51,12 @@ const createClient = async (req = request, res = response) => {
 			cases,
 		});
 
+		console.log(names, lastnames, email)
+		await enviarMail(names, lastnames, email)
+
 		await client.save();
 		res.status(200).json({ msg: "Ok", client });
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: "Error del servidor en POST CLIENTES." });
