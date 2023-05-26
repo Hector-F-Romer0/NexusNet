@@ -11,4 +11,14 @@ const loginUserRequest = async (data) => {
 	}
 };
 
-export { loginUserRequest };
+const postUserRequest = async (data) => {
+	try {
+		const res = await instanceBackend.post(`/client/`, data);
+		console.log(res);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export { loginUserRequest, postUserRequest };

@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import Select from "react-select";
 
 import Logo from "../../assets/logo.png";
 import FormInput from "../../components/shared/FormInput";
 import DropDownList from "../../components/shared/DropDownList";
 import FacebookButton from "../../components/shared/FacebookButton";
 import GoogleButton from "../../components/shared/GoogleButton";
+import { getRoleRequest } from "../../services/role.services";
 
 const SignUp = () => {
 	const {
 		register,
+		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const [typeUser, setTypeUser] = useState({ id: 1, name: "client" });
+	const [roles, setRoles] = useState([]);
 	const MySwal = withReactContent(Swal);
 
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		//? Cargar roles
+		getDataBD();
+	}, []);
+
+	const getDataBD = async () => {
+		const rolesDB = await getRoleRequest();
+		const filteredRoles = rolesDB.filter((filter) => filter.role !== "Admin");
+		setRoles(filteredRoles);
+	};
+
 	const onSubmit = (data) => {
+		console.log(data);
 		if (data?.confirmationPassword !== data.password) {
 			MySwal.fire({
 				title: "Passwords don't matches.",
@@ -32,20 +47,17 @@ const SignUp = () => {
 			});
 			return;
 		}
-		console.log({ data, typeUser });
 
-		if (typeUser.name === "client") {
+		if (data.role.role === "Client") {
 			navigate("/register/client", {
 				state: {
 					userData: data,
-					typeUser,
 				},
 			});
 		} else {
-			navigate("/register/provider", {
+			navigate("/register/Provider", {
 				state: {
 					userData: data,
-					typeUser,
 				},
 			});
 		}
@@ -116,15 +128,17 @@ const SignUp = () => {
 								error={errors.confirmationPassword}
 							/>
 						</div>
-						<DropDownList
-							label="User type"
-							availableOptions={[
-								{ id: 1, name: "client" },
-								{ id: 2, name: "provider" },
-							]}
-							selected={typeUser}
-							setSelected={setTypeUser}></DropDownList>
-						<div className="flex justify-center">
+						<div className="my-3">
+							<Controller
+								control={control}
+								name="role"
+								rules={{ required: true }}
+								defaultValue={roles[0]?.id}
+								render={({ field }) => (
+									<Select {...field} options={roles} getOptionLabel={(option) => option.role} />
+								)}></Controller>
+						</div>
+						<div className="flex justify-center mt-5">
 							<button
 								type="submit"
 								className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 w-2/4">
