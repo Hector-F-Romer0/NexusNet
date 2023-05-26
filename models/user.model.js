@@ -1,6 +1,11 @@
 import { Schema, model } from "mongoose";
-
 import { caseSchema } from "./case.model.js";
+
+export const USER_ROLES = Object.freeze({
+	ADMIN: "Admin",
+	PROVIDER: "Provider",
+	CLIENT: "Client",
+});
 
 const userSchema = Schema({
 	names: { type: String, required: true, minLength: 3, maxLength: 30, trim: true },
@@ -34,6 +39,13 @@ const userSchema = Schema({
 	],
 	phrase: { type: String, required: false, minLength: 3, maxLength: 500, trim: true },
 });
+
+//* Modificaremos el método del modelo que retorna el JSON del modelo. Esto lo haremos para arrojar en la respuesta del protocolo el "_id" de Mongo como "id"
+userSchema.methods.toJSON = function () {
+	const { __v, _id, ...user } = this.toObject();
+	user.id = _id;
+	return user;
+};
 
 const userModel = model("User", userSchema);
 

@@ -1,7 +1,7 @@
 import express from "express";
 import { check } from "express-validator";
 
-import { validarCampos } from "../middlewares/validar-campos.js";
+import { validateFields } from "../middlewares/validar-campos.js";
 import {
 	createCategory,
 	deleteCategory,
@@ -13,14 +13,14 @@ import { validateJWT } from "../middlewares/validate-jwt.js";
 
 const router = express.Router();
 
-router.get("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], getCategory);
+router.get("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], getCategory);
 router.get("/", [validateJWT], getCategories);
-router.post("/", [check("label", "Label is required.").not().isEmpty(), validarCampos], createCategory);
+router.post("/", [check("label", "Label is required.").not().isEmpty(), validateFields], createCategory);
 router.put(
 	"/:id",
-	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validarCampos],
+	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validateFields],
 	updateCategory
 );
-router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], deleteCategory);
+router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], deleteCategory);
 
 export default router;

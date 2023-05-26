@@ -8,18 +8,18 @@ import {
 	getServices,
 	updateService,
 } from "../controllers/service.controller.js";
-import { validarCampos } from "../middlewares/validar-campos.js";
+import { validateFields } from "../middlewares/validar-campos.js";
 
 const router = express.Router();
 
-router.get("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], getService);
+router.get("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], getService);
 router.get("/", getServices);
-router.post("/", [check("label", "Label is required.").not().isEmpty(), validarCampos], createService);
+router.post("/", [check("label", "Label is required.").not().isEmpty(), validateFields], createService);
 router.put(
 	"/:id",
-	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validarCampos],
+	[check("id", "Invalid id.").isMongoId(), check("label", "Label is required.").not().isEmpty(), validateFields],
 	updateService
 );
-router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validarCampos], deleteService);
+router.delete("/:id", [check("id", "Invalid id.").isMongoId(), validateFields], deleteService);
 
 export default router;
