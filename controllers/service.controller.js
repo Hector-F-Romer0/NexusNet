@@ -1,6 +1,6 @@
 import { request, response } from "express";
 
-import serviceModel from "../models/service.model.js";
+import { serviceModel } from "../models/service.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const getService = async (req = request, res = response) => {

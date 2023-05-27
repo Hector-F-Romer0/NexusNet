@@ -13,4 +13,4 @@ keywordSchema.methods.toJSON = function () {
 
 const keyWordModel = model("Keyword", keywordSchema);
 
-export default keyWordModel;
+export { keyWordModel };

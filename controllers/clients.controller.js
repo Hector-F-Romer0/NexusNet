@@ -1,8 +1,25 @@
 import { request, response } from "express";
 import bcrypt from "bcrypt";
 
-// import clientModel from "../models/client.model.js";
 import { userModel } from "../models/user.model.js";
+import { handleErrorHTTP } from "../helpers/handleError.js";
+
+const getClients = async (req = request, res = response) => {
+	try {
+		const users = await userModel
+			.find({ role: "6466e5f81d1fe6f36287dc43" })
+			.populate([
+				{
+					path: "role",
+					select: "role",
+				},
+			])
+			.exec();
+		res.status(200).json(users);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, `Error when trying to get clients.`);
+	}
+};
 
 const getClient = async (req = request, res = response) => {
 	try {
@@ -58,4 +75,4 @@ const createClient = async (req = request, res = response) => {
 	}
 };
 
-export { getClient, createClient };
+export { getClient, getClients, createClient };

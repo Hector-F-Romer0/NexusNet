@@ -13,4 +13,4 @@ serviceSchema.methods.toJSON = function () {
 
 const serviceModel = model("Service", serviceSchema);
 
-export default serviceModel;
+export { serviceModel };

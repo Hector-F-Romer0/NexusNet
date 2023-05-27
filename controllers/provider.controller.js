@@ -20,7 +20,7 @@ const getProvider = async (req = request, res = response) => {
 
 const getProviders = async (req = request, res = response) => {
 	try {
-		const providers = await userModel.find({});
+		const providers = await userModel.find({ role: "6466e5f41d1fe6f36287dc40" }).exec();
 		res.status(200).json(providers);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");

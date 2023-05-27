@@ -1,6 +1,6 @@
 import { request, response } from "express";
 
-import keyWordModel from "../models/keyword.model.js";
+import { keyWordModel } from "../models/keyword.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const getKeyWord = async (req = request, res = response) => {
