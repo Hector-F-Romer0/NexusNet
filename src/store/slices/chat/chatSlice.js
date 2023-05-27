@@ -14,11 +14,11 @@ export const chatSlice = createSlice({
 	initialState,
 	reducers: {
 		setChatInformation: (state, action) => {
-			console.log("Set chat");
+			// console.log("Set chat");
 			const usersInvolved = action.payload.chat.users;
 			// Obtain the other id without brackets
 			const [recipientUserId] = usersInvolved.filter((userId) => userId !== action.payload.userIdSesion);
-			console.log(action.payload.userIdSesion);
+			// console.log(action.payload.userIdSesion);
 			state.messaageHistory = action.payload.chat.messages;
 			state.chatId = action.payload.chat.id;
 			state.users = action.payload.chat.users;

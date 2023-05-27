@@ -11,7 +11,7 @@ const InputChat = () => {
 	const { chatId } = useSelector((state) => state.chat);
 
 	const onSubmit = (data) => {
-		console.log(data);
+		// console.log(data);
 		const token = JSON.parse(localStorage.getItem("auth-token"));
 
 		// Send new message to backend

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { FiSend, FiCornerUpLeft } from "react-icons/fi";
+import { io } from "socket.io-client";
 
+import { FiSend, FiCornerUpLeft } from "react-icons/fi";
 import SenderMessage from "./SenderMessage";
 import RecipientMessage from "./RecipientMessage";
 import InputChat from "./InputChat";
 import { getUserIdRequest } from "../../services/users.services";
+
+const socket = io("http://localhost:4000");
 
 const ChatMessage = () => {
 	const { messaageHistory, userIdSesion, recipientIdUser } = useSelector((state) => state.chat);
@@ -19,6 +22,16 @@ const ChatMessage = () => {
 
 		getRecipientData();
 	}, [recipientIdUser]);
+
+	useEffect(() => {
+		socket.on("send-message", (payload) => {
+			console.log(payload);
+		});
+
+		return () => {
+			socket.disconnect();
+		};
+	}, [socket]);
 
 	return (
 		<div className="flex flex-col mb-20 w-2/4 mx-2">
@@ -56,6 +69,7 @@ const ChatMessage = () => {
 				})}
 			</div>
 			<InputChat />
+			<h1>hola</h1>
 		</div>
 	);
 };
