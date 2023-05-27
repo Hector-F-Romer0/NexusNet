@@ -3,6 +3,43 @@ import { request, response } from "express";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 import { chatModel } from "../models/chat.model.js";
 
+const getChat = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		const chat = await chatModel.findById(id).populate([
+			{
+				path: "users",
+				select: "id username",
+			},
+			{
+				path: "messages",
+				select: "message",
+			},
+		]);
+		res.status(200).json(chat);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get a chat.");
+	}
+};
+
+const getChats = async (req = request, res = response) => {
+	try {
+		const chats = await chatModel.find({}).populate([
+			{
+				path: "users",
+				select: "id username",
+			},
+			{
+				path: "messages",
+				select: "message",
+			},
+		]);
+		res.status(200).json(chats);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get chats.");
+	}
+};
+
 const createChat = async (req = request, res = response) => {
 	try {
 		const { userForCreatingChat } = req.body;
@@ -38,4 +75,29 @@ const createChat = async (req = request, res = response) => {
 	}
 };
 
-export { createChat };
+const updateChat = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		const existingChat = await chatModel.findById(id);
+
+		if (existingChat) {
+			return res.status(409).json({ msg: "Chat ya existe.", existingChat: existingChat, userIdSesion: uid });
+		}
+		const updatedChat = await chatModel.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+		res.status(200).json(updatedChat);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to uodate a chat.");
+	}
+};
+
+const deleteChat = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		await chatModel.findByIdAndDelete(id);
+		res.status(204).json({});
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to delete a chat.");
+	}
+};
+
+export { getChat, getChats, createChat, updateChat, deleteChat };

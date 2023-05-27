@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUser, getUsers, getUsersWithoutLogged } from "../controllers/users.controller.js";
+import { deleteUser, getUser, getUsers, getUsersWithoutLogged } from "../controllers/users.controller.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { validateFields } from "../middlewares/validar-campos.js";
 import { hasRoles } from "../middlewares/validate-role.js";
@@ -16,5 +16,6 @@ router.get(
 	[validateJWT, hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])],
 	getUsersWithoutLogged
 );
+router.delete("/:id", [validateJWT, hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT]), deleteUser]);
 
 export default router;

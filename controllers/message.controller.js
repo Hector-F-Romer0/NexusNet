@@ -43,17 +43,17 @@ const createMessage = async (req = request, res = response) => {
 const updateMessage = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
-		const { role } = req.body;
+		const { message, sender } = req.body;
 
-		const existRole = await messageModel.findById(id).exec();
+		const existMessage = await messageModel.findById(id).exec();
 
-		if (!existRole) {
-			return res.status(404).json({ error: `The role with id ${id} doesn't exist.` });
+		if (!existMessage) {
+			return res.status(404).json({ error: `The message with id ${id} doesn't exist.` });
 		}
 
-		const newRole = await messageModel.findOneAndUpdate(id, { role }, { new: true });
+		const updatedMessage = await messageModel.findByIdAndUpdate(id, { $set: { message, sender } }, { new: true });
 
-		res.status(200).json(newRole);
+		res.status(200).json(updatedMessage);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to Update a role.");
 	}
@@ -63,11 +63,9 @@ const deleteMessage = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
 
-		const existRole = await messageModel.findByIdAndDelete(id);
-		if (!existRole) {
-			return res.status(404).json({ error: `The role with id ${id} doesn't exist.` });
-		}
-		res.status(204).json({ msg: `Role with id ${id} deleted successfully.` });
+		await messageModel.findByIdAndDelete(id);
+
+		res.status(204).json({});
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to delete a role.");
 	}

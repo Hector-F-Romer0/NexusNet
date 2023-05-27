@@ -1,7 +1,8 @@
-import { generateJWT } from "../helpers/jwt.js";
+import { generateJWT, verifyJWT } from "../helpers/jwt.js";
 import bcrypt from "bcrypt";
 
 import { userModel } from "../models/user.model.js";
+import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const loginUser = async (req = request, res = response) => {
 	try {
@@ -33,4 +34,21 @@ const loginGoogle = async (req = request, res = response) => {
 	res.send("Iniciada sesión");
 };
 
-export { loginUser, loginGoogle };
+const revalidateToken = async (req = request, res = response) => {
+	try {
+		const uid = req.uid;
+		const username = req.username;
+		const role = req.role;
+
+		if (!req.uid || !req.username || !req.role) {
+			throw new Error("Don't exists user data in the request.");
+		}
+
+		const token = await generateJWT(uid, username, role);
+		res.status(200).json({ token });
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to renew the token.");
+	}
+};
+
+export { loginUser, loginGoogle, revalidateToken };

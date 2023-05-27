@@ -3,12 +3,14 @@ import passport from "passport";
 import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validar-campos.js";
-import { loginGoogle, loginUser } from "../controllers/auth.controller.js";
+import { loginGoogle, loginUser, revalidateToken } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
 import { auth } from "../middlewares/google.js";
+import { validateJWT } from "../middlewares/validate-jwt.js";
 
+router.get("/renew", [validateJWT], revalidateToken);
 router.post(
 	"/login",
 	[

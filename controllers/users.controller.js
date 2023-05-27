@@ -39,4 +39,17 @@ const getUsersWithoutLogged = async (req = request, res = response) => {
 	}
 };
 
-export { getUser, getUsers, getUsersWithoutLogged };
+const deleteUser = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		// res.status(200).json({ msg: "Hola" });
+		// console.log(req.uid);
+		await userModel.findByIdAndDelete(id);
+		// console.log(usersWithoutUserToken);
+		res.status(204).json();
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
+	}
+};
+
+export { getUser, getUsers, getUsersWithoutLogged, deleteUser };
