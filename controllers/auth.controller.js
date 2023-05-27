@@ -28,4 +28,9 @@ const loginUser = async (req = request, res = response) => {
 	}
 };
 
-export { loginUser };
+const loginGoogle = async (req = request, res = response) => {
+	// console.log(req.user);
+	res.send("Iniciada sesión");
+};
+
+export { loginUser, loginGoogle };

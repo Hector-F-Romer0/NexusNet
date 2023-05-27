@@ -4,6 +4,8 @@ import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
 import { Server } from "socket.io";
+import passport from "passport";
+import session from "express-session";
 
 import { dbConnection } from "./database/config.js";
 import clientRoutes from "./routes/clients.routes.js";
@@ -31,6 +33,9 @@ dbConnection(); // Establecer conexión a la BD
 app.use(cors());
 // Lectura y parseo del del body (generalmente utilizado cuando se envian información por PUT o POST)
 app.use(express.json());
+app.use(session({ secret: "Sunshine" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Socket server configuration
 const httpServer = createServer(app);
