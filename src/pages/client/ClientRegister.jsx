@@ -3,13 +3,10 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { current } from "@reduxjs/toolkit";
 
 import FormInput from "../../components/shared/FormInput";
 import { FiCornerUpLeft } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { postUserDB } from "../../store/slices/usersDB/thunks";
-import { setUser } from "../../store/slices/user/userSlice";
+import { postUserRequest } from "../../services/users.services";
 
 const ClientRegister = () => {
 	const {
@@ -18,43 +15,36 @@ const ClientRegister = () => {
 		formState: { errors },
 	} = useForm();
 
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const MySwal = withReactContent(Swal);
-	const { usersDB } = useSelector((state) => state.usersDB);
 
 	const onSubmit = async (data) => {
-		const { userData, typeUser } = location.state;
+		const { userData } = location.state;
 		const newUser = {
 			names: data?.names,
 			lastnames: data?.lastnames,
 			username: data?.username,
 			email: userData?.email,
 			password: userData?.password,
-			typeUser: typeUser?.name,
+			role: userData.role.value,
 			phoneNumber: data?.phoneNumber,
 			country: data?.country,
 			state: data?.state,
 			city: data?.city,
 			urlImg: "/src/assets/Duck.jpg",
-			cases: null,
-			id: Date.now(),
 		};
 
+		const res = await postUserRequest(newUser);
+		console.log(res);
+
 		// ? CREACIÓN DEL USUARIO EN STORE
-		dispatch(postUserDB(newUser));
 		await MySwal.fire({
 			title: `Welcome to NexusNet ${data?.names} 😎`,
 			icon: "success",
 			text: "Go to home to and explore all our tools.",
 			confirmButtonColor: "#007BFF",
 		});
-
-		dispatch(setUser(newUser));
-		// const allUsers = current(usersDB);
-		// const findUser = allUsers.find((us) => us?.username === data?.username);
-		// console.log(findUser);
 
 		navigate("/client/home");
 	};
@@ -127,11 +117,11 @@ const ClientRegister = () => {
 									},
 									minLength: {
 										value: 3,
-										message: "Username must be between 3 and 30 characters.",
+										message: "Username must be between 3 and 15 characters.",
 									},
 									maxLength: {
-										value: 30,
-										message: "Username must be between 3 and 30 characters.",
+										value: 15,
+										message: "Username must be between 3 and 15 characters.",
 									},
 								}}
 								error={errors.username}

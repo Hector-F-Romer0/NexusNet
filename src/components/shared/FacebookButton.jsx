@@ -1,8 +1,30 @@
 import React from "react";
+import { authentication } from "../../../firebase.config";
+import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 
 const FacebookButton = () => {
+	const signInWithFacebook = () => {
+		const provider = new FacebookAuthProvider();
+		signInWithPopup(authentication, provider)
+			.then((result) => {
+				// Comprobar si el inicio de sesión se completó correctamente
+				if (result && result.user) {
+					console.log("Inicio de sesión exitoso:", result.user);
+					// Realizar acciones adicionales después del inicio de sesión exitoso
+				} else {
+					console.log("Inicio de sesión cancelado por el usuario o cerrado manualmente.");
+					// Mostrar un mensaje apropiado al usuario si el inicio de sesión se canceló o cerró manualmente
+				}
+			})
+			.catch((error) => {
+				console.log("Error durante el inicio de sesión:", error);
+				// Mostrar un mensaje de error si ocurre algún error durante el inicio de sesión
+			});
+	};
+
 	return (
 		<button
+			onClick={signInWithFacebook}
 			type="button"
 			className="flex break-inside bg-white text-black border-2 border-blue-200 rounded-3xl px-6 py-3 mb-4 w-full">
 			<div className="m-auto">
