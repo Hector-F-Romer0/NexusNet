@@ -55,11 +55,12 @@ const createProviderValidation = {
 		trim: true,
 		exists: { errorMessage: "Password can't be empty." },
 		isLength: {
-			options: (value) => {
-				value.length === 10;
-			},
-			errorMessage: "Phone number should be 10 digits",
-		},
+            options: {
+                min: 3,
+                max: 15,
+            },
+            errorMessage: "Password must be between 3 and 15 characters.",
+        },
 	},
 	role: {
 		isString: true,
