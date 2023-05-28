@@ -25,6 +25,9 @@ const getCase = async (req = request, res = response) => {
 				{
 					path: "service",
 				},
+				{
+					path:"createdBy"
+				}
 			])
 			.exec();
 
@@ -42,6 +45,33 @@ const getCases = async (req = request, res = response) => {
 	try {
 		const cases = await caseModel
 			.find({})
+			.populate([
+				{
+					path: "takenBy",
+					select: "names lastnames username",
+				},
+				{
+					path: "keywords",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(cases);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the cases.");
+	}
+};
+
+const getCasesUser = async (req = request, res = response) => {
+	try {
+		const {uid} = req
+		const cases = await caseModel
+			.find({createdBy:uid})
 			.populate([
 				{
 					path: "takenBy",
@@ -140,4 +170,4 @@ const deleteCase = async (req = request, res = response) => {
 	}
 };
 
-export { getCase, getCases, createCase, updateCase, deleteCase };
+export { getCase, getCases,getCasesUser, createCase, updateCase, deleteCase };

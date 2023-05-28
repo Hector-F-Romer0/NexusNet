@@ -1,7 +1,7 @@
 import { request, response } from "express";
 import bcrypt from "bcrypt";
 
-import { userModel } from "../models/user.model.js";
+import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const getProvider = async (req = request, res = response) => {
@@ -20,7 +20,7 @@ const getProvider = async (req = request, res = response) => {
 
 const getProviders = async (req = request, res = response) => {
 	try {
-		const providers = await userModel.find({ role: "6466e5f41d1fe6f36287dc40" }).exec();
+		const providers = await userModel.find({ role: USER_ROLES.PROVIDER }).exec();
 		res.status(200).json(providers);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");

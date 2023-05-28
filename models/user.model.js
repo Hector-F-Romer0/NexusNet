@@ -2,9 +2,9 @@ import { Schema, model } from "mongoose";
 import { caseSchema } from "./case.model.js";
 
 export const USER_ROLES = Object.freeze({
-	ADMIN: "Admin",
-	PROVIDER: "Provider",
-	CLIENT: "Client",
+	ADMIN: "6466e4f3f6031b477e59c2e5",
+	PROVIDER: "6466e5f41d1fe6f36287dc40",
+	CLIENT: "6466e5f81d1fe6f36287dc43",
 });
 
 const userSchema = Schema({

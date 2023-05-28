@@ -4,8 +4,7 @@ import { roleModel } from "../models/role.model.js";
 const hasRoles = (rolesAllowed) => {
 	return async (req, res = response, next) => {
 		try {
-			const rolesInBD = await roleModel.find({ role: rolesAllowed }).exec();
-
+			const rolesInBD = await roleModel.find({ _id: rolesAllowed }).exec();
 			const userRole = req.role;
 
 			if (!userRole) {

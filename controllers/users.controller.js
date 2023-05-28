@@ -15,7 +15,7 @@ const getUsers = async (req = request, res = response) => {
 const getUser = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
-		const user = await userModel.findById(id);
+		const user = await userModel.findById(id).populate([{path:"role"}]);
 
 		if (!user) {
 			return res.status(404).json({ error: `The user with id ${id} doesn't exist.` });
