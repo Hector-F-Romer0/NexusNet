@@ -1,16 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { verifyJWT } from "../../helpers/jwt";
+import { USER_ROLES } from "../../db/config";
 
 const CardCase = ({ data }) => {
 	const navigate = useNavigate();
-	const { user } = useSelector((state) => state.user);
 
-	const handleNavigate = () => {
-		if (user?.type === "client") {
+	const handleNavigate = async () => {
+		const { role } = await verifyJWT(getUserToken());
+		// TODO: Investigar si existe alguna mejor forma de centralizar algunos datos fijos de la BD como los id de cada rol. Guardo el id del rol en el token, pero ¿Cómo sé a qué rol pertenece en front? ¿Cómo sé que acciones puede hacer el rol sin mandar petición al backend?
+		// console.log(role);
+		if (role === USER_ROLES.CLIENT) {
 			navigate(`/client/case/${data?.id}`);
-		} else {
+		} else if (role === USER_ROLES.PROVIDER) {
 			navigate(`/provider/case/${data?.id}`);
+		}
+		// ? ¿Es necesario validar los dos siguientes casos?
+		else if (role === USER_ROLES.ADMIN) {
+			navigate("/admin/home");
+		} else {
+			navigate("/");
 		}
 	};
 

@@ -2,7 +2,7 @@ import { instanceBackend } from "../db/config";
 
 const loginUserRequest = async (data) => {
 	try {
-		const res = await instanceBackend.post("/auth/login", data);
+		const res = await instanceBackend.post("/auth/login",data);
 		// console.log(res);
 		return res;
 	} catch (error) {
@@ -23,7 +23,7 @@ const getUsersRequest = async () => {
 const getUserIdRequest = async (id) => {
 	try {
 		const res = await instanceBackend.get(`/user/${id}`);
-		return res;
+		return res.data;
 	} catch (error) {
 		return error.response;
 	}
@@ -40,7 +40,7 @@ const getUsersWithoutMeRequest = async (token) => {
 	}
 };
 
-export { loginUserRequest, getUsersRequest, getUsersWithoutMeRequest, getUserIdRequest };
+
 const postUserRequest = async (data) => {
 	try {
 		const res = await instanceBackend.post(`/client/`, data);
@@ -50,5 +50,4 @@ const postUserRequest = async (data) => {
 		console.log(error);
 	}
 };
-
-export { loginUserRequest, postUserRequest };
+export { loginUserRequest, getUsersRequest, getUsersWithoutMeRequest, getUserIdRequest,postUserRequest };

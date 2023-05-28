@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiStar } from "react-icons/fi";
-import { Provider, useSelector } from "react-redux";
+
 import { Rating } from "react-simple-star-rating";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { verifyJWT } from "../../helpers/jwt";
+import { getUserIdRequest } from "../../services/users.services";
 
 const CardAccount = () => {
-	const { user } = useSelector((state) => state.user);
-	console.log(user);
+	const [user, setUser] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		// Load user information
+		getUserData();
+	}, []);
+
+	const getUserData = async () => {
+		setIsLoading(true);
+		const { uid } = await verifyJWT(getUserToken());
+		const res = await getUserIdRequest(uid);
+		console.log(res);
+		setUser(res);
+		setIsLoading(false);
+	};
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
+
 	return (
 		<div className="flex items-center justify-center bg-white w-full h-screen">
 			<div className="w-10/12 h-5/6 py-8 my-6 flex flex-row items-center justify-center bg-[#E8F1FF] rounded-3xl shadow-xl mb-24">
@@ -15,7 +37,7 @@ const CardAccount = () => {
 							src={user?.urlImg}
 							className="w-1/2 md:w-full bg-slate-600 rounded-3xl overflow-hidden"></img>
 						<h1 className="text-lg my-3 font-semibold">{user?.typeUser?.toUpperCase()}</h1>
-						{user?.typeUser === "client" ? (
+						{user?.role?.role === "Client" ? (
 							""
 						) : (
 							<Rating

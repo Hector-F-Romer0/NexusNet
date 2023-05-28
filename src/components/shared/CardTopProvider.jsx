@@ -1,8 +1,10 @@
 import React from "react";
 import { FiStar } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 
 const CardTopProvider = ({ data }) => {
+	const navigate = useNavigate();
 	console.log(data);
 	return (
 		<div className="flex flex-row  gap-2 sm:gap-8 min-w-sm w-3/5 py-8 px-8 rounded-lg justify-between bg-[#D3E5FF] items-center ">

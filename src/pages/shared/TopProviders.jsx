@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import SideBar from "../../components/shared/SideBar";
 import Footer from "../../components/shared/Footer";
 import CardTopProvider from "../../components/shared/CardTopProvider";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
+import { getProvidersRequest } from "../../services/providers.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
 
 const TopProviders = () => {
-	const { providers } = useSelector((state) => state.providers);
+	const [providers, setProviders] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const getProvidersBD = async () => {
+			setIsLoading(true);
+			const res = await getProvidersRequest(getUserToken());
+			setProviders(res);
+			setIsLoading(false);
+		};
+		getProvidersBD();
+	}, []);
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<section className="flex">

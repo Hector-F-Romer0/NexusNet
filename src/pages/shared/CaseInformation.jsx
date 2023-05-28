@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -12,20 +10,41 @@ import { assingCase, deleteCase } from "../../store/slices/cases/casesSlice";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import KeyWord from "../../components/shared/KeyWord";
 import { assignCaseProvider } from "../../store/slices/providers/providersSlice";
+import { deleteCaseRequest, getCaseIdRequest } from "../../services/cases.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { verifyJWT } from "../../helpers/jwt";
+import { USER_ROLES } from "../../db/config";
+import { showSuccessModal } from "../../components/modals/customModals";
 
 const CaseInformation = () => {
+	const [userCase, setUserCase] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
+
 	const { id } = useParams();
 	const { user } = useSelector((state) => state.user);
-	const [userCase, setUserCase] = useState({});
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { allCases } = useSelector((state) => state.cases);
-	const MySwal = withReactContent(Swal);
 
 	useEffect(() => {
-		console.log(id);
-		console.log(user.typeUser);
-		setUserCase(allCases.find((item) => item.id == id));
+		const getDatBD = async () => {
+			setIsLoading(true);
+			const userToken = getUserToken();
+			const { uid } = await verifyJWT(userToken);
+
+			// TODO: Si el caso no existe, mostrar en pantalla que no existe el caso
+			const res = await getCaseIdRequest(id, userToken);
+
+			if (res.status === 404) {
+				setUserCase(null);
+			} else {
+				console.log(res);
+				// console.log(res);
+				setUserCase(res);
+			}
+			setIsLoading(false);
+		};
+
+		getDatBD();
 	}, []);
 
 	const takeCaseProvider = () => {
@@ -39,35 +58,43 @@ const CaseInformation = () => {
 		console.log("aa");
 	};
 
+	// TODO: Marcar que una tarea esté hecha en la BD
 	const showButtonsClient = () => {
-		if (userCase?.takenBy === null || user?.typeUser === "provider") {
-			return;
-		} else {
-			return (
-				<>
-					<button
-						className="flex px-3 py-2 bg-[#1FCE1B] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
-						onClick={() =>
-							navigate(`/client/rate/provider/${userCase.takenBy.id}`, {
-								state: { idCase: userCase.id },
-							})
-						}>
-						<FiThumbsUp size={26}></FiThumbsUp> <span className="ml-1">Mark as done</span>
-					</button>
-					<button
-						className="flex px-8 py-2 bg-[#5A8FCC] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
-						onClick={() => navigate("/client/chats")}>
-						<FiMessageCircle size={26}></FiMessageCircle> <span className="ml-1">Chat</span>
-					</button>
-					<button
-						onClick={() => handleDeleteCase()}
-						className="flex px-3 py-2 bg-[#E72E2E] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md">
-						<FiTrash2 size={26}></FiTrash2>
-						<span className="ml-1">Delete Case</span>
-					</button>
-				</>
-			);
-		}
+		// console.log(userCase?.createdBy?.role);
+		// if (userCase?.takenBy === null || userCase?.createdBy?.role === USER_ROLES.PROVIDER) {
+		// 	return;
+		// }
+		// else {
+		// console.log("Cliente");
+		return (
+			<>
+				{!userCase.takenBy ? null : (
+					<>
+						<button
+							className="flex px-3 py-2 bg-[#1FCE1B] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
+							onClick={() =>
+								navigate(`/client/rate/provider/${userCase.takenBy.id}`, {
+									state: { idCase: userCase.id },
+								})
+							}>
+							<FiThumbsUp size={26}></FiThumbsUp> <span className="ml-1">Mark as done</span>
+						</button>
+						<button
+							className="flex px-8 py-2 bg-[#5A8FCC] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
+							onClick={() => navigate("/client/chats")}>
+							<FiMessageCircle size={26}></FiMessageCircle> <span className="ml-1">Chat</span>
+						</button>
+					</>
+				)}
+
+				<button
+					onClick={() => handleDeleteCase()}
+					className="flex px-3 py-2 bg-[#E72E2E] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60 md">
+					<FiTrash2 size={26}></FiTrash2>
+					<span className="ml-1">Delete Case</span>
+				</button>
+			</>
+		);
 	};
 
 	const showButtonsProvider = () => {
@@ -93,23 +120,34 @@ const CaseInformation = () => {
 		}
 	};
 
-	const handleDeleteCase = async () => {
-		await MySwal.fire({
-			title: "Case deleted successfully",
-			icon: "success",
-			text: `The case ${userCase.caseTitle} was deleted from database.`,
-			confirmButtonColor: "#007BFF",
-			confirmButtonText: "Ok, go home",
-		});
+	const handleDoneCase = async () => {};
 
-		if (user?.typeUser === "client") {
-			navigate("/client/home");
-			// TODO: ELIMINO EL CASO DEL USUARIO, PERO ES NECESARIO COLOCARLO COMO DISPONIBLE PARA OTRO PROVEEDOR
-			dispatch(deleteCase(userCase));
-		} else {
-			navigate("/provider/home");
-		}
+	const handleDeleteCase = async () => {
+		// if (userCase?.createdBy?.role === USER_ROLES.CLIENT) {
+		// 	console.log("Eliminar caso");
+		// 	// navigate("/client/home");
+		// 	// TODO: ELIMINO EL CASO DEL USUARIO, PERO ES NECESARIO COLOCARLO COMO DISPONIBLE PARA OTRO PROVEEDOR
+		// 	// dispatch(deleteCase(userCase));
+		// } else {
+		//
+		// }
+
+		await deleteCaseRequest(userCase?.id, getUserToken());
+		await showSuccessModal(
+			"Case deleted successfully",
+			`The case ${userCase.caseTitle} was deleted from database.`,
+			"Ok, go home"
+		);
+		navigate("/provider/home");
 	};
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
+
+	if (userCase === null) {
+		return <h2>Not found</h2>;
+	}
 
 	return (
 		<section className="flex">
@@ -134,7 +172,7 @@ const CaseInformation = () => {
 					<p className="my-3">{userCase?.caseDescription}</p>
 					<div className="flex flex-col sm:flex-row items-center sm:items-start">
 						{userCase?.keywords?.map((keyword) => (
-							<KeyWord key={keyword.value} data={keyword} />
+							<KeyWord key={keyword.id} data={keyword} />
 						))}
 					</div>
 					<div className="my-1">
@@ -155,7 +193,7 @@ const CaseInformation = () => {
 						</h3>
 					)}
 					<div className="flex items-center justify-center flex-col md:flex-row">
-						{user?.typeUser === "client" ? showButtonsClient() : showButtonsProvider()}
+						{userCase?.createdBy?.role === USER_ROLES.CLIENT ? showButtonsClient() : showButtonsProvider()}
 					</div>
 				</div>
 				<ContainerFooter>

@@ -1,24 +1,33 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import SideBar from "../../components/shared/SideBar";
 import CardCase from "../../components/shared/CardCase";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
-import { getUserLocalStorage, setUserLocalStorage } from "../../helpers/localStorageManagement";
-import { setUser } from "../../store/slices/user/userSlice";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { getCasesRequest, getMyCasesRequest } from "../../services/cases.services";
 
 const HomeClient = () => {
+	const [cases, setCases] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const navigate = useNavigate();
-	const { allCases } = useSelector((state) => state.cases);
-	const dispatch = useDispatch();
 
 	useEffect(() => {
-		// const userInfo = getUserLocalStorage();
-		// setUserLocalStorage(userInfo);
-		// dispatch(setUser(userInfo));
+		const getDataBD = async () => {
+			setIsLoading(true);
+			const res = await getMyCasesRequest(getUserToken());
+			console.log(res);
+			setCases(res);
+			setIsLoading(false);
+		};
+		getDataBD();
 	}, []);
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<section className="flex">
@@ -40,7 +49,7 @@ const HomeClient = () => {
 					</button>
 				</div>
 				<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
-					{allCases.map((caseInfo) =>
+					{cases.map((caseInfo) =>
 						!caseInfo?.completed ? <CardCase key={caseInfo.id} data={caseInfo} /> : ""
 					)}
 				</div>
