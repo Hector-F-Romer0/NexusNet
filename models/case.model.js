@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 export const caseSchema = Schema(
 	{
 		caseTitle: { type: String, required: true },
-		caseDescription: { type: String, required: true },
+		caseDescription: { type: String, required: true, maxLength: 3500 },
 		createdBy: {
 			type: Schema.Types.ObjectId,
 			ref: "User",

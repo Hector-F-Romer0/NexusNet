@@ -14,7 +14,7 @@ const getCase = async (req = request, res = response) => {
 			.populate([
 				{
 					path: "takenBy",
-					select: "names lastnames username",
+					select: "names lastnames username urlImg",
 				},
 				{
 					path: "keywords",
@@ -26,8 +26,8 @@ const getCase = async (req = request, res = response) => {
 					path: "service",
 				},
 				{
-					path:"createdBy"
-				}
+					path: "createdBy",
+				},
 			])
 			.exec();
 
@@ -48,7 +48,7 @@ const getCases = async (req = request, res = response) => {
 			.populate([
 				{
 					path: "takenBy",
-					select: "names lastnames username",
+					select: "names lastnames username urlImg",
 				},
 				{
 					path: "keywords",
@@ -69,9 +69,9 @@ const getCases = async (req = request, res = response) => {
 
 const getCasesUser = async (req = request, res = response) => {
 	try {
-		const {uid} = req
+		const { uid } = req;
 		const cases = await caseModel
-			.find({createdBy:uid})
+			.find({ createdBy: uid })
 			.populate([
 				{
 					path: "takenBy",
@@ -170,4 +170,4 @@ const deleteCase = async (req = request, res = response) => {
 	}
 };
 
-export { getCase, getCases,getCasesUser, createCase, updateCase, deleteCase };
+export { getCase, getCases, getCasesUser, createCase, updateCase, deleteCase };

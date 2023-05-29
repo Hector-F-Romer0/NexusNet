@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
+import { commentModel } from "../models/comment.model.js";
 
 const getProvider = async (req = request, res = response) => {
 	try {
@@ -159,4 +160,32 @@ const deleteProvider = async (req = request, res = response) => {
 	}
 };
 
-export { getProvider, getProviders, createProvider, updateProvider, deleteProvider };
+const updateRateProvider = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		const { rate, comment } = req.body;
+		const existProvider = await userModel.findById(id);
+
+		if (!existProvider) {
+			return res.status(404).json({ error: `The provider with id ${id} doesn't exist.` });
+		}
+
+		const newComment = new commentModel({ comment, rate, writtenBy: req.uid });
+		// TODO: añadir los comentarios a la BD
+		if (!existProvider.rate) {
+			existProvider.rate = rate;
+		} else {
+			const newRate = (existProvider.rate + rate) / 2;
+			existProvider.rate = newRate;
+		}
+		await newComment.save();
+		existProvider.comments.push(newComment);
+		await existProvider.save();
+
+		res.status(200).json(existProvider);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to delete a provider.");
+	}
+};
+
+export { getProvider, getProviders, createProvider, updateProvider, deleteProvider, updateRateProvider };
