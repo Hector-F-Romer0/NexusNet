@@ -65,9 +65,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 						<Route path="/provider/account" element={<AccountProvider />}></Route>
 						<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
 						<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
-						<Route
-							path="/provider/searchcase"
-							element={<ProviderSearchCases></ProviderSearchCases>}></Route>
+						<Route path="/provider/searchcase" element={<ProviderSearchCases />}></Route>
 					</Route>
 					{/* Admin Routes */}
 					<Route element={<PrivateRoutes allowedFor={"admin"} />}>
