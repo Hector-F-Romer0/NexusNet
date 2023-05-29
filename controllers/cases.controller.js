@@ -67,11 +67,66 @@ const getCases = async (req = request, res = response) => {
 	}
 };
 
+const getCasesTakingByProvider = async (req = request, res = response) => {
+	try {
+		const { uid } = req;
+		// console.log(uid);
+		const cases = await caseModel
+			.find({ takenBy: uid, completed: false })
+			.populate([
+				{
+					path: "takenBy",
+					select: "names lastnames username",
+				},
+				{
+					path: "keywords",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(cases);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the cases.");
+	}
+};
+
 const getCasesUser = async (req = request, res = response) => {
 	try {
 		const { uid } = req;
 		const cases = await caseModel
 			.find({ createdBy: uid })
+			.populate([
+				{
+					path: "takenBy",
+					select: "names lastnames username",
+				},
+				{
+					path: "keywords",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(cases);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the cases.");
+	}
+};
+
+const getCasesAvailableForProviders = async (req = request, res = response) => {
+	try {
+		const { uid } = req;
+		const cases = await caseModel
+			.find({ takenBy: null })
 			.populate([
 				{
 					path: "takenBy",
@@ -109,6 +164,37 @@ const createCase = async (req = request, res = response) => {
 		});
 		await newCase.save();
 		res.status(201).json(newCase);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to create a case.");
+	}
+};
+
+const updateLeaveCase = async (req = request, res = response) => {
+	try {
+		const { idCase } = req.body;
+		const existCase = await caseModel
+			.findByIdAndUpdate(idCase, { takenBy: null, takenOn: null }, { new: true })
+			.exec();
+		if (!existCase) {
+			return res.status(404).json({ error: `The case with id ${idCase} doesn't exist.` });
+		}
+
+		// await existCase.save();
+		res.status(201).json(existCase);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to create a case.");
+	}
+};
+
+const updateTakeCase = async (req = request, res = response) => {
+	try {
+		const { idCase } = req.body;
+		const { uid } = req;
+		const existCase = await caseModel
+			.findByIdAndUpdate(idCase, { takenBy: uid, takenOn: Date.now() }, { new: true })
+			.exec();
+
+		res.status(201).json(existCase);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to create a case.");
 	}
@@ -170,4 +256,15 @@ const deleteCase = async (req = request, res = response) => {
 	}
 };
 
-export { getCase, getCases, getCasesUser, createCase, updateCase, deleteCase };
+export {
+	getCase,
+	getCases,
+	getCasesUser,
+	getCasesTakingByProvider,
+	getCasesAvailableForProviders,
+	createCase,
+	updateLeaveCase,
+	updateTakeCase,
+	updateCase,
+	deleteCase,
+};

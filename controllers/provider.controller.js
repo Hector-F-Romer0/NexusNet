@@ -176,7 +176,7 @@ const updateRateProvider = async (req = request, res = response) => {
 			existProvider.rate = rate;
 		} else {
 			const newRate = (existProvider.rate + rate) / 2;
-			existProvider.rate = newRate;
+			existProvider.rate = newRate.toFixed(2);
 		}
 		await newComment.save();
 		existProvider.comments.push(newComment);

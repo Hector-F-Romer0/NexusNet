@@ -4,6 +4,7 @@ import { verifyJWT } from "../helpers/jwt.js";
 export const validateJWT = (req, res = response, next) => {
 	try {
 		const token = req.headers.authorization.split(" ").pop();
+		// console.log(token);
 		if (token === undefined) {
 			return res.status(401).json({
 				ok: false,
@@ -11,6 +12,7 @@ export const validateJWT = (req, res = response, next) => {
 			});
 		}
 		const { uid, username, role } = verifyJWT(token);
+
 		req.uid = uid;
 		req.username = username;
 		req.role = role;

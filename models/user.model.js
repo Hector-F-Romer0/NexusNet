@@ -60,7 +60,7 @@ const userSchema = Schema(
 
 //* Modificaremos el método del modelo que retorna el JSON del modelo. Esto lo haremos para arrojar en la respuesta del protocolo el "_id" de Mongo como "id"
 userSchema.methods.toJSON = function () {
-	const { __v, _id, ...user } = this.toObject();
+	const { __v, _id, password, ...user } = this.toObject();
 	user.id = _id;
 	return user;
 };
