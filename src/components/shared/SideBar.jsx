@@ -2,10 +2,21 @@ import React, { useState } from "react";
 import { FiMessageSquare, FiGlobe, FiAward, FiUser, FiLogOut, FiAlignRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { clearUserLocalStorage } from "../../helpers/localStorageManagement";
+import { clearUserLocalStorage, getUserToken } from "../../helpers/localStorageManagement";
+import { verifyJWT } from "../../helpers/jwt";
+import { USER_ROLES } from "../../db/config";
+import { useEffect } from "react";
 
 const SideBar = () => {
-	const { user } = useSelector((state) => state.user);
+	const [role, setRole] = useState();
+
+	useEffect(() => {
+		const getRole = async () => {
+			const { role } = await verifyJWT(getUserToken());
+			setRole(role);
+		};
+		getRole();
+	}, []);
 
 	const menusClient = [
 		{ name: "Home", link: "/client/home", icon: FiGlobe },
@@ -23,13 +34,13 @@ const SideBar = () => {
 		{ name: "Log Out", link: "/signin", icon: FiLogOut, onClickFunction: () => logOut() },
 	];
 
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const logOut = () => {
 		clearUserLocalStorage();
 	};
 	const showSideBar = () => {
-		if (user?.typeUser == "client") {
+		if (role === USER_ROLES.CLIENT) {
 			return menusClient;
 		} else {
 			return menusProvider;

@@ -1,58 +1,70 @@
-import React from "react";
-import { rateProvider } from "../../store/slices/providers/providersSlice";
-import { completeCase } from "../../store/slices/cases/casesSlice";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import { useLocation } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import withReactContent from "sweetalert2-react-content";
+import { useForm } from "react-hook-form";
 
 import CardRateProvider from "../../components/client/CardRateProvider";
 import TextAreaForm from "../../components/shared/TextAreaForm";
 import Footer from "../../components/shared/Footer";
 import StarRating from "../../components/shared/StarRating";
-import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
+import { getProviderIdRequest, updateRateRequest } from "../../services/providers.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { showSuccessModal, showWarningModal } from "../../components/modals/customModals";
 
 const RateProvider = () => {
-	const { id } = useParams();
-	const location = useLocation();
-	const provider = useSelector((state) => state.providers.providers.find((p) => p.id === Number(id)));
+	const [provider, setProvider] = useState({});
 	const [rating, setRating] = useState(0);
-	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+
+	const { id } = useParams();
 	const navigate = useNavigate();
-	const MySwal = withReactContent(Swal);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = async (data) => {
-		console.log(data);
-		console.log(provider);
+	useEffect(() => {
+		const getDataBD = async () => {
+			setIsLoading(true);
+			const res = await getProviderIdRequest(id, getUserToken());
+			setProvider(res);
+			setIsLoading(false);
+		};
 
+		getDataBD();
+	}, []);
+
+	const onSubmit = async (data) => {
 		if (rating === 0) {
-			await MySwal.fire({
-				title: "Please rate the provider",
-				icon: "warning",
-				text: "Click the stars in accordance with your experience. This helps us to improve our platform",
-				confirmButtonColor: "#007BFF",
-			});
+			await showWarningModal(
+				"Please rate the provider",
+				"Click the stars in accordance with your experience. This helps us to improve our platform.",
+				"Ok"
+			);
 			return;
 		}
 
-		dispatch(rateProvider({ rate: rating, idProvider: provider.id }));
-		dispatch(completeCase(location.state.idCase));
-		await MySwal.fire({
-			title: "Information sent",
-			icon: "success",
-			text: "Thanks for rate. This helps us to improve our platform",
-			confirmButtonColor: "#007BFF",
-		});
+		await updateRateRequest(
+			id,
+			{
+				rate: rating,
+				comment: data.comment,
+			},
+			getUserToken()
+		);
+		await showSuccessModal(
+			"Information sent",
+			"Thanks for rate. This helps us to improve our platform",
+			"Ok, return to home"
+		);
 		navigate("/client/home");
 	};
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<div className="bg-white flex justify-center items-center h-screen flex-wrap">
@@ -77,7 +89,7 @@ const RateProvider = () => {
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<TextAreaForm
 						label="Comments"
-						registerName="providerComment"
+						registerName="comment"
 						placeholder="His/her job was greatful..."
 						register={register}
 						validations={{
@@ -90,7 +102,7 @@ const RateProvider = () => {
 								message: "Comments must be between 3 and 100 characters.",
 							},
 						}}
-						error={errors.providerComment}
+						error={errors.comment}
 					/>
 					<div className="flex justify-center flex-wrap">
 						<button

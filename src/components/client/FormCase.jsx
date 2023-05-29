@@ -14,6 +14,9 @@ import { getCategoriesRequest } from "../../services/categories.services";
 import { getServicesRequest } from "../../services/services.services";
 import { getKeywordsRequest } from "../../services/keywords.services";
 import { postCaseRequest } from "../../services/cases.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { showErrorModal, showSuccessModal } from "../modals/customModals.js";
+import { verifyJWT } from "../../helpers/jwt";
 
 const FormCase = () => {
 	const {
@@ -23,7 +26,6 @@ const FormCase = () => {
 		formState: { errors },
 	} = useForm();
 
-	const { user } = useSelector((state) => state.user);
 	const [categories, setCategories] = useState([]);
 	const [services, setServices] = useState([]);
 	const [keywords, setKeywords] = useState([]);
@@ -43,11 +45,9 @@ const FormCase = () => {
 	}, []);
 
 	const getDataBD = async () => {
-		const categories = await getCategoriesRequest();
-		const services = await getServicesRequest();
-		const keywords = await getKeywordsRequest();
-		// console.log(keywords);
-		// console.log(categories);
+		const categories = await getCategoriesRequest(getUserToken());
+		const services = await getServicesRequest(getUserToken());
+		const keywords = await getKeywordsRequest(getUserToken());
 		setCategories(categories);
 		setServices(services);
 		setKeywords(keywords);
@@ -83,51 +83,29 @@ const FormCase = () => {
 
 	const onSubmit = async (data) => {
 		if (selectedKeyWord.value === 0 || keywordsChosen.length === 0) {
-			MySwal.fire({
-				title: "No chosen word",
-				icon: "error",
-				text: `Choose at least one word to create the case.`,
-				confirmButtonColor: "#007BFF",
-			});
+			await showErrorModal("No chosen word", "Choose at least one word to create the case.");
 			return;
 		}
 
-		data.createdBy = "6456d389e145265e62819aae";
-		data.keywords = keywordsChosen.map((keyword) => keyword.value);
-		// console.log(newCase);
-		console.log(data);
-
-		const formData = new FormData();
-
-		formData.append("file", uploadFile);
-		formData.append("upload_preset", "your upload preset name");
-		console.log(formData);
-		console.log(uploadFile);
-
-		// const res = await postCaseRequest(data);
-		// console.log(res);
-		// const { data, keywords, userId } = caseToCreate;
-		// //TODO: Petición a la BD para crear un caso.
-		// const caseToAdd = {
-		// 	caseTitle: data?.caseTitle,
-		// 	caseDescription: data.caseDescription,
-		// 	createdBy: userId,
-		// 	// createdAt: moment(Date.now()).format("DD/MM/YYYY"),
-		// 	takenOn: null,
-		// 	takenBy: null,
-		// 	completed: false,
-		// 	keywords,
-		// 	service: data.service,
-		// 	category: data.category,
-		// 	files: [
-		// 		{
-		// 			id: 1,
-		// 			src: "https://....",
-		// 		},
-		// 	],
-		// };
-		// dispatch(postCase(newCase));
-		// navigate("/client/home");
+		try {
+			const { uid } = await verifyJWT(getUserToken());
+			data.category = data.category.value;
+			data.service = data.service.value;
+			data.createdBy = uid;
+			data.keywords = keywordsChosen.map((keyword) => keyword.value);
+			console.log(data);
+			const res = await postCaseRequest(data, getUserToken());
+			await showSuccessModal(
+				"Case created",
+				`The case "${data.caseTitle}" was created correctly.`,
+				"Ok,Lets look my cases"
+			);
+			console.log(res);
+			navigate("/client/home");
+		} catch (error) {
+			console.log("Error creating case");
+			console.log(error);
+		}
 	};
 
 	return (
@@ -166,11 +144,11 @@ const FormCase = () => {
 					},
 					minLength: {
 						value: 3,
-						message: "Case description must be between 3 and 30 characters.",
+						message: "Case description must be between 3 and 3500 characters.",
 					},
 					maxLength: {
-						value: 500,
-						message: "Case description must be between 3 and 500 characters.",
+						value: 3500,
+						message: "Case description must be between 3 and 3500 characters.",
 					},
 				}}
 				error={errors.caseDescription}

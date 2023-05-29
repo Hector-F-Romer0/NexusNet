@@ -28,9 +28,9 @@ const getCaseIdRequest = async(id,token)=>{
 	}
 }
 
-const postCaseRequest = async (data) => {
+const postCaseRequest = async (data,token) => {
 	try {
-		const res = await instanceBackend.post(`/case`, data);
+		const res = await instanceBackend.post(`/case`, data,{ headers: { Authorization: `Bearer ${token}` } });
 		console.log(res);
 		return res.data;
 	} catch (error) {
