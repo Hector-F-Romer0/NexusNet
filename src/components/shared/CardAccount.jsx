@@ -6,6 +6,7 @@ import { getUserToken } from "../../helpers/localStorageManagement";
 import { verifyJWT } from "../../helpers/jwt";
 import { getUserIdRequest } from "../../services/users.services";
 import { USER_ROLES } from "../../db/config";
+import Loading from "./Loading";
 
 const CardAccount = () => {
 	const [user, setUser] = useState({});
@@ -26,7 +27,7 @@ const CardAccount = () => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		return <Loading />;
 	}
 
 	return (

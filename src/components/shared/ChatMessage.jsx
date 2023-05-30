@@ -7,6 +7,8 @@ import SenderMessage from "./SenderMessage";
 import RecipientMessage from "./RecipientMessage";
 import InputChat from "./InputChat";
 import { getUserIdRequest } from "../../services/users.services";
+import { setMessageHistoryToMap } from "../../store/slices/chat/chatSlice";
+import { useDispatch } from "react-redux";
 
 const socket = io("http://localhost:4000");
 
@@ -17,25 +19,26 @@ const ChatMessage = ({ socket }) => {
 	useEffect(() => {
 		const getRecipientData = async () => {
 			const res = await getUserIdRequest(recipientIdUser);
-			console.log(res);
 			setRecipientUser(res);
-			console.log(recipientUser);
 		};
 
 		getRecipientData();
 	}, [recipientIdUser]);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		socket.on("send-message", (payload) => {
 			console.log(payload);
+			dispatch(setMessageHistoryToMap(payload));
 		});
 
 		return () => {
 			socket.disconnect();
 		};
-	}, [socket]);
+	}, [socket, dispatch]);
 
-	console.log(chatId);
+	// console.log(chatId);
 
 	return chatId ? (
 		<div className="flex flex-col mb-20 w-2/4 mx-2 my-10">

@@ -10,6 +10,16 @@ const getCasesRequest = async (token) => {
 	}
 };
 
+const getCasesNotCompletedRequest = async (token) => {
+	try {
+		const res = await instanceBackend.get(`/case/search/mycasesnotcompleted`, { headers: { Authorization: `Bearer ${token}` } });
+		console.log(res);
+		return res.data;
+	} catch (error) {
+		return error.response;
+	}
+};
+
 const getMyCasesRequest = async (token) => {
 	try {
 		const res = await instanceBackend.get(`/case/search/mycases`, {
@@ -102,6 +112,7 @@ const deleteCaseRequest = async (id, token) => {
 
 export {
 	getCasesRequest,
+	getCasesNotCompletedRequest,
 	getMyCasesRequest,
 	getCasesTakenRequest,
 	getCasesAvailablesRequest,
