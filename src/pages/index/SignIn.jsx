@@ -40,6 +40,7 @@ const SignIn = () => {
 
 	const onSubmitSignIn = async (data) => {
 		const res = await loginUserRequest(data);
+		console.log(res);
 		if (res.status === 404) {
 			return await MySwal.fire({
 				title: "Incorrect data",
