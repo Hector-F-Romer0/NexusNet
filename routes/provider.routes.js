@@ -1,7 +1,9 @@
 import express from "express";
 
 import {
+	approveProvider,
 	createProvider,
+	disapproveProvider,
 	getProvider,
 	getProviders,
 	getProvidersApproved,
@@ -33,6 +35,8 @@ router.get(
 	getProvidersApproved
 );
 
+router.put("/disapprove/:id", [validateJWT, hasRoles([USER_ROLES.ADMIN])], disapproveProvider);
+router.put("/approve/:id", [validateJWT, hasRoles([USER_ROLES.ADMIN])], approveProvider);
 //
 // check("keywords", "The provider has to have keywords").not().isEmpty()
 // router.post("/", createProvider);

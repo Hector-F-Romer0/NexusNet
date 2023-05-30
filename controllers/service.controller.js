@@ -48,13 +48,7 @@ const updateService = async (req = request, res = response) => {
 		const { id } = req.params;
 		const { label } = req.body;
 
-		const service = await serviceModel.findById(id).exec();
-
-		if (!service) {
-			return res.status(404).json({ error: `The service with id ${id} doesn't exist.` });
-		}
-
-		const newService = await serviceModel.findOneAndUpdate(id, { label }, { new: true });
+		const newService = await serviceModel.findByIdAndUpdate(id, { label }, { new: true });
 
 		res.status(200).json(newService);
 	} catch (error) {

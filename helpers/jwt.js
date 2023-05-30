@@ -22,7 +22,6 @@ const generateJWT = (uid, username, role) => {
 
 const verifyJWT = (token) => {
 	const resVerified = jwt.verify(token, process.env.SECRET_JWT_SEED);
-
 	// TODO: Hacer que estos errores vayan al cliente y no rompan el servidor.
 	if (resVerified === null) {
 		console.log("Empty token.");
@@ -39,7 +38,7 @@ const verifyJWT = (token) => {
 		throw new Error("Token without role. Invalid token.");
 	}
 
-	// console.log(resVerified);
+	console.log(resVerified);
 	return resVerified;
 };
 

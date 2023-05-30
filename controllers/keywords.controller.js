@@ -48,13 +48,7 @@ const updateKeyWord = async (req = request, res = response) => {
 		const { id } = req.params;
 		const { label } = req.body;
 
-		const keyword = await keyWordModel.findById(id).exec();
-
-		if (!keyword) {
-			return res.status(404).json({ error: `The keyword with id ${id} doesn't exist.` });
-		}
-
-		const newKeyword = await keyWordModel.findOneAndUpdate(id, { label }, { new: true });
+		const newKeyword = await keyWordModel.findByIdAndUpdate(id, { label }, { new: true });
 
 		res.status(200).json(newKeyword);
 	} catch (error) {

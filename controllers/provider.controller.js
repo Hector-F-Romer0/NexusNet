@@ -207,6 +207,28 @@ const updateProvider = async (req = request, res = response) => {
 	}
 };
 
+const disapproveProvider = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		const provider = await userModel.findByIdAndUpdate(id, { $set: { approved: false } }, { new: true }).exec();
+		console.log(provider);
+		res.status(200).json(provider);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to update a provider.");
+	}
+};
+
+const approveProvider = async (req = request, res = response) => {
+	try {
+		const { id } = req.params;
+		const provider = await userModel.findByIdAndUpdate(id, { $set: { approved: true } }, { new: true }).exec();
+		console.log(provider);
+		res.status(200).json(provider);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to update a provider.");
+	}
+};
+
 const deleteProvider = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
@@ -258,4 +280,6 @@ export {
 	updateProvider,
 	deleteProvider,
 	updateRateProvider,
+	disapproveProvider,
+	approveProvider,
 };

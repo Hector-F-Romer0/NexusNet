@@ -49,13 +49,9 @@ const updateCategory = async (req = request, res = response) => {
 		const { id } = req.params;
 		const { label } = req.body;
 
-		const category = await categoryModel.findById(id).exec();
+		// const category = await categoryModel.findById(id).exec();
 
-		if (!category) {
-			return res.status(404).json({ error: `The category with id ${id} doesn't exist.` });
-		}
-
-		const newCategory = await categoryModel.findOneAndUpdate(id, { label }, { new: true });
+		const newCategory = await categoryModel.findByIdAndUpdate(id, { label }, { new: true });
 
 		res.status(200).json(newCategory);
 	} catch (error) {
