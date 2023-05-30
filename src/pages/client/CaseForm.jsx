@@ -2,8 +2,15 @@ import FormCase from "../../components/client/FormCase";
 import SideBar from "../../components/shared/SideBar";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
+import Loading from "../../components/shared/Loading";
 
 const CaseForm = () => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	if (isLoading) {
+		<Loading />;
+	}
+
 	return (
 		<section className="flex">
 			<ContainerSideBar>

@@ -11,6 +11,7 @@ import StarRating from "../../components/shared/StarRating";
 import { getProviderIdRequest, updateRateRequest } from "../../services/providers.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { showSuccessModal, showWarningModal } from "../../components/modals/customModals";
+import Loading from "../../components/shared/Loading";
 
 const RateProvider = () => {
 	const [provider, setProvider] = useState({});
@@ -63,7 +64,7 @@ const RateProvider = () => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

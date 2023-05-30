@@ -7,6 +7,7 @@ import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { getCasesRequest, getMyCasesRequest } from "../../services/cases.services";
+import Loading from "../../components/shared/Loading";
 
 const HomeClient = () => {
 	const [cases, setCases] = useState([]);
@@ -26,7 +27,7 @@ const HomeClient = () => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

@@ -10,6 +10,7 @@ import SideBar from "../../components/shared/SideBar";
 import { getCasesAvailablesRequest } from "../../services/cases.services.js";
 import CardCase from "../../components/shared/CardCase";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import Loading from "../../components/shared/Loading";
 
 const ProviderSearchCases = () => {
 	// console.log(allCases);
@@ -30,7 +31,7 @@ const ProviderSearchCases = () => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

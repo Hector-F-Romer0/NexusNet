@@ -7,6 +7,7 @@ import CardTopProvider from "../../components/shared/CardTopProvider";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 import { getProvidersRequest } from "../../services/providers.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import Loading from "../../components/shared/Loading";
 
 const TopProviders = () => {
 	const [providers, setProviders] = useState([]);
@@ -23,7 +24,7 @@ const TopProviders = () => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

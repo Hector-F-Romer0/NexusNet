@@ -7,6 +7,7 @@ import withReactContent from "sweetalert2-react-content";
 import FormInput from "../../components/shared/FormInput";
 import { FiCornerUpLeft } from "react-icons/fi";
 import { postUserRequest } from "../../services/users.services";
+import Loading from "../../components/shared/Loading";
 
 const ClientRegister = () => {
 	const {
@@ -18,6 +19,7 @@ const ClientRegister = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const MySwal = withReactContent(Swal);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const onSubmit = async (data) => {
 		const { userData } = location.state;
@@ -48,6 +50,10 @@ const ClientRegister = () => {
 
 		navigate("/client/home");
 	};
+
+	if (isLoading) {
+		<Loading />;
+	}
 
 	return (
 		<div className="bg-white flex justify-center items-center flex-wrap h-screen">

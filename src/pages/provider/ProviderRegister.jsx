@@ -11,6 +11,7 @@ import { getUserToken } from "../../helpers/localStorageManagement";
 import { getCategoriesRequest } from "../../services/categories.services";
 import { showErrorModal, showSuccessModal } from "../../components/modals/customModals";
 import { postProviderRequest } from "../../services/providers.services";
+import Loading from "../../components/shared/Loading";
 
 const ProviderRegister = () => {
 	const [categories, setCategories] = useState([]);
@@ -102,7 +103,7 @@ const ProviderRegister = () => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

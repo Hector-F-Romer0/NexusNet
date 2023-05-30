@@ -6,10 +6,17 @@ import ContainerChats from "../../components/shared/ContainerChats";
 import ChatMessage from "../../components/shared/ChatMessage";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
+import Loading from "../../components/shared/Loading";
 
 const socket = io("http://localhost:4000");
 
 const Chat = () => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	if (isLoading) {
+		<Loading />;
+	}
+
 	return (
 		<section className="flex">
 			<ContainerSideBar>

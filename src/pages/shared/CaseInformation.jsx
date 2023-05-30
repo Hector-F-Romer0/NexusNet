@@ -19,6 +19,7 @@ import { getUserToken } from "../../helpers/localStorageManagement";
 import { verifyJWT } from "../../helpers/jwt";
 import { USER_ROLES } from "../../db/config";
 import { showSuccessModal } from "../../components/modals/customModals";
+import Loading from "../../components/shared/Loading";
 
 const CaseInformation = () => {
 	const [userCase, setUserCase] = useState({});
@@ -147,7 +148,7 @@ const CaseInformation = () => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	if (userCase === null) {

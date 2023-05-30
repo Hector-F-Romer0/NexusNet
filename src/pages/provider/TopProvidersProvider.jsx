@@ -3,8 +3,15 @@ import SideBar from "../../components/shared/SideBar";
 import { Layout, MainContentLayout } from "../../styled-components/index/Layout";
 import ContainerTopProvider from "../../components/shared/ContainerTopProvider";
 import Footer from "../../components/shared/Footer";
+import Loading from "../../components/shared/Loading";
 
 const TopProvidersProvider = () => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	if (isLoading) {
+		<Loading />;
+	}
+
 	return (
 		<Layout>
 			<SideBar />

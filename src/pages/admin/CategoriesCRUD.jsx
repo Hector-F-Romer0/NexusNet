@@ -8,6 +8,7 @@ import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
 import { getCategoriesRequest, postCategoryRequest } from "../../services/categories.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import Loading from "../../components/shared/Loading";
 
 const CategoriesCRUD = () => {
 	const [categories, setCategories] = useState([]);
@@ -77,7 +78,7 @@ const CategoriesCRUD = () => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (

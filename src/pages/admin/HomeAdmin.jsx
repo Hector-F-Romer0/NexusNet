@@ -3,8 +3,15 @@ import AdminSideBar from "../../components/admin/AdminSideBar";
 import ContainerProvider from "../../components/shared/ContainerProvider";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
+import Loading from "../../components/shared/Loading";
 
 const HomeAdmin = () => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	if (isLoading) {
+		<Loading />;
+	}
+
 	return (
 		<section className="flex">
 			<ContainerSideBar>

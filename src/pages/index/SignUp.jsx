@@ -13,6 +13,7 @@ import GoogleButton from "../../components/shared/GoogleButton";
 import { getRoleRequest } from "../../services/role.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { USER_ROLES } from "../../db/config";
+import Loading from "../../components/shared/Loading";
 
 const SignUp = () => {
 	const {
@@ -24,6 +25,8 @@ const SignUp = () => {
 
 	const [role, setRole] = useState([]);
 	const MySwal = withReactContent(Swal);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -68,6 +71,10 @@ const SignUp = () => {
 			});
 		}
 	};
+
+	if (isLoading) {
+		<Loading />;
+	}
 
 	return (
 		<div className="bg-white flex justify-center items-center h-screen flex-wrap">

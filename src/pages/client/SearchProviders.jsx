@@ -7,6 +7,7 @@ import SearchBar from "../../components/shared/SearchBar";
 import SideBar from "../../components/shared/SideBar";
 import CardProvider from "../../components/shared/CardProvider";
 import { useSearchBar } from "../../hooks/useSearchBar";
+import Loading from "../../components/shared/Loading";
 import { ContainerFooter, ContainerSideBar } from "../../styled-components/shared/container.style";
 
 const SearchProviders = () => {
@@ -295,6 +296,12 @@ const SearchProviders = () => {
 			}
 		}
 	};
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	if (isLoading) {
+		<Loading />;
+	}
 
 	return (
 		<section className="flex">

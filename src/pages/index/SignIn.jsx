@@ -11,6 +11,7 @@ import FacebookButton from "../../components/shared/FacebookButton.jsx";
 import Logo from "../../assets/logo.png";
 
 import { loginUserRequest } from "../../services/users.services";
+import Loading from "../../components/shared/Loading";
 
 const SignIn = () => {
 	const {
@@ -18,6 +19,8 @@ const SignIn = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -57,6 +60,10 @@ const SignIn = () => {
 			}
 		}
 	};
+
+	if (isLoading) {
+		<Loading />;
+	}
 
 	return (
 		<div className="bg-white flex justify-center items-center h-screen">

@@ -8,6 +8,7 @@ import { ContainerFooter, ContainerSideBar } from "../../styled-components/share
 import { getCasesTakenRequest } from "../../services/cases.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import CardCase from "../../components/shared/CardCase";
+import Loading from "../../components/shared/Loading";
 
 const HomeProvider = () => {
 	const [cases, setCases] = useState([]);
@@ -27,7 +28,7 @@ const HomeProvider = () => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		<Loading />;
 	}
 
 	return (
