@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,36 +7,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const CRUDRow = ({ data, titleToManage, handleUpdate }) => {
+const CRUDRow = ({ data, titleToManage, handleUpdate, handleDelete }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
-
-	//!DELETE
-
-	const detectNameDelete = () => {
-		if (titleToManage === "Categories") {
-			handleDeleteCategory();
-		} else if (titleToManage === "Services") {
-			handleDeleteService();
-		} else {
-			handleDeleteKeyword();
-		}
-	};
-
-	const handleDeleteCategory = async () => {
-		console.log(data);
-		dispatch(deleteCategoryRequest(data.id));
-		// dispatch(deleteCategory(data?.value));
-		await MySwal.fire({
-			title: "Category deleted successfully",
-			icon: "success",
-			text: `The category ${data?.label} was deleted from database.`,
-			confirmButtonColor: "#007BFF",
-			confirmButtonText: "Done",
-		});
-		navigate("/admin/categories");
-	};
 
 	const handleDeleteService = async () => {
 		dispatch(deleteServices(data?.value));
@@ -165,7 +138,7 @@ const CRUDRow = ({ data, titleToManage, handleUpdate }) => {
 			<td className="px-5 py-4 border-b border-white bg-white">
 				<div className="flex flex-row justify-end">
 					<button
-						onClick={() => detectNameDelete()}
+						onClick={() => handleDelete(data)}
 						className="flex mr-4 py-1 bg-buttonAdmin text-white font-semibold rounded-2xl justify-center items-center my-1 text-xs w-40 lg:w-40 md:text-md">
 						<FiTrash2 size={20}></FiTrash2>
 						<span className="ml-1">Delete</span>

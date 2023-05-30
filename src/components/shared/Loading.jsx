@@ -1,14 +1,12 @@
 import React from "react";
+import isLoading from "../../assets/isLoading.gif";
 
 const Loading = () => {
 	return (
-		<div class="h-screen bg-white">
-			<div class="flex justify-center items-center h-full">
-				<img
-					class="h-16 w-16"
-					src="https://tenor.com/es/view/spider-web-cobweb-catch-web-gif-14509485"
-					alt=""
-				/>
+		<div className="h-screen bg-white">
+			<div className="flex justify-center items-center h-full">
+				<h1 className="text-2xl font-montserrat font-bold">Loading...</h1>
+				<img className="h-52 w-52" src={isLoading} alt="" />
 			</div>
 		</div>
 	);

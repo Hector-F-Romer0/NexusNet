@@ -55,6 +55,40 @@ const postProviderRequest = async (data) => {
 	}
 };
 
+const approveProviderRequest = async (id, token) => {
+	try {
+		const res = await instanceBackend.put(
+			`/provider/approve/${id}`,
+			{},
+			{
+				headers: { Authorization: `Bearer ${token}` },
+			}
+		);
+
+		return res.data;
+	} catch (error) {
+		console.log(error);
+		return error.response;
+	}
+};
+
+const disapproveProviderRequest = async (id, token) => {
+	try {
+		const res = await instanceBackend.put(
+			`/provider/disapprove/${id}`,
+			{},
+			{
+				headers: { Authorization: `Bearer ${token}` },
+			}
+		);
+
+		return res.data;
+	} catch (error) {
+		console.log(error);
+		return error.response;
+	}
+};
+
 const updateRateRequest = async (id, data, token) => {
 	try {
 		const res = await instanceBackend.post(`/provider/rate/${id}`, data, {
@@ -74,4 +108,6 @@ export {
 	getProvidersRequest,
 	getProvidersNotApprovedRequest,
 	updateRateRequest,
+	disapproveProviderRequest,
+	approveProviderRequest,
 };

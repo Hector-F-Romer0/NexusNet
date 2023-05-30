@@ -3,6 +3,7 @@ import CardProvider from "./CardProvider";
 import { useSelector } from "react-redux";
 import { getProvidersNotApprovedRequest, getProvidersRequest } from "../../services/providers.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import Loading from "./Loading";
 
 const ContainerProvider = () => {
 	const [providers, setProviders] = useState([]);
@@ -21,7 +22,7 @@ const ContainerProvider = () => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading...</h1>;
+		return <Loading />;
 	}
 
 	return (

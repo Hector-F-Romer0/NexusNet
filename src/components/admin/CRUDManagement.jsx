@@ -3,7 +3,7 @@ import CRUDRow from "./CRUDRow";
 import CRUDHeader from "./CRUDHeader";
 import { useSearchBar } from "../../hooks/useSearchBar";
 
-const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate }) => {
+const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate, handleDelete }) => {
 	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
 
 	return (
@@ -33,6 +33,7 @@ const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate }) => {
 										data={item}
 										titleToManage={nameToManage}
 										handleUpdate={handleUpdate}
+										handleDelete={handleDelete}
 									/>
 								))}
 							</tbody>
