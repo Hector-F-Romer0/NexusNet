@@ -21,7 +21,7 @@ const socketController = (socket = Server, io) => {
 
 	socket.on("enter-chat", async (payload, callback) => {
 		const chatId = payload.chatId;
-		// socket.join(chatId);
+		socket.join(chatId);
 		const sockets = await io.in(chatId).fetchSockets();
 		// console.log(sockets);
 		// for (const iterator of sockets) {
@@ -46,7 +46,7 @@ const socketController = (socket = Server, io) => {
 			// Add the new message to chat document
 			existingChat.messages.push(newMessage);
 			await existingChat.save();
-			console.log(chatId);
+			// console.log(chatId);
 			socket.to(chatId).emit("send-message", { message });
 		} catch (error) {
 			socket.emit("error", { error: error });

@@ -1,6 +1,6 @@
 import { request, response } from "express";
 
-import { userModel } from "../models/user.model.js";
+import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const getUsers = async (req = request, res = response) => {
@@ -15,7 +15,7 @@ const getUsers = async (req = request, res = response) => {
 const getUser = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
-		const user = await userModel.findById(id).populate([{path:"role"}]);
+		const user = await userModel.findById(id).populate([{ path: "role" }]);
 
 		if (!user) {
 			return res.status(404).json({ error: `The user with id ${id} doesn't exist.` });
@@ -31,7 +31,7 @@ const getUsersWithoutLogged = async (req = request, res = response) => {
 	try {
 		// res.status(200).json({ msg: "Hola" });
 		// console.log(req.uid);
-		const usersWithoutUserToken = await userModel.find({ _id: { $ne: req.uid } });
+		const usersWithoutUserToken = await userModel.find({ _id: { $ne: req.uid }, role: { $ne: USER_ROLES.ADMIN } });
 		// console.log(usersWithoutUserToken);
 		res.status(200).json(usersWithoutUserToken);
 	} catch (error) {
