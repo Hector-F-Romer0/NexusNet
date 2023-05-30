@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app, auth } from "../../../firebase.config";
 
 const GoogleButton = () => {
+	const signInWithGoogle = () => {
+		const provider = new GoogleAuthProvider();
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				const credential = GoogleAuthProvider.credentialFromResult(result);
+				const token = credential.accessToken;
+				const user = result.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// The email of the user's account used.
+				const email = error.customData.email;
+				// The AuthCredential type that was used.
+				const credential = GoogleAuthProvider.credentialFromError(error);
+			});
+	};
 	return (
 		<button
+			onClick={signInWithGoogle}
 			type="button"
 			className="flex break-inside bg-white text-black border-2 border-blue-200 rounded-3xl px-6 py-3 mb-4 w-full">
 			<div className="m-auto">

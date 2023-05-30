@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -26,12 +26,29 @@ const FormCase = () => {
 		formState: { errors },
 	} = useForm();
 
+	const [uploadImage, setUploadImage] = useState("");
+	const [loading, setLoading] = useState("");
+
+	const inputRef = useRef(null);
+	const uploadFile = async (e) => {
+		const files = inputRef.current.files;
+		const data = new FormData();
+		data.append("file", files[0]);
+		data.append("upload_preset", "archiveCase");
+		setLoading(true);
+		const res = await fetch("https://api.cloudinary.com/v1_1/dhjcunqwa/image/upload", {
+			method: "POST",
+			body: data,
+		});
+		const file = await res.json();
+		setUploadImage(file.secure_url);
+		setLoading(false);
+		return file.secure_url;
+	};
+
 	const [categories, setCategories] = useState([]);
 	const [services, setServices] = useState([]);
 	const [keywords, setKeywords] = useState([]);
-
-	const [uploadFile, setUploadFile] = useState("");
-	const [cloudinaryImage, setCloudinaryImage] = useState("");
 
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
@@ -87,6 +104,8 @@ const FormCase = () => {
 			return;
 		}
 
+		const resCloud = await uploadFile();
+		console.log(resCloud);
 		try {
 			const { uid } = await verifyJWT(getUserToken());
 			data.category = data.category.value;
@@ -212,15 +231,8 @@ const FormCase = () => {
 						)
 				)}
 			</div>
-			<div>
-				<input
-					type="file"
-					name=""
-					id=""
-					onChange={(e) => {
-						setUploadFile(e.target.files[0]);
-					}}
-				/>
+			<div className="flex justify-center mb-4">
+				<input type="file" name="" id="" ref={inputRef} />
 			</div>
 			<div className="flex justify-center">
 				<button

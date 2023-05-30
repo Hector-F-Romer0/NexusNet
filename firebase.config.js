@@ -1,17 +1,16 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDInX-N2ndBfgi-wLA6-pfFCJ5FZxiJBg8",
-    authDomain: "nexusnet-388004.firebaseapp.com",
-    projectId: "nexusnet-388004",
-    storageBucket: "nexusnet-388004.appspot.com",
-    messagingSenderId: "722995655656",
-    appId: "1:722995655656:web:9cfbb8ef71e8871ca72a5d"
-};
+    apiKey: "AIzaSyDF2Z_Lxc23NPkCi_2zWg_BGr4S5NqT9ag",
+    authDomain: "nexusnet-efbcb.firebaseapp.com",
+    projectId: "nexusnet-efbcb",
+    storageBucket: "nexusnet-efbcb.appspot.com",
+    messagingSenderId: "204073132085",
+    appId: "1:204073132085:web:93a3dacf0ec6c60c85917c"
+  };
   
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const authentication = getAuth(app)
-
-export { authentication };
+export { auth, app };

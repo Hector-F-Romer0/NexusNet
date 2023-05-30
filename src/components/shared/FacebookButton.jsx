@@ -1,24 +1,22 @@
+import { auth } from "../../../firebase.config";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 import React from "react";
-import { authentication } from "../../../firebase.config";
-import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 
 const FacebookButton = () => {
 	const signInWithFacebook = () => {
 		const provider = new FacebookAuthProvider();
-		signInWithPopup(authentication, provider)
+		signInWithPopup(auth, provider)
 			.then((result) => {
-				// Comprobar si el inicio de sesión se completó correctamente
-				if (result && result.user) {
-					console.log("Inicio de sesión exitoso:", result.user);
-					// Realizar acciones adicionales después del inicio de sesión exitoso
-				} else {
-					console.log("Inicio de sesión cancelado por el usuario o cerrado manualmente.");
-					// Mostrar un mensaje apropiado al usuario si el inicio de sesión se canceló o cerró manualmente
-				}
+				const credential = FacebookAuthProvider.credentialFromResult(result);
+				const user = result.user;
+				const accessToken = credential.accessToken;
+				console.log(user);
 			})
 			.catch((error) => {
-				console.log("Error durante el inicio de sesión:", error);
-				// Mostrar un mensaje de error si ocurre algún error durante el inicio de sesión
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				const email = error.customData.email;
+				const credential = FacebookAuthProvider.credentialFromError(error);
 			});
 	};
 
