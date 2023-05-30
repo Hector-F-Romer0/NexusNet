@@ -50,18 +50,6 @@ const createProviderValidation = {
 
 		errorMessage: "Password can't be empty.",
 	},
-	password: {
-		notEmpty: true,
-		trim: true,
-		exists: { errorMessage: "Password can't be empty." },
-		isLength: {
-			options: {
-				min: 3,
-				max: 15,
-			},
-			errorMessage: "Password must be between 3 and 15 characters.",
-		},
-	},
 	role: {
 		isString: true,
 		notEmpty: true,
@@ -144,18 +132,6 @@ const createClientValidation = {
 		trim: true,
 
 		errorMessage: "Password can't be empty.",
-	},
-	password: {
-		notEmpty: true,
-		errorMessage: "Password can't be empty.",
-		isLength: {
-			options: {
-				min: 3,
-				max: 15,
-			},
-			errorMessage: "Username must be between 3 and 15 characters.",
-		},
-		trim: true,
 	},
 	role: {
 		isString: true,

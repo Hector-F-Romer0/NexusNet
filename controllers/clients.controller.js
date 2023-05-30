@@ -4,6 +4,7 @@ import { enviarMail } from "../helpers/nodeMailer.js";
 
 import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
+import { generateJWT } from "../helpers/jwt.js";
 
 const getClients = async (req = request, res = response) => {
 	try {
@@ -69,10 +70,10 @@ const createClient = async (req = request, res = response) => {
 		});
 
 		console.log(names, lastnames, email);
+		const token = await generateJWT(client.id, client.username, client.role._id);
 		await enviarMail(names, lastnames, email);
-
 		await client.save();
-		res.status(200).json({ msg: "Ok", client });
+		res.status(200).json({ client, token });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: "Error del servidor en POST CLIENTES." });

@@ -2,6 +2,7 @@ import { request, response } from "express";
 
 import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
+import { generateJWT } from "../helpers/jwt.js";
 
 const getUsers = async (req = request, res = response) => {
 	try {
@@ -39,6 +40,41 @@ const getUsersWithoutLogged = async (req = request, res = response) => {
 	}
 };
 
+const getUserByEmail = async (req = request, res = response) => {
+	try {
+		const { email } = req.body;
+		// res.status(200).json({ msg: "Hola" });
+		// console.log(req.uid);
+		const user = await userModel.findOne({ email }).exec();
+
+		if (!user) {
+			return res.status(404).json({ error: `The user with email ${email} doesn't exist.` });
+		}
+		const token = await generateJWT(user.id, user.username, user.role._id);
+		// const usersWithoutUserToken = await userModel.find({ _id: { $ne: req.uid }, role: { $ne: USER_ROLES.ADMIN } });
+		// console.log(usersWithoutUserToken);
+		res.status(200).json({ user, token, role: user.role._id });
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
+	}
+};
+
+const existUserByEmail = async (req = request, res = response) => {
+	try {
+		const { email } = req.body;
+		// res.status(200).json({ msg: "Hola" });
+		// console.log(req.uid);
+		const user = await userModel.findOne({ email }).exec();
+
+		if (user) {
+			return res.status(400).json({ error: `The user with email ${email} already exist.` });
+		}
+		res.status(200).json({ msg: "Don't exist" });
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
+	}
+};
+
 const deleteUser = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
@@ -52,4 +88,4 @@ const deleteUser = async (req = request, res = response) => {
 	}
 };
 
-export { getUser, getUsers, getUsersWithoutLogged, deleteUser };
+export { getUser, getUsers, getUsersWithoutLogged, deleteUser, getUserByEmail, existUserByEmail };
