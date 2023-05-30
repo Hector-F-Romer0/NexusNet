@@ -161,6 +161,7 @@ const createCase = async (req = request, res = response) => {
 			keywords,
 			category,
 			service,
+			files
 		});
 		await newCase.save();
 		res.status(201).json(newCase);
