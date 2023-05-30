@@ -47,7 +47,7 @@ const ProviderRegister = () => {
 		const files = inputRef.current.files;
 		const data = new FormData();
 		data.append("file", files[0]);
-		data.append("upload_preset", "archiveCase");
+		data.append("upload_preset", "perfilPhoto");
 		setLoading(true);
 		const res = await fetch("https://api.cloudinary.com/v1_1/dhjcunqwa/image/upload", {
 			method: "POST",
@@ -317,7 +317,8 @@ const ProviderRegister = () => {
 								}}
 								error={errors.phrase}
 							/>
-							<div className="p-8 flex justify-center items-center">
+							<div className="p-8 flex flex-col justify-center items-center">
+								<h1 className="font-montserrat font-medium text-lg">Selecciona tu foto de perfil</h1>
 								<div className="w-full md:w-1/2 relative grid grid-cols-1 md:grid-cols-3 border border-gray-300 bg-gray-100 rounded-lg">
 									<div className="rounded-l-lg p-4 bg-gray-200 flex flex-col justify-center items-center border-0 border-r border-gray-300 ">
 										<label
