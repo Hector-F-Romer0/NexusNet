@@ -11,7 +11,7 @@ import { getUserIdRequest } from "../../services/users.services";
 const socket = io("http://localhost:4000");
 
 const ChatMessage = ({ socket }) => {
-	const { messaageHistory, userIdSesion, recipientIdUser } = useSelector((state) => state.chat);
+	const { messaageHistory, userIdSesion, recipientIdUser, chatId } = useSelector((state) => state.chat);
 	const [recipientUser, setRecipientUser] = useState();
 
 	useEffect(() => {
@@ -33,8 +33,10 @@ const ChatMessage = ({ socket }) => {
 		};
 	}, [socket]);
 
-	return (
-		<div className="flex flex-col mb-20 w-2/4 mx-2">
+	console.log(chatId);
+
+	return chatId ? (
+		<div className="flex flex-col mb-20 w-2/4 mx-2 my-10">
 			<div className="flex sm:items-center border-b-2 border-gray-200">
 				<FiCornerUpLeft size={30} className="mx-3"></FiCornerUpLeft>
 				<div className="relative">
@@ -69,7 +71,13 @@ const ChatMessage = ({ socket }) => {
 				})}
 			</div>
 			<InputChat socket={socket} />
-			<h1>hola</h1>
+		</div>
+	) : (
+		<div className="flex flex-col justify-center items-center w-80 mx-32 mb-24">
+			<h1 className="text-4xl font-montserrat font-bold"> You haven't selected any chat </h1>
+			<h2 className="text-2xl font-montserrat font-semibold">
+				Select one of your chats so that you can interact in real time.
+			</h2>
 		</div>
 	);
 };

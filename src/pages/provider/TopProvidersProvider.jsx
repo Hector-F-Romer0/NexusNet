@@ -4,6 +4,7 @@ import { Layout, MainContentLayout } from "../../styled-components/index/Layout"
 import ContainerTopProvider from "../../components/shared/ContainerTopProvider";
 import Footer from "../../components/shared/Footer";
 import Loading from "../../components/shared/Loading";
+import { useState } from "react";
 
 const TopProvidersProvider = () => {
 	const [isLoading, setIsLoading] = useState(false);
