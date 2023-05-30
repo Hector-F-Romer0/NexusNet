@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 import { commentModel } from "../models/comment.model.js";
+import { generateJWT } from "../helpers/jwt.js";
+import { enviarMail } from "../helpers/nodeMailer.js";
 
 const getProvider = async (req = request, res = response) => {
 	try {
@@ -21,7 +23,67 @@ const getProvider = async (req = request, res = response) => {
 
 const getProviders = async (req = request, res = response) => {
 	try {
-		const providers = await userModel.find({ role: USER_ROLES.PROVIDER }).exec();
+		const providers = await userModel
+			.find({ role: USER_ROLES.PROVIDER })
+			.populate([
+				{
+					path: "role",
+					select: "role",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(providers);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
+	}
+};
+
+const getProvidersNotApproved = async (req = request, res = response) => {
+	try {
+		const providers = await userModel
+			.find({ role: USER_ROLES.PROVIDER, approved: false })
+			.populate([
+				{
+					path: "role",
+					select: "role",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(providers);
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
+	}
+};
+
+const getProvidersApproved = async (req = request, res = response) => {
+	try {
+		const providers = await userModel
+			.find({ role: USER_ROLES.PROVIDER, approved: true })
+			.populate([
+				{
+					path: "role",
+					select: "role",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
 		res.status(200).json(providers);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to get all the providers.");
@@ -42,11 +104,9 @@ const createProvider = async (req = request, res = response) => {
 			state,
 			city,
 			urlImg,
-			cases,
 			rate,
 			category,
 			service,
-			keywords,
 			phrase,
 		} = req.body;
 
@@ -54,7 +114,6 @@ const createProvider = async (req = request, res = response) => {
 		if (existsUsername) {
 			return res.status(409).json({ msg: `Username ${username} already exist.` });
 		}
-		console.log(keywords);
 		const salt = bcrypt.genSaltSync();
 		const encryptedPassword = bcrypt.hashSync(password, salt);
 
@@ -72,16 +131,18 @@ const createProvider = async (req = request, res = response) => {
 			state,
 			city,
 			urlImg,
-			cases,
 			rate,
 			category,
 			service,
-			keywords,
 			phrase,
+			approved: false,
 		});
 
 		await provider.save();
-		res.status(200).json(provider);
+		await enviarMail(names, lastnames, email);
+
+		const token = await generateJWT(provider.id, provider.username, provider.role._id);
+		res.status(200).json({ provider, token });
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to create a provider.");
 	}
@@ -188,4 +249,13 @@ const updateRateProvider = async (req = request, res = response) => {
 	}
 };
 
-export { getProvider, getProviders, createProvider, updateProvider, deleteProvider, updateRateProvider };
+export {
+	getProvider,
+	getProviders,
+	getProvidersNotApproved,
+	getProvidersApproved,
+	createProvider,
+	updateProvider,
+	deleteProvider,
+	updateRateProvider,
+};

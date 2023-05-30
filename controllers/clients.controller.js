@@ -2,13 +2,13 @@ import { request, response } from "express";
 import bcrypt from "bcrypt";
 import { enviarMail } from "../helpers/nodeMailer.js";
 
-import { userModel } from "../models/user.model.js";
+import { USER_ROLES, userModel } from "../models/user.model.js";
 import { handleErrorHTTP } from "../helpers/handleError.js";
 
 const getClients = async (req = request, res = response) => {
 	try {
 		const users = await userModel
-			.find({ role: "6466e5f81d1fe6f36287dc43" })
+			.find({ role: USER_ROLES.CLIENT })
 			.populate([
 				{
 					path: "role",
@@ -68,12 +68,11 @@ const createClient = async (req = request, res = response) => {
 			cases,
 		});
 
-		console.log(names, lastnames, email)
-		await enviarMail(names, lastnames, email)
+		console.log(names, lastnames, email);
+		await enviarMail(names, lastnames, email);
 
 		await client.save();
 		res.status(200).json({ msg: "Ok", client });
-
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: "Error del servidor en POST CLIENTES." });

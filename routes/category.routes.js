@@ -16,7 +16,6 @@ import { USER_ROLES } from "../models/user.model.js";
 const router = express.Router();
 
 // All endpoints will use validateJWT
-router.use(validateJWT);
 
 router.get(
 	"/:id",
@@ -27,15 +26,16 @@ router.get(
 	],
 	getCategory
 );
-router.get("/", hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER]), getCategories);
+router.get("/", getCategories);
 router.post(
 	"/",
-	[hasRoles(USER_ROLES.ADMIN), check("label", "Label is required.").not().isEmpty(), validateFields],
+	[validateJWT, hasRoles(USER_ROLES.ADMIN), check("label", "Label is required.").not().isEmpty(), validateFields],
 	createCategory
 );
 router.put(
 	"/:id",
 	[
+		validateJWT,
 		hasRoles(USER_ROLES.ADMIN),
 		check("id", "Invalid id.").not().isEmpty().isMongoId(),
 		check("label", "Label is required.").not().isEmpty(),
@@ -45,7 +45,7 @@ router.put(
 );
 router.delete(
 	"/:id",
-	[hasRoles(USER_ROLES.ADMIN), check("id", "Invalid id.").not().isEmpty().isMongoId(), validateFields],
+	[validateJWT, hasRoles(USER_ROLES.ADMIN), check("id", "Invalid id.").not().isEmpty().isMongoId(), validateFields],
 	deleteCategory
 );
 

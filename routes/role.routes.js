@@ -8,26 +8,27 @@ import { hasRoles } from "../middlewares/validate-role.js";
 import { USER_ROLES } from "../models/user.model.js";
 
 const router = express.Router();
-router.use(validateJWT);
 
 router.get(
 	"/:id",
 	[
+		validateJWT,
 		hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER]),
 		check("id", "Invalid id.").isMongoId(),
 		validateFields,
 	],
 	getRole
 );
-router.get("/", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])], getRoles);
+router.get("/", getRoles);
 router.post(
 	"/",
-	[hasRoles([USER_ROLES.ADMIN]), check("role", "Role is required.").not().isEmpty(), validateFields],
+	[validateJWT, hasRoles([USER_ROLES.ADMIN]), check("role", "Role is required.").not().isEmpty(), validateFields],
 	createRole
 );
 router.put(
 	"/:id",
 	[
+		validateJWT,
 		hasRoles([USER_ROLES.ADMIN]),
 		check("id", "Invalid id.").isMongoId(),
 		check("role", "Role is required.").not().isEmpty(),
@@ -37,7 +38,7 @@ router.put(
 );
 router.delete(
 	"/:id",
-	[hasRoles([USER_ROLES.ADMIN]), check("id", "Invalid id.").isMongoId(), validateFields],
+	[validateJWT, hasRoles([USER_ROLES.ADMIN]), check("id", "Invalid id.").isMongoId(), validateFields],
 	deleteRole
 );
 

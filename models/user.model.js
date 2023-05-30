@@ -31,13 +31,6 @@ const userSchema = Schema(
 		rate: { type: Number, required: false, default: null },
 		category: { type: Schema.Types.ObjectId, ref: "Category", required: false },
 		service: { type: Schema.Types.ObjectId, ref: "Service", required: false },
-		keywords: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: "Keyword",
-				required: false,
-			},
-		],
 		phrase: { type: String, required: false, minLength: 3, maxLength: 500, trim: true },
 		comments: [
 			{
@@ -46,6 +39,11 @@ const userSchema = Schema(
 				required: false,
 			},
 		],
+		approved: {
+			type: Boolean,
+			required: false,
+			default: null,
+		},
 	},
 	{
 		timestamps: true,

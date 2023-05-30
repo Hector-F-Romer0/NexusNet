@@ -14,7 +14,6 @@ import { USER_ROLES } from "../models/user.model.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
 const router = express.Router();
-router.use(validateJWT);
 
 router.get(
 	"/:id",
@@ -25,15 +24,16 @@ router.get(
 	],
 	getService
 );
-router.get("/", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])], getServices);
+router.get("/", getServices);
 router.post(
 	"/",
-	[hasRoles([USER_ROLES.ADMIN]), check("label", "Label is required.").not().isEmpty(), validateFields],
+	[validateJWT, hasRoles([USER_ROLES.ADMIN]), check("label", "Label is required.").not().isEmpty(), validateFields],
 	createService
 );
 router.put(
 	"/:id",
 	[
+		validateJWT,
 		hasRoles([USER_ROLES.ADMIN]),
 		check("id", "Invalid id.").isMongoId(),
 		check("label", "Label is required.").not().isEmpty(),
@@ -43,7 +43,7 @@ router.put(
 );
 router.delete(
 	"/:id",
-	[hasRoles([USER_ROLES.ADMIN]), check("id", "Invalid id.").isMongoId(), validateFields],
+	[validateJWT, hasRoles([USER_ROLES.ADMIN]), check("id", "Invalid id.").isMongoId(), validateFields],
 	deleteService
 );
 

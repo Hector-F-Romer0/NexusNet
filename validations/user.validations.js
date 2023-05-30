@@ -55,12 +55,12 @@ const createProviderValidation = {
 		trim: true,
 		exists: { errorMessage: "Password can't be empty." },
 		isLength: {
-            options: {
-                min: 3,
-                max: 15,
-            },
-            errorMessage: "Password must be between 3 and 15 characters.",
-        },
+			options: {
+				min: 3,
+				max: 15,
+			},
+			errorMessage: "Password must be between 3 and 15 characters.",
+		},
 	},
 	role: {
 		isString: true,
@@ -97,10 +97,6 @@ const createProviderValidation = {
 	service: {
 		notEmpty: true,
 		errorMessage: "Service can't be empty.",
-	},
-	keywords: {
-		notEmpty: true,
-		errorMessage: "The provider has to have keywords.",
 	},
 };
 
