@@ -58,14 +58,14 @@ const SignUp = () => {
 			return;
 		}
 
-		if (role === USER_ROLES.CLIENT) {
+		if (data.role.value === USER_ROLES.CLIENT) {
 			navigate("/register/client", {
 				state: {
 					userData: data,
 				},
 			});
 		} else {
-			navigate("/register/Provider", {
+			navigate("/register/provider", {
 				state: {
 					userData: data,
 				},

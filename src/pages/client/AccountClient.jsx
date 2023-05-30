@@ -5,7 +5,6 @@ import Footer from "../../components/shared/Footer";
 import SideBar from "../../components/shared/SideBar";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import Loading from "../../components/shared/Loading";
-import { useState } from "react";
 
 const AccountClient = () => {
 	const [isLoading, setIsLoading] = useState(false);
