@@ -6,7 +6,7 @@ import CardCase from "../../components/shared/CardCase";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import { getUserToken } from "../../helpers/localStorageManagement";
-import { getCasesRequest, getMyCasesRequest } from "../../services/cases.services";
+import { getCasesNotCompletedRequest } from "../../services/cases.services";
 import Loading from "../../components/shared/Loading";
 
 const HomeClient = () => {
@@ -18,7 +18,7 @@ const HomeClient = () => {
 	useEffect(() => {
 		const getDataBD = async () => {
 			setIsLoading(true);
-			const res = await getMyCasesRequest(getUserToken());
+			const res = await getCasesNotCompletedRequest(getUserToken());
 			console.log(res);
 			setCases(res);
 			setIsLoading(false);
@@ -35,7 +35,7 @@ const HomeClient = () => {
 			<ContainerSideBar>
 				<SideBar />
 			</ContainerSideBar>
-			<div className=" text-gray-900 font-semibold mb-20">
+			<div className="w-full mb-20">
 				<h1 className="text-4xl font-bold text-center mt-9">Welcome to my cases - client</h1>
 				<div className="flex flex-row justify-center align-middle gap-10 my-7 text-xs md:text-2xl ">
 					<button
