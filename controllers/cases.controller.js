@@ -144,7 +144,6 @@ const getCasesNotCompletedUser = async (req = request, res = response) => {
 			])
 			.exec();
 		res.status(200).json(cases);
-		console.log(cases)
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to get all the cases not completed.");
 	}
