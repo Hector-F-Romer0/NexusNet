@@ -1,6 +1,4 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -8,14 +6,24 @@ import CRUDManagement from "../../components/admin/CRUDManagement";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
+import { getCategoriesRequest, postCategoryRequest } from "../../services/categories.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
 
 const CategoriesCRUD = () => {
-	const { categories, isLoading } = useSelector((state) => state.categories);
-	const dispatch = useDispatch();
+	const [categories, setCategories] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const MySwal = withReactContent(Swal);
 
 	useEffect(() => {
-		dispatch(getCategories());
+		const getCategoriesBD = async () => {
+			setIsLoading(true);
+			const categories = await getCategoriesRequest(getUserToken());
+			setCategories(categories);
+			setIsLoading(false);
+		};
+
+		getCategoriesBD();
 	}, []);
 
 	const handleCreateCategory = async () => {
@@ -23,12 +31,14 @@ const CategoriesCRUD = () => {
 			title: "Create a category:",
 			input: "text",
 			inputLabel: "Category",
-			inputValidator: (value) => {
+			inputValidator: async (value) => {
 				if (!value) {
 					return "You need to write something!";
 				}
 				if (value) {
-					dispatch(postCategoryRequest(value));
+					// dispatch(postCategoryRequest(value));
+					const res = await postCategoryRequest({ label: value }, getUserToken());
+					console.log(res);
 					MySwal.fire({
 						title: "Category create successfully",
 						icon: "success",

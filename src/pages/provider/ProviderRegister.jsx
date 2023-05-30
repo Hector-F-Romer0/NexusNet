@@ -40,7 +40,6 @@ const ProviderRegister = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			console.log(location.state);
 			const { userData } = location.state;
 			const newProvider = {
 				names: data?.names,

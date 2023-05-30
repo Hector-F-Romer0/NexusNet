@@ -10,7 +10,7 @@ import { getUserIdRequest } from "../../services/users.services";
 
 const socket = io("http://localhost:4000");
 
-const ChatMessage = () => {
+const ChatMessage = ({ socket }) => {
 	const { messaageHistory, userIdSesion, recipientIdUser } = useSelector((state) => state.chat);
 	const [recipientUser, setRecipientUser] = useState();
 
@@ -68,7 +68,7 @@ const ChatMessage = () => {
 					}
 				})}
 			</div>
-			<InputChat />
+			<InputChat socket={socket} />
 			<h1>hola</h1>
 		</div>
 	);

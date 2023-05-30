@@ -157,7 +157,7 @@ const CRUDRow = ({ data, titleToManage, handleUpdate }) => {
 	return (
 		<tr>
 			<td className="px-15 w-44 py-4 border-b border-white bg-white text-sm">
-				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.id}</p>
+				<p className="text-gray-900 whitespace-no-wrap text-center">{data?.value}</p>
 			</td>
 			<td className="px-15 py-4 border-b border-white bg-white text-center text-sm">
 				<p className="text-gray-900 whitespace-no-wrap">{data?.label}</p>
