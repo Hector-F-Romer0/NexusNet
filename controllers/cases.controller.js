@@ -122,6 +122,34 @@ const getCasesUser = async (req = request, res = response) => {
 	}
 };
 
+const getCasesNotCompletedUser = async (req = request, res = response) => {
+	try {
+		const { uid } = req;
+		const cases = await caseModel
+			.find({ createdBy: uid, completed: false })
+			.populate([
+				{
+					path: "takenBy",
+					select: "names lastnames username",
+				},
+				{
+					path: "keywords",
+				},
+				{
+					path: "category",
+				},
+				{
+					path: "service",
+				},
+			])
+			.exec();
+		res.status(200).json(cases);
+		console.log(cases)
+	} catch (error) {
+		handleErrorHTTP(res, error, 500, "Error when trying to get all the cases not completed.");
+	}
+};
+
 const getCasesAvailableForProviders = async (req = request, res = response) => {
 	try {
 		const { uid } = req;
@@ -263,6 +291,7 @@ export {
 	getCasesUser,
 	getCasesTakingByProvider,
 	getCasesAvailableForProviders,
+	getCasesNotCompletedUser,
 	createCase,
 	updateLeaveCase,
 	updateTakeCase,
