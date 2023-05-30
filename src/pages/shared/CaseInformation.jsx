@@ -40,12 +40,10 @@ const CaseInformation = () => {
 			// TODO: Si el caso no existe, mostrar en pantalla que no existe el caso
 			const res = await getCaseIdRequest(id, userToken);
 
-			console.log(res.files);
-
 			if (res.status === 404) {
 				setUserCase(null);
 			} else {
-				console.log(res);
+				// console.log(res);
 				// console.log(res);
 				setUserCase(res);
 			}
@@ -54,6 +52,14 @@ const CaseInformation = () => {
 
 		getDatBD();
 	}, []);
+
+	if (isLoading) {
+		<Loading />;
+	}
+
+	if (userCase === null) {
+		return <h2>Not found</h2>;
+	}
 
 	const deleteCaseForProvider = async () => {
 		await updateLeaveCaseRequest(
@@ -96,7 +102,7 @@ const CaseInformation = () => {
 		}
 
 		if (roleUserLogged === USER_ROLES.CLIENT) {
-			console.log("Soy cliente");
+			// console.log("Soy cliente");
 			return (
 				<>
 					{!userCase.takenBy ? null : (
@@ -147,14 +153,6 @@ const CaseInformation = () => {
 		}
 	};
 
-	if (isLoading) {
-		<Loading />;
-	}
-
-	if (userCase === null) {
-		return <h2>Not found</h2>;
-	}
-
 	return (
 		<section className="flex">
 			<ContainerSideBar>
@@ -191,7 +189,7 @@ const CaseInformation = () => {
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
 					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Files uploads</h2>
-					<img src={userCase?.files[0]} />
+					{userCase?.files && <img src={userCase?.files[0]} />}
 					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Taken by</h2>
 					{userCase?.takenBy !== null ? (
 						<div className="flex items-center justify-center my-5">

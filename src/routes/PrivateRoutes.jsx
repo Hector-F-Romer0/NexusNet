@@ -1,14 +1,20 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { getRoleUser, getUserToken } from "../helpers/localStorageManagement";
 import { verifyJWT } from "../helpers/jwt";
+import { useEffect } from "react";
 
 const ProtectedRoutes = ({ children, allowedFor }) => {
-	// const user = getUserLocalStorage();
+	// console.log(allowedFor);
+
 	// const getRole = async () => {
 	// 	const role = await getRoleUser();
 	// 	return role;
 	// };
 
+	// useEffect(() => {
+	// 	console.log(allowedFor);
+	// 	console.log(getRole());
+	// }, []);
 	// const role = getRole();
 	// console.log(role);
 	// console.log(user);
