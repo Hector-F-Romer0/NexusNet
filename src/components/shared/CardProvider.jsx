@@ -8,6 +8,8 @@ import KeyWord from "./KeyWord";
 import { USER_ROLES } from "../../db/config";
 import { verifyJWT } from "../../helpers/jwt";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import { approveProviderRequest, disapproveProviderRequest } from "../../services/providers.services";
+import { showSuccessModal } from "../modals/customModals";
 
 const CardProvider = ({ data }) => {
 	const MySwal = withReactContent(Swal);
@@ -24,23 +26,24 @@ const CardProvider = ({ data }) => {
 		getRoleToken();
 	}, []);
 
-	const deletePrv = () => {
-		MySwal.fire({
-			title: "Provider deleted",
-			icon: "success",
-			text: `You decided that this provider doesn't comply with the rules of NexusNet. Thanks`,
-			confirmButtonColor: "#007BFF",
-		});
-		dispatch(deleteProvider(data));
+	const disapproveProvider = async (id) => {
+		const res = await disapproveProviderRequest(id, getUserToken());
+		showSuccessModal(
+			"Provider deleted",
+			`You decided that this provider doesn't comply with the rules of NexusNet. Thanks`,
+			"Ok"
+		);
+		console.log(res);
 	};
 
-	const handleAcceptProvider = () => {
-		MySwal.fire({
-			title: "Provider accepted",
-			icon: "success",
-			text: `You decided that this provider complies with the rules of NexusNet. Thanks`,
-			confirmButtonColor: "#007BFF",
-		});
+	const approveProvider = async (id) => {
+		const res = await approveProviderRequest(id, getUserToken());
+		showSuccessModal(
+			"Provider accepted",
+			`You decided that this provider complies with the rules of NexusNet. Thanks`,
+			"Ok"
+		);
+		console.log(res);
 	};
 
 	return (
@@ -85,12 +88,12 @@ const CardProvider = ({ data }) => {
 						) : (
 							<div className="flex flex-row md:flex row">
 								<button
-									onClick={() => deletePrv()}
+									onClick={() => disapproveProvider(data.id)}
 									className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center justify-center cursor-pointerl mx-2">
 									<FiX className="text-[#FF0000] text-4xl mx-auto" />
 								</button>
 								<button
-									onClick={() => handleAcceptProvider()}
+									onClick={() => approveProvider(data.id)}
 									className="bg-white w-16 h-16 hover:bg-gray-300 rounded-full items-center cursor-pointerl mx-2">
 									<FiCheck className="text-[#1DCD0D] text-4xl mx-auto" />
 								</button>

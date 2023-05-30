@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 import CRUDManagement from "../../components/admin/CRUDManagement";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import AdminSideBar from "../../components/admin/AdminSideBar";
 import Footer from "../../components/shared/Footer";
-import { getCategoriesRequest, postCategoryRequest } from "../../services/categories.services";
+import {
+	deleteCategoryRequest,
+	getCategoriesRequest,
+	postCategoryRequest,
+	putCategoryRequest,
+} from "../../services/categories.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import { showErrorModal, showSuccessModal } from "../../components/modals/customModals";
 
 const CategoriesCRUD = () => {
 	const [categories, setCategories] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const MySwal = withReactContent(Swal);
 
 	useEffect(() => {
 		const getCategoriesBD = async () => {
@@ -31,23 +34,21 @@ const CategoriesCRUD = () => {
 			title: "Create a category:",
 			input: "text",
 			inputLabel: "Category",
-			inputValidator: async (value) => {
-				if (!value) {
-					return "You need to write something!";
+		}).then(async (result) => {
+			try {
+				if (!result.value) {
+					return await showErrorModal("Empty field", "You need to write something!", "Ok, I'll try");
 				}
-				if (value) {
-					// dispatch(postCategoryRequest(value));
-					const res = await postCategoryRequest({ label: value }, getUserToken());
-					console.log(res);
-					MySwal.fire({
-						title: "Category create successfully",
-						icon: "success",
-						text: `The category was created from database.`,
-						confirmButtonColor: "#007BFF",
-						confirmButtonText: "Done",
-					});
-				}
-			},
+				await postCategoryRequest({ label: result.value }, getUserToken());
+				setCategories(await getCategoriesRequest(getUserToken()));
+				showSuccessModal(
+					"Category create successfully",
+					`The category ${result.value} was created from database.`,
+					"Done"
+				);
+			} catch (error) {
+				return await showErrorModal(error.name, error.message, "Ok, I'll try");
+			}
 		});
 	};
 
@@ -56,24 +57,32 @@ const CategoriesCRUD = () => {
 			title: `Update the category ${data?.label}`,
 			input: "text",
 			inputLabel: "Category",
-			inputValidator: (value) => {
-				console.log(data);
-				console.log("-------");
-				if (!value) {
-					return "You need to write something!";
+		}).then(async (result) => {
+			try {
+				if (!result.value) {
+					return await showErrorModal("Empty field", "You need to write something!", "Ok, I'll try");
 				}
-				if (value) {
-					dispatch(putCategoryRequest({ id: data.id, label: value }));
-				}
-			},
+				await putCategoryRequest(data.value, { label: result.value }, getUserToken());
+				showSuccessModal(
+					"Category update successfully",
+					`The category ${result.value} was updated from database.`,
+					"Done"
+				);
+				setCategories(await getCategoriesRequest(getUserToken()));
+			} catch (error) {
+				return await showErrorModal(error.name, error.message, "Ok, I'll try");
+			}
 		});
-		await MySwal.fire({
-			title: "Category update successfully",
-			icon: "success",
-			text: `The category ${data?.label} was updated from database.`,
-			confirmButtonColor: "#007BFF",
-			confirmButtonText: "Done",
-		});
+	};
+
+	const handleDeleteCategory = async (data) => {
+		await deleteCategoryRequest(data.value, getUserToken());
+		setCategories(await getCategoriesRequest(getUserToken()));
+		await showSuccessModal(
+			"Category deleted successfully",
+			`The category ${data.lable} was deleted from database.`,
+			"Done"
+		);
 	};
 
 	if (isLoading) {
@@ -91,6 +100,7 @@ const CategoriesCRUD = () => {
 					nameToManage={"Categories"}
 					handleCreate={handleCreateCategory}
 					handleUpdate={handleUpdateCategory}
+					handleDelete={handleDeleteCategory}
 				/>
 				<ContainerFooter>
 					<Footer />
