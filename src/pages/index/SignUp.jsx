@@ -14,6 +14,7 @@ import { getRoleRequest } from "../../services/role.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { USER_ROLES } from "../../db/config";
 import Loading from "../../components/shared/Loading";
+import RegisterButtonGoogleButton from "../../components/shared/RegisterButtonGoogle";
 
 const SignUp = () => {
 	const {
@@ -160,8 +161,7 @@ const SignUp = () => {
 						</div>
 					</form>
 					<div className="flex flex-col mt-10">
-						<GoogleButton />
-						<FacebookButton />
+						<RegisterButtonGoogleButton />
 					</div>
 				</div>
 			</div>

@@ -2,11 +2,23 @@ import { instanceBackend } from "../db/config";
 
 const loginUserRequest = async (data) => {
 	try {
-		const res = await instanceBackend.post("/auth/login",data);
+		const res = await instanceBackend.post("/auth/login", data);
 		// console.log(res);
 		return res;
 	} catch (error) {
 		// console.log(error);
+		return error.response;
+	}
+};
+
+const loginGoogleRequest = async (data) => {
+	try {
+		const res = await instanceBackend.post("/user/search/email", data);
+		// console.log(res);
+		return res;
+	} catch (error) {
+		// console.log(error);
+		throw new Error("User don't exist");
 		return error.response;
 	}
 };
@@ -40,6 +52,15 @@ const getUsersWithoutMeRequest = async (token) => {
 	}
 };
 
+const getExisteUserEmailRequest = async (data) => {
+	try {
+		const res = await instanceBackend.post("/user/search/exist", data);
+		return res;
+	} catch (error) {
+		throw new Error("User already exist.");
+		return error.response;
+	}
+};
 
 const postUserRequest = async (data) => {
 	try {
@@ -50,4 +71,13 @@ const postUserRequest = async (data) => {
 		console.log(error);
 	}
 };
-export { loginUserRequest, getUsersRequest, getUsersWithoutMeRequest, getUserIdRequest,postUserRequest };
+
+export {
+	loginUserRequest,
+	getUsersRequest,
+	getUsersWithoutMeRequest,
+	getUserIdRequest,
+	postUserRequest,
+	loginGoogleRequest,
+	getExisteUserEmailRequest,
+};

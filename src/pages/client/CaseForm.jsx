@@ -3,6 +3,7 @@ import SideBar from "../../components/shared/SideBar";
 import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import Loading from "../../components/shared/Loading";
+import { useState } from "react";
 
 const CaseForm = () => {
 	const [isLoading, setIsLoading] = useState(false);

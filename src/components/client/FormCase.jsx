@@ -65,6 +65,7 @@ const FormCase = () => {
 		const categories = await getCategoriesRequest(getUserToken());
 		const services = await getServicesRequest(getUserToken());
 		const keywords = await getKeywordsRequest(getUserToken());
+		console.log(categories);
 		setCategories(categories);
 		setServices(services);
 		setKeywords(keywords);

@@ -1,21 +1,64 @@
-import React, { useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app, auth } from "../../../firebase.config";
+import Swal from "sweetalert2";
+import Select from "react-select";
+
+import withReactContent from "sweetalert2-react-content";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { postKeywordRequest } from "../../services/keywords.services";
+import { showErrorModal, showSuccessModal } from "../modals/customModals";
+import { Controller, useForm } from "react-hook-form";
+import { getRoleRegisterRequest, getRoleRequest } from "../../services/role.services";
+import { USER_ROLES } from "../../db/config";
+import { changeKeysOfArray } from "../../helpers/normalizeData";
+import { loginGoogleRequest, loginUserRequest } from "../../services/users.services";
 
 const GoogleButton = () => {
+	const navigate = useNavigate();
+	const [user, setUser] = useState();
+	const MySwal = withReactContent(Swal);
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const onSubmit = (data, user) => {
+		// console.log(data.role);
+
+		user.role = data.role;
+		// console.log(user);
+		setUser(user);
+	};
+
 	const signInWithGoogle = () => {
 		const provider = new GoogleAuthProvider();
 		signInWithPopup(auth, provider)
-			.then((result) => {
+			.then(async (result) => {
 				const credential = GoogleAuthProvider.credentialFromResult(result);
 				const token = credential.accessToken;
 				const user = result.user;
 				console.log(user);
+				const res = await loginGoogleRequest({ email: user.email });
+				console.log(res);
+
+				localStorage.setItem("auth-token", JSON.stringify(res.data.token));
+				if (res.data.role === USER_ROLES.CLIENT) {
+					navigate("/client/home");
+				} else {
+					navigate("/provider/home");
+				}
+				// const res = loginUserRequest({
+				// 	username:
+				// })
 			})
-			.catch((error) => {
+			.catch(async (error) => {
 				// Handle Errors here.
+				console.log(error);
+				await showErrorModal("Error", error.message, "Ok");
 				const errorCode = error.code;
 				const errorMessage = error.message;
 				// The email of the user's account used.

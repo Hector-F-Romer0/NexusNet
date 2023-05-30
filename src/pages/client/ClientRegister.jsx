@@ -23,6 +23,14 @@ const ClientRegister = () => {
 
 	const onSubmit = async (data) => {
 		const { userData } = location.state;
+		console.log(userData);
+		console.log(userData.imageGoogle);
+		let photoProfile = "";
+		if (!userData.imageGoogle === undefined) {
+			photoProfile = userData.imageGoogle;
+		} else {
+			photoProfile = "/src/assets/Duck.jpg";
+		}
 		const newUser = {
 			names: data?.names,
 			lastnames: data?.lastnames,
@@ -34,11 +42,12 @@ const ClientRegister = () => {
 			country: data?.country,
 			state: data?.state,
 			city: data?.city,
-			urlImg: "/src/assets/Duck.jpg",
+			urlImg: photoProfile,
 		};
 
-		const res = await postUserRequest(newUser);
-		console.log(res);
+		const { token } = await postUserRequest(newUser);
+		localStorage.setItem("auth-token", JSON.stringify(token));
+		// console.log(res);
 
 		// ? CREACIÓN DEL USUARIO EN STORE
 		await MySwal.fire({
