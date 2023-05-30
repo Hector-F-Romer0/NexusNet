@@ -35,6 +35,7 @@ const SignIn = () => {
 		// dispatch(getServices());
 		// dispatch(getProviders());
 		// dispatch(getCases());
+		console.log(import.meta.env.VITE_BACKEND_URL);
 	}, []);
 
 	const onSubmitSignIn = async (data) => {
