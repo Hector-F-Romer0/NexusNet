@@ -38,7 +38,6 @@ const verifyJWT = (token) => {
 		throw new Error("Token without role. Invalid token.");
 	}
 
-	console.log(resVerified);
 	return resVerified;
 };
 

@@ -21,12 +21,13 @@ const socketController = (socket = Server, io) => {
 
 	socket.on("enter-chat", async (payload, callback) => {
 		const chatId = payload.chatId;
+		console.log(chatId);
 		socket.join(chatId);
 		const sockets = await io.in(chatId).fetchSockets();
-		// console.log(sockets);
-		// for (const iterator of sockets) {
-		// 	console.log("Un usuario en esta sala");
-		// }
+		console.log(sockets);
+		for (const iterator of sockets) {
+			console.log("Un usuario en esta sala");
+		}
 		// console.log("----------------------------------");
 	});
 
@@ -35,6 +36,7 @@ const socketController = (socket = Server, io) => {
 			const { chatId, message, token } = payload;
 			const { uid, username, role } = verifyJWT(token);
 			// console.log(payload);
+			console.log(message);
 
 			// Verify if chat exists in BD
 			const existingChat = await chatModel.findById(chatId);
@@ -47,7 +49,7 @@ const socketController = (socket = Server, io) => {
 			existingChat.messages.push(newMessage);
 			await existingChat.save();
 			// console.log(chatId);
-			socket.to(chatId).emit("send-message", { message });
+			io.to(chatId).emit("send-message", newMessage);
 		} catch (error) {
 			socket.emit("error", { error: error });
 		}
