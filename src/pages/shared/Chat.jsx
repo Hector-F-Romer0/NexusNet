@@ -8,7 +8,7 @@ import Footer from "../../components/shared/Footer";
 import { ContainerSideBar, ContainerFooter } from "../../styled-components/shared/container.style";
 import Loading from "../../components/shared/Loading";
 
-const socket = io("http://localhost:4000");
+const socket = io(import.meta.env.VITE_BACKEND_URL);
 
 const Chat = () => {
 	const [isLoading, setIsLoading] = useState(false);

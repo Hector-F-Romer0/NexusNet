@@ -12,7 +12,7 @@ const ContainerChats = ({ setmessageHistory, socket }) => {
 		const getAllUsers = async () => {
 			const userToken = getUserToken();
 			const resUsers = await getUsersWithoutMeRequest(userToken);
-			// console.log(resUsers);
+			console.log(resUsers.data);
 			setUsers(resUsers.data);
 		};
 		getAllUsers();

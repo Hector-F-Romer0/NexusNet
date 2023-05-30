@@ -12,12 +12,10 @@ const CardChat = ({ data, socket }) => {
 
 		// TODO: Si no existe chat, crear el chat en la BD
 		const res = await createChatRequest(data.id, userToken);
-		// console.log(res);
+		console.log(data);
 		// Backend return 201 and the new chat document if chat doesn't exist
 		if (res.status === 201) {
-			// console.log("Chat creado");0
 			dispatch(setChatInformation({ chat: res.data.newChat, userIdSesion: res.data.userIdSesion }));
-			// console.log("Distpatch?");
 			socket.emit("enter-chat", { chatId: res.data.newChat.id, idUser: userIdSesion });
 			return;
 		}
@@ -25,9 +23,8 @@ const CardChat = ({ data, socket }) => {
 		// TODO: verificar si el chat existe en BD
 		if (res.status === 409) {
 			dispatch(setChatInformation({ chat: res.data.existingChat, userIdSesion: res.data.userIdSesion }));
-			socket.emit("enter-chat", { chatId: res.data.existingChat.id, idUser: userIdSesion }, (algo) => {
-				console.log("ID de la sala a la que me conecté: " + algo);
-			});
+			console.log(res.data.existingChat);
+			socket.emit("enter-chat", { chatId: res.data.existingChat.id, idUser: userIdSesion });
 
 			return;
 		}
@@ -42,7 +39,7 @@ const CardChat = ({ data, socket }) => {
 
 	return (
 		<div className="flex flex-row gap-2 sm:gap-8 min-w-sm rounded-lg px-5 py-2 my-1 justify-between bg-[#D3E5FF] items-center w-full">
-			<img className="h-auto w-12 rounded-3xl" src={"/src/assets/Duck.jpg"} alt="Provider photo" />
+			<img className="h-auto w-12 rounded-3xl" src={data?.urlImg} alt="Provider photo" />
 			<h3
 				onClick={(e) => handleAccessChat(e)}
 				className="text-lg font-bold mr-10">{`${data?.names} ${data?.lastnames}`}</h3>

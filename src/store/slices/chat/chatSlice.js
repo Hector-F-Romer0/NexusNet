@@ -28,8 +28,8 @@ export const chatSlice = createSlice({
 		setMessageHistory: (state, action) => {
 			state.messaageHistory = action.payload;
 		},
-		setMessageHistoryToMap: (state, action) => {
-			console.log(action.payload)
+		addMessageToHistorial: (state, action) => {
+			console.log(action.payload);
 			state.messaageHistory.push(action.payload);
 		},
 		setChatId: (state, action) => {
@@ -41,4 +41,5 @@ export const chatSlice = createSlice({
 	},
 });
 
-export const { setMessageHistory, setMessageHistoryToMap, startLoading, setChatId, setChatInformation } = chatSlice.actions;
+export const { setMessageHistory, addMessageToHistorial, startLoading, setChatId, setChatInformation } =
+	chatSlice.actions;
