@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export const instanceBackend = axios.create({
-	baseURL: "http://localhost:4000/api/v1",
+	baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/v1`,
 });
-
 
 export const USER_ROLES = Object.freeze({
 	ADMIN: "6466e4f3f6031b477e59c2e5",
