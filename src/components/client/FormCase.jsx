@@ -104,14 +104,15 @@ const FormCase = () => {
 			return;
 		}
 
-		const resCloud = await uploadFile();
-		console.log(resCloud);
 		try {
+			const resCloud = await uploadFile();
+			console.log(resCloud);
 			const { uid } = await verifyJWT(getUserToken());
 			data.category = data.category.value;
 			data.service = data.service.value;
 			data.createdBy = uid;
 			data.keywords = keywordsChosen.map((keyword) => keyword.value);
+			data.files = resCloud;
 			console.log(data);
 			const res = await postCaseRequest(data, getUserToken());
 			await showSuccessModal(

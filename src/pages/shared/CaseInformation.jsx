@@ -34,9 +34,12 @@ const CaseInformation = () => {
 			setIsLoading(true);
 			const userToken = getUserToken();
 			const { role } = await verifyJWT(userToken);
+
 			setRoleUserLogged(role);
 			// TODO: Si el caso no existe, mostrar en pantalla que no existe el caso
 			const res = await getCaseIdRequest(id, userToken);
+
+			console.log(res.files);
 
 			if (res.status === 404) {
 				setUserCase(null);
@@ -187,6 +190,7 @@ const CaseInformation = () => {
 					</div>
 					<hr className="h-1 bg-black mb-5 f" />
 					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Files uploads</h2>
+					<img src={userCase?.files[0]} />
 					<h2 className="my-5 text-base md:text-xl font-semibold tracking-tight text-black">Taken by</h2>
 					{userCase?.takenBy !== null ? (
 						<div className="flex items-center justify-center my-5">
