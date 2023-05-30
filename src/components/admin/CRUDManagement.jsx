@@ -29,7 +29,7 @@ const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate }) => {
 							<tbody>
 								{searchResults?.map((item) => (
 									<CRUDRow
-										key={item?.id}
+										key={item?.value}
 										data={item}
 										titleToManage={nameToManage}
 										handleUpdate={handleUpdate}

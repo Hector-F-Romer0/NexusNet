@@ -2,11 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { createChatRequest } from "../../services/chat.services";
 import { setChatInformation } from "../../store/slices/chat/chatSlice";
-import io from "socket.io-client";
 
-const socket = io("http://localhost:4000");
-
-const CardChat = ({ data }) => {
+const CardChat = ({ data, socket }) => {
 	const dispatch = useDispatch();
 	const { userIdSesion } = useSelector((state) => state.chat);
 
@@ -27,18 +24,11 @@ const CardChat = ({ data }) => {
 
 		// TODO: verificar si el chat existe en BD
 		if (res.status === 409) {
-			// console.log("Ya existe el chat");
-			// console.log(res.data);
-			// Add the information of existing chat to Redux store
-			// console.log(res.data.existingChat.messages);
-			// console.log(res.data);
 			dispatch(setChatInformation({ chat: res.data.existingChat, userIdSesion: res.data.userIdSesion }));
 			socket.emit("enter-chat", { chatId: res.data.existingChat.id, idUser: userIdSesion }, (algo) => {
 				console.log("ID de la sala a la que me conecté: " + algo);
 			});
-			// TODO: El populate de la BD me arroja _id en vez de .id
 
-			// setmessageHistory(res.data.existingChat.messages);
 			return;
 		}
 

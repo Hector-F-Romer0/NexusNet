@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
 import { FiSend } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import io from "socket.io-client";
 
-const socket = io("http://localhost:4000");
-
-const InputChat = () => {
+const InputChat = ({ socket }) => {
 	const { register, handleSubmit, reset } = useForm();
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const { chatId } = useSelector((state) => state.chat);
 
 	const onSubmit = (data) => {

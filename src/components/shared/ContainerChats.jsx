@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { getUsersRequest, getUsersWithoutMeRequest } from "../../services/users.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
 
-const ContainerChats = ({ setmessageHistory }) => {
+const ContainerChats = ({ setmessageHistory, socket }) => {
 	const [users, setUsers] = useState([]);
 	const { userIdSesion } = useSelector((state) => state.chat);
 
@@ -23,7 +23,7 @@ const ContainerChats = ({ setmessageHistory }) => {
 			<h1 className="text-5xl font-bold m-5 text-mainTitle">Chats</h1>
 			<div className="flex flex-col items-center">
 				{users?.map((user) => {
-					return <CardChat key={user?.id} data={user} />;
+					return <CardChat key={user?.id} data={user} socket={socket} />;
 				})}
 			</div>
 		</div>
