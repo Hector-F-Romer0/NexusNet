@@ -11,6 +11,8 @@ import DropDownList from "../../components/shared/DropDownList";
 import FacebookButton from "../../components/shared/FacebookButton";
 import GoogleButton from "../../components/shared/GoogleButton";
 import { getRoleRequest } from "../../services/role.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { USER_ROLES } from "../../db/config";
 
 const SignUp = () => {
 	const {
@@ -20,7 +22,7 @@ const SignUp = () => {
 		formState: { errors },
 	} = useForm();
 
-	const [roles, setRoles] = useState([]);
+	const [role, setRole] = useState([]);
 	const MySwal = withReactContent(Swal);
 
 	const navigate = useNavigate();
@@ -31,9 +33,13 @@ const SignUp = () => {
 	}, []);
 
 	const getDataBD = async () => {
-		const rolesDB = await getRoleRequest();
-		const filteredRoles = rolesDB.filter((filter) => filter.role !== "Admin");
-		setRoles(filteredRoles);
+		const roles = await getRoleRequest(getUserToken());
+		const rolesWithOutAdmin = roles.filter((role) => {
+			if (role.value !== USER_ROLES.ADMIN) {
+				return role;
+			}
+		});
+		setRole(rolesWithOutAdmin);
 	};
 
 	const onSubmit = (data) => {
@@ -48,7 +54,7 @@ const SignUp = () => {
 			return;
 		}
 
-		if (data.role.role === "Client") {
+		if (role === USER_ROLES.CLIENT) {
 			navigate("/register/client", {
 				state: {
 					userData: data,
@@ -133,9 +139,9 @@ const SignUp = () => {
 								control={control}
 								name="role"
 								rules={{ required: true }}
-								defaultValue={roles[0]?.id}
+								defaultValue={role[0]?.id}
 								render={({ field }) => (
-									<Select {...field} options={roles} getOptionLabel={(option) => option.role} />
+									<Select {...field} options={role} getOptionLabel={(option) => option.role} />
 								)}></Controller>
 						</div>
 						<div className="flex justify-center mt-5">

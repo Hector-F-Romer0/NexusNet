@@ -1,65 +1,87 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FiCornerUpLeft } from "react-icons/fi";
+import Select from "react-select";
 
 import FormInput from "../../components/shared/FormInput";
 import TextAreaForm from "../../components/shared/TextAreaForm";
-import { FiCornerUpLeft } from "react-icons/fi";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
-import { addProvider } from "../../store/slices/providers/providersSlice";
-import { setUser } from "../../store/slices/user/userSlice";
+import { getServicesRequest } from "../../services/services.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
+import { getCategoriesRequest } from "../../services/categories.services";
+import { showErrorModal, showSuccessModal } from "../../components/modals/customModals";
+import { postProviderRequest } from "../../services/providers.services";
 
 const ProviderRegister = () => {
-	const dispatch = useDispatch();
+	const [categories, setCategories] = useState([]);
+	const [services, setServices] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const MySwal = withReactContent(Swal);
-
 	const {
 		register,
 		handleSubmit,
+		control,
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = async (data) => {
-		const { userData, typeUser } = location.state;
-
-		console.log(data);
-		console.log(userData);
-		console.log(typeUser);
-
-		const newUser = {
-			names: data?.names,
-			lastnames: data?.lastnames,
-			username: data?.username,
-			email: userData?.email,
-			password: userData?.password,
-			typeUser: typeUser?.name,
-			phoneNumber: data?.phoneNumber,
-			country: data?.country,
-			state: data?.state,
-			city: data?.city,
-			urlImg: "/src/assets/Duck.jpg",
-			cases: null,
-			phrase: data?.phrase,
-			id: Date.now(),
+	useEffect(() => {
+		const getDataBD = async () => {
+			setIsLoading(true);
+			const services = await getServicesRequest(getUserToken());
+			const categories = await getCategoriesRequest(getUserToken());
+			setServices(services);
+			setCategories(categories);
+			setIsLoading(false);
 		};
 
-		// ? CREACIÓN DEL USUARIO EN STORE
-		dispatch(addProvider(newUser));
-		await MySwal.fire({
-			title: `Welcome to NexusNet ${data?.names} 😎`,
-			icon: "success",
-			text: "Go to home to and explore all our tools.",
-			confirmButtonColor: "#007BFF",
-		});
+		getDataBD();
+	}, []);
 
-		dispatch(setUser(newUser));
+	const onSubmit = async (data) => {
+		try {
+			console.log(location.state);
+			const { userData } = location.state;
+			const newProvider = {
+				names: data?.names,
+				lastnames: data?.lastnames,
+				username: data?.username,
+				email: userData?.email,
+				password: userData?.password,
+				role: userData?.role.value,
+				phoneNumber: data?.phoneNumber,
+				country: data?.country,
+				state: data?.state,
+				city: data?.city,
+				category: data.category.value,
+				service: data.service.value,
+				urlImg: "/src/assets/Duck.jpg",
+				cases: null,
+				phrase: data?.phrase,
+			};
 
-		navigate("/provider/home");
+			const { token } = await postProviderRequest(newProvider, getUserToken());
+			localStorage.setItem("auth-token", JSON.stringify(token));
+			await showSuccessModal(
+				`Welcome to NexusNet ${data?.names} 😎`,
+				"Go to home to and explore all our tools.",
+				"Ok, lets start."
+			);
+
+			navigate("/provider/home");
+		} catch (error) {
+			await showErrorModal(
+				`Don't exist email and password in this session`,
+				"Go back and complete the fields.",
+				"Ok, go back"
+			);
+			navigate("/signup");
+		}
 	};
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<div className="bg-white flex justify-center items-center flex-wrap h-screen">
@@ -226,49 +248,32 @@ const ProviderRegister = () => {
 									error={errors.city}
 								/>
 							</div>
-
-							<FormInput
-								label="Category"
-								type="text"
-								registerName="category"
-								register={register}
-								validations={{
-									required: {
-										value: true,
-										message: "Category is required.",
-									},
-									minLength: {
-										value: 3,
-										message: "Category must be between 3 and 30 characters.",
-									},
-									maxLength: {
-										value: 30,
-										message: "Category must be between 3 and 30 characters.",
-									},
-								}}
-								error={errors.category}
-							/>
-							<FormInput
-								label="Service"
-								type="text"
-								registerName="service"
-								register={register}
-								validations={{
-									required: {
-										value: true,
-										message: "Service is required.",
-									},
-									minLength: {
-										value: 3,
-										message: "Service must be between 3 and 30 characters.",
-									},
-									maxLength: {
-										value: 30,
-										message: "Service must be between 3 and 30 characters.",
-									},
-								}}
-								error={errors.service}
-							/>
+							<div className="my-3">
+								<label
+									htmlFor={"category"}
+									className="block mb-2 text-base font-semibold text-gray-900">
+									Categories
+								</label>
+								<Controller
+									control={control}
+									name="category"
+									rules={{ required: true }}
+									render={({ field: { onChange } }) => (
+										<Select onChange={onChange} options={categories} />
+									)}></Controller>
+							</div>
+							<div className="my-3">
+								<label htmlFor={"service"} className="block mb-2 text-base font-semibold text-gray-900">
+									Services
+								</label>
+								<Controller
+									control={control}
+									name="service"
+									rules={{ required: true }}
+									render={({ field: { onChange } }) => (
+										<Select onChange={onChange} options={services} />
+									)}></Controller>
+							</div>
 							<TextAreaForm
 								label="Tell us about yourself"
 								registerName="phrase"

@@ -10,13 +10,7 @@ import GoogleButton from "../../components/shared/GoogleButton.jsx";
 import FacebookButton from "../../components/shared/FacebookButton.jsx";
 import Logo from "../../assets/logo.png";
 
-import { getUsersDB } from "../../store/slices/usersDB/thunks";
-import { getKeyWords } from "../../store/slices/keywords/thunks";
-import { getServices } from "../../store/slices/services/thunks";
-import { getProviders } from "../../store/slices/providers/thunks";
-import { getCases } from "../../store/slices/cases/thunks";
 import { loginUserRequest } from "../../services/users.services";
-import { setUser } from "../../store/slices/user/userSlice";
 
 const SignIn = () => {
 	const {

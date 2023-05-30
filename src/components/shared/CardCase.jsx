@@ -1,6 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
+
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { verifyJWT } from "../../helpers/jwt";
 import { USER_ROLES } from "../../db/config";
@@ -41,7 +42,7 @@ const CardCase = ({ data }) => {
 			<hr className="h-1 bg-black mb-5 f" />
 			<p className="font-light text-gray-700 text-sm md:text-xl">{data?.caseDescription}</p>
 			<h4 className="font-thin text-base text-right text-gray-700 mt-4 pb-2">
-				{data.takenOn ? `Taken on ${data.takenOn}` : "Not assumed"}
+				{data.takenOn ? `Taken on ${moment(data.takenOn).format("YYYY-MM-DD")}` : "Not assumed"}
 			</h4>
 		</div>
 	);

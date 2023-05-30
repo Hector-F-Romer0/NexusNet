@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 
-const SearchBar = ({ handleChange }) => {
+const SearchBar = ({ handleChange, placeholder }) => {
 	return (
 		<>
 			<form className="border-t-indigo-900">
@@ -14,7 +14,7 @@ const SearchBar = ({ handleChange }) => {
 						type="search"
 						onChange={(e) => handleChange(e)}
 						className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-						placeholder="Search usernames."
+						placeholder={placeholder}
 					/>
 				</div>
 			</form>

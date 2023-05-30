@@ -5,6 +5,7 @@ import { Rating } from "react-simple-star-rating";
 import { getUserToken } from "../../helpers/localStorageManagement";
 import { verifyJWT } from "../../helpers/jwt";
 import { getUserIdRequest } from "../../services/users.services";
+import { USER_ROLES } from "../../db/config";
 
 const CardAccount = () => {
 	const [user, setUser] = useState({});
@@ -37,21 +38,24 @@ const CardAccount = () => {
 							src={user?.urlImg}
 							className="w-1/2 md:w-full bg-slate-600 rounded-3xl overflow-hidden"></img>
 						<h1 className="text-lg my-3 font-semibold">{user?.typeUser?.toUpperCase()}</h1>
-						{user?.role?.role === "Client" ? (
+						{user?.role?.role === USER_ROLES.CLIENT ? (
 							""
 						) : (
-							<Rating
-								initialValue={user?.rate}
-								readonly={true}
-								allowFraction={true}
-								emptyStyle={{ display: "flex" }}
-								fillIcon={<FiStar className="fill-[#FFCB45] text-xs md:text-3xl stroke-none" />}
-								emptyIcon={<FiStar className="fill-[#D1D5DB] text-xs md:text-3xl stroke-none" />}
-								fillStyle={{ display: "-webkit-inline-box" }}
-							/>
+							<>
+								<Rating
+									initialValue={user?.rate}
+									readonly={true}
+									allowFraction={true}
+									emptyStyle={{ display: "flex" }}
+									fillIcon={<FiStar className="fill-[#FFCB45] text-xs md:text-3xl stroke-none" />}
+									emptyIcon={<FiStar className="fill-[#D1D5DB] text-xs md:text-3xl stroke-none" />}
+									fillStyle={{ display: "-webkit-inline-box" }}
+								/>
+								<span>{user?.rate}</span>
+							</>
 						)}
 						<p className="text-xs mt-5">
-							{user?.typeUser === "provider" ? <span>{user?.phrase}</span> : ""}
+							{user?.role?.id === USER_ROLES.PROVIDER ? <span>{user?.phrase}</span> : ""}
 						</p>
 					</div>
 					<div className="md:w-3/5 space-y-4 flex flex-col justify-start items-center">

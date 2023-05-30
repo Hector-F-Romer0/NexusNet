@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useDispatch, useSelector } from "react-redux";
 import { FiStar, FiX, FiCheck } from "react-icons/fi";
 
 import KeyWord from "./KeyWord";
-import { deleteProvider } from "../../store/slices/providers/providersSlice";
+import { USER_ROLES } from "../../db/config";
+import { verifyJWT } from "../../helpers/jwt";
+import { getUserToken } from "../../helpers/localStorageManagement";
 
 const CardProvider = ({ data }) => {
-	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user);
 	const MySwal = withReactContent(Swal);
+	const [role, setRole] = useState("");
+
+	useEffect(() => {
+		const getRoleToken = async () => {
+			const { role } = await verifyJWT(getUserToken());
+			console.log(role);
+
+			setRole(role);
+		};
+
+		getRoleToken();
+	}, []);
 
 	const deletePrv = () => {
 		MySwal.fire({
@@ -69,7 +80,7 @@ const CardProvider = ({ data }) => {
 							/>
 							<h3 className="mb-2 text-base md:text-lg font-semibold text-black">{data?.rate}</h3>
 						</div>
-						{user?.typeUser !== "admin" ? (
+						{role !== USER_ROLES.ADMIN ? (
 							""
 						) : (
 							<div className="flex flex-row md:flex row">
