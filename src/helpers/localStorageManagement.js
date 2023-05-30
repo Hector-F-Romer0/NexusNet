@@ -1,14 +1,7 @@
-const getUserLocalStorage = () => {
-	const data = JSON.parse(localStorage.getItem("userInfo"));
-	return data;
-};
-
-const setUserLocalStorage = (data) => {
-	localStorage.setItem("userInfo", JSON.stringify(data));
-};
+import { verifyJWT } from "./jwt";
 
 const clearUserLocalStorage = () => {
-	localStorage.setItem("userInfo", JSON.stringify(""));
+	localStorage.setItem("auth-token", JSON.stringify(""));
 };
 
 const getUserToken = () => {
@@ -16,4 +9,8 @@ const getUserToken = () => {
 	return data;
 };
 
-export { getUserLocalStorage, setUserLocalStorage, clearUserLocalStorage, getUserToken };
+const getRoleUser = async () => {
+	const { role } = await verifyJWT(getUserToken());
+	return role;
+};
+export { getRoleUser, clearUserLocalStorage, getUserToken };

@@ -4,12 +4,9 @@ import { useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateCategory } from "../../store/slices/categories/categoriesSlice";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { deleteKeyword, updateKeyword } from "../../store/slices/keywords/keywordsSlice";
-import { deleteServices, updateService } from "../../store/slices/services/servicesSlice";
-import { deleteCategoryRequest } from "../../store/slices/categories/thunks";
 
 const CRUDRow = ({ data, titleToManage, handleUpdate }) => {
 	const dispatch = useDispatch();

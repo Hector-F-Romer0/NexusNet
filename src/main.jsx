@@ -33,6 +33,7 @@ import CaseForm from "./pages/client/CaseForm";
 import CaseInformation from "./pages/shared/CaseInformation";
 import ProviderSearchCases from "./pages/provider/ProviderSearchCases";
 import PrivateRoutes from "./routes/PrivateRoutes";
+import { USER_ROLES } from "./db/config";
 
 const persistor = persistStore(store);
 
@@ -44,10 +45,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 					<Route path="/" element={<SignIn />}></Route>
 					<Route path="/signin" element={<SignIn />}></Route>
 					<Route path="/signup" element={<SignUp />}></Route>
-					<Route path="/register/client" element={<ClientRegister></ClientRegister>}></Route>
+					<Route path="/register/client" element={<ClientRegister />}></Route>
+					<Route path="/register/provider" element={<ProviderRegister />}></Route>
 					<Route path="/*" element={<NotFound />}></Route>
 
-					<Route element={<PrivateRoutes allowedFor={"client"} />}>
+					<Route element={<PrivateRoutes allowedFor={USER_ROLES.CLIENT} />}>
 						<Route path="/client/home" element={<HomeClient />}></Route>
 						<Route path="/top/providers" element={<TopProviders />}></Route>
 						<Route path="/client/chats" element={<Chat />}></Route>
@@ -59,16 +61,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 						<Route path="/client/view/provider/:id" element={<ViewAccountProvider />}></Route>
 					</Route>
 					{/* Provider routes */}
-					<Route element={<PrivateRoutes allowedFor={"provider"} />}>
+					<Route element={<PrivateRoutes allowedFor={USER_ROLES.PROVIDER} />}>
 						<Route path="/provider/home" element={<HomeProvider />}></Route>
 						<Route path="/provider/chats" element={<Chat />}></Route>
 						<Route path="/provider/account" element={<AccountProvider />}></Route>
 						<Route path="/provider/case/:id" element={<CaseInformation />}></Route>
-						<Route path="/register/provider" element={<ProviderRegister></ProviderRegister>}></Route>
 						<Route path="/provider/searchcase" element={<ProviderSearchCases />}></Route>
 					</Route>
 					{/* Admin Routes */}
-					<Route element={<PrivateRoutes allowedFor={"admin"} />}>
+					<Route element={<PrivateRoutes allowedFor={USER_ROLES.ADMIN} />}>
 						<Route path="/admin/home" element={<HomeAdmin />}></Route>
 						<Route path="/admin/categories" element={<CategoriesCRUD />}></Route>
 						<Route path="/admin/keywords" element={<KeyWordsCRUD />}></Route>

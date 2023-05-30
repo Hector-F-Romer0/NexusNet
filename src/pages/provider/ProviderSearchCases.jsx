@@ -8,7 +8,6 @@ import CardProvider from "../../components/shared/CardProvider";
 import Footer from "../../components/shared/Footer";
 import SideBar from "../../components/shared/SideBar";
 import { getCasesAvailablesRequest } from "../../services/cases.services.js";
-import { getServices } from "../../store/slices/services/thunks";
 import CardCase from "../../components/shared/CardCase";
 import { getUserToken } from "../../helpers/localStorageManagement";
 

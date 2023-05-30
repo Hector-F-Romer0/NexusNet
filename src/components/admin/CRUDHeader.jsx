@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import withReactContent from "sweetalert2-react-content";
-import { createCategory } from "../../store/slices/categories/categoriesSlice";
-import { createService } from "../../store/slices/services/servicesSlice";
-import { createKeyword } from "../../store/slices/keywords/keywordsSlice";
 import SearchBar from "../shared/SearchBar";
 import { useSearchBar } from "../../hooks/useSearchBar";
 

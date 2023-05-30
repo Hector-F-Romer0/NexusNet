@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardProvider from "./CardProvider";
 import { useSelector } from "react-redux";
+import { getProvidersNotApprovedRequest, getProvidersRequest } from "../../services/providers.services";
+import { getUserToken } from "../../helpers/localStorageManagement";
 
 const ContainerProvider = () => {
-	const { providers } = useSelector((state) => state.providers);
+	const [providers, setProviders] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const getDataBD = async () => {
+			setIsLoading(true);
+			const res = await getProvidersNotApprovedRequest(getUserToken());
+			console.log(res);
+			setProviders(res);
+			setIsLoading(false);
+		};
+
+		getDataBD();
+	}, []);
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
+
 	return (
 		<div className="flex flex-col justify-center items-center mb-20">
 			{!providers.length > 0 ? (

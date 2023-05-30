@@ -36,7 +36,7 @@ const HomeProvider = () => {
 				<SideBar />
 			</ContainerSideBar>
 			<div className="w-full mb-20">
-				<div className="flex flex-row justify-evenly mt-12  ">
+				<div className="flex flex-row justify-evenly mt-12">
 					<h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-4xl font-bold text-[mainTitle]">
 						Welcome to your current cases - Provider
 					</h1>
