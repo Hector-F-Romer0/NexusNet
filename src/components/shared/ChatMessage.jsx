@@ -17,7 +17,9 @@ const ChatMessage = ({ socket }) => {
 	useEffect(() => {
 		const getRecipientData = async () => {
 			const res = await getUserIdRequest(recipientIdUser);
-			setRecipientUser(res.data);
+			console.log(res);
+			setRecipientUser(res);
+			console.log(recipientUser);
 		};
 
 		getRecipientData();

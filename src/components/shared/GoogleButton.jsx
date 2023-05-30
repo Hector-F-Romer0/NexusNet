@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app, auth } from "../../../firebase.config";
