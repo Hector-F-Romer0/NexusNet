@@ -29,18 +29,12 @@ const SignIn = () => {
 
 	useEffect(() => {
 		// TODO: AJUSTAR TODAS LAS CARGAS DE ESTADO DEL REDUCER PUESTO QUE ESTA ES LA RUTA RAÍZ DEL APLICATIVO.
-		// dispatch(getUsersDB());
-		// dispatch(getCategories());
-		// dispatch(getKeyWords());
-		// dispatch(getServices());
-		// dispatch(getProviders());
-		// dispatch(getCases());
-		console.log(import.meta.env.VITE_BACKEND_URL);
+		// console.log(import.meta.env.VITE_BACKEND_URL);
 	}, []);
 
 	const onSubmitSignIn = async (data) => {
 		const res = await loginUserRequest(data);
-		console.log(res);
+		// console.log(res);
 		if (res.status === 404) {
 			return await MySwal.fire({
 				title: "Incorrect data",
