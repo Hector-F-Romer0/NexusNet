@@ -6,6 +6,7 @@ import {
 	getCase,
 	getCases,
 	getCasesAvailableForProviders,
+	getCasesNotCompletedUser,
 	getCasesTakingByProvider,
 	getCasesUser,
 	updateCase,
@@ -26,6 +27,7 @@ router.get("/:id", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PR
 router.get("/search/mycases", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT])], getCasesUser);
 router.get("/search/availables", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.PROVIDER])], getCasesAvailableForProviders);
 router.get("/search/taken", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.PROVIDER])], getCasesTakingByProvider);
+router.get("/search/mycasesnotcompleted", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT, USER_ROLES.PROVIDER])], getCasesNotCompletedUser);
 router.post("/", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT]), validateFields], createCase);
 router.put("/:id", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT])], updateCase);
 router.put("/update/leave", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.PROVIDER])], updateLeaveCase);
