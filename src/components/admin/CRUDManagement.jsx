@@ -6,6 +6,8 @@ import { useSearchBar } from "../../hooks/useSearchBar";
 const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate, handleDelete }) => {
 	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
 
+	const filteredData = inputSearch ? searchResults : data; // Verificar si inputSearch está vacío
+
 	return (
 		<div className="bg-white p-8 rounded-md w-full mb-20">
 			<div>
@@ -27,15 +29,19 @@ const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate, handle
 								</tr>
 							</thead>
 							<tbody>
-								{searchResults?.map((item) => (
-									<CRUDRow
-										key={item?.value}
-										data={item}
-										titleToManage={nameToManage}
-										handleUpdate={handleUpdate}
-										handleDelete={handleDelete}
-									/>
-								))}
+								{filteredData.map(
+									(
+										item // Usar filteredData en lugar de searchResults
+									) => (
+										<CRUDRow
+											key={item?.value}
+											data={item}
+											titleToManage={nameToManage}
+											handleUpdate={handleUpdate}
+											handleDelete={handleDelete}
+										/>
+									)
+								)}
 							</tbody>
 						</table>
 					</div>
