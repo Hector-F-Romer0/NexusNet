@@ -38,8 +38,16 @@ export const chatSlice = createSlice({
 		startLoading: (state, action) => {
 			state.isLoading = true;
 		},
+		clearChatInformation: (state) => {
+			state.messaageHistory = initialState.messaageHistory;
+			state.isLoading = initialState.isLoading;
+			state.chatId = initialState.chatId;
+			state.users = initialState.users;
+			state.userIdSesion = initialState.userIdSesion;
+			state.recipientIdUser = initialState.recipientIdUser;
+		},
 	},
 });
 
-export const { setMessageHistory, addMessageToHistorial, startLoading, setChatId, setChatInformation } =
+export const { setMessageHistory, addMessageToHistorial, startLoading, setChatId, setChatInformation, clearChatInformation } =
 	chatSlice.actions;

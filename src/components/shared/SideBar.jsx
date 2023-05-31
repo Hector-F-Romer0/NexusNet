@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { FiMessageSquare, FiGlobe, FiAward, FiUser, FiLogOut, FiAlignRight } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { clearUserLocalStorage, getUserToken } from "../../helpers/localStorageManagement";
 import { verifyJWT } from "../../helpers/jwt";
 import { USER_ROLES } from "../../db/config";
 import { useEffect } from "react";
+import { clearChatInformation } from "../../store/slices/chat/chatSlice";
 
 const SideBar = () => {
 	const [role, setRole] = useState();
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const getRole = async () => {
@@ -38,6 +41,7 @@ const SideBar = () => {
 
 	const logOut = () => {
 		clearUserLocalStorage();
+		dispatch(clearChatInformation());
 	};
 	const showSideBar = () => {
 		if (role === USER_ROLES.CLIENT) {
