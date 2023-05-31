@@ -9,8 +9,14 @@ const getUserToken = () => {
 	return data;
 };
 
+// const getRoleUser = async () => {
+// 	const role = JSON.parse(localStorage.getItem("role"));
+// 	return role;
+// };
+
 const getRoleUser = async () => {
-	const { role } = await verifyJWT(getUserToken());
+	const token = getUserToken();
+	const { role } = await verifyJWT(token);
 	return role;
 };
 export { getRoleUser, clearUserLocalStorage, getUserToken };

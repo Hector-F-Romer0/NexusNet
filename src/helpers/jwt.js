@@ -14,14 +14,14 @@ const verifyJWT = async (token) => {
 			throw new InvalidTokenError("Token without role. Invalid token.");
 		}
 
-		if(!payload.username){
+		if (!payload.username) {
 			throw new InvalidTokenError("Token without username. Invalid token.");
 		}
 
 		return payload;
 	} catch (error) {
-		if(error instanceof InvalidTokenError){
-			return error
+		if (error instanceof InvalidTokenError) {
+			return error;
 		}
 	}
 };
