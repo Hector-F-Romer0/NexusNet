@@ -6,7 +6,7 @@ import { useSearchBar } from "../../hooks/useSearchBar";
 const CRUDManagement = ({ data, nameToManage, handleCreate, handleUpdate, handleDelete }) => {
 	const { inputSearch, searchResults, handleChange } = useSearchBar(data, "label");
 
-	const filteredData = inputSearch ? searchResults : data; // Verificar si inputSearch está vacío
+	const filteredData = inputSearch ? searchResults : data;
 
 	return (
 		<div className="bg-white p-8 rounded-md w-full mb-20">
