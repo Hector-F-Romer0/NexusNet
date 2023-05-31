@@ -46,6 +46,7 @@ const CaseInformation = () => {
 				// console.log(res);
 				// console.log(res);
 				setUserCase(res);
+				console.log(res);
 			}
 			setIsLoading(false);
 		};
@@ -109,7 +110,13 @@ const CaseInformation = () => {
 						<>
 							<button
 								className="flex px-3 py-2 bg-[#1FCE1B] mr-1 text-white font-semibold rounded justify-center items-center my-1 text-xs w-40 lg:w-60"
-								onClick={() => navigate(`/client/rate/provider/${userCase.takenBy.id}`)}>
+								onClick={() =>
+									navigate(`/client/rate/provider/${userCase.takenBy.id}`, {
+										state: {
+											idCase: userCase,
+										},
+									})
+								}>
 								<FiThumbsUp size={26}></FiThumbsUp> <span className="ml-1">Mark as done</span>
 							</button>
 							<button

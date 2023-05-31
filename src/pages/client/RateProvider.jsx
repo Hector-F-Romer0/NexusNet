@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ const RateProvider = () => {
 	const [rating, setRating] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const location = useLocation();
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const {
@@ -38,6 +39,8 @@ const RateProvider = () => {
 	}, []);
 
 	const onSubmit = async (data) => {
+		const { idCase } = location.state;
+
 		if (rating === 0) {
 			await showWarningModal(
 				"Please rate the provider",
@@ -52,6 +55,7 @@ const RateProvider = () => {
 			{
 				rate: rating,
 				comment: data.comment,
+				idCase: idCase,
 			},
 			getUserToken()
 		);
