@@ -3,8 +3,9 @@ import CardChat from "./CardChat";
 import { useSelector } from "react-redux";
 import { getUsersRequest, getUsersWithoutMeRequest } from "../../services/users.services";
 import { getUserToken } from "../../helpers/localStorageManagement";
+import Loading from "./Loading";
 
-const ContainerChats = ({ setmessageHistory, socket }) => {
+const ContainerChats = ({ setIsLoading, socket, isLoading }) => {
 	const [users, setUsers] = useState([]);
 	const { userIdSesion } = useSelector((state) => state.chat);
 
@@ -14,9 +15,14 @@ const ContainerChats = ({ setmessageHistory, socket }) => {
 			const resUsers = await getUsersWithoutMeRequest(userToken);
 			console.log(resUsers.data);
 			setUsers(resUsers.data);
+			setIsLoading(false);
 		};
 		getAllUsers();
 	}, []);
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<div className="w-2/4 mx-2">

@@ -91,7 +91,7 @@ const SearchProviders = () => {
 			} else if (selectedOptionService?.value === 0 && selectedOptionKeyWord?.value === 0) {
 				//* FILTRAR ÚNICAMENTE POR CATEGORÍA
 				const filter = providers?.filter(
-					(provider) => provider?.category?.value === selectedOptionCategory?.value
+					(provider) => provider?.category?._id === selectedOptionCategory?.value
 				);
 				setSearchResults(filter);
 			} else if (selectedOptionService?.value === 0 && selectedOptionCategory?.value === 0) {
@@ -325,14 +325,6 @@ const SearchProviders = () => {
 									defaultValue={selectedOptionCategory}
 									onChange={setSelectedOptionCategory}
 									options={categories}
-								/>
-							</div>
-							<div className="">
-								<h2 className="text-base md:text-xl font-normal text-center my-1">Keyword</h2>
-								<Select
-									defaultValue={selectedOptionKeyWord}
-									onChange={setSelectedOptionKeyWord}
-									options={keywords}
 								/>
 							</div>
 						</div>
