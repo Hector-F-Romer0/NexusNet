@@ -36,26 +36,32 @@ const ProviderSearchCases = () => {
 
 	return (
 		<section className="flex">
-			<ContainerSideBar>
-				<SideBar />
-			</ContainerSideBar>
-			<div className="w-full mb-20">
-				<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a case</h1>
-				<div className="w-3/4 mx-auto my-4">
-					<SearchBar handleChange={handleChange} placeholder={"Search by titles"} />
-				</div>
-				{/* Mustra todos los casos que no han sido tomados */}
-				<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
-					{searchResults
-						.filter((caseClient) => caseClient?.takenBy === null)
-						?.map((caseClient) => (
-							<CardCase key={caseClient.id} data={caseClient} />
-						))}
-				</div>
-				<ContainerFooter>
-					<Footer />
-				</ContainerFooter>
-			</div>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<>
+					<ContainerSideBar>
+						<SideBar />
+					</ContainerSideBar>
+					<div className="w-full mb-20">
+						<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a case</h1>
+						<div className="w-3/4 mx-auto my-4">
+							<SearchBar handleChange={handleChange} placeholder={"Search by titles"} />
+						</div>
+						{/* Mustra todos los casos que no han sido tomados */}
+						<div className="flex flex-col items-center justify-center flex-wrap gap-11 mb-5">
+							{searchResults
+								.filter((caseClient) => caseClient?.takenBy === null)
+								?.map((caseClient) => (
+									<CardCase key={caseClient.id} data={caseClient} />
+								))}
+						</div>
+						<ContainerFooter>
+							<Footer />
+						</ContainerFooter>
+					</div>
+				</>
+			)}
 		</section>
 	);
 };

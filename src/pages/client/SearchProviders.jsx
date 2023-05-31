@@ -32,6 +32,9 @@ const SearchProviders = () => {
 	const [selectedOptionCategory, setSelectedOptionCategory] = useState({ label: "No category", value: 0 });
 	const [selectedOptionKeyWord, setSelectedOptionKeyWord] = useState({ label: "No keyword", value: 0 });
 
+	if (isLoading) {
+		<Loading />;
+	}
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
@@ -57,7 +60,11 @@ const SearchProviders = () => {
 			setIsLoading(false);
 		};
 
-		fetchData();
+		const load = async () => {
+			await fetchData();
+		};
+
+		load();
 	}, []);
 
 	useEffect(() => {
@@ -288,55 +295,58 @@ const SearchProviders = () => {
 		}
 	};
 
-	if (isLoading) {
-		<Loading />;
-	}
-
 	return (
 		<section className="flex">
-			<ContainerSideBar>
-				<SideBar />
-			</ContainerSideBar>
-			<div className="w-full">
-				<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a provider</h1>
-				<div className="w-3/4 mx-auto">
-					<SearchBar handleChange={handleChange} />
-				</div>
-				<div className="grid grid-cols-3 mx-12 gap-10 my-4">
-					<div>
-						<h2 className="text-base md:text-xl font-normal text-center my-1">Service</h2>
-						<Select
-							defaultValue={selectedOptionService}
-							onChange={setSelectedOptionService}
-							options={services}
-						/>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<>
+					<ContainerSideBar>
+						<SideBar />
+					</ContainerSideBar>
+					<div className="w-full">
+						<h1 className="text-xl md:text-4xl font-bold text-center my-9">Search a provider</h1>
+						<div className="w-3/4 mx-auto">
+							<SearchBar handleChange={handleChange} />
+						</div>
+						<div className="grid grid-cols-3 mx-12 gap-10 my-4">
+							<div>
+								<h2 className="text-base md:text-xl font-normal text-center my-1">Service</h2>
+
+								<Select
+									defaultValue={selectedOptionService}
+									onChange={setSelectedOptionService}
+									options={services}
+								/>
+							</div>
+							<div className="">
+								<h2 className="text-base md:text-xl font-normal text-center my-1">Category</h2>
+								<Select
+									defaultValue={selectedOptionCategory}
+									onChange={setSelectedOptionCategory}
+									options={categories}
+								/>
+							</div>
+							<div className="">
+								<h2 className="text-base md:text-xl font-normal text-center my-1">Keyword</h2>
+								<Select
+									defaultValue={selectedOptionKeyWord}
+									onChange={setSelectedOptionKeyWord}
+									options={keywords}
+								/>
+							</div>
+						</div>
+						<div className="flex flex-col flex-wrap  gap-6 content-center mb-7">
+							{searchResults?.map((provider) => (
+								<CardProvider key={provider.id} data={provider} />
+							))}
+						</div>
+						<ContainerFooter>
+							<Footer />
+						</ContainerFooter>
 					</div>
-					<div className="">
-						<h2 className="text-base md:text-xl font-normal text-center my-1">Category</h2>
-						<Select
-							defaultValue={selectedOptionCategory}
-							onChange={setSelectedOptionCategory}
-							options={categories}
-						/>
-					</div>
-					<div className="">
-						<h2 className="text-base md:text-xl font-normal text-center my-1">Keyword</h2>
-						<Select
-							defaultValue={selectedOptionKeyWord}
-							onChange={setSelectedOptionKeyWord}
-							options={keywords}
-						/>
-					</div>
-				</div>
-				<div className="flex flex-col flex-wrap  gap-6 content-center mb-7">
-					{searchResults?.map((provider) => (
-						<CardProvider key={provider.id} data={provider} />
-					))}
-				</div>
-				<ContainerFooter>
-					<Footer />
-				</ContainerFooter>
-			</div>
+				</>
+			)}
 		</section>
 	);
 };
