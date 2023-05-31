@@ -14,7 +14,11 @@ const getCase = async (req = request, res = response) => {
 			.populate([
 				{
 					path: "takenBy",
-					select: "names lastnames username urlImg",
+					select: "names lastnames username urlImg comments rate",
+					populate: {
+						path: "comments",
+						select: "comment id",
+					},
 				},
 				{
 					path: "keywords",
@@ -49,6 +53,10 @@ const getCases = async (req = request, res = response) => {
 				{
 					path: "takenBy",
 					select: "names lastnames username urlImg",
+					populate: {
+						path: "comments",
+						select: "comment id",
+					},
 				},
 				{
 					path: "keywords",
@@ -188,7 +196,7 @@ const createCase = async (req = request, res = response) => {
 			keywords,
 			category,
 			service,
-			files
+			files,
 		});
 		await newCase.save();
 		res.status(201).json(newCase);

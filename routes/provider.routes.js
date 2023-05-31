@@ -41,6 +41,6 @@ router.put("/approve/:id", [validateJWT, hasRoles([USER_ROLES.ADMIN])], approveP
 // check("keywords", "The provider has to have keywords").not().isEmpty()
 // router.post("/", createProvider);
 router.post("/", [checkSchema(createProviderValidation), validateFields], createProvider);
-router.post("/rate/:id", [hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT])], updateRateProvider);
+router.post("/rate/:id", [validateJWT, hasRoles([USER_ROLES.ADMIN, USER_ROLES.CLIENT])], updateRateProvider);
 
 export default router;

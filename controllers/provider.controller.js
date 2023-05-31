@@ -6,6 +6,7 @@ import { handleErrorHTTP } from "../helpers/handleError.js";
 import { commentModel } from "../models/comment.model.js";
 import { generateJWT } from "../helpers/jwt.js";
 import { enviarMail } from "../helpers/nodeMailer.js";
+import caseModel from "../models/case.model.js";
 
 const getProvider = async (req = request, res = response) => {
 	try {
@@ -35,6 +36,9 @@ const getProviders = async (req = request, res = response) => {
 				},
 				{
 					path: "service",
+				},
+				{
+					path: "comments",
 				},
 			])
 			.exec();
@@ -211,7 +215,7 @@ const disapproveProvider = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
 		const provider = await userModel.findByIdAndUpdate(id, { $set: { approved: false } }, { new: true }).exec();
-		console.log(provider);
+		// console.log(provider);
 		res.status(200).json(provider);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to update a provider.");
@@ -222,7 +226,7 @@ const approveProvider = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
 		const provider = await userModel.findByIdAndUpdate(id, { $set: { approved: true } }, { new: true }).exec();
-		console.log(provider);
+		// console.log(provider);
 		res.status(200).json(provider);
 	} catch (error) {
 		handleErrorHTTP(res, error, 500, "Error when trying to update a provider.");
@@ -246,7 +250,7 @@ const deleteProvider = async (req = request, res = response) => {
 const updateRateProvider = async (req = request, res = response) => {
 	try {
 		const { id } = req.params;
-		const { rate, comment } = req.body;
+		const { rate, comment, idCase } = req.body;
 		const existProvider = await userModel.findById(id);
 
 		if (!existProvider) {
@@ -261,6 +265,10 @@ const updateRateProvider = async (req = request, res = response) => {
 			const newRate = (existProvider.rate + rate) / 2;
 			existProvider.rate = newRate.toFixed(2);
 		}
+
+		const userCase = await caseModel.findByIdAndUpdate(idCase, { completed: true }, { new: true });
+		// console.log(userCase);
+
 		await newComment.save();
 		existProvider.comments.push(newComment);
 		await existProvider.save();
