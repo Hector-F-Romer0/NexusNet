@@ -9,6 +9,13 @@ const ContainerProvider = () => {
 	const [providers, setProviders] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const updateProviders = async () => {
+		setIsLoading(true);
+		const res = await getProvidersNotApprovedRequest(getUserToken());
+		setProviders(res);
+		setIsLoading(false);
+	};
+
 	useEffect(() => {
 		const getDataBD = async () => {
 			setIsLoading(true);
@@ -31,7 +38,7 @@ const ContainerProvider = () => {
 				<h3 className="text-black ml-5 text-6xl my-64">Not providers found to approve 😀</h3>
 			) : (
 				providers.map((provider) => {
-					return <CardProvider key={provider.id} data={provider} />;
+					return <CardProvider key={provider.id} data={provider} update={updateProviders} />;
 				})
 			)}
 		</div>

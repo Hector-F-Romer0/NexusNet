@@ -11,7 +11,7 @@ import { getUserToken } from "../../helpers/localStorageManagement";
 import { approveProviderRequest, disapproveProviderRequest } from "../../services/providers.services";
 import { showSuccessModal } from "../modals/customModals";
 
-const CardProvider = ({ data }) => {
+const CardProvider = ({ data, update }) => {
 	const MySwal = withReactContent(Swal);
 	const [role, setRole] = useState("");
 
@@ -34,6 +34,7 @@ const CardProvider = ({ data }) => {
 			"Ok"
 		);
 		console.log(res);
+		update();
 	};
 
 	const approveProvider = async (id) => {
@@ -44,6 +45,7 @@ const CardProvider = ({ data }) => {
 			"Ok"
 		);
 		console.log(res);
+		update();
 	};
 
 	return (
