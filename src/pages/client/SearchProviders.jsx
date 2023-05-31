@@ -27,320 +27,266 @@ const SearchProviders = () => {
 		"username"
 	);
 
+	// * FILTROS CON SELECT
+	const [selectedOptionService, setSelectedOptionService] = useState({ label: "No service", value: 0 });
+	const [selectedOptionCategory, setSelectedOptionCategory] = useState({ label: "No category", value: 0 });
+	const [selectedOptionKeyWord, setSelectedOptionKeyWord] = useState({ label: "No keyword", value: 0 });
+
 	useEffect(() => {
-		const getCategoriesBD = async () => {
+		const fetchData = async () => {
 			setIsLoading(true);
 			const categories = await getCategoriesRequest(getUserToken());
-			setCategories(categories);
-			setIsLoading(false);
-		};
-
-		const getServicesBD = async () => {
-			setIsLoading(true);
 			const services = await getServicesRequest(getUserToken());
-			setServices(services);
-			setIsLoading(false);
-		};
-
-		const getKeywordsBD = async () => {
-			setIsLoading(true);
 			const keywords = await getKeywordsRequest(getUserToken());
-			setKeywords(keywords);
-			setIsLoading(false);
-		};
-
-		const getProvidersBD = async () => {
-			setIsLoading(true);
 			const providers = await getProvidersRequest(getUserToken());
+
 			setProviders(providers);
+
+			const servicesCopy = [...services];
+			const categoriesCopy = [...categories];
+			const keywordsCopy = [...keywords];
+
+			servicesCopy.unshift(selectedOptionService);
+			categoriesCopy.unshift(selectedOptionCategory);
+			keywordsCopy.unshift(selectedOptionKeyWord);
+
+			setServices(servicesCopy);
+			setCategories(categoriesCopy);
+			setKeywords(keywordsCopy);
+
 			setIsLoading(false);
 		};
 
-		getCategoriesBD();
-		getServicesBD();
-		getKeywordsBD();
-		getProvidersBD();
-		console.log(services);
-		console.log(keywords);
-		console.log(categories);
+		fetchData();
 	}, []);
 
-	// // console.log(inputSearch);
-	// // * FILTROS CON SELECT
-	// const [selectedOptionService, setSelectedOptionService] = useState(services[0]);
-	// const [selectedOptionCategory, setSelectedOptionCategory] = useState(categories[0]);
-	// const [selectedOptionKeyWord, setSelectedOptionKeyWord] = useState(keywords[0]);
+	useEffect(() => {
+		filterBySelect();
+	}, [selectedOptionService, selectedOptionCategory, selectedOptionKeyWord, inputSearch]);
 
-	// useEffect(() => {
-	// 	filterBySelect();
-	// }, [selectedOptionService, selectedOptionCategory, selectedOptionKeyWord, inputSearch]);
+	const filterBySelect = () => {
+		if (
+			selectedOptionService?.value === 0 &&
+			selectedOptionCategory?.value === 0 &&
+			selectedOptionKeyWord?.value === 0 &&
+			inputSearch === ""
+		) {
+			setSearchResults(providers);
+			return;
+		}
+		if (inputSearch === "") {
+			console.log(selectedOptionService);
+			console.log(providers[0]?.service?._id);
+			// * FILTRAR ÚNICAMENTE POR SERVICIO
+			if (selectedOptionCategory?.value === 0 && selectedOptionKeyWord?.value === 0) {
+				const filter = providers?.filter((provider) => provider?.service?._id === selectedOptionService?.value);
+				setSearchResults(filter);
+			} else if (selectedOptionService?.value === 0 && selectedOptionKeyWord?.value === 0) {
+				//* FILTRAR ÚNICAMENTE POR CATEGORÍA
+				const filter = providers?.filter(
+					(provider) => provider?.category?.value === selectedOptionCategory?.value
+				);
+				setSearchResults(filter);
+			} else if (selectedOptionService?.value === 0 && selectedOptionCategory?.value === 0) {
+				const filter = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (existKeyword?.length > 0) {
+						return provider;
+					}
+				});
+				setSearchResults(filter);
+			} else if (
+				selectedOptionCategory?.value !== 0 &&
+				selectedOptionService?.value !== 0 &&
+				selectedOptionKeyWord?.value === 0
+			) {
+				//* FILTRAR POR CATEGORÍA Y SERVICIO
+				const filter = providers?.filter(
+					(provider) =>
+						provider?.category?.value === selectedOptionCategory?.value &&
+						provider?.service?.value === selectedOptionService?.value
+				);
+				setSearchResults(filter);
+			} else if (
+				selectedOptionService?.value !== 0 &&
+				selectedOptionKeyWord?.value !== 0 &&
+				selectedOptionCategory?.value === 0
+			) {
+				//* FILTRAR POR KEYWORD Y SERVICIO
+				const filter = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (existKeyword?.length > 0 && selectedOptionService?.value === provider?.service?.value) {
+						return provider;
+					}
+				});
+				setSearchResults(filter);
+			} else if (
+				selectedOptionService?.value === 0 &&
+				selectedOptionKeyWord?.value !== 0 &&
+				selectedOptionCategory?.value !== 0
+			) {
+				//* FILTRAR POR KEYWORD Y CATEGORY
+				const filter = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (existKeyword?.length > 0 && selectedOptionCategory?.value === provider?.category?.value) {
+						return provider;
+					}
+				});
+				setSearchResults(filter);
+			} else {
+				const filter = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (
+						existKeyword?.length > 0 &&
+						selectedOptionService?.value === provider?.service?.value &&
+						selectedOptionCategory?.value === provider?.category?.value
+					) {
+						return provider;
+					}
+				});
+				setSearchResults(filter);
+			}
+		} else {
+			if (
+				selectedOptionCategory?.value === 0 &&
+				selectedOptionKeyWord?.value === 0 &&
+				selectedOptionService?.value === 0 &&
+				inputSearch !== ""
+			) {
+				const result = providers?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			}
 
-	// const filterBySelect = () => {
-	// 	if (
-	// 		selectedOptionService.value === 0 &&
-	// 		selectedOptionCategory.value === 0 &&
-	// 		selectedOptionKeyWord.value === 0 &&
-	// 		inputSearch === ""
-	// 	) {
-	// 		// console.log("Quitar filtro");
-	// 		setSearchResults(providers);
-	// 		return;
-	// 	}
+			// * FILTRAR ÚNICAMENTE POR SERVICIO
+			else if (selectedOptionCategory?.value === 0 && selectedOptionKeyWord?.value === 0) {
+				const filterWithSearch = providers?.filter(
+					(provider) => provider?.service?.value === selectedOptionService?.value
+				);
 
-	// 	if (inputSearch === "") {
-	// 		// console.log("Existe un filtro SIN BARRA DE BUSQUEDA");
-	// 		// console.log(selectedOptionService);
-	// 		// * FILTRAR ÚNICAMENTE POR SERVICIO
-	// 		if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
-	// 			// console.log("FILTRADO POR SERVICIO");
-	// 			const filter = providers.filter((provider) => provider.service.value === selectedOptionService.value);
-	// 			setSearchResults(filter);
-	// 		} else if (selectedOptionService.value === 0 && selectedOptionKeyWord.value === 0) {
-	// 			//* FILTRAR ÚNICAMENTE POR CATEGORÍA
-	// 			// console.log("FILTRADO POR CATEGORIA");
-	// 			const filter = providers.filter((provider) => provider.category.value === selectedOptionCategory.value);
-	// 			setSearchResults(filter);
-	// 		} else if (selectedOptionService.value === 0 && selectedOptionCategory.value === 0) {
-	// 			// console.log("FILTRADO POR Keyword");
-	// 			// console.log(selectedOptionKeyWord);
-	// 			const filter = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			setSearchResults(filter);
-	// 		} else if (
-	// 			selectedOptionCategory.value !== 0 &&
-	// 			selectedOptionService.value !== 0 &&
-	// 			selectedOptionKeyWord.value === 0
-	// 		) {
-	// 			//* FILTRAR POR CATEGORÍA Y SERVICIO
-	// 			// console.log("FILTRAR CATEGORIA Y SERVICIO");
-	// 			const filter = providers.filter(
-	// 				(provider) =>
-	// 					provider.category.value === selectedOptionCategory.value &&
-	// 					provider.service.value === selectedOptionService.value
-	// 			);
-	// 			// console.log(filter);
-	// 			setSearchResults(filter);
-	// 		} else if (
-	// 			selectedOptionService.value !== 0 &&
-	// 			selectedOptionKeyWord.value !== 0 &&
-	// 			selectedOptionCategory.value === 0
-	// 		) {
-	// 			//* FILTRAR POR KEYWORD Y SERVICIO
-	// 			// console.log("FILTRO POR KEYWORD Y SERVICIO");
-	// 			const filter = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0 && selectedOptionService.value === provider.service.value) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			setSearchResults(filter);
-	// 		} else if (
-	// 			selectedOptionService.value === 0 &&
-	// 			selectedOptionKeyWord.value !== 0 &&
-	// 			selectedOptionCategory.value !== 0
-	// 		) {
-	// 			//* FILTRAR POR KEYWORD Y CATEGORY
-	// 			// console.log("FILTRO POR KEYWORD Y CATEGORY");
-	// 			const filter = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.value) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			setSearchResults(filter);
-	// 		} else {
-	// 			// console.log("FILTRAR POR TODO");
-	// 			const filter = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (
-	// 					existKeyword.length > 0 &&
-	// 					selectedOptionService.value === provider.service.value &&
-	// 					selectedOptionCategory.value === provider.category.value
-	// 				) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			setSearchResults(filter);
-	// 		}
-	// 	} else {
-	// 		// console.log("😼 Existe un filtro CON BARRA DE BUSQUEDA");
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else if (selectedOptionService?.value === 0 && selectedOptionKeyWord?.value === 0) {
+				//* FILTRAR ÚNICAMENTE POR CATEGORÍA
+				const filterWithSearch = providers?.filter(
+					(provider) => provider?.category?.value === selectedOptionCategory?.value
+				);
 
-	// 		if (
-	// 			selectedOptionCategory.value === 0 &&
-	// 			selectedOptionKeyWord.value === 0 &&
-	// 			selectedOptionService.value === 0 &&
-	// 			inputSearch !== ""
-	// 		) {
-	// 			const result = providers.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		}
-
-	// 		// * FILTRAR ÚNICAMENTE POR SERVICIO
-	// 		else if (selectedOptionCategory.value === 0 && selectedOptionKeyWord.value === 0) {
-	// 			// console.log("FILTRADO POR SERVICIO");
-	// 			const filterWithSearch = providers.filter(
-	// 				(provider) => provider.service.value === selectedOptionService.value
-	// 			);
-
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else if (selectedOptionService.value === 0 && selectedOptionKeyWord.value === 0) {
-	// 			//* FILTRAR ÚNICAMENTE POR CATEGORÍA
-	// 			// console.log("FILTRADO POR CATEGORIA");
-	// 			const filterWithSearch = providers.filter(
-	// 				(provider) => provider.category.value === selectedOptionCategory.value
-	// 			);
-
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else if (selectedOptionService.value === 0 && selectedOptionCategory.value === 0) {
-	// 			// console.log("FILTRADO POR Keyword");
-	// 			// console.log(selectedOptionKeyWord);
-	// 			const filterWithSearch = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else if (
-	// 			selectedOptionCategory.value !== 0 &&
-	// 			selectedOptionService.value !== 0 &&
-	// 			selectedOptionKeyWord.value === 0
-	// 		) {
-	// 			//* FILTRAR POR CATEGORÍA Y SERVICIO
-	// 			// console.log("FILTRAR CATEGORIA Y SERVICIO");
-	// 			const filterWithSearch = providers.filter(
-	// 				(provider) =>
-	// 					provider.category.value === selectedOptionCategory.value &&
-	// 					provider.service.value === selectedOptionService.value
-	// 			);
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else if (
-	// 			selectedOptionService.value !== 0 &&
-	// 			selectedOptionKeyWord.value !== 0 &&
-	// 			selectedOptionCategory.value === 0
-	// 		) {
-	// 			//* FILTRAR POR KEYWORD Y SERVICIO
-	// 			// console.log("FILTRO POR KEYWORD Y SERVICIO");
-	// 			const filterWithSearch = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0 && selectedOptionService.value === provider.service.value) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else if (
-	// 			selectedOptionService.value === 0 &&
-	// 			selectedOptionKeyWord.value !== 0 &&
-	// 			selectedOptionCategory.value !== 0
-	// 		) {
-	// 			//* FILTRAR POR KEYWORD Y CATEGORY
-	// 			// console.log("FILTRO POR KEYWORD Y CATEGORY");
-	// 			const filterWithSearch = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (existKeyword.length > 0 && selectedOptionCategory.value === provider.category.value) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		} else {
-	// 			// console.log("FILTRAR POR TODO");
-	// 			const filterWithSearch = providers.filter((provider) => {
-	// 				// console.log("Actualmente con " + provider.names);
-	// 				const existKeyword = provider.keywords?.filter((k) => {
-	// 					// console.log(k);
-	// 					return k.value === selectedOptionKeyWord.value;
-	// 				});
-	// 				// console.log(existKeyword === true);
-	// 				if (
-	// 					existKeyword.length > 0 &&
-	// 					selectedOptionService.value === provider.service.value &&
-	// 					selectedOptionCategory.value === provider.category.value
-	// 				) {
-	// 					return provider;
-	// 				}
-	// 			});
-	// 			const result = filterWithSearch.filter((element) => {
-	// 				if (element?.username.toLowerCase().includes(inputSearch.toLowerCase())) {
-	// 					return element;
-	// 				}
-	// 			});
-	// 			setSearchResults(result);
-	// 		}
-	// 	}
-	// };
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else if (selectedOptionService?.value === 0 && selectedOptionCategory?.value === 0) {
+				const filterWithSearch = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (existKeyword?.length > 0) {
+						return provider;
+					}
+				});
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else if (
+				selectedOptionCategory?.value !== 0 &&
+				selectedOptionService?.value !== 0 &&
+				selectedOptionKeyWord?.value === 0
+			) {
+				//* FILTRAR POR CATEGORÍA Y SERVICIO
+				const filterWithSearch = providers?.filter(
+					(provider) =>
+						provider?.category?.value === selectedOptionCategory?.value &&
+						provider?.service?.value === selectedOptionService?.value
+				);
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else if (
+				selectedOptionService?.value !== 0 &&
+				selectedOptionKeyWord?.value !== 0 &&
+				selectedOptionCategory?.value === 0
+			) {
+				//* FILTRAR POR KEYWORD Y SERVICIO
+				const filterWithSearch = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord.value;
+					});
+					if (existKeyword?.length > 0 && selectedOptionService?.value === provider?.service?.value) {
+						return provider;
+					}
+				});
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else if (
+				selectedOptionService?.value === 0 &&
+				selectedOptionKeyWord?.value !== 0 &&
+				selectedOptionCategory?.value !== 0
+			) {
+				//* FILTRAR POR KEYWORD Y CATEGORY
+				const filterWithSearch = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (existKeyword?.length > 0 && selectedOptionCategory?.value === provider?.category?.value) {
+						return provider;
+					}
+				});
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			} else {
+				const filterWithSearch = providers?.filter((provider) => {
+					const existKeyword = provider?.keywords?.filter((k) => {
+						return k?.value === selectedOptionKeyWord?.value;
+					});
+					if (
+						existKeyword?.length > 0 &&
+						selectedOptionService?.value === provider?.service?.value &&
+						selectedOptionCategory?.value === provider?.category?.value
+					) {
+						return provider;
+					}
+				});
+				const result = filterWithSearch?.filter((element) => {
+					if (element?.username?.toLowerCase().includes(inputSearch.toLowerCase())) {
+						return element;
+					}
+				});
+				setSearchResults(result);
+			}
+		}
+	};
 
 	if (isLoading) {
 		<Loading />;
@@ -359,27 +305,27 @@ const SearchProviders = () => {
 				<div className="grid grid-cols-3 mx-12 gap-10 my-4">
 					<div>
 						<h2 className="text-base md:text-xl font-normal text-center my-1">Service</h2>
-						{/* <Select
+						<Select
 							defaultValue={selectedOptionService}
 							onChange={setSelectedOptionService}
 							options={services}
-						/> */}
+						/>
 					</div>
 					<div className="">
 						<h2 className="text-base md:text-xl font-normal text-center my-1">Category</h2>
-						{/* <Select
+						<Select
 							defaultValue={selectedOptionCategory}
 							onChange={setSelectedOptionCategory}
 							options={categories}
-						/> */}
+						/>
 					</div>
 					<div className="">
 						<h2 className="text-base md:text-xl font-normal text-center my-1">Keyword</h2>
-						{/* <Select
+						<Select
 							defaultValue={selectedOptionKeyWord}
 							onChange={setSelectedOptionKeyWord}
 							options={keywords}
-						/> */}
+						/>
 					</div>
 				</div>
 				<div className="flex flex-col flex-wrap  gap-6 content-center mb-7">
